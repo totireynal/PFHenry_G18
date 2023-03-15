@@ -110,7 +110,7 @@ const Employees = () => {
       apellido: "Soto",
       email: "a.soto@mail.com",
       avatar: "https://randomuser.me/api/portraits/women/14.jpg",
-    }
+    },
   ];
 
   return (
