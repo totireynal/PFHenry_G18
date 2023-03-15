@@ -8,11 +8,12 @@
   width: 18vw;
   height: 36vh;
   align-items: center;
+  justify-content: center;
   transition: 0.4s;
 }
 
 .mainCointainer:hover {
-  transform: scale(106%);
+  transform: scale(104%);
 }
 
 .mainCointainer p {

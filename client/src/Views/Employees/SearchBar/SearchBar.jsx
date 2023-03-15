@@ -1,17 +1,26 @@
+import React from "react";
 import style from "./SearchBar.module.css";
 
-export default function SearchBar() {
+const SearchBar = ({ handleSearch }) => {
+  const [term, setTerm] = React.useState("");
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setTerm(value);
+    handleSearch(value);
+  };
+
   return (
-    <form className={style.searchContainer}>
+    <div className={style.searchContainer}>
       <input
-        className={style.searchInput}
-        name="game"
         type="text"
-        placeholder="Search an employee..."
-      ></input>
-      <button type="submit" className={style.searchButton}>
-        Search
-      </button>
-    </form>
+        placeholder="Search an Employee"
+        value={term}
+        onChange={handleChange}
+        className={style.searchInput}
+      />
+    </div>
   );
-}
+};
+
+export default SearchBar;

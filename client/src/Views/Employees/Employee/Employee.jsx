@@ -4,11 +4,11 @@ const Employee = (props) => {
   return (
     <div className={style.mainCointainer}>
       <div className={style.namesContainer}>
-        <p>{props.nombre}</p>
-        <p>{props.apellido}</p>
+        <p>{props.name}</p>
+        <p>{props.lastName}</p>
       </div>
-      <img src={props.avatar} alt={props.nombre}></img>
-      <p>Email: {props.email}</p>
+      <img src={props.avatar} alt={props.name}></img>
+      <p>{props.position}</p>
     </div>
   );
 };
