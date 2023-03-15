@@ -8,7 +8,7 @@ const Employee = (props) => {
         <p>{props.lastName}</p>
       </div>
       <img src={props.avatar} alt={props.name}></img>
-      <p>{props.position}</p>
+      <span>{props.position}</span>
     </div>
   );
 };

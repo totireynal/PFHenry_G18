@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import SideBar from "./Components/SideBar/SideBar";
+// import SideBar from "./Components/SideBar/SideBar";
 import Dashboard from "./Views/Dashboard";
 import Employees from "./Views/Employees";
 // import Employee from "./Views/Employees/Employee";
@@ -22,7 +22,6 @@ function App() {
         {/* <Route path="/home/login/register" element={<Register />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/employees" element={<Employees />} />
-        <Route path="/employees" element={<SideBar />} />
         <Route path="/employee/:id" element={<EmployeeDetail />} />
         {/* <Route path="/employees/:employeeId" element={<Employee />} /> */}
         <Route path="*" element={<h1>Ruta equivocada</h1>} />
@@ -32,6 +31,3 @@ function App() {
 }
 
 export default App;
-
-//prueba de comentario 2
-//comentario 3
