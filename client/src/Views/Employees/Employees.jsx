@@ -104,6 +104,13 @@ const Employees = () => {
       email: "a.soto@mail.com",
       avatar: "https://randomuser.me/api/portraits/women/14.jpg",
     },
+    {
+      id: 15,
+      nombre: "Prueba Carlos",
+      apellido: "Soto",
+      email: "a.soto@mail.com",
+      avatar: "https://randomuser.me/api/portraits/women/14.jpg",
+    }
   ];
 
   return (
