@@ -3,7 +3,7 @@ import Button from "../../Components/Button";
 
 const Home = () => {
   return (
-    <div>
+    <div className="">
       <Link to={'/home/login'}>
       <Button>Login</Button>
       </Link>
@@ -11,5 +11,6 @@ const Home = () => {
     
   )
 }
+
 
 export default Home;
