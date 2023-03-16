@@ -10,8 +10,8 @@ import Register from "./Components/Register/Register.jsx"
 function App() {
   return (
     <div className="App">
-      <Register></Register>
-      {/* <Routes>
+      {/* <Register></Register> */}
+      <Routes>
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/home/login" element={<Login />} />
@@ -20,7 +20,7 @@ function App() {
         <Route path="/employees" element={<Employees />} />
         <Route path="/employees/:employeeId" element={<Employee />} />
         <Route path="*" element={<h1>Ruta equivocada</h1>} /> 
-      </Routes> */}
+      </Routes>
     </div>
   );
 }
