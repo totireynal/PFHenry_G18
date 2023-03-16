@@ -1,16 +1,14 @@
 .searchContainer {
   display: flex;
   position: relative;
-  /* width: 24vw; */
-  /* flex-grow: 1; */
-  width: 300px;
+  width: 16vw;
+  height: 6vh;
   background: transparent;
   border-radius: 5px;
   border: 1px solid black;
 }
 
-.searchInput,
-.searchButton {
+.searchInput {
   border: none;
   outline: none;
   background-color: transparent;
@@ -26,18 +24,4 @@
   width: 100%;
   padding: 10px;
   font-size: 15px;
-}
-
-.searchButton {
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 6vw;
-  height: 40px;
-  font-size: 15px;
-  border-left: 1px solid black;
-  color: black;
-  cursor: pointer;
-  overflow: hidden;
 }

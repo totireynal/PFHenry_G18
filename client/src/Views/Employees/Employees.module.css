@@ -1,7 +1,14 @@
 .titleContainer {
-  width: 100%;
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  height: 20vh;
+  gap: 10px;
+}
+
+h2 {
+  font-size: 30px;
 }
 
 .cardsContainer {
@@ -10,5 +17,16 @@
   flex-wrap: wrap;
   gap: 25px;
   justify-content: center;
-  margin: 40px;
+}
+
+.addContainer {
+  display: flex;
+  position: relative;
+  width: 16vw;
+  height: 6vh;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid black;
 }

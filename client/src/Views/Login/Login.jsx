@@ -52,3 +52,5 @@ const { loginWithRedirect } = useAuth0();
 };
 
 export default Login;
+
+export default Login
