@@ -197,3 +197,5 @@ export default function CreateCompany(){
     )
 
 }
+
+export default Register;
