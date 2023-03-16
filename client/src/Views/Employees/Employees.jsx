@@ -5,6 +5,7 @@ import Employee from "./Employee/Employee";
 import style from "./Employees.module.css";
 import SearchBar from "./SearchBar/SearchBar";
 import { users } from "../../Utils";
+import SideBar from "../../Components/SideBar/SideBar";
 
 const Employees = () => {
   const [numEmployees, setNumEmployees] = useState(10);
@@ -390,6 +391,7 @@ const Employees = () => {
 
   return (
     <div>
+      <SideBar />
       <div className={style.titleContainer}>
         <h2>List of Employees</h2>
         <SearchBar handleSearch={handleSearch} />

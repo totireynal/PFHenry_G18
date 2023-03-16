@@ -5,16 +5,16 @@ import Dashboard from "./Views/Dashboard";
 import Employees from "./Views/Employees";
 // import Employee from "./Views/Employees/Employee";
 import EmployeeDetail from "./Views/Employees/EmployeeDetail/EmployeeDetail";
+import EmployeeDetail from "./Views/EmployeeDetail/EmployeeDetail";
 import Home from "./Views/Home";
 import Login from "./Views/Home/Login";
 // import Register from "./Components/Register/Register.jsx"
-import Register from "./Components/Register/Register.jsx"
-import Payment from "./Components/Payment/Payment.jsx"
+import Register from "./Components/Register/Register.jsx";
+import Payment from "./Components/Payment/Payment.jsx";
 
 function App() {
   return (
     <div className="App">
-      {/* <Register></Register> */}
       <Routes>
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />

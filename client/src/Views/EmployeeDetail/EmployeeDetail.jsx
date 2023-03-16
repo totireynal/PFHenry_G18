@@ -1,14 +1,7 @@
-// import style from "./EmployeeDetail.module.css";
-
-// const EmployeeDetail = () => {
-//   return <div className={style.mainCointainer}></div>;
-// };
-
-// export default EmployeeDetail;
-
 import { useParams } from "react-router-dom";
 import style from "./EmployeeDetail.module.css";
-import { users } from "../../../Utils";
+import { users } from "../../Utils";
+import SideBar from "../../Components/SideBar/SideBar";
 
 const EmployeeDetail = () => {
   const { id } = useParams();
@@ -31,6 +24,7 @@ const EmployeeDetail = () => {
 
   return (
     <div>
+      <SideBar />
       <div className={style.mainCointainer}>
         <div className={style.dataCointainer}>
           <div className={style.firstContainer}>
