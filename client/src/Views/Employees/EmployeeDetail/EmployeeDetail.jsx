@@ -57,7 +57,7 @@ const EmployeeDetail = () => {
         </div>
       </div>
       <div className={style.buttonCointainer}>
-        <button className={style.editButton}>Edit Employee</button>
+        <button className={style.editButton}>Edit Employe</button>
       </div>
     </div>
   );
