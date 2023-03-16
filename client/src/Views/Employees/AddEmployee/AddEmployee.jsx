@@ -7,7 +7,7 @@ const AddEmployee = () => {
       <div className="col-span-5 px-8 pb-8 flex flex-col justify-center items-center">
         <div className="flex flex-col gap-6 border-2 border-gray-800 px-12 py-4 rounded-2xl shadow-md shadow-slate-300 bg-slate-200">
           <div className="text-center">
-            <span className="text-4xl">Add Employee</span>
+            <span className="text-4xl">Add Employe</span>
           </div>
           <div className="flex gap-16">
             <div>
