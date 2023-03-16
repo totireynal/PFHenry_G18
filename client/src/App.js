@@ -6,6 +6,8 @@ import Employee from "./Views/Employees/Employee";
 import Home from "./Views/Home";
 import Login from "./Views/Home/Login";
 // import Register from "./Components/Register/Register.jsx"
+import Register from "./Components/Register/Register.jsx"
+import Payment from "./Components/Payment/Payment.jsx"
 
 function App() {
   return (
