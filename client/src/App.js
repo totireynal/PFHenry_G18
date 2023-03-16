@@ -6,7 +6,7 @@ import Employees from "./Views/Employees";
 // import Employee from "./Views/Employees/Employee";
 import EmployeeDetail from "./Views/EmployeeDetail/EmployeeDetail";
 import Home from "./Views/Home";
-import Login from "./Views/Home/Login";
+import Login from "./Views/Login";
 // import Register from "./Components/Register/Register.jsx"
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 
