@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 import { useState } from "react";
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 
@@ -18,9 +19,11 @@ const handlerChange = (event) => {
   setLogin({...login, [property]: value})
 }
 
+const { loginWithRedirect } = useAuth0();
+
   return (
     <div>
-      <label>User: </label>
+      {/* <label>User: </label>
       <input type='text'
       name='user'
       value={login.user}
@@ -33,7 +36,13 @@ const handlerChange = (event) => {
       name='password'
       value={login.password}
       onChange={handlerChange}
-      />
+      /> */}
+
+      <div>
+      <button onClick={() => loginWithRedirect()}>
+        Login
+      </button>
+      </div>
 
       <Link to="/home/login/register">
         <Button>Register</Button>

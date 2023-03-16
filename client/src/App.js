@@ -4,7 +4,7 @@ import Dashboard from "./Views/Dashboard";
 import Employees from "./Views/Employees";
 import Employee from "./Views/Employees/Employee";
 import Home from "./Views/Home";
-import Login from "./Views/Home/Login";
+import Login from "./Views/Login";
 // import Register from "./Components/Register/Register.jsx"
 
 function App() {
