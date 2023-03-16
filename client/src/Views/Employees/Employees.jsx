@@ -390,38 +390,40 @@ const Employees = () => {
   };
 
   return (
-    <div>
+    <div className="grid grid-cols-6 grid-rows-1 h-screen">
       <SideBar />
-      <div className={style.titleContainer}>
-        <h2>List of Employees</h2>
-        <SearchBar handleSearch={handleSearch} />
-      </div>
-      <div
-        style={{ height: "400px", overflow: "auto" }}
-        onScroll={(e) => {
-          const element = e.target;
-          if (
-            element.scrollHeight - element.scrollTop ===
-            element.clientHeight
-          ) {
-            loadMoreEmployees();
-          }
-        }}
-        className={style.cardsContainer}
-      >
-        {filteredUsers.slice(0, numEmployees).map((user) => {
-          return (
-            <Link key={user.id} to={`/employee/${user.id}`}>
-              <Employee
-                id={user.id}
-                name={user.name}
-                lastName={user.lastName}
-                position={user.position}
-                avatar={user.avatar}
-              />
-            </Link>
-          );
-        })}
+      <div className="col-span-5 px-8 pb-8">
+        <div className={style.titleContainer}>
+          <h2>List of Employees</h2>
+          <SearchBar handleSearch={handleSearch} />
+        </div>
+        <div
+          style={{ height: "480px", overflow: "auto" }}
+          onScroll={(e) => {
+            const element = e.target;
+            if (
+              element.scrollHeight - element.scrollTop ===
+              element.clientHeight
+            ) {
+              loadMoreEmployees();
+            }
+          }}
+          className={style.cardsContainer}
+        >
+          {filteredUsers.slice(0, numEmployees).map((user) => {
+            return (
+              <Link key={user.id} to={`/employee/${user.id}`}>
+                <Employee
+                  id={user.id}
+                  name={user.name}
+                  lastName={user.lastName}
+                  position={user.position}
+                  avatar={user.avatar}
+                />
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

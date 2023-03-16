@@ -9,7 +9,6 @@
 
 h2 {
   font-size: 30px;
-  margin: 0;
 }
 
 .cardsContainer {
@@ -18,5 +17,4 @@ h2 {
   flex-wrap: wrap;
   gap: 25px;
   justify-content: center;
-  margin: 20px;
 }

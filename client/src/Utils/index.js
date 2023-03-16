@@ -363,4 +363,18 @@ export const users = [
     position: "Human Resources Manager",
     area: "Human Resources",
   },
+  {
+    id: 27,
+    name: "Tobias",
+    lastName: "Gómez",
+    email: "t.gomez@mail.com",
+    avatar: "https://randomuser.me/api/portraits/men/27.jpg",
+    birthDate: "1993-02-14",
+    dni: "57892463Z",
+    phone: "+6746012347",
+    direction: "406 Oak St, Anytown",
+    admissionDate: "2019-04-03",
+    position: "Frontend Developer",
+    area: "Engineering",
+  },
 ];

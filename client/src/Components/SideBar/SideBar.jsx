@@ -25,11 +25,11 @@ const SideBar = () => {
             </div>
           </div>
         </div>
-        <img
+        {/* <img
           className="w-52 object-cover"
           src="https://datepsychology.com/wp-content/uploads/2022/09/gigachad.jpg"
           alt=""
-        />
+        /> */}
       </div>
     </div>
   );
