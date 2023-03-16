@@ -7,7 +7,11 @@ const Employee = (props) => {
         <p>{props.name}</p>
         <p>{props.lastName}</p>
       </div>
-      <img src={props.avatar} alt={props.name}></img>
+      <img
+        src={props.avatar}
+        alt={props.name}
+        className={style.imageContainer}
+      ></img>
       <span>{props.position}</span>
     </div>
   );

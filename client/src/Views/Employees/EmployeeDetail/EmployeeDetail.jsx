@@ -12,8 +12,7 @@ import { users } from "../../../Utils";
 
 const EmployeeDetail = () => {
   const { id } = useParams();
-  console.log(id);
-  console.log(1);
+
   const user = users.find((item) => item.id === Number(id));
 
   const {
@@ -31,13 +30,35 @@ const EmployeeDetail = () => {
   } = user;
 
   return (
-    <div className={style.mainCointainer}>
-      <div className={style.namesContainer}>
-        <p>{name}</p>
-        <p>{lastName}</p>
+    <div>
+      <div className={style.mainCointainer}>
+        <div className={style.dataCointainer}>
+          <div className={style.firstContainer}>
+            <p>Name: {name}</p>
+            <p>Last Name: {lastName}</p>
+            <p>Birth Date: {birthDate}</p>
+            <p>E-mail: {email}</p>
+          </div>
+          <div className={style.imageContainer}>
+            <img src={avatar} alt={name} className={style.profileImage}></img>
+          </div>
+        </div>
+        <div className={style.secondContainer}>
+          <div className={style.oneContainer}>
+            <p>DNI: {dni}</p>
+            <p>Phone: {phone}</p>
+            <p>Direction: {direction}</p>
+          </div>
+          <div className={style.twoContainer}>
+            <p>Position: {position}</p>
+            <p>Area: {area}</p>
+            <p>Admission Date: {admissionDate}</p>
+          </div>
+        </div>
       </div>
-      <img src={avatar} alt={name}></img>
-      <p>Email: {email}</p>
+      <div className={style.buttonCointainer}>
+        <button className={style.editButton}>Edit Employee</button>
+      </div>
     </div>
   );
 };

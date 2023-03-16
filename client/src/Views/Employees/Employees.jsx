@@ -1,12 +1,13 @@
 // import Button from "../../Components/Button";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import Employee from "./Employee/Employee";
 import style from "./Employees.module.css";
 import SearchBar from "./SearchBar/SearchBar";
 import { users } from "../../Utils";
 
 const Employees = () => {
+  const [numEmployees, setNumEmployees] = useState(10);
   // const users = [
   //   {
   //     id: 1,
@@ -376,6 +377,10 @@ const Employees = () => {
 
   const [filteredUsers, setFilteredUsers] = React.useState(users);
 
+  const loadMoreEmployees = () => {
+    setNumEmployees(numEmployees + 4);
+  };
+
   const handleSearch = (term) => {
     const filtered = users.filter((user) =>
       user.name.toLowerCase().includes(term.toLowerCase())
@@ -389,8 +394,20 @@ const Employees = () => {
         <h2>List of Employees</h2>
         <SearchBar handleSearch={handleSearch} />
       </div>
-      <div className={style.cardsContainer}>
-        {filteredUsers.map((user) => {
+      <div
+        style={{ height: "400px", overflow: "auto" }}
+        onScroll={(e) => {
+          const element = e.target;
+          if (
+            element.scrollHeight - element.scrollTop ===
+            element.clientHeight
+          ) {
+            loadMoreEmployees();
+          }
+        }}
+        className={style.cardsContainer}
+      >
+        {filteredUsers.slice(0, numEmployees).map((user) => {
           return (
             <Link key={user.id} to={`/employee/${user.id}`}>
               <Employee
