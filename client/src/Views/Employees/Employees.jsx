@@ -394,8 +394,11 @@ const Employees = () => {
       <SideBar />
       <div className="col-span-5 px-8 pb-8">
         <div className={style.titleContainer}>
-          <h2>List of Employees</h2>
           <SearchBar handleSearch={handleSearch} />
+          <Link to={"/addemployee/"}>
+            <button className={style.addContainer}>Add Employee</button>
+          </Link>
+          {/* <h2>List of Employees</h2> */}
         </div>
         <div
           style={{ height: "480px", overflow: "auto" }}

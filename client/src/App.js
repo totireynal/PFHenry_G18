@@ -11,6 +11,7 @@ import Login from "./Views/Home/Login";
 // import Register from "./Components/Register/Register.jsx"
 import Register from "./Components/Register/Register.jsx";
 import Payment from "./Components/Payment/Payment.jsx";
+import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         {/* <Route path="/home/login/register" element={<Register />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/employees" element={<Employees />} />
+        <Route path="/addemployee" element={<AddEmployee />} />
         <Route path="/employee/:id" element={<EmployeeDetail />} />
         {/* <Route path="/employees/:employeeId" element={<Employee />} /> */}
         <Route path="*" element={<h1>Ruta equivocada</h1>} />

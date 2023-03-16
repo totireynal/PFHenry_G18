@@ -27,7 +27,7 @@ const EmployeeDetail = () => {
       <SideBar />
       <div className="col-span-5 p-8">
         <div className={style.buttonCointainer}>
-          <button className={style.editButton}>Edit Employe</button>
+          <button className={style.editButton}>Edit Employee</button>
         </div>
         <div className={style.mainCointainer}>
           <div className={style.dataCointainer}>

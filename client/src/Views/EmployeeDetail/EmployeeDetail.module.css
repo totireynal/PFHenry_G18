@@ -76,16 +76,14 @@
 }
 
 .editButton {
-  width: 14vw;
-  height: 8vh;
-  background-color: #5c5c5c;
-  font-size: 18px;
-  color: white;
-  border-radius: 10px;
+  display: flex;
+  position: relative;
+  width: 16vw;
+  height: 6vh;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid black;
   transition: 0.4s;
-}
-
-.editButton:hover {
-  background-color: #7e7e7e;
-  transform: scale(102%);
 }
