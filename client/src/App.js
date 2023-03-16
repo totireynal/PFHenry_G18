@@ -10,15 +10,21 @@ import Login from "./Views/Home/Login";
 =======
 import Register from "./Components/Register/Register.jsx"
 import Payment from "./Components/Payment/Payment.jsx"
+<<<<<<< HEAD
 >>>>>>> 7050622 (Armado del componente Payment)
+=======
+>>>>>>> 70506222b9d57660df7b489a802605be4e7aed12
 
 function App() {
   return (
     <div className="App">
 <<<<<<< HEAD
+<<<<<<< HEAD
       {/* <Register></Register> */}
       <Routes>
 =======
+=======
+>>>>>>> 70506222b9d57660df7b489a802605be4e7aed12
       <Routes>
       <Route path="/register" element={<Register />} />
       <Route path="/payment" element={<Payment />} />
@@ -37,10 +43,14 @@ function App() {
         <Route path="/employees/:employeeId" element={<Employee />} />
         <Route path="*" element={<h1>Ruta equivocada</h1>} /> 
 <<<<<<< HEAD
+<<<<<<< HEAD
       </Routes>
 =======
       </Routes>  */}
 >>>>>>> 7050622 (Armado del componente Payment)
+=======
+      </Routes>  */}
+>>>>>>> 70506222b9d57660df7b489a802605be4e7aed12
     </div>
   );
 }
