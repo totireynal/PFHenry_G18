@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import style from "./EmployeeDetail.module.css";
-import { users } from "../../Utils";
+import { users } from "../../utils";
 import SideBar from "../../Components/SideBar/SideBar";
 
 const EmployeeDetail = () => {

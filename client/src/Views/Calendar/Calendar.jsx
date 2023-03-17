@@ -1,9 +1,5 @@
 import SideBar from "../../Components/SideBar/SideBar";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import { useEffect } from "react";
-
-const events = [{ title: "Meeting", start: new Date() }];
+import CalendarApi from './CalendarApi'
 const Calendar = () => {
   return (
     <div className="h-screen grid grid-cols-6 grid-rows-1 ">
@@ -23,15 +19,8 @@ const Calendar = () => {
           </div>
           <div className="flex justify-center items-center">
 
-          <div className="w-[600px]">
-            <FullCalendar
-              className=""
-              plugins={[dayGridPlugin]}
-              initialView="dayGridMonth"
-              weekends={true}
-              events={events}
-              eventContent={renderEventContent}
-              />
+          <div className="w-[600px] h-[400px]">
+            <CalendarApi />
               </div>
           </div>
         </div>
@@ -39,14 +28,5 @@ const Calendar = () => {
     </div>
   );
 };
-
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  );
-}
 
 export default Calendar;
