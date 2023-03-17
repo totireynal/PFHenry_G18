@@ -27,6 +27,7 @@ const AddEmployee = () => {
     area: "",
     cuil: "",
     cbu: "",
+    dateOfAdmission: "",
   });
 
   const [errorButton, setErrorButton] = useState(true);
@@ -99,6 +100,10 @@ const AddEmployee = () => {
 
     if (!value.cbu) {
       errors.cbu = "CBU is required";
+    }
+
+    if (!value.dateOfAdmission) {
+      errors.dateOfAdmission = "CBU is required";
     }
 
     setErrors(errors);
@@ -441,6 +446,29 @@ const AddEmployee = () => {
                   <p className="flex text-red-500 justify-end">
                     <RiAlertFill className="flex relative m-1" />
                     {errors.area}
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="my-6 h-16">
+                <label className="text-base">Date of Admission: </label>
+                <input
+                  onChange={handleChange}
+                  name="dateOfAdmission"
+                  value={employee.dateOfAdmission}
+                  type="date"
+                  className={
+                    touched.dateOfAdmission && errors.dateOfAdmission
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
+                  }
+                  autocomplete="off"
+                ></input>
+                {touched.dateOfAdmission && errors.dateOfAdmission ? (
+                  <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
+                    {errors.dateOfAdmission}
                   </p>
                 ) : (
                   ""
