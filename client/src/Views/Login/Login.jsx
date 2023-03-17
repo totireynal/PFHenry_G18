@@ -1,56 +1,35 @@
 import { Link } from "react-router-dom";
-import Button from "../../Components/Button";
-import { useState } from "react";
+import style from './Login.module.css';
 import { useAuth0 } from '@auth0/auth0-react';
 
 
 
 const Login = () => {
 
-const [login, setLogin] = useState({
-  user: '',
-  password: ''
-})
-
-const handlerChange = (event) => {
-  const property = event.target.name;
-  const value = event.target.value;
-
-  setLogin({...login, [property]: value})
-}
 
 const { loginWithRedirect } = useAuth0();
 
   return (
     <div>
-      {/* <label>User: </label>
-      <input type='text'
-      name='user'
-      value={login.user}
-      onChange={handlerChange}
-      autoComplete='on'
-      />
+      <div className={style.container}>
+        <button className={style.button}
+        onClick={() => loginWithRedirect()}>
+          Login
+        </button>
+        
+        <div className={style.text}>
+        <h2>You are not registered yet, please press the button</h2>      
+        </div>
+        <Link to="/home/login/register">
+          <button className={style.button1}>Register</button>
+        </Link>
 
-      <label>Password: </label>
-      <input type='text'
-      name='password'
-      value={login.password}
-      onChange={handlerChange}
-      /> */}
-
-      <div>
-      <button onClick={() => loginWithRedirect()}>
-        Login
-      </button>
+        <Link to="/dashboard">
+          <button >Succesful login</button>
+        </Link>
       </div>
-
-      <Link to="/home/login/register">
-        <Button>Register</Button>
-      </Link>
     </div>
   );
 };
 
 export default Login;
-
-export default Login

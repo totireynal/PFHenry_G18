@@ -9,6 +9,7 @@ import Home from "./Views/Home";
 import Login from "./Views/Login";
 import Register from "./Views/Register";
 import MyProfile from "./Views/MyProfile/MyProfile";
+import EditMyProfile from "./Views/MyProfile/EditMyProfile";
 import Notifications from "./Views/Notifications/Notifications";
 import Organization from "./Views/Organization";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
@@ -56,6 +57,7 @@ function App() {
             <Route path="/notifications" element={<Notifications />} />
           </Route>
           <Route path="/myprofile" element={<MyProfile />} />
+          <Route path="/myprofile/edit" element={<EditMyProfile />} />
         </Route>
         <Route path="*" element={<h1>Ruta equivocada</h1>} />
       </Routes>
