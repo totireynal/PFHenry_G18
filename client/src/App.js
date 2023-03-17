@@ -7,19 +7,21 @@ import Employees from "./Views/Employees";
 import EmployeeDetail from "./Views/EmployeeDetail/EmployeeDetail";
 import Home from "./Views/Home";
 import Login from "./Views/Login";
+// import Register from "./Components/Register/Register.jsx"
 import Register from "./Views/Register";
 import MyProfile from "./Views/MyProfile/MyProfile";
 import EditMyProfile from "./Views/MyProfile/EditMyProfile";
 import Notifications from "./Views/Notifications/Notifications";
 import Organization from "./Views/Organization";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
-import SideBar from "./Components/SideBar/SideBar";
+// import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
+import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 
 function App() {
   // const [user, setUser] = useState(null);
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
   const [user, setUser] = useState({
     name: "juan",
     role: ["admin"],
@@ -50,8 +52,9 @@ function App() {
           >
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/employees" element={<Employees />} />
-            <Route path="/employees/:id" element={<EmployeeDetail />} />
+            <Route path="/employee/:id" element={<EmployeeDetail />} />
             <Route path="/addemployee" element={<AddEmployee />} />
+            <Route path="/editemployee" element={<EditEmployee />} />
             <Route path="/organization" element={<Organization />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/notifications" element={<Notifications />} />
