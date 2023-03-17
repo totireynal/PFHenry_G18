@@ -6,6 +6,7 @@ import {
   resetCreate,
   createEmployee,
 } from "../../../state/redux/actions/actions";
+import { RiAlertFill } from "react-icons/ri";
 
 const AddEmployee = () => {
   const { employeeCreated } = useSelector((state) => state);
@@ -28,15 +29,22 @@ const AddEmployee = () => {
 
   const [errors, setErrors] = useState({});
 
+  const [touched, setTouched] = useState({});
+
   useEffect(() => {
     dispatch(resetCreate());
   }, []);
+
+  //Expresiones regulares para validar
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   const validate = (value) => {
     let errors = {};
 
     if (!value.name) {
       errors.name = "Name is required";
+    } else if (value.name.length < 3 || value.name.length > 20) {
+      errors.name = "Between 3 and 20 chars";
     }
 
     if (!value.lastName) {
@@ -48,7 +56,9 @@ const AddEmployee = () => {
     }
 
     if (!value.email) {
-      errors.email = "Email is required";
+      errors.email = "E-mail is required";
+    } else if (value.email && !regexEmail.test(value.email)) {
+      errors.email = "Wrong E-mail";
     }
 
     if (!value.dni) {
@@ -56,7 +66,7 @@ const AddEmployee = () => {
     }
 
     if (!value.tel) {
-      errors.tel = "Telephone is required";
+      errors.tel = "Phone is required";
     }
 
     if (!value.address) {
@@ -78,6 +88,11 @@ const AddEmployee = () => {
     setEmployee({
       ...employee,
       [event.target.name]: event.target.value,
+    });
+
+    setTouched({
+      ...touched,
+      [event.target.name]: true,
     });
   };
 
@@ -134,28 +149,31 @@ const AddEmployee = () => {
           </div>
           <div className="flex gap-16">
             <div>
-              <div>
+              <div className="h-16">
                 <label className="text-base">Name: </label>
                 <input
                   onChange={handleChange}
                   name="name"
                   value={employee.name}
                   type="text"
-                  // className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
                   className={
-                    errors.name
-                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                    touched.name && errors.name
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
                   }
                   placeholder="First Name"
+                  autocomplete="off"
                 ></input>
-                {errors.name ? (
-                  <p className="flex text-red-600 justify-end">{errors.name}</p>
+                {touched.name && errors.name ? (
+                  <p className="flex text-red-600 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
+                    {errors.name}
+                  </p>
                 ) : (
                   ""
                 )}
               </div>
-              <div className="my-2">
+              <div className="my-6 h-16">
                 <label className="text-base">Last Name: </label>
                 <input
                   onChange={handleChange}
@@ -163,21 +181,23 @@ const AddEmployee = () => {
                   value={employee.lastname}
                   type="text"
                   className={
-                    errors.lastName
-                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                    touched.lastName && errors.lastName
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
                   }
                   placeholder="Last Name"
+                  autocomplete="off"
                 ></input>
-                {errors.lastName ? (
+                {touched.lastName && errors.lastName ? (
                   <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
                     {errors.lastName}
                   </p>
                 ) : (
                   ""
                 )}
               </div>
-              <div className="my-2">
+              <div className="my-6 h-16">
                 <label className="text-base">Birth Date: </label>
                 <input
                   onChange={handleChange}
@@ -185,20 +205,21 @@ const AddEmployee = () => {
                   value={employee.birthdate}
                   type="date"
                   className={
-                    errors.birthDate
-                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                    touched.birthDate && errors.birthDate
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
                   }
                 ></input>
-                {errors.birthDate ? (
+                {touched.birthDate && errors.birthDate ? (
                   <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
                     {errors.birthDate}
                   </p>
                 ) : (
                   ""
                 )}
               </div>
-              <div className="my-2">
+              <div className="my-6 h-16">
                 <label className="text-base">E-mail: </label>
                 <input
                   onChange={handleChange}
@@ -206,21 +227,23 @@ const AddEmployee = () => {
                   value={employee.email}
                   type="text"
                   className={
-                    errors.email
-                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                    touched.email && errors.email
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
                   }
                   placeholder="eg. email@example.com"
+                  autocomplete="off"
                 ></input>
-                {errors.email ? (
+                {touched.email && errors.email ? (
                   <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
                     {errors.email}
                   </p>
                 ) : (
                   ""
                 )}
               </div>
-              <div className="my-2">
+              <div className="my-6 h-16">
                 <label className="text-base">DNI: </label>
                 <input
                   onChange={handleChange}
@@ -228,14 +251,18 @@ const AddEmployee = () => {
                   value={employee.dni}
                   type="text"
                   className={
-                    errors.dni
-                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                    touched.dni && errors.dni
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
                   }
-                  placeholder="eg. 45678901D"
+                  placeholder="eg. 32472653"
+                  autocomplete="off"
                 ></input>
-                {errors.dni ? (
-                  <p className="flex text-red-500 justify-end">{errors.dni}</p>
+                {touched.dni && errors.dni ? (
+                  <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
+                    {errors.dni}
+                  </p>
                 ) : (
                   ""
                 )}
@@ -243,26 +270,30 @@ const AddEmployee = () => {
             </div>
             <div>
               <div>
-                <label className="text-base">Telephone: </label>
+                <label className="text-base">Phone: </label>
                 <input
                   onChange={handleChange}
                   name="tel"
                   value={employee.phone}
                   type="text"
                   className={
-                    errors.tel
-                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                    touched.tel && errors.tel
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
                   }
-                  placeholder="eg. 4567890123"
+                  placeholder="eg. 2914293847"
+                  autocomplete="off"
                 ></input>
-                {errors.tel ? (
-                  <p className="flex text-red-500 justify-end">{errors.tel}</p>
+                {touched.tel && errors.tel ? (
+                  <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
+                    {errors.tel}
+                  </p>
                 ) : (
                   ""
                 )}
               </div>
-              <div className="my-2">
+              <div className="my-6 h-16">
                 <label className="text-base">Address: </label>
                 <input
                   onChange={handleChange}
@@ -270,21 +301,23 @@ const AddEmployee = () => {
                   value={employee.address}
                   type="text"
                   className={
-                    errors.address
-                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                    touched.address && errors.address
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
                   }
                   placeholder="eg. 012 Elm St, Anytown"
+                  autocomplete="off"
                 ></input>
-                {errors.address ? (
+                {touched.address && errors.address ? (
                   <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
                     {errors.address}
                   </p>
                 ) : (
                   ""
                 )}
               </div>
-              <div className="my-2">
+              <div className="my-6 h-16">
                 <label className="text-base">Role: </label>
                 <select
                   onChange={handleChange}
@@ -292,28 +325,30 @@ const AddEmployee = () => {
                   value={employee.role}
                   type="text"
                   className={
-                    errors.role
-                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                    touched.role && errors.role
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
                   }
                   placeholder="eg. Accountant"
+                  autocomplete="off"
                 >
-                  <option selected value="0">
-                    Select Role
-                  </option>
-                  <option value="SuperAdmin">SuperAdmin</option>
-                  <option value="Admin" selected>
-                    Admin
+                  <option hidden selected>
+                    Select a Role
                   </option>
                   <option value="User">User</option>
+                  <option value="SuperAdmin">SuperAdmin</option>
+                  <option value="Admin">Admin</option>
                 </select>
-                {errors.role ? (
-                  <p className="flex text-red-500 justify-end">{errors.role}</p>
+                {touched.role && errors.role ? (
+                  <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
+                    {errors.role}
+                  </p>
                 ) : (
                   ""
                 )}
               </div>
-              <div className="my-2">
+              <div className="my-6 h-16">
                 <label className="text-base">Image: </label>
                 <input
                   onChange={handleChange}
@@ -321,14 +356,16 @@ const AddEmployee = () => {
                   value={employee.image}
                   type="text"
                   className={
-                    errors.image
-                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                    touched.image && errors.image
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
                   }
-                  placeholder="eg. Finance"
+                  placeholder="Insert a valid URL"
+                  autocomplete="off"
                 ></input>
-                {errors.image ? (
+                {touched.image && errors.image ? (
                   <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
                     {errors.image}
                   </p>
                 ) : (
@@ -343,8 +380,8 @@ const AddEmployee = () => {
               disabled={errorButton}
               className={
                 errorButton
-                  ? "cursor-not-allowed border-2 border-gray-600 w-24 h-9 rounded-2xl shadow-md shadow-slate-300 bg-gray-400 text-slate-300"
-                  : "border-2 border-gray-600 w-24 h-9 rounded-2xl shadow-md shadow-slate-300 bg-gray-800 text-slate-300"
+                  ? "cursor-not-allowed border border-gray-600 w-24 h-9 rounded-2xl shadow-md shadow-slate-300 bg-gray-400 text-slate-300"
+                  : "border border-gray-600 w-24 h-9 rounded-2xl shadow-md shadow-slate-300 bg-gray-800 text-slate-300"
               }
             >
               Create
