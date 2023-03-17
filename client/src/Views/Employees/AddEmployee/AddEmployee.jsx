@@ -9,6 +9,7 @@ import {
 
 const AddEmployee = () => {
   const { employeeCreated } = useSelector((state) => state);
+
   const dispatch = useDispatch();
 
   const [employee, setEmployee] = useState({
@@ -36,8 +37,6 @@ const AddEmployee = () => {
 
     if (!value.name) {
       errors.name = "Name is required";
-    } else if (value.name.length < 4 || value.name.length > 25) {
-      errors.name = "Name must contain between 4 and 25 characters";
     }
 
     if (!value.lastName) {
@@ -129,7 +128,7 @@ const AddEmployee = () => {
     >
       <SideBar />
       <div className="col-span-5 p-8 flex flex-col justify-center items-center">
-        <div className="flex flex-col gap-6 px-10 py-4 rounded-2xl shadow-md shadow-slate-500 bg-slate-200">
+        <div className="flex flex-col gap-4 px-10 py-4 rounded-2xl shadow-md shadow-slate-500 bg-slate-200">
           <div className="text-center">
             <span className="text-4xl">Add Employee</span>
           </div>
@@ -145,54 +144,101 @@ const AddEmployee = () => {
                   // className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
                   className={
                     errors.name
-                      ? "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
-                      : "rounded-md border-2 border-red-800 block w-56 h-10 px-2"
+                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
                   }
                   placeholder="First Name"
                 ></input>
+                {errors.name ? (
+                  <p className="flex text-red-600 justify-end">{errors.name}</p>
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="my-6">
+              <div className="my-2">
                 <label className="text-base">Last Name: </label>
                 <input
                   onChange={handleChange}
                   name="lastName"
                   value={employee.lastname}
                   type="text"
-                  className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  className={
+                    errors.lastName
+                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  }
                   placeholder="Last Name"
                 ></input>
+                {errors.lastName ? (
+                  <p className="flex text-red-500 justify-end">
+                    {errors.lastName}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="my-6">
+              <div className="my-2">
                 <label className="text-base">Birth Date: </label>
                 <input
                   onChange={handleChange}
                   name="birthDate"
                   value={employee.birthdate}
                   type="date"
-                  className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  className={
+                    errors.birthDate
+                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  }
                 ></input>
+                {errors.birthDate ? (
+                  <p className="flex text-red-500 justify-end">
+                    {errors.birthDate}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="my-6">
+              <div className="my-2">
                 <label className="text-base">E-mail: </label>
                 <input
                   onChange={handleChange}
                   name="email"
                   value={employee.email}
                   type="text"
-                  className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  className={
+                    errors.email
+                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  }
                   placeholder="eg. email@example.com"
                 ></input>
+                {errors.email ? (
+                  <p className="flex text-red-500 justify-end">
+                    {errors.email}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="my-6">
+              <div className="my-2">
                 <label className="text-base">DNI: </label>
                 <input
                   onChange={handleChange}
                   name="dni"
                   value={employee.dni}
-                  type="number"
-                  className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  type="text"
+                  className={
+                    errors.dni
+                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  }
                   placeholder="eg. 45678901D"
                 ></input>
+                {errors.dni ? (
+                  <p className="flex text-red-500 justify-end">{errors.dni}</p>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             <div>
@@ -202,49 +248,92 @@ const AddEmployee = () => {
                   onChange={handleChange}
                   name="tel"
                   value={employee.phone}
-                  type="number"
-                  className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  type="text"
+                  className={
+                    errors.tel
+                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  }
                   placeholder="eg. 4567890123"
                 ></input>
+                {errors.tel ? (
+                  <p className="flex text-red-500 justify-end">{errors.tel}</p>
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="my-6">
+              <div className="my-2">
                 <label className="text-base">Address: </label>
                 <input
                   onChange={handleChange}
                   name="address"
                   value={employee.address}
                   type="text"
-                  className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  className={
+                    errors.address
+                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  }
                   placeholder="eg. 012 Elm St, Anytown"
                 ></input>
+                {errors.address ? (
+                  <p className="flex text-red-500 justify-end">
+                    {errors.address}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="my-6">
+              <div className="my-2">
                 <label className="text-base">Role: </label>
                 <select
                   onChange={handleChange}
                   name="role"
                   value={employee.role}
                   type="text"
-                  className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  className={
+                    errors.role
+                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  }
                   placeholder="eg. Accountant"
                 >
+                  <option selected value="0">
+                    Select Role
+                  </option>
                   <option value="SuperAdmin">SuperAdmin</option>
                   <option value="Admin" selected>
                     Admin
                   </option>
                   <option value="User">User</option>
                 </select>
+                {errors.role ? (
+                  <p className="flex text-red-500 justify-end">{errors.role}</p>
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="my-6">
+              <div className="my-2">
                 <label className="text-base">Image: </label>
                 <input
                   onChange={handleChange}
                   name="image"
                   value={employee.image}
                   type="text"
-                  className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  className={
+                    errors.image
+                      ? "rounded-md border-2 border-red-600 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  }
                   placeholder="eg. Finance"
                 ></input>
+                {errors.image ? (
+                  <p className="flex text-red-500 justify-end">
+                    {errors.image}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
@@ -252,7 +341,11 @@ const AddEmployee = () => {
             <button
               type="submit"
               disabled={errorButton}
-              className="border-2 border-gray-600 w-24 h-9 rounded-2xl shadow-md shadow-slate-300 bg-gray-800 text-slate-300"
+              className={
+                errorButton
+                  ? "cursor-not-allowed border-2 border-gray-600 w-24 h-9 rounded-2xl shadow-md shadow-slate-300 bg-gray-400 text-slate-300"
+                  : "border-2 border-gray-600 w-24 h-9 rounded-2xl shadow-md shadow-slate-300 bg-gray-800 text-slate-300"
+              }
             >
               Create
             </button>
