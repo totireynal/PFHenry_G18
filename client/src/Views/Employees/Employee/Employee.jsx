@@ -13,6 +13,7 @@ const Employee = (props) => {
       <span className="text-black text-base font-medium mt-2">
         {props.position}
       </span>
+      {/* console.log("prueba"); */}
     </div>
   );
 };
