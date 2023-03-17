@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Employee from "./Employee/Employee";
 import style from "./Employees.module.css";
 import SearchBar from "./SearchBar/SearchBar";
-import { users } from "../../Utils";
+import { users } from "../../utils";
 import SideBar from "../../Components/SideBar/SideBar";
 
 const Employees = () => {
