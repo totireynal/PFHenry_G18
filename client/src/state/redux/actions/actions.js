@@ -30,7 +30,7 @@ export function resetCreate() {
 
 export const createEmployee = (info) => {
   return function (dispatch) {
-    return axios.post("", info).then(
+    return axios.post("http://localhost:3001/users", info).then(
       (response) => {
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },

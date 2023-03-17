@@ -149,7 +149,7 @@ const AddEmployee = () => {
                 <label className="text-base">Last Name: </label>
                 <input
                   onChange={handleChange}
-                  name="lastname"
+                  name="lastName"
                   value={employee.lastname}
                   type="text"
                   className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
@@ -160,7 +160,7 @@ const AddEmployee = () => {
                 <label className="text-base">Birth Date: </label>
                 <input
                   onChange={handleChange}
-                  name="birthdate"
+                  name="birthDate"
                   value={employee.birthdate}
                   type="date"
                   className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
@@ -194,7 +194,7 @@ const AddEmployee = () => {
                 <label className="text-base">Telephone: </label>
                 <input
                   onChange={handleChange}
-                  name="phone"
+                  name="tel"
                   value={employee.phone}
                   type="number"
                   className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
@@ -205,7 +205,7 @@ const AddEmployee = () => {
                 <label className="text-base">Address: </label>
                 <input
                   onChange={handleChange}
-                  name="direction"
+                  name="address"
                   value={employee.address}
                   type="text"
                   className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
@@ -216,18 +216,24 @@ const AddEmployee = () => {
                 <label className="text-base">Role: </label>
                 <select
                   onChange={handleChange}
-                  name="position"
+                  name="role"
                   value={employee.role}
                   type="text"
                   className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
                   placeholder="eg. Accountant"
-                ></select>
+                >
+                  <option value="SuperAdmin">SuperAdmin</option>
+                  <option value="Admin" selected>
+                    Admin
+                  </option>
+                  <option value="User">User</option>
+                </select>
               </div>
               <div className="my-6">
                 <label className="text-base">Image: </label>
                 <input
                   onChange={handleChange}
-                  name="area"
+                  name="image"
                   value={employee.image}
                   type="text"
                   className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
