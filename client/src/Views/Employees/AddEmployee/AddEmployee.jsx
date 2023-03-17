@@ -36,6 +36,8 @@ const AddEmployee = () => {
 
     if (!value.name) {
       errors.name = "Name is required";
+    } else if (value.name.length < 4 || value.name.length > 25) {
+      errors.name = "Name must contain between 4 and 25 characters";
     }
 
     if (!value.lastName) {
@@ -80,7 +82,6 @@ const AddEmployee = () => {
     });
   };
 
-  //Handler para enviar el formulario
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(createEmployee(employee));
@@ -128,7 +129,7 @@ const AddEmployee = () => {
     >
       <SideBar />
       <div className="col-span-5 p-8 flex flex-col justify-center items-center">
-        <div className="flex flex-col gap-6 border-2 border-gray-800 px-10 py-4 rounded-2xl shadow-md shadow-slate-300 bg-slate-200">
+        <div className="flex flex-col gap-6 px-10 py-4 rounded-2xl shadow-md shadow-slate-500 bg-slate-200">
           <div className="text-center">
             <span className="text-4xl">Add Employee</span>
           </div>
@@ -141,7 +142,12 @@ const AddEmployee = () => {
                   name="name"
                   value={employee.name}
                   type="text"
-                  className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  // className="rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                  className={
+                    errors.name
+                      ? "rounded-md border-2 border-gray-800 block w-56 h-10 px-2"
+                      : "rounded-md border-2 border-red-800 block w-56 h-10 px-2"
+                  }
                   placeholder="First Name"
                 ></input>
               </div>
