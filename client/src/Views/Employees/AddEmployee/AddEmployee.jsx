@@ -23,6 +23,10 @@ const AddEmployee = () => {
     address: "",
     role: "",
     image: "",
+    position: "",
+    area: "",
+    cuil: "",
+    cbu: "",
   });
 
   const [errorButton, setErrorButton] = useState(true);
@@ -81,6 +85,22 @@ const AddEmployee = () => {
       errors.image = "Image is required";
     }
 
+    if (!value.position) {
+      errors.position = "Position is required";
+    }
+
+    if (!value.area) {
+      errors.area = "Area is required";
+    }
+
+    if (!value.cuil) {
+      errors.cuil = "Cuil is required";
+    }
+
+    if (!value.cbu) {
+      errors.cbu = "CBU is required";
+    }
+
     setErrors(errors);
   };
 
@@ -132,6 +152,10 @@ const AddEmployee = () => {
         address: "",
         role: "",
         image: "",
+        position: "",
+        area: "",
+        cuil: "",
+        cbu: "",
       });
     }
   }, [employeeCreated]);
@@ -367,6 +391,104 @@ const AddEmployee = () => {
                   <p className="flex text-red-500 justify-end">
                     <RiAlertFill className="flex relative m-1" />
                     {errors.image}
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+            <div>
+              <div className="h-16">
+                <label className="text-base">Position: </label>
+                <input
+                  onChange={handleChange}
+                  name="position"
+                  value={employee.position}
+                  type="text"
+                  className={
+                    touched.position && errors.position
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
+                  }
+                  placeholder="eg. Accountant"
+                  autocomplete="off"
+                ></input>
+                {touched.position && errors.position ? (
+                  <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
+                    {errors.position}
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="my-6 h-16">
+                <label className="text-base">Area: </label>
+                <input
+                  onChange={handleChange}
+                  name="area"
+                  value={employee.area}
+                  type="text"
+                  className={
+                    touched.area && errors.area
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
+                  }
+                  placeholder="eg. Finance"
+                  autocomplete="off"
+                ></input>
+                {touched.area && errors.area ? (
+                  <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
+                    {errors.area}
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="my-6 h-16">
+                <label className="text-base">Cuil: </label>
+                <input
+                  onChange={handleChange}
+                  name="cuil"
+                  value={employee.cuil}
+                  type="text"
+                  className={
+                    touched.cuil && errors.cuil
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
+                  }
+                  placeholder="eg. 20-05854965-3"
+                  autocomplete="off"
+                ></input>
+                {touched.cuil && errors.cuil ? (
+                  <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
+                    {errors.cuil}
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="my-6 h-16">
+                <label className="text-base">CBU: </label>
+                <input
+                  onChange={handleChange}
+                  name="cbu"
+                  value={employee.cbu}
+                  type="text"
+                  className={
+                    touched.cbu && errors.cbu
+                      ? "rounded-md border border-red-600 block w-56 h-10 px-2 focus:outline-none"
+                      : "rounded-md border border-gray-800 block w-56 h-10 px-2 focus:outline-none"
+                  }
+                  placeholder="eg. 01702046600000087865"
+                  autocomplete="off"
+                ></input>
+                {touched.cbu && errors.cbu ? (
+                  <p className="flex text-red-500 justify-end">
+                    <RiAlertFill className="flex relative m-1" />
+                    {errors.cbu}
                   </p>
                 ) : (
                   ""
