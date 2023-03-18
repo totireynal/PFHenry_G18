@@ -4,6 +4,7 @@ import {
   GET_COMPANIES,
   RESET_CREATE,
   CREATE_EMPLOYEE,
+  GET_EMPLOYEES,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -36,6 +37,25 @@ export const createEmployee = (info) => {
       },
       (error) => {
         dispatch({ type: CREATE_EMPLOYEE, payload: error.response.data });
+      }
+    );
+  };
+};
+
+export const getGames = (name) => {
+  return function (dispatch) {
+    let url = "http://localhost:3001/users";
+
+    if (name) {
+      url += `?name=${name}`;
+    }
+
+    return axios.get(url).then(
+      (response) => {
+        dispatch({ type: GET_EMPLOYEES, payload: response.data });
+      },
+      (error) => {
+        dispatch({ type: GET_EMPLOYEES, payload: error.response.data });
       }
     );
   };
