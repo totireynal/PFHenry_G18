@@ -36,7 +36,7 @@ function rootReducer(state = initialState, action) {
         employeeCreated: action.payload,
       };
     case UPDATE_EMPLOYEE:
-      const updatedUser = state.allCompanies.filter(employee => employee.id !== action.payload);
+      const updatedUser = state.allEmployees.filter(employee => employee.id !== action.payload.id);
       return {
         ...state,
         allEmployees: [...updatedUser ,action.payload],

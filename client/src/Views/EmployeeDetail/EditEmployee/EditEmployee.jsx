@@ -89,7 +89,6 @@ const EditEmployee = () => {
         area: "",
         dateOfAdmission: "",
       });
-      console.log('faaa');
     }
   };
 
