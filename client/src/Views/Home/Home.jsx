@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-// import styles from './Home.module.css';
+import {AiFillInstagram} from 'react-icons/ai';
 
-// import Button from "../../Components/Button";
 
 const Home = () => {
   return (
@@ -40,8 +39,6 @@ const Home = () => {
         </div>
       </section>
 
-      
-
       <section className="h-[400px] text-center">
         <div>
           <h2>
@@ -65,13 +62,38 @@ const Home = () => {
         </div>
       </section>
 
-      <footer className="">
-        <div>
-          <h2>Contact Us</h2>
+      <footer className="bg-slate-600 px-4 py-6">
+        <div className="container ml-2 mr-1">
+          <div className="flex justify-between bg-yellow-400">
+            
+            <div className="w-1/3">
+              <div className="text-center text-white bg-slate-400 px-10">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXRffPuFBvvRFjhn46hKBxJATOfFLl-VkWA&usqp=CAU" alt="" />
+              </div>
+            </div>
+            
+            <div className="w-2/6 text-left pl-12 text-white bg-blue-400">
+              <h5 className="uppercase mb-6 font-bold">Contact Us</h5>
+              <p>
+                email@staffPhere.com
+              </p>
+              <p className="pt-2">
+                tel: +54-11-555-1234
+              </p>
+            </div>
+
+            <div className="w-4/6 text-left text-white bg-blue-800">
+              <h5 className="uppercase mb-6 font-bold">Send us a review</h5>
+              <p>
+                Link a un form para cargar.
+              </p>
+              <button className="flex pt-3 bg-slate-200 text-black">
+                instadestaff <span><AiFillInstagram className="pt-1" size={23}></AiFillInstagram></span> 
+              </button>
+            </div>
+          </div>
         </div>
       </footer>
-
-
     </>
     
   )
