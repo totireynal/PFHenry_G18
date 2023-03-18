@@ -43,5 +43,3 @@ const handlerChange = (event) => {
 };
 
 export default Login;
-
-export default Login
