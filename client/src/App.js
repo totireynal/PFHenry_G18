@@ -40,30 +40,11 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/home/login" element={<Login />} />
-        <Route path="/home/login/register" element={<Register />} />
-        <Route path="/home/login/register/payment" element={<Payment />} />
-        <Route element={<ProtectedRoute isAllowed={!!user} />}>
-          <Route
-            element={
-              <ProtectedRoute
-                isAllowed={!!user && user.role.includes("admin")}
-                redirectTo="/myprofile"
-              />
-            }
-          >
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/employees" element={<Employees />} />
-            <Route path="/employee/:id" element={<EmployeeDetail />} />
-            <Route path="/addemployee" element={<AddEmployee />} />
-            <Route path="/editemployee/:id" element={<EditEmployee />} />
-            <Route path="/organization" element={<Organization />} />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/notifications" element={<Notifications />} />
-          </Route>
-          <Route path="/myprofile" element={<MyProfile />} />
-          <Route path="/myprofile/edit" element={<EditMyProfile />} />
-        </Route>
-        <Route path="*" element={<h1>Ruta equivocada</h1>} />
+        {/* <Route path="/home/login/register" element={<Register />} /> */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/employees" element={<Employees />} />
+        <Route path="/employees/:employeeId" element={<Employee />} />
+        <Route path="*" element={<h1>Ruta equivocada</h1>} /> 
       </Routes>
     </div>
   );
