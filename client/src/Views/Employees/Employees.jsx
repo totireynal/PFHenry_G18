@@ -47,8 +47,10 @@ const Employees = () => {
                   id={user.id}
                   name={user.name}
                   lastName={user.lastName}
-                  email={user.email}
+                  // image={user.image}
                   area={user.area}
+                  position={user.position}
+                  role={user.role}
                 />
               </Link>
             );

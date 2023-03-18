@@ -15,18 +15,20 @@ const EmployeeDetail = () => {
     dispatch(getEmployeeDetail(id));
   }, [id, dispatch]);
 
-  const { position, area, cuil, cbu } = employeeDetail;
-  console.log(employeeDetail);
   const {
-    name = "",
-    lastName = "",
-    birthDate = "",
-    email = "",
-    address = "",
-    dni = 0,
-    tel = 0,
-    role = "",
-  } = employeeDetail?.User || {};
+    name,
+    lastName,
+    birthDate,
+    email,
+    address,
+    dni,
+    tel,
+    role,
+    position,
+    area,
+    cuil,
+    cbu,
+  } = employeeDetail;
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">

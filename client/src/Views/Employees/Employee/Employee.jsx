@@ -11,6 +11,12 @@ const Employee = (props) => {
       <span className="text-black text-base font-medium mt-2">
         {props.area}
       </span>
+      <span className="text-black text-base font-medium mt-2">
+        {props.position}
+      </span>
+      <span className="text-black text-base font-medium mt-2">
+        {props.role}
+      </span>
     </div>
   );
 };
