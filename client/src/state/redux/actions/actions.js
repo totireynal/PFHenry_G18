@@ -6,6 +6,7 @@ import {
   CREATE_EMPLOYEE,
   GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
+  GET_EMPLOYEE_DETAIL,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -43,7 +44,7 @@ export const createEmployee = (info) => {
   };
 };
 
-export const getGames = (name) => {
+export const getEmployees = (name) => {
   return function (dispatch) {
     let url = "http://localhost:3001/users";
 
@@ -76,5 +77,18 @@ export const updateEmployee = (id, user) => {
         payload: result,
       });
     } catch (error) {}
+  };
+};
+
+export const getEmployeeDetail = (id) => {
+  return function (dispatch) {
+    return axios.get(`http://localhost:3001/users/${id}`).then(
+      (response) => {
+        dispatch({ type: GET_EMPLOYEE_DETAIL, payload: response.data });
+      },
+      (error) => {
+        dispatch({ type: GET_EMPLOYEE_DETAIL, payload: error.response.data });
+      }
+    );
   };
 };

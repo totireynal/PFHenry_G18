@@ -1,26 +1,32 @@
 import { Link, useParams } from "react-router-dom";
 import style from "./EmployeeDetail.module.css";
-import { users } from "../../utils";
 import SideBar from "../../Components/SideBar/SideBar";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getEmployeeDetail } from "../../state/redux/actions/actions";
 
 const EmployeeDetail = () => {
-  const { id } = useParams();
+  let { id } = useParams();
+  let employeeDetail = useSelector((state) => state.employeeDetail);
 
-  const user = users.find((item) => item.id === Number(id));
+  let dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getEmployeeDetail(id));
+  }, [id, dispatch]);
+
+  const { position, area, cuil, cbu } = employeeDetail;
+  console.log(employeeDetail);
   const {
-    name,
-    lastName,
-    email,
-    avatar,
-    birthDate,
-    dni,
-    phone,
-    direction,
-    admissionDate,
-    position,
-    area,
-  } = user;
+    name = "",
+    lastName = "",
+    birthDate = "",
+    email = "",
+    address = "",
+    dni = 0,
+    tel = 0,
+    role = "",
+  } = employeeDetail?.User || {};
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
@@ -32,29 +38,18 @@ const EmployeeDetail = () => {
           </Link>
         </div>
         <div className={style.mainCointainer}>
-          <div className={style.dataCointainer}>
-            <div className={style.firstContainer}>
-              <p>Name: {name}</p>
-              <p>Last Name: {lastName}</p>
-              <p>Birth Date: {birthDate}</p>
-              <p>E-mail: {email}</p>
-            </div>
-            <div className={style.imageContainer}>
-              <img src={avatar} alt={name} className={style.profileImage}></img>
-            </div>
-          </div>
-          <div className={style.secondContainer}>
-            <div className={style.oneContainer}>
-              <p>DNI: {dni}</p>
-              <p>Phone: {phone}</p>
-              <p>Direction: {direction}</p>
-            </div>
-            <div className={style.twoContainer}>
-              <p>Position: {position}</p>
-              <p>Area: {area}</p>
-              <p>Admission Date: {admissionDate}</p>
-            </div>
-          </div>
+          <p>Name: {name}</p>
+          <p>Last Name: {lastName}</p>
+          <p>Birth Date: {birthDate}</p>
+          <p>E-mail: {email}</p>
+          <p>DNI: {dni}</p>
+          <p>Phone: {tel}</p>
+          <p>Address: {address}</p>
+          <p>Role: {role}</p>
+          <p>Position: {position}</p>
+          <p>Area: {area}</p>
+          <p>Cuil: {cuil}</p>
+          <p>Cbu: {cbu}</p>
         </div>
       </div>
     </div>

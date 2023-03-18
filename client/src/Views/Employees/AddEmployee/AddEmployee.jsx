@@ -365,8 +365,12 @@ const AddEmployee = () => {
                     Select a Role
                   </option>
                   <option value="User">User</option>
-                  <option value="SuperAdmin">SuperAdmin</option>
-                  <option value="Admin">Admin</option>
+                  <option value="SuperAdmin" disabled>
+                    SuperAdmin
+                  </option>
+                  <option value="Admin" disabled>
+                    Admin
+                  </option>
                 </select>
                 {touched.role && errors.role ? (
                   <p className="flex text-red-500 justify-end">

@@ -1,60 +1,54 @@
-// import Button from "../../Components/Button";
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Employee from "./Employee/Employee";
-import style from "./Employees.module.css";
 import SearchBar from "./SearchBar/SearchBar";
-import { users } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
+import { getEmployees } from "../../state/redux/actions/actions";
 
 const Employees = () => {
-  const [numEmployees, setNumEmployees] = useState(10);
+  const users = useSelector((state) => state.allEmployees);
+  const dispatch = useDispatch();
 
-  const [filteredUsers, setFilteredUsers] = React.useState(users);
+  useEffect(() => {
+    dispatch(getEmployees());
+  }, []);
 
-  const loadMoreEmployees = () => {
-    setNumEmployees(numEmployees + 4);
+  const [searchEmployee, setSearchEmployee] = useState("");
+
+  const handleSearch = (employee) => {
+    setSearchEmployee(employee);
   };
 
-  const handleSearch = (term) => {
-    const filtered = users.filter((user) =>
-      user.name.toLowerCase().includes(term.toLowerCase())
-    );
-    setFilteredUsers(filtered);
-  };
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchEmployee.toLowerCase()) ||
+      user.lastName.toLowerCase().includes(searchEmployee.toLowerCase())
+  );
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
       <SideBar />
       <div className="col-span-5 px-8 pb-8">
-        <div className={style.titleContainer}>
+        <div className="flex flex-row items-center justify-center h-24 gap-2.5">
           <SearchBar handleSearch={handleSearch} />
           <Link to={"/addemployee/"}>
-            <button className={style.addContainer}>Add Employee</button>
+            <button className="flex relative h-12 w-40 justify-center items-center rounded-md border border-solid border-black">
+              Add Employee
+            </button>
           </Link>
         </div>
-        <div
-          style={{ height: "480px", overflow: "auto" }}
-          onScroll={(e) => {
-            const element = e.target;
-            if (
-              element.scrollHeight - element.scrollTop ===
-              element.clientHeight
-            ) {
-              loadMoreEmployees();
-            }
-          }}
-          className={style.cardsContainer}
-        >
-          {filteredUsers.slice(0, numEmployees).map((user) => {
+        <div className="flex flex-row flex-wrap gap-6 justify-center">
+          {filteredUsers.map((user) => {
             return (
               <Link key={user.id} to={`/employee/${user.id}`}>
                 <Employee
                   id={user.id}
                   name={user.name}
                   lastName={user.lastName}
-                  position={user.position}
-                  avatar={user.avatar}
+                  email={user.email}
+                  area={user.area}
                 />
               </Link>
             );
