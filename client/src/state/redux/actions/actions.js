@@ -4,6 +4,7 @@ import {
   GET_COMPANIES,
   RESET_CREATE,
   CREATE_EMPLOYEE,
+  UPDATE_EMPLOYEE,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -40,3 +41,21 @@ export const createEmployee = (info) => {
     );
   };
 };
+
+export const updateEmployee =  (id, user) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`http://localhost:3001/users/${id}`, user);
+      const result = response.data;
+      
+      return dispatch({
+        type: UPDATE_EMPLOYEE,
+        payload: result
+      })
+    } catch (error) {
+      
+    }
+
+
+  }
+}

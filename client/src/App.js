@@ -54,7 +54,7 @@ function App() {
             <Route path="/employees" element={<Employees />} />
             <Route path="/employee/:id" element={<EmployeeDetail />} />
             <Route path="/addemployee" element={<AddEmployee />} />
-            <Route path="/editemployee" element={<EditEmployee />} />
+            <Route path="/editemployee/:id" element={<EditEmployee />} />
             <Route path="/organization" element={<Organization />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/notifications" element={<Notifications />} />

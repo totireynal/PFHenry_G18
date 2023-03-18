@@ -27,7 +27,7 @@ const EmployeeDetail = () => {
       <SideBar />
       <div className="col-span-5 p-8">
         <div className={style.buttonCointainer}>
-          <Link key={user.id} to={`/editemployee`}>
+          <Link to={`/editemployee/${id}`}>
             <button className={style.editButton}>Edit Employee</button>
           </Link>
         </div>
