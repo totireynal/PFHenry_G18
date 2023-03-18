@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import style from "./EmployeeDetail.module.css";
-import { users } from "../../Utils";
+import { users } from "../../utils";
 import SideBar from "../../Components/SideBar/SideBar";
 
 const EmployeeDetail = () => {
@@ -27,7 +27,9 @@ const EmployeeDetail = () => {
       <SideBar />
       <div className="col-span-5 p-8">
         <div className={style.buttonCointainer}>
-          <button className={style.editButton}>Edit Employee</button>
+          <Link to={`/editemployee/${id}`}>
+            <button className={style.editButton}>Edit Employee</button>
+          </Link>
         </div>
         <div className={style.mainCointainer}>
           <div className={style.dataCointainer}>
