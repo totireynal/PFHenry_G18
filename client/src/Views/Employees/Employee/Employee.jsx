@@ -5,15 +5,18 @@ const Employee = (props) => {
         <p className="text-xl font-bold mb-2">{props.name}</p>
         <p className="text-xl font-bold mb-2">{props.lastName}</p>
       </div>
-      <img
-        src={props.avatar}
-        alt={props.name}
-        className="rounded-full rounded-60"
-      ></img>
+      <span className="text-black text-base font-medium mt-2">
+        {props.email}
+      </span>
+      <span className="text-black text-base font-medium mt-2">
+        {props.area}
+      </span>
       <span className="text-black text-base font-medium mt-2">
         {props.position}
       </span>
-      {/* console.log("prueba"); */}
+      <span className="text-black text-base font-medium mt-2">
+        {props.role}
+      </span>
     </div>
   );
 };

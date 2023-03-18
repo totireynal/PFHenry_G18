@@ -7,7 +7,6 @@ import Form from "../../../Components/Form/Form";
 import validate from "../../../utils/functions/validate";
 import { useErrors } from "../../../utils/hooks/errors";
 
-
 const AddEmployee = () => {
   // const { employeeCreated } = useSelector((state) => state);
 

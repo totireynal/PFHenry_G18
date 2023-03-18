@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import Button from "../../Components/Button";
-import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import style from "./Login.module.css";
 
@@ -10,7 +8,10 @@ const Login = () => {
   return (
     <div>
       <div className={style.container}>
-        <button className={style.button} onClick={() => loginWithRedirect()}>
+        <button
+          className="m2-2 p-3 bg-sky-700 text-white"
+          onClick={() => loginWithRedirect()}
+        >
           Login
         </button>
 
@@ -18,7 +19,7 @@ const Login = () => {
           <h2>You are not registered yet, please press the button</h2>
         </div>
         <Link to="/home/login/register">
-          <button className={style.button1}>Register</button>
+          <button className="m2-2 p-3 bg-sky-700 text-white">Register</button>
         </Link>
 
         <Link to="/dashboard">

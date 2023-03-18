@@ -1,5 +1,4 @@
 import React from "react";
-import style from "./SearchBar.module.css";
 
 const SearchBar = ({ handleSearch }) => {
   const [term, setTerm] = React.useState("");
@@ -11,13 +10,13 @@ const SearchBar = ({ handleSearch }) => {
   };
 
   return (
-    <div className={style.searchContainer}>
+    <div className="flex relative h-12 w-60 justify-center items-center rounded-md border border-solid border-black">
       <input
         type="text"
         placeholder="Search an Employee"
         value={term}
         onChange={handleChange}
-        className={style.searchInput}
+        className="border-none outline-none text-base"
       />
     </div>
   );

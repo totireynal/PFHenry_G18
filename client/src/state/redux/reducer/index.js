@@ -5,7 +5,7 @@ import {
   CREATE_EMPLOYEE,
   GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
-  GET_EMPLOYEE_DETAIL
+  GET_EMPLOYEE_DETAIL,
 } from "../action-types/index";
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
   companies: [],
   employeeCreated: [],
   allEmployees: [],
-  employeeDetail: {}
+  employeeDetail: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -50,6 +50,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allEmployees: [...updatedUser, action.payload],
+      };
+    case GET_EMPLOYEE_DETAIL:
+      return {
+        ...state,
+        employeeDetail: action.payload,
       };
     case GET_EMPLOYEE_DETAIL:
       return {
