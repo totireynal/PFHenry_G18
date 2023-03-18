@@ -1,3 +1,6 @@
+import { RiAlertFill } from "react-icons/ri";
+
+
 const InputeForm = ({
   label,
   type,
@@ -21,7 +24,7 @@ const InputeForm = ({
         <input
           className={`${
             error && "border-red-400"
-          } rounded-md border-2 border-gray-800 block w-56 h-10 px-2`}
+          } rounded-md border-2 border-gray-800 block w-60 h-10 px-2 outline-none focus:border-blue-400`}
           type={type}
           name={name}
           value={value}
@@ -31,7 +34,19 @@ const InputeForm = ({
           valid={error}
         />
       </div>
-      {error && <p className="text-red-400 text-xs">{error}</p>}
+      <div className="text-end">
+        {error && (
+          <>
+
+              <p className="text-red-400 text-xs">
+                <i className="text-red-400 inline-block">
+                  <RiAlertFill />
+                </i>
+                {error}
+              </p>
+          </>
+        )}
+      </div>
     </div>
   );
 }//sm

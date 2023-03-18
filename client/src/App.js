@@ -23,6 +23,7 @@ function App() {
   // const [user, setUser] = useState(null);
   // const { pathname } = useLocation();
   const [user, setUser] = useState({
+    id: 1,
     name: "juan",
     role: ["admin"],
   });
