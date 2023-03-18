@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 // import styles from './Home.module.css';
 
 // import Button from "../../Components/Button";
@@ -65,9 +66,43 @@ const Home = () => {
         </div>
       </section>
 
-      <footer className="">
-        <div>
-          <h2>Contact Us</h2>
+      <footer>
+          {/* <h2>Contact Us</h2> */}
+        <div className="col-span-5 flex flex-col justify-center">
+
+          <div>
+            <div>
+              <div>
+                <div>
+                  
+                  <div className="flex">
+                    <h4>Column 1</h4>
+                    <ul className="">
+                      <li>Text 1</li>
+                      <li>Text 2</li>
+                      <li>Text 3</li>
+                    </ul>
+                  </div>
+                  <div className="flex p-0">  
+                    <h4>Column 2</h4>
+                    <ul>
+                      <li>Text 1</li>
+                      <li>Text 2</li>
+                      <li>Text 3</li>
+                    </ul>
+                  </div>
+                  <div className="flex p-0">  
+                    <h4>Column 3</h4>
+                    <ul>
+                      <li>Text 1</li>
+                      <li>Text 2</li>
+                      <li>Text 3</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
 

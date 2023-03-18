@@ -3,6 +3,7 @@ import {
   GET_COMPANIES,
   RESET_CREATE,
   CREATE_EMPLOYEE,
+  GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
 } from "../action-types/index";
 
@@ -10,7 +11,7 @@ const initialState = {
   allCompanies: [],
   companies: [],
   employeeCreated: [],
-  allEmployees: []
+  allEmployees: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -35,12 +36,19 @@ function rootReducer(state = initialState, action) {
         ...state,
         employeeCreated: action.payload,
       };
-    case UPDATE_EMPLOYEE:
-      const updatedUser = state.allEmployees.filter(employee => employee.id !== action.payload.id);
+    case GET_EMPLOYEES:
       return {
         ...state,
-        allEmployees: [...updatedUser ,action.payload],
-      }
+        allEmployees: action.payload,
+      };
+    case UPDATE_EMPLOYEE:
+      const updatedUser = state.allEmployees.filter(
+        (employee) => employee.id !== action.payload.id
+      );
+      return {
+        ...state,
+        allEmployees: [...updatedUser, action.payload],
+      };
     default:
       return state;
   }
