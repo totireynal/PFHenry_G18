@@ -1,18 +1,20 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import SideBar from "../../../Components/SideBar/SideBar";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import React, { useState } from "react";
-import { createEmployee } from "../../../state/redux/actions/actions";
-import Form from "../../../Components/Form/Form";
+import { useParams } from "react-router-dom";
+import SideBar from "../../../Components/SideBar/SideBar";
+import { updateEmployee } from "../../../state/redux/actions/actions";
 import validate from "../../../utils/functions/validate";
+import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../utils/hooks/errors";
 
-const AddEmployee = () => {
-  // const { employeeCreated } = useSelector((state) => state);
-
+const EditEmployee = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
 
-  const [employee, setEmployee] = useState({
+  const { errors, setAllErrors } = useErrors(); 
+  const [submited, setSubmited] = useState(false);
+  const [errorButton, setErrorButton] = useState(true);
+  const [updatedUser, setUpdatedUser] = useState({
     name: "",
     lastName: "",
     birthDate: "",
@@ -20,69 +22,47 @@ const AddEmployee = () => {
     dni: "",
     tel: "",
     address: "",
-    role: "",
-    image: "",
     position: "",
     area: "",
+    dateOfAdmission: "",
+    role: "",
     cuil: "",
     cbu: "",
-    dateOfAdmission: "",
   });
 
-  const [errorButton, setErrorButton] = useState(true);
+  const handleInput = (e) => {
+    const { value, name } = e.target;
 
-  const { errors, setAllErrors } = useErrors();
-
-  const [touched, setTouched] = useState({});
-
-  const [submited, setSubmited] = useState(false);
-
-  const handleInput = (event) => {
-    setEmployee({
-      ...employee,
-      [event.target.name]: event.target.value,
+    setUpdatedUser({
+      ...updatedUser,
+      [name]: value,
     });
 
     setAllErrors(
       validate({
-        ...employee,
-        [event.target.name]: event.target.value,
+        ...updatedUser,
+        [name]: value,
       })
     );
-
-    setTouched({
-      ...touched,
-      [event.target.name]: true,
-    });
-
     const allErrors = Object.values(errors).length;
+    console.log(allErrors);
     if (!allErrors) {
       setErrorButton(false);
-    } else {
-      setErrorButton(true);
     }
   };
 
-  const handleSelect = (e) => {
-    const { value, name } = e.target;
-    console.log(value, name);
-    if (name === "role") {
-      setEmployee({
-        ...employee,
-        [name]: value,
-      });
-    }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // const allErrors = Object.values(errors).length;
+    // if (!allErrors) {
     setSubmited(true);
     setTimeout(() => {
       setSubmited(false);
     }, 3000);
-    dispatch(createEmployee(employee));
+    dispatch(updateEmployee(id, updatedUser));
     setErrorButton(true);
-    setEmployee({
+
+    setUpdatedUser({
       name: "",
       lastName: "",
       birthDate: "",
@@ -90,14 +70,15 @@ const AddEmployee = () => {
       dni: "",
       tel: "",
       address: "",
-      role: "",
-      image: "",
       position: "",
       area: "",
+      dateOfAdmission: "",
+      role: "",
+      image: "",
       cuil: "",
       cbu: "",
-      dateOfAdmission: "",
     });
+    console.log(updatedUser.birthDate);
 
     setAllErrors({
       name: "",
@@ -107,14 +88,26 @@ const AddEmployee = () => {
       dni: "",
       tel: "",
       address: "",
-      role: "",
-      image: "",
       position: "",
       area: "",
+      dateOfAdmission: "",
+      role: "",
+      image: "",
       cuil: "",
       cbu: "",
-      dateOfAdmission: "",
     });
+    // }
+  };
+
+  const handleSelect = (e) => {
+    const { value, name } = e.target;
+    console.log(value, name);
+    if (name === "role") {
+      setUpdatedUser({
+        ...updatedUser,
+        [name]: value,
+      });
+    }
   };
 
   return (
@@ -123,7 +116,7 @@ const AddEmployee = () => {
       <div className="col-span-5 p-8 flex flex-col justify-center items-center">
         <div className="flex flex-col gap-6 px-10 py-4 rounded-2xl shadow-md shadow-slate-500 bg-slate-200">
           <div className="text-center">
-            <span className="text-4xl">Add Employee</span>
+            <span className="text-4xl">Edit Employee</span>
           </div>
           <div className="flex gap-16">
             <div>
@@ -132,7 +125,7 @@ const AddEmployee = () => {
                 handleSubmit={handleSubmit}
                 handleSelect={handleSelect}
                 errors={errors}
-                users={employee}
+                users={updatedUser}
                 errorButton={errorButton}
                 submited={submited}
               />
@@ -144,4 +137,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default EditEmployee;
