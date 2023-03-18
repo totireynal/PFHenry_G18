@@ -47,8 +47,6 @@ function validate(input) {
   }
   return errors;
 }
-<<<<<<< HEAD
-=======
 
 export default function CreateCompany() {
   const dispatch = useDispatch();
@@ -301,4 +299,3 @@ export default function CreateCompany() {
     // </div>
   );
 }
->>>>>>> develop
