@@ -11,7 +11,7 @@ const validate = (values) => {
   // if (!values.image.length) errors.image = 'No ha ingresado ningun caracter';
   if (!regex.image.test(values.image)) errors.image = "No es un url apropiado";
 
-  if (values.role === "default" || !values.role.length)
+  if (values.role === "default")
     errors.role = "Debe elegir in Role";
   if (!values.name.length) errors.name = "No ha ingresado ningun caracter";
   if (!values.lastName.length)
@@ -35,6 +35,7 @@ const validate = (values) => {
   // if (!regex.date.test(values.birthDate)) errors.birthDate = 'Esto no es una fecha'
   if (!values.email.length) errors.email = "No ha ingresado ningun caracter";
   if (!regex.email.test(values.email)) errors.email = "El email es invalido";
+
   return errors;
 };
 

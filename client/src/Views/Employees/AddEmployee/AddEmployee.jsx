@@ -21,7 +21,7 @@ const AddEmployee = () => {
     dni: "",
     tel: "",
     address: "",
-    role: "",
+    role: "user",
     image: "",
     position: "",
     area: "",
@@ -108,7 +108,7 @@ const AddEmployee = () => {
       dni: "",
       tel: "",
       address: "",
-      role: "",
+      role: "user",
       image: "",
       position: "",
       area: "",
@@ -132,10 +132,12 @@ const AddEmployee = () => {
                 handleInput={handleInput}
                 handleSubmit={handleSubmit}
                 handleSelect={handleSelect}
+                touched={touched}
                 errors={errors}
                 users={employee}
                 errorButton={errorButton}
                 submited={submited}
+                button="Add Employee"
               />
             </div>
           </div>
