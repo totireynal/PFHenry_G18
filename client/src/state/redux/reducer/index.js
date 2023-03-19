@@ -8,6 +8,7 @@ import {
   GET_EMPLOYEE_DETAIL,
   DELETE_EMPLOYEE,
   SORT_EMPLOYEE_NAME,
+  CURRENT_EMPLOYEE,
 } from "../action-types/index";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   employeeCreated: [],
   allEmployees: [],
   employeeDetail: {},
+  currentEmployee: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -68,11 +70,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         allEmployees: action.payload
       }
-    // case SORT_ZA:
-    //   return {
-    //     ...state,
-    //     allEmployees: action.payload
-    //   }
+    case CURRENT_EMPLOYEE:
+      return {
+        ...state,
+        currentEmployee: action.payload
+      }
     default:
       return state;
   }

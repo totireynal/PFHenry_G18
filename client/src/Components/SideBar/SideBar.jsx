@@ -1,6 +1,13 @@
 import ButtonSideBar from "./ButtonSideBar/ButtonSideBar";
+import { useSelector } from "react-redux";
+
 
 const SideBar = () => {
+
+  const current = useSelector(state => state.currentEmployee)
+  const redirect = current.id;
+  const url = `/myprofile/${redirect}`
+
   return (
     <div className="h-screen bg-slate-300 w-52">
       <div className="h-screen flex flex-col justify-between items-center">
@@ -19,7 +26,7 @@ const SideBar = () => {
             </div>
             <div>
               <div className="flex flex-col gap-4">
-                <ButtonSideBar url="/myprofile">My Profile</ButtonSideBar>
+                <ButtonSideBar url={url}>My Profile</ButtonSideBar>
                 <ButtonSideBar url="/logout">Log Out</ButtonSideBar>
               </div>
             </div>

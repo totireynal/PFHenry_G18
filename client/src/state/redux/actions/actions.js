@@ -9,6 +9,7 @@ import {
   GET_EMPLOYEE_DETAIL,
   DELETE_EMPLOYEE,
   SORT_EMPLOYEE_NAME,
+  CURRENT_EMPLOYEE,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -125,5 +126,12 @@ export const sortEmployeeName = (typeSort) => {
       const err = error.response.data.error
       alert(err);
     }
+  }
+}
+
+export const getCurrentEmployee = (user) => {
+  return {
+    type: CURRENT_EMPLOYEE,
+    payload:user
   }
 }
