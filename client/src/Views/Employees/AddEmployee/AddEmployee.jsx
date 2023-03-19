@@ -30,8 +30,6 @@ const AddEmployee = () => {
     dateOfAdmission: "",
   });
 
-
-
   const [errorButton, setErrorButton] = useState(true);
 
   const { errors, setAllErrors } = useErrors();
@@ -65,7 +63,6 @@ const AddEmployee = () => {
     } else {
       setErrorButton(true);
     }
-    console.log(errors);
   };
 
   const handleSelect = (e) => {

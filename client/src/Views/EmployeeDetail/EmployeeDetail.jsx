@@ -31,9 +31,6 @@ const EmployeeDetail = () => {
     dispatch(deleteEmployee(id));
     navigate("/employees");
   };
-    dispatch(deleteEmployee(id));
-    navigate("/employees");
-  };
 
   useEffect(() => {
     dispatch(getEmployeeDetail(id, showAnswer));
@@ -55,12 +52,9 @@ const EmployeeDetail = () => {
     dateOfAdmission,
   } = employeeDetail;
 
-  return (
+return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
       <div
-        onClick={() => {
-          refModal.current.style = "none";
-        }}
         onClick={() => {
           refModal.current.style = "none";
         }}
@@ -142,7 +136,7 @@ const EmployeeDetail = () => {
         </div>
       </div>
     </div>
-  );
-};
+)
+}
 
 export default EmployeeDetail;

@@ -112,7 +112,7 @@ const EditEmployee = () => {
       position: "",
       area: "",
       dateOfAdmission: "",
-      role: "user",
+      role: "",
       image: "",
       cuil: "",
       cbu: "",

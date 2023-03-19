@@ -25,7 +25,7 @@ const Position = () =>{
             <legend>Position</legend>
             <select name="" onChange={handleChange} defaultValue="default">
             <option value="default" hidden>Elegir</option>
-            {positions.map(e=>(<option value={e}>{e}</option>))}
+            {positions.map((e, i)=>(<option key={i} value={e}>{e}</option>))}
             </select>
         </div>
     )

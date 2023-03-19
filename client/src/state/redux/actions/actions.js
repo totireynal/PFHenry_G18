@@ -44,6 +44,7 @@ export const createEmployee = (info, showAnswer) => {
   return function (dispatch) {
     return axios.post("http://localhost:3001/users", info).then(
       (response) => {
+        console.log(response.data.message, '........');
         showAnswer(response.data.message)
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },
@@ -82,6 +83,7 @@ export const updateEmployee = (id, user, showAnswer) => {
         user
       );
       const result = response.data;
+      console.log(result);
       showAnswer(result)
 
       return dispatch({
@@ -117,104 +119,9 @@ export const deleteEmployee = (id, showAnswer) => {
 
       return dispatch({
         type: DELETE_EMPLOYEE,
-        payload: result
       })
     } catch (error) {
       showAnswer(error);
-    }
-  };
-};
-
-
-
-export const getPositions=()=>{
-  return async function(dispatch){
-    try {
-      const response = await axios.get("http://localhost:3001/positions")
-      const result = response.data;
-      return dispatch({type: GET_POSITIONS, payload: result})
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-}
-
-export const getPositionsEmployees = (position) => {
-  return async function(dispatch){
-    try {
-      const response = await axios.get(`http://localhost:3001/users?position=${position}`)
-      const result = response.data;
-      return dispatch({type: GET_POSITIONS_EMPLOYEES, payload: result})
-    } catch(error){
-      console.log(error.message)
-    }
-  }
-}
-
-
-export const getAreas=()=>{
-  return async function(dispatch){
-    try {
-      const response = await axios.get("http://localhost:3001/areas")
-      const result = response.data;
-      return dispatch({type: GET_AREAS, payload: result})
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-}
-
-export const getAreasEmployees = (area) => {
-  return async function(dispatch){
-    try {
-      const response = await axios.get(`http://localhost:3001/users?area=${area}`)
-      const result = response.data;
-      return dispatch({type: GET_AREAS_EMPLOYEES, payload: result})
-    } catch(error){
-      console.log(error.message)
-    }
-  }
-}
-
-
-export const getRoles=()=>{
-  return async function(dispatch){
-    try {
-      const response = await axios.get("http://localhost:3001/roles")
-      const result = response.data;
-      return dispatch({type: GET_ROLES, payload: result})
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-}
-
-export const getRolEmployees = (role) => {
-  return async function(dispatch){
-    try {
-      const response = await axios.get(`http://localhost:3001/users?role=${role}`)
-      const result = response.data;
-      return dispatch({type: GET_ROL_EMPLOYEES, payload: result})
-    } catch(error){
-      console.log(error.message)
-    }
-  }
-}
-
-
-
-export const sortEmployeeName = (typeSort) => {
-  return async function (dispatch) {
-    try {
-      console.log(typeSort);
-      const response = await axios.get(`http://localhost:3001/users?sort=${typeSort}`)
-      const result = response.data;
-
-      return dispatch({ type: SORT_EMPLOYEE_NAME , payload: result})
-
-    } catch (error) {
-      const err = error.response.data.error
-      alert(err);
     }
   };
 };

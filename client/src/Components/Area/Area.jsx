@@ -25,7 +25,7 @@ const Area = () =>{
             <legend>Area</legend>
             <select name="" onChange={handleChange} defaultValue="default">
             <option value="default" hidden>Elegir</option>
-            {areas.map(e=>(<option value={e}>{e}</option>))}
+            {areas.map((e,i)=>(<option key={i} value={e}>{e}</option>))}
             </select>
         </div>
     )
