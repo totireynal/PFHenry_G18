@@ -7,16 +7,14 @@ const Home = () => {
     <>
       <div className="text-end">
         <Link to={'/home/login'}>
-          <div className="text-center w-40 bg-sky-700 inline-block">
-            <button type="submit" className="m2-2 p-3 bg-sky-700 text-white"> Login
+            <button type="submit" className="m2-2 p-3 bg-sky-700 text-white rounded"> Login
             </button>
-          </div>
         </Link>
       </div>
 
       <section className="text-center">
         <div className=''>
-          <h1>
+          <h1 className="text ">
             Don't waste time and get started with the best staff manager application!
           </h1>
         </div>
@@ -35,6 +33,7 @@ const Home = () => {
           </h2>
           <p>
           We are a company fucussed on HR managment with more than 20 years of experience...
+          
           </p>
         </div>
       </section>

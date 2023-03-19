@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SideBar from "../../../Components/SideBar/SideBar";
 import { updateEmployee } from "../../../state/redux/actions/actions";
@@ -11,23 +11,25 @@ const EditEmployee = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
+  const currentEmployee = useSelector(state => state.employeeDetail)
+
   const { errors, setAllErrors } = useErrors(); 
   const [submited, setSubmited] = useState(false);
   const [errorButton, setErrorButton] = useState(true);
   const [updatedUser, setUpdatedUser] = useState({
-    name: "",
-    lastName: "",
-    birthDate: "",
-    email: "",
-    dni: "",
-    tel: "",
-    address: "",
-    position: "",
-    area: "",
-    dateOfAdmission: "",
-    role: "",
-    cuil: "",
-    cbu: "",
+    name: `${currentEmployee.name}`,
+    lastName: `${currentEmployee.lastName}`,
+    birthDate: `${currentEmployee.birthDate}`,
+    email: `${currentEmployee.email}`,
+    dni: `${currentEmployee.dni}`,
+    tel: `${currentEmployee.tel}`,
+    address: `${currentEmployee.address}`,
+    position: `${currentEmployee.position}`,
+    area: `${currentEmployee.area}`,
+    dateOfAdmission: `${currentEmployee.dateOfAdmission}`,
+    role: `${currentEmployee.role}`,
+    cuil: `${currentEmployee.cuil}`,
+    cbu: `${currentEmployee.cbu}`,
   });
 
   const handleInput = (e) => {
@@ -62,22 +64,6 @@ const EditEmployee = () => {
     dispatch(updateEmployee(id, updatedUser));
     setErrorButton(true);
 
-    setUpdatedUser({
-      name: "",
-      lastName: "",
-      birthDate: "",
-      email: "",
-      dni: "",
-      tel: "",
-      address: "",
-      position: "",
-      area: "",
-      dateOfAdmission: "",
-      role: "",
-      image: "",
-      cuil: "",
-      cbu: "",
-    });
     console.log(updatedUser.birthDate);
 
     setAllErrors({
@@ -128,6 +114,7 @@ const EditEmployee = () => {
                 users={updatedUser}
                 errorButton={errorButton}
                 submited={submited}
+                currentEmployee={currentEmployee}
               />
             </div>
           </div>
