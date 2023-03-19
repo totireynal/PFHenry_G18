@@ -93,15 +93,3 @@ export const getEmployeeDetail = (id) => {
   };
 };
 
-export const getEmployeeDetail = (id) => {
-  return function (dispatch) {
-    return axios.get(`http://localhost:3001/users/${id}`).then(
-      (response) => {
-        dispatch({ type: GET_EMPLOYEE_DETAIL, payload: response.data });
-      },
-      (error) => {
-        dispatch({ type: GET_EMPLOYEE_DETAIL, payload: error.response.data });
-      }
-    );
-  };
-};
