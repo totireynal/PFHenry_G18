@@ -6,6 +6,7 @@ import {
   GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
   GET_EMPLOYEE_DETAIL,
+  DELETE_EMPLOYEE,
 } from "../action-types/index";
 
 const initialState = {
@@ -55,6 +56,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         employeeDetail: action.payload,
+      };
+    case DELETE_EMPLOYEE:
+      // const employeeToDelete = state.allEmployees.filter(employee => employee.id !== action.payload.id)
+      return {
+        ...state,
       };
     default:
       return state;
