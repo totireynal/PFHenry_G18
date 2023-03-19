@@ -7,6 +7,12 @@ import {
   UPDATE_EMPLOYEE,
   GET_EMPLOYEE_DETAIL,
   DELETE_EMPLOYEE,
+  GET_AREAS_EMPLOYEES,
+  GET_AREAS,
+  GET_POSITIONS_EMPLOYEES,
+  GET_POSITIONS,
+  GET_ROLES,
+  GET_ROL_EMPLOYEES
 } from "../action-types/index";
 
 const initialState = {
@@ -15,6 +21,9 @@ const initialState = {
   employeeCreated: [],
   allEmployees: [],
   employeeDetail: {},
+  positions:[],
+  areas: [],
+  roles:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -62,6 +71,36 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+    case GET_AREAS_EMPLOYEES:
+      return {
+        ...state,
+        allEmployees: action.payload,
+      }
+    case GET_AREAS:
+    return {
+        ...state,
+        areas: action.payload,
+      }
+    case GET_POSITIONS:
+      return {
+            ...state,
+            positions: action.payload,
+          }
+    case GET_POSITIONS_EMPLOYEES:
+      return {
+        ...state,
+        allEmployees: action.payload,
+      }
+    case GET_ROLES:
+      return{
+        ...state,
+        roles: action.payload
+      }
+    case GET_ROL_EMPLOYEES:
+      return {
+        ...state,
+        allEmployees: action.payload
+      }
     default:
       return state;
   }

@@ -6,6 +6,9 @@ import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import { getEmployees } from "../../state/redux/actions/actions";
+import Position from "../../Components/Position/Position";
+import Area from "../../Components/Area/Area"
+import Rol from "../../Components/Rol/Rol"
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
@@ -40,6 +43,9 @@ const Employees = () => {
             </button>
           </Link>
         </div>
+        <Area/>
+        <Position/>
+        <Rol></Rol>
         <div className="flex flex-row flex-wrap gap-6 justify-center overflow-auto h-[630px] pt-3 ">
           {users.map((user) => {
             return (
