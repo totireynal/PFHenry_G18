@@ -20,7 +20,7 @@ const AddEmployee = () => {
     dni: "",
     tel: "",
     address: "",
-    role: "user",
+    role: "User",
     image: "",
     position: "",
     area: "",
@@ -74,6 +74,8 @@ const AddEmployee = () => {
     }
   };
 
+  console.log(employee);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmited(true);
@@ -107,7 +109,7 @@ const AddEmployee = () => {
       dni: "",
       tel: "",
       address: "",
-      role: "user",
+      role: "User",
       image: "",
       position: "",
       area: "",

@@ -171,9 +171,9 @@ const Form = ({
             handler={handleSelect}
             error={errors.role}
             optionQuantity={[
-              // { value: "default", html: "Role" },
-              { value: "user", html: "User", disable: false },
-              { value: "admin", html: "Admin", disable: true },
+              { value: "default", html: "Role", disable: false },
+              { value: "User", html: "User", disable: false },
+              { value: "Admin", html: "Admin", disable: true },
             ]}
           />
 

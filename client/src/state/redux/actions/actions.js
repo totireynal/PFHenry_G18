@@ -7,6 +7,7 @@ import {
   GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
   GET_EMPLOYEE_DETAIL,
+  DELETE_EMPLOYEE,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -25,7 +26,7 @@ export function getCompanies() {
       })
       .catch((err) => console.log(err.message));
   };
-}
+};
 
 export function resetCreate() {
   return { type: RESET_CREATE, payload: [] };
@@ -38,6 +39,7 @@ export const createEmployee = (info) => {
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },
       (error) => {
+        console.log(error);
         dispatch({ type: CREATE_EMPLOYEE, payload: error.response.data });
       }
     );
@@ -93,3 +95,18 @@ export const getEmployeeDetail = (id) => {
   };
 };
 
+export const deleteEmployee = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/users/${id}`);
+      const result = response.data;
+
+      return dispatch({
+        type: DELETE_EMPLOYEE,
+        payload: result
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}

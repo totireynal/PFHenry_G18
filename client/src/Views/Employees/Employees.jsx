@@ -13,7 +13,9 @@ const Employees = () => {
 
   useEffect(() => {
     dispatch(getEmployees());
-  }, []);
+    console.log('toy');
+
+  }, [dispatch]);
 
   const [searchEmployee, setSearchEmployee] = useState("");
 
@@ -21,10 +23,10 @@ const Employees = () => {
     setSearchEmployee(employee);
   };
 
-  const filteredUsers = users.filter(
+  const filteredUsers = users?.filter(
     (user) =>
-      user.name.toLowerCase().includes(searchEmployee.toLowerCase()) ||
-      user.lastName.toLowerCase().includes(searchEmployee.toLowerCase())
+      user?.name?.toLowerCase().includes(searchEmployee.toLowerCase()) ||
+      user?.lastName?.toLowerCase().includes(searchEmployee.toLowerCase())
   );
 
   return (
@@ -39,7 +41,7 @@ const Employees = () => {
             </button>
           </Link>
         </div>
-        <div className="flex flex-row flex-wrap gap-6 justify-center">
+        <div className="flex flex-row flex-wrap gap-6 justify-center overflow-auto h-[630px] pt-3 ">
           {filteredUsers.map((user) => {
             return (
               <Link key={user.id} to={`/employee/${user.id}`}>

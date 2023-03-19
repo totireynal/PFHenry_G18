@@ -1,15 +1,28 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import style from "./EmployeeDetail.module.css";
 import SideBar from "../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getEmployeeDetail } from "../../state/redux/actions/actions";
+import { useEffect, useRef } from "react";
+import { deleteEmployee, getEmployeeDetail } from "../../state/redux/actions/actions";
 
 const EmployeeDetail = () => {
   let { id } = useParams();
   let employeeDetail = useSelector((state) => state.employeeDetail);
+  let navigate = useNavigate()
 
   let dispatch = useDispatch();
+  let refModal = useRef();
+  let refDivModal = useRef();
+
+  const modalActive = () => {
+    refModal.current.style.display = 'flex'
+    refDivModal.current.style.transform = 'scale-1'
+  }
+
+  const deletedEmplote = () => {
+    dispatch(deleteEmployee(id))
+    navigate('/employees')
+  }
 
   useEffect(() => {
     dispatch(getEmployeeDetail(id));
@@ -32,9 +45,42 @@ const EmployeeDetail = () => {
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
+      <div
+        onClick={()=> {refModal.current.style = "none";}}
+        ref={refModal}
+        className="fixed w-screen h-screen justify-center items-center bg-black bg-opacity-50 hidden z-10"
+      >
+        <div
+          ref={refDivModal}
+          className="flex flex-col justify-between w-[600px] h-[200px] bg-white rounded p-6 text-xl transition-all duration-100"
+        >
+          <h3>Esta seguro que quiere borrar a este empleado?</h3>
+          <div className="text-end text-base">
+            <button
+              className="mr-6 px-6 py-2 bg-blue-400 rounded"
+              onClick={deletedEmplote}
+            >
+              Delete
+            </button>
+            <button
+              className=" px-6 py-2 bg-red-400 rounded"
+              onClick={() => (refModal.current.style = "none")}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
       <SideBar />
       <div className="col-span-5 p-8">
         <div className={style.buttonCointainer}>
+          {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
+          <button
+            className="fixed right-8 top-8 px-6 py-2 bg-blue-400 rounded z-0"
+            onClick={modalActive}
+          >
+            Delete
+          </button>
           <Link to={`/editemployee/${id}`}>
             <button className={style.editButton}>Edit Employee</button>
           </Link>
