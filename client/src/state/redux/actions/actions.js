@@ -26,7 +26,7 @@ export function getCompanies() {
       })
       .catch((err) => console.log(err.message));
   };
-};
+}
 
 export function resetCreate() {
   return { type: RESET_CREATE, payload: [] };
@@ -103,10 +103,10 @@ export const deleteEmployee = (id) => {
 
       return dispatch({
         type: DELETE_EMPLOYEE,
-        payload: result
-      })
+        payload: result,
+      });
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};

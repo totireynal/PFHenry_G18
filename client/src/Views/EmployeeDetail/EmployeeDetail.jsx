@@ -3,26 +3,29 @@ import style from "./EmployeeDetail.module.css";
 import SideBar from "../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
-import { deleteEmployee, getEmployeeDetail } from "../../state/redux/actions/actions";
+import {
+  deleteEmployee,
+  getEmployeeDetail,
+} from "../../state/redux/actions/actions";
 
 const EmployeeDetail = () => {
   let { id } = useParams();
   let employeeDetail = useSelector((state) => state.employeeDetail);
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   let dispatch = useDispatch();
   let refModal = useRef();
   let refDivModal = useRef();
 
   const modalActive = () => {
-    refModal.current.style.display = 'flex'
-    refDivModal.current.style.transform = 'scale-1'
-  }
+    refModal.current.style.display = "flex";
+    refDivModal.current.style.transform = "scale-1";
+  };
 
   const deletedEmplote = () => {
-    dispatch(deleteEmployee(id))
-    navigate('/employees')
-  }
+    dispatch(deleteEmployee(id));
+    navigate("/employees");
+  };
 
   useEffect(() => {
     dispatch(getEmployeeDetail(id));
@@ -41,12 +44,15 @@ const EmployeeDetail = () => {
     area,
     cuil,
     cbu,
+    dateOfAdmission,
   } = employeeDetail;
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
       <div
-        onClick={()=> {refModal.current.style = "none";}}
+        onClick={() => {
+          refModal.current.style = "none";
+        }}
         ref={refModal}
         className="fixed w-screen h-screen justify-center items-center bg-black bg-opacity-50 hidden z-10"
       >
@@ -88,25 +94,30 @@ const EmployeeDetail = () => {
           </Link>
         </div>
         {/* <div className={style.mainCointainer}> */}
-        <div className="flex flex-col gap-24 items-center justify-center w-[700px] h-[280px] border rounded-3xl bg-slate-300 border-slate-500 shadow shadow-slate-700 hover:translate-y-1 hover:scale-104 transition ease-in-out delay-100 duration-400">
-          <div className="flex flex-row h-[60px]">
-            <p>Name: {name}</p>
-            <p>Last Name: {lastName}</p>
-            <p>E-mail: {email}</p>
+        <div className="m-auto mt-28 flex flex-col items-center justify-center w-[700px] h-[280px] border rounded-3xl bg-slate-300 border-slate-500 shadow shadow-slate-700 hover:translate-y-1 hover:scale-104 transition ease-in-out delay-100 duration-400 overflow-hidden">
+          <div className="text-2xl flex flex-col items-center justify-center h-1/3 bg-slate-800 w-full text-slate-200">
+            <div className="flex w-full h-1/2 items-end justify-center">
+              <p>{role}</p>
+            </div>
+            <div className="flex flex-row gap-2 w-full h-1/2 justify-center items-start">
+              <p>{name}</p>
+              <p>{lastName}</p>
+            </div>
           </div>
-          <div className="flex flex-row items-center justify-center h-[220px]">
-            <div className="text-xl w-[350px] flex items-center justify-center">
-              <p>Birth Date: {birthDate}</p>
+          <div className="flex flex-row items-center justify-center h-2/3 w-full ">
+            <div className="text-xl flex flex-col w-1/2 h-full items-center justify-center ">
               <p>DNI: {dni}</p>
               <p>Phone: {tel}</p>
+              <p>Birth Date: {birthDate}</p>
               <p>Address: {address}</p>
+              <p>E-mail: {email}</p>
             </div>
-            <div className="text-xl w-[350px]">
-              <p>Role: {role}</p>
+            <div className="text-xl flex flex-col w-1/2 h-full items-center justify-center ">
               <p>Position: {position}</p>
               <p>Area: {area}</p>
+              <p>Address: {dateOfAdmission}</p>
               <p>Cuil: {cuil}</p>
-              <p>Cbu: {cbu}</p>
+              <p>CBU: {cbu}</p>
             </div>
           </div>
         </div>
