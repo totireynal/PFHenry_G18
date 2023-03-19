@@ -94,7 +94,7 @@ const EmployeeDetail = () => {
           </Link>
         </div>
         {/* <div className={style.mainCointainer}> */}
-        <div className="m-auto mt-28 flex flex-col items-center justify-center w-[700px] h-[280px] border rounded-3xl bg-slate-300 border-slate-500 shadow shadow-slate-700 hover:translate-y-1 hover:scale-104 transition ease-in-out delay-100 duration-400 overflow-hidden">
+        <div className="m-auto mt-28 flex flex-col items-center justify-center w-[700px] h-[280px] rounded-3xl bg-slate-300 shadow shadow-slate-700 hover:translate-y-1 hover:scale-104 transition ease-in-out delay-100 duration-400 overflow-hidden">
           <div className="text-2xl flex flex-col items-center justify-center h-1/3 bg-slate-800 w-full text-slate-200">
             <div className="flex w-full h-1/2 items-end justify-center">
               <p>{role}</p>
