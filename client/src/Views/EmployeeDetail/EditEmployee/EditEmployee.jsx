@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SideBar from "../../../Components/SideBar/SideBar";
@@ -13,7 +13,28 @@ const EditEmployee = () => {
 
   const currentEmployee = useSelector(state => state.employeeDetail)
 
-  const { errors, setAllErrors } = useErrors(); 
+  const { errors, setAllErrors } = useErrors();
+
+  const currentEmployee = useSelector((state) => state.employeeDetail);
+
+  
+  
+  const [touched, setTouched] = useState({
+    name: false,
+    lastName: false,
+    birthDate: false,
+    email: false,
+    dni: false,
+    tel: false,
+    address: false,
+    position: false,
+    area: false,
+    dateOfAdmission: false,
+    role: false,
+    cuil: false,
+    cbu: false,
+  });
+
   const [submited, setSubmited] = useState(false);
   const [errorButton, setErrorButton] = useState(true);
   const [updatedUser, setUpdatedUser] = useState({
@@ -46,10 +67,26 @@ const EditEmployee = () => {
         [name]: value,
       })
     );
+
+    setTouched({
+      ...touched,
+      [name]: true,
+    });
+
     const allErrors = Object.values(errors).length;
-    console.log(allErrors);
     if (!allErrors) {
       setErrorButton(false);
+    }
+  };
+
+  const handleSelect = (e) => {
+    const { value, name } = e.target;
+    console.log(value, name);
+    if (name === "role") {
+      setUpdatedUser({
+        ...updatedUser,
+        [name]: value,
+      });
     }
   };
 
@@ -77,23 +114,12 @@ const EditEmployee = () => {
       position: "",
       area: "",
       dateOfAdmission: "",
-      role: "",
+      role: "user",
       image: "",
       cuil: "",
       cbu: "",
     });
     // }
-  };
-
-  const handleSelect = (e) => {
-    const { value, name } = e.target;
-    console.log(value, name);
-    if (name === "role") {
-      setUpdatedUser({
-        ...updatedUser,
-        [name]: value,
-      });
-    }
   };
 
   return (
@@ -110,11 +136,12 @@ const EditEmployee = () => {
                 handleInput={handleInput}
                 handleSubmit={handleSubmit}
                 handleSelect={handleSelect}
+                touched={touched}
                 errors={errors}
                 users={updatedUser}
                 errorButton={errorButton}
                 submited={submited}
-                currentEmployee={currentEmployee}
+                button="Edit Employee"
               />
             </div>
           </div>

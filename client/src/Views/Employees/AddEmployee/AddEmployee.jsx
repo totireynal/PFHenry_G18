@@ -20,7 +20,7 @@ const AddEmployee = () => {
     dni: "",
     tel: "",
     address: "",
-    role: "",
+    role: "User",
     image: "",
     position: "",
     area: "",
@@ -74,6 +74,8 @@ const AddEmployee = () => {
     }
   };
 
+  console.log(employee);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmited(true);
@@ -107,7 +109,7 @@ const AddEmployee = () => {
       dni: "",
       tel: "",
       address: "",
-      role: "",
+      role: "User",
       image: "",
       position: "",
       area: "",
@@ -131,10 +133,12 @@ const AddEmployee = () => {
                 handleInput={handleInput}
                 handleSubmit={handleSubmit}
                 handleSelect={handleSelect}
+                touched={touched}
                 errors={errors}
                 users={employee}
                 errorButton={errorButton}
                 submited={submited}
+                button="Add Employee"
               />
             </div>
           </div>
