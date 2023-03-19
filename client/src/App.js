@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import Calendar from "./Views/Calendar/Calendar";
 import Dashboard from "./Views/Dashboard";
 import Employees from "./Views/Employees";
@@ -10,7 +10,7 @@ import Login from "./Views/Login";
 // import Register from "./Components/Register/Register.jsx"
 import Register from "./Views/Register";
 import MyProfile from "./Views/MyProfile/MyProfile";
-import EditMyProfile from "./Views/MyProfile/EditMyProfile";
+// import EditMyProfile from "./Views/MyProfile/EditMyProfile";
 import Notifications from "./Views/Notifications/Notifications";
 import Organization from "./Views/Organization";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
@@ -18,12 +18,14 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
+import { useDispatch } from "react-redux";
+import { getCurrentEmployee } from './state/redux/actions/actions'
 
 function App() {
   // const [user, setUser] = useState(null);
   // const { pathname } = useLocation();
   const [user, setUser] = useState({
-    id: 150,
+    id: 2,
     name: "juan",
     role: ["admin"],
   });
@@ -31,7 +33,11 @@ function App() {
   //   setUser(user)
   // }
 
-  console.log(user);
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(getCurrentEmployee(user))
+  }, [])
 
   return (
     <div className="App">
@@ -62,8 +68,8 @@ function App() {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
-          <Route path={`/employee/${user.id}`} element={<MyProfile />} />
-          {/* <Route path={`/editemployee/${user.id}`} element={<EditMyProfile />} /> */}
+          <Route path="/myprofile/:id" element={<MyProfile />} />
+          {/* <Route path={`/myprofile/${user.id}`} element={<EditMyProfile />} /> */}
         </Route>
         <Route path="*" element={<h1>Ruta equivocada</h1>} />
       </Routes>

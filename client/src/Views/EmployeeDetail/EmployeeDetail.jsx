@@ -31,6 +31,9 @@ const EmployeeDetail = () => {
     dispatch(deleteEmployee(id));
     navigate("/employees");
   };
+    dispatch(deleteEmployee(id));
+    navigate("/employees");
+  };
 
   useEffect(() => {
     dispatch(getEmployeeDetail(id, showAnswer));
@@ -49,11 +52,15 @@ const EmployeeDetail = () => {
     area,
     cuil,
     cbu,
+    dateOfAdmission,
   } = employeeDetail;
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
       <div
+        onClick={() => {
+          refModal.current.style = "none";
+        }}
         onClick={() => {
           refModal.current.style = "none";
         }}
@@ -100,22 +107,38 @@ const EmployeeDetail = () => {
             Delete
           </button>
           <Link to={`/editemployee/${id}`}>
-            <button className={style.editButton}>Edit Employee</button>
+            <button className="flex relative h-12 w-40 justify-center items-center rounded-md border border-solid border-black">
+              Edit Employee
+            </button>
           </Link>
         </div>
-        <div className={style.mainCointainer}>
-          <p>Name: {name}</p>
-          <p>Last Name: {lastName}</p>
-          <p>Birth Date: {birthDate}</p>
-          <p>E-mail: {email}</p>
-          <p>DNI: {dni}</p>
-          <p>Phone: {tel}</p>
-          <p>Address: {address}</p>
-          <p>Role: {role}</p>
-          <p>Position: {position}</p>
-          <p>Area: {area}</p>
-          <p>Cuil: {cuil}</p>
-          <p>Cbu: {cbu}</p>
+        {/* <div className={style.mainCointainer}> */}
+        <div className="m-auto mt-28 flex flex-col items-center justify-center w-[700px] h-[280px] border rounded-3xl bg-slate-300 border-slate-500 shadow shadow-slate-700 hover:translate-y-1 hover:scale-104 transition ease-in-out delay-100 duration-400 overflow-hidden">
+          <div className="text-2xl flex flex-col items-center justify-center h-1/3 bg-slate-800 w-full text-slate-200">
+            <div className="flex w-full h-1/2 items-end justify-center">
+              <p>{role}</p>
+            </div>
+            <div className="flex flex-row gap-2 w-full h-1/2 justify-center items-start">
+              <p>{name}</p>
+              <p>{lastName}</p>
+            </div>
+          </div>
+          <div className="flex flex-row items-center justify-center h-2/3 w-full ">
+            <div className="text-xl flex flex-col w-1/2 h-full items-center justify-center ">
+              <p>DNI: {dni}</p>
+              <p>Phone: {tel}</p>
+              <p>Birth Date: {birthDate}</p>
+              <p>Address: {address}</p>
+              <p>E-mail: {email}</p>
+            </div>
+            <div className="text-xl flex flex-col w-1/2 h-full items-center justify-center ">
+              <p>Position: {position}</p>
+              <p>Area: {area}</p>
+              <p>Address: {dateOfAdmission}</p>
+              <p>Cuil: {cuil}</p>
+              <p>CBU: {cbu}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
