@@ -58,7 +58,6 @@ function rootReducer(state = initialState, action) {
         employeeDetail: action.payload,
       };
     case DELETE_EMPLOYEE:
-      // const employeeToDelete = state.allEmployees.filter(employee => employee.id !== action.payload.id)
       return {
         ...state,
       };

@@ -31,6 +31,8 @@ function App() {
   //   setUser(user)
   // }
 
+  console.log(user);
+
   return (
     <div className="App">
       {/* {(pathname === "/home" ||
@@ -60,8 +62,8 @@ function App() {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
-          <Route path="/myprofile" element={<MyProfile user={user.id} />} />
-          <Route path={`/myprofile/${user.id}`} element={<EditMyProfile />} />
+          <Route path={`/employee/${user.id}`} element={<MyProfile />} />
+          {/* <Route path={`/editemployee/${user.id}`} element={<EditMyProfile />} /> */}
         </Route>
         <Route path="*" element={<h1>Ruta equivocada</h1>} />
       </Routes>

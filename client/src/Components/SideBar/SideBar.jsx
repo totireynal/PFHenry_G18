@@ -19,7 +19,7 @@ const SideBar = () => {
             </div>
             <div>
               <div className="flex flex-col gap-4">
-                <ButtonSideBar url="/myprofile">My Profile</ButtonSideBar>
+                <ButtonSideBar url="/myprofile/:id">My Profile</ButtonSideBar>
                 <ButtonSideBar url="/logout">Log Out</ButtonSideBar>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SideBar from "../../Components/SideBar/SideBar";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const MyProfile = ({user}) => {
   //cuando se loggea recibe userId
@@ -28,7 +28,6 @@ const MyProfile = ({user}) => {
   // //   position: "Marketing Manager",
   // //   area: "Marketing",
   // }
-console.log(user.id);
   const getUserProfile = () => {};
 
   const [inputValue, setInputValue] = useState("");
@@ -54,6 +53,9 @@ console.log(user.id);
       direction: "789 Oak St, Anytown",
     },
   ];
+
+  const { id } = useParams()
+  console.log(id);
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
@@ -84,7 +86,7 @@ console.log(user.id);
         ))}
       </div>
 
-      <Link to={`/myprofile/${user.id}`}>
+      <Link to={`/myprofile/${user}`}>
         <div className="">
           <button>Edit</button>
         </div>

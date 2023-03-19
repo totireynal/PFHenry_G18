@@ -10,8 +10,10 @@ const Form = ({
   users,
   errorButton,
   submited,
-  button
+  button,
+  answer
 }) => {
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -70,7 +72,7 @@ const Form = ({
           <InputForm
             label="Cuil"
             placeholder="Cuil"
-            type="text"
+            type="number"
             name="cuil"
             touched={touched.cuil}
             value={users.cuil}
@@ -83,7 +85,7 @@ const Form = ({
           <InputForm
             label="CBU"
             placeholder="CBU"
-            type="text"
+            type="number"
             name="cbu"
             touched={touched.cbu}
             value={users.cbu}
@@ -95,7 +97,7 @@ const Form = ({
           <InputForm
             label="DNI"
             placeholder="DNI"
-            type="text"
+            type="number"
             name="dni"
             touched={touched.dni}
             value={users.dni}
@@ -106,7 +108,7 @@ const Form = ({
           <InputForm
             label="Phone"
             placeholder="Phone"
-            type="text"
+            type="number"
             name="tel"
             touched={touched.tel}
             value={users.tel}
@@ -177,6 +179,7 @@ const Form = ({
             ]}
           />
 
+          {/* <input type="file" accept="image/png, image/jpeg" /> */}
           <InputForm
             label="Image"
             placeholder="Image"
@@ -190,21 +193,23 @@ const Form = ({
           />
         </div>
       </div>
-
-      <button
-        className={
-          errorButton
-            ? "cursor-not-allowed border border-gray-600 w-24 h-auto rounded-2xl shadow-md shadow-slate-300 bg-gray-400 text-slate-300"
-            : "border border-gray-600 w-24 h-auto rounded-2xl shadow-md shadow-slate-300 bg-gray-800 text-slate-300"
-        }
-        onClick={handleSubmit}
-        disabled={errorButton}
-      >
-        {button}
-      </button>
-      {submited && (
-        <p className="text-green-800">El formulario ha sido enviado</p>
+      {!submited ? (
+        <button
+          className={
+            errorButton
+              ? "cursor-not-allowed border px-16 py-3 h-auto rounded shadow-md shadow-slate-300 bg-gray-400 text-slate-300"
+              : "bg-sky-700 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+          }
+          onClick={handleSubmit}
+          disabled={errorButton}
+        >
+          {button}
+        </button>
+      ) : (
+          <p className="px-20 py-4 bg-green-400 text-white ">{answer}</p>
       )}
+      {/* <p className="px-20 py-4 bg-green-400 rounded">hola que ase</p> */}
+      {/* {submited && <p className="text-green-800">{answer}</p>} */}
     </form>
   );
 };

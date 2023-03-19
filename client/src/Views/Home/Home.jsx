@@ -118,10 +118,10 @@ const Home = () => {
           <div className="flex justify-between bg-yellow-400">
             <div className="w-1/3">
               <div className="text-center text-white bg-slate-400 px-10">
-                <img
+                {/* <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXRffPuFBvvRFjhn46hKBxJATOfFLl-VkWA&usqp=CAU"
                   alt=""
-                />
+                /> */}
               </div>
             </div>
 
