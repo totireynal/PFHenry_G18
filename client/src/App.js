@@ -23,7 +23,7 @@ function App() {
   // const [user, setUser] = useState(null);
   // const { pathname } = useLocation();
   const [user, setUser] = useState({
-    id: 1,
+    id: 150,
     name: "juan",
     role: ["admin"],
   });
@@ -60,8 +60,8 @@ function App() {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
-          <Route path="/myprofile" element={<MyProfile />} />
-          <Route path="/myprofile/edit" element={<EditMyProfile />} />
+          <Route path="/myprofile" element={<MyProfile user={user.id} />} />
+          <Route path={`/myprofile/${user.id}`} element={<EditMyProfile />} />
         </Route>
         <Route path="*" element={<h1>Ruta equivocada</h1>} />
       </Routes>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import SideBar from "../../Components/SideBar/SideBar";
 import { Link } from "react-router-dom";
 
-const MyProfile = () => {
+const MyProfile = ({user}) => {
   //cuando se loggea recibe userId
   //    estado global??
   //cuando se monta el componente se hace un get de los detalles de su informacion
@@ -28,7 +28,7 @@ const MyProfile = () => {
   // //   position: "Marketing Manager",
   // //   area: "Marketing",
   // }
-
+console.log(user.id);
   const getUserProfile = () => {};
 
   const [inputValue, setInputValue] = useState("");
@@ -84,7 +84,7 @@ const MyProfile = () => {
         ))}
       </div>
 
-      <Link to="/myprofile/edit">
+      <Link to={`/myprofile/${user.id}`}>
         <div className="">
           <button>Edit</button>
         </div>
