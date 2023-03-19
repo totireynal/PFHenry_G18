@@ -115,7 +115,7 @@ const Home = () => {
       </section>
 
       <footer className="bg-slate-600">
-        <div className="flex flex-row">
+        <div className="flex flex-row text-white">
           <div className="w-1/3">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXRffPuFBvvRFjhn46hKBxJATOfFLl-VkWA&usqp=CAU"
