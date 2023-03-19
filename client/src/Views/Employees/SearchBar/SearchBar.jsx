@@ -24,7 +24,7 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex relative h-12 w-60 justify-center items-center rounded-md border border-solid border-black"
+      className="flex relative justify-center items-center rounded-md pl-2 border border-sky-700"
     >
       <input
         className="border-none outline-none text-base"
@@ -34,7 +34,12 @@ const SearchBar = () => {
         type="text"
         placeholder="Search a Employee"
       ></input>
-      <button type="submit">Search</button>
+      <button
+        className="bg-sky-700 text-white rounded-r overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+        type="submit"
+      >
+        Search
+      </button>
     </form>
   );
 };

@@ -1,5 +1,4 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import style from "./EmployeeDetail.module.css";
 import SideBar from "../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
@@ -92,22 +91,22 @@ return (
       </div>
       <SideBar />
       <div className="col-span-5 p-8">
-        <div className={style.buttonCointainer}>
+        <div className="flex flex-row gap-6 items-center justify-center">
           {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
+          <Link to={`/editemployee/${id}`}>
+            <button className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600">
+              Edit Employee
+            </button>
+          </Link>
           <button
-            className="fixed right-8 top-8 px-6 py-2 bg-blue-400 rounded z-0"
+            className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
             onClick={modalActive}
           >
             Delete
           </button>
-          <Link to={`/editemployee/${id}`}>
-            <button className="flex relative h-12 w-40 justify-center items-center rounded-md border border-solid border-black">
-              Edit Employee
-            </button>
-          </Link>
         </div>
         {/* <div className={style.mainCointainer}> */}
-        <div className="m-auto mt-28 flex flex-col items-center justify-center w-[700px] h-[280px] border rounded-3xl bg-slate-300 border-slate-500 shadow shadow-slate-700 hover:translate-y-1 hover:scale-104 transition ease-in-out delay-100 duration-400 overflow-hidden">
+        <div className="m-auto mt-28 flex flex-col items-center justify-center w-[700px] h-[280px] rounded-3xl bg-slate-300 shadow shadow-slate-700 hover:translate-y-1 hover:scale-104 transition ease-in-out delay-100 duration-400 overflow-hidden">
           <div className="text-2xl flex flex-col items-center justify-center h-1/3 bg-slate-800 w-full text-slate-200">
             <div className="flex w-full h-1/2 items-end justify-center">
               <p>{role}</p>

@@ -43,7 +43,7 @@ const Employees = () => {
         <div className="flex flex-row items-center justify-center h-24 gap-2.5">
           <SearchBar />
           <Link to={"/addemployee/"}>
-            <button className="flex relative h-12 w-40 justify-center items-center rounded-md border border-solid border-black">
+            <button className="bg-sky-700 text-white rounded border border-sky-700 overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600">
               Add Employee
             </button>
           </Link>
