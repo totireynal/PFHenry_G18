@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SideBar from "../../../Components/SideBar/SideBar";
 import { updateEmployee } from "../../../state/redux/actions/actions";
-import validate from "../../../Utils/functions/validate";
+import validate from "../../../utils/functions/validate";
 import Form from "../../../Components/Form/Form";
-import { useErrors } from "../../../Utils/hooks/errors";
+import { useErrors } from "../../../utils/hooks/errors";
 
 const EditEmployee = () => {
   const { id } = useParams();
