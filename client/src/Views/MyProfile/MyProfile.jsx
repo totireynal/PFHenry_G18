@@ -1,96 +1,64 @@
-import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import style from "../EmployeeDetail/EmployeeDetail.module.css";
 import SideBar from "../../Components/SideBar/SideBar";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getEmployeeDetail } from "../../state/redux/actions/actions";
 
-const MyProfile = ({user}) => {
-  //cuando se loggea recibe userId
-  //    estado global??
-  //cuando se monta el componente se hace un get de los detalles de su informacion
-  //    con userId?
-  //se renderiza la info de empleado de la tabla user
-  //un boton edit carga un componente Form que permite modificar los campos
-  //    se precarga la info existente
-  //    se validan los inputs
-  //un submit hace un PUT al back
-  //se devuelve y renderiza con la informacion modificada
+const EmployeeDetail = () => {
+  let { id } = useParams();
+  let employeeDetail = useSelector((state) => state.employeeDetail);
 
-  // {
-  //   id: 3,
-  //   name: "Pedro",
-  //   lastName: "Martinez",
-  //   email: "p.martinez@mail.com",
-  //   avatar: "https://randomuser.me/api/portraits/men/3.jpg",
-  //   birthDate: "1988-10-15",
-  //   dni: "34567890C",
-  //   phone: "+3456789012",
-  //   direction: "789 Oak St, Anytown",
-  // //   admissionDate: "2018-05-01",
-  // //   position: "Marketing Manager",
-  // //   area: "Marketing",
-  // }
-console.log(user.id);
-  const getUserProfile = () => {};
+  let dispatch = useDispatch();
 
-  const [inputValue, setInputValue] = useState("");
+  useEffect(() => {
+    dispatch(getEmployeeDetail(id));
+  }, [id, dispatch]);
 
-  const handlerInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  const handlerGetProfile = () => {
-    getUserProfile();
-  };
-
-  const profile = [
-    {
-      id: 3,
-      name: "Pedro",
-      lastName: "Martinez",
-      email: "p.martinez@mail.com",
-      avatar: "https://randomuser.me/api/portraits/men/3.jpg",
-      birthDate: "1988-10-15",
-      dni: "34567890C",
-      phone: "+3456789012",
-      direction: "789 Oak St, Anytown",
-    },
-  ];
+  const {
+    name,
+    lastName,
+    birthDate,
+    email,
+    address,
+    dni,
+    tel,
+    role,
+    position,
+    area,
+    cuil,
+    cbu,
+  } = employeeDetail;
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
+      
       <SideBar />
-
-      <div>
-        <input
-          type="text"
-          placeholder="id"
-          value={inputValue}
-          onChange={handlerInputChange}
-        />
-        <button onClick={handlerGetProfile}>Get Profile</button>
-      </div>
-
-      <div>
-        {profile.map((item) => (
-          <div key={item.id}>
-            <p>Name: {item.name}</p>
-            <p>Last Name: {item.lastName}</p>
-            <p>Birth Date: {item.birthDate}</p>
-            <p>E-mail: {item.email}</p>
-            <p>DNI: {item.dni}</p>
-            <p>Phone: {item.phone}</p>
-            <p>Direction: {item.direction}</p>
-            <img src={item.avatar} alt={item.name} className=""></img>
-          </div>
-        ))}
-      </div>
-
-      <Link to={`/myprofile/${user.id}`}>
-        <div className="">
-          <button>Edit</button>
+      <div className="col-span-5 p-8">
+        <div className={style.buttonCointainer}>
+          {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
+          
+          <Link to={`/editemployee/${id}`}>
+            <button className={style.editButton}>Edit Employee</button>
+          </Link>
         </div>
-      </Link>
+        <div className={style.mainCointainer}>
+          <p>Name: {name}</p>
+          <p>Last Name: {lastName}</p>
+          <p>Birth Date: {birthDate}</p>
+          <p>E-mail: {email}</p>
+          <p>DNI: {dni}</p>
+          <p>Phone: {tel}</p>
+          <p>Address: {address}</p>
+          <p>Role: {role}</p>
+          <p>Position: {position}</p>
+          <p>Area: {area}</p>
+          <p>Cuil: {cuil}</p>
+          <p>Cbu: {cbu}</p>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default MyProfile;
+export default EmployeeDetail;

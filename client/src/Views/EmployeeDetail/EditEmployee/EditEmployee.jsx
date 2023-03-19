@@ -99,22 +99,6 @@ const EditEmployee = () => {
     dispatch(updateEmployee(id, updatedUser));
     setErrorButton(true);
 
-    setUpdatedUser({
-      name: "",
-      lastName: "",
-      birthDate: "",
-      email: "",
-      dni: "",
-      tel: "",
-      address: "",
-      position: "",
-      area: "",
-      dateOfAdmission: "",
-      role: "",
-      image: "",
-      cuil: "",
-      cbu: "",
-    });
     console.log(updatedUser.birthDate);
 
     setAllErrors({
