@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { createEmployee } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
-import validate from "../../../utils/functions/validate";
-import { useErrors } from "../../../utils/hooks/errors";
+import validate from "../../../Utils/functions/validate";
+import { useErrors } from "../../../Utils/hooks/errors";
 
 const AddEmployee = () => {
   // const { employeeCreated } = useSelector((state) => state);

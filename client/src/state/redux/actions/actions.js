@@ -8,6 +8,12 @@ import {
   UPDATE_EMPLOYEE,
   GET_EMPLOYEE_DETAIL,
   DELETE_EMPLOYEE,
+  GET_AREAS_EMPLOYEES,
+  GET_AREAS,
+  GET_POSITIONS_EMPLOYEES,
+  GET_POSITIONS,
+  GET_ROLES,
+  GET_ROL_EMPLOYEES,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -110,3 +116,80 @@ export const deleteEmployee = (id) => {
     }
   }
 }
+
+
+export const getPositions=()=>{
+  return async function(dispatch){
+    try {
+      const response = await axios.get("http://localhost:3001/positions")
+      const result = response.data;
+      return dispatch({type: GET_POSITIONS, payload: result})
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+}
+
+export const getPositionsEmployees = (position) => {
+  return async function(dispatch){
+    try {
+      const response = await axios.get(`http://localhost:3001/users?position=${position}`)
+      const result = response.data;
+      return dispatch({type: GET_POSITIONS_EMPLOYEES, payload: result})
+    } catch(error){
+      console.log(error.message)
+    }
+  }
+}
+
+
+export const getAreas=()=>{
+  return async function(dispatch){
+    try {
+      const response = await axios.get("http://localhost:3001/areas")
+      const result = response.data;
+      return dispatch({type: GET_AREAS, payload: result})
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+}
+
+export const getAreasEmployees = (area) => {
+  return async function(dispatch){
+    try {
+      const response = await axios.get(`http://localhost:3001/users?area=${area}`)
+      const result = response.data;
+      return dispatch({type: GET_AREAS_EMPLOYEES, payload: result})
+    } catch(error){
+      console.log(error.message)
+    }
+  }
+}
+
+
+export const getRoles=()=>{
+  return async function(dispatch){
+    try {
+      const response = await axios.get("http://localhost:3001/roles")
+      const result = response.data;
+      return dispatch({type: GET_ROLES, payload: result})
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+}
+
+export const getRolEmployees = (role) => {
+  return async function(dispatch){
+    try {
+      const response = await axios.get(`http://localhost:3001/users?role=${role}`)
+      const result = response.data;
+      return dispatch({type: GET_ROL_EMPLOYEES, payload: result})
+    } catch(error){
+      console.log(error.message)
+    }
+  }
+}
+
+
