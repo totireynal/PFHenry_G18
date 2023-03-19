@@ -11,8 +11,6 @@ const EditEmployee = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const currentEmployee = useSelector(state => state.employeeDetail)
-
   const { errors, setAllErrors } = useErrors();
 
   const currentEmployee = useSelector((state) => state.employeeDetail);

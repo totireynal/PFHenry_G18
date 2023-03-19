@@ -8,6 +8,7 @@ import {
   UPDATE_EMPLOYEE,
   GET_EMPLOYEE_DETAIL,
   DELETE_EMPLOYEE,
+  SORT_EMPLOYEE_NAME,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -100,13 +101,29 @@ export const deleteEmployee = (id) => {
     try {
       const response = await axios.delete(`http://localhost:3001/users/${id}`);
       const result = response.data;
-
+      
       return dispatch({
         type: DELETE_EMPLOYEE,
         payload: result
       })
     } catch (error) {
       console.log(error);
+    }
+  }
+}
+
+export const sortEmployeeName = (typeSort) => {
+  return async function (dispatch) {
+    try {
+      console.log(typeSort);
+      const response = await axios.get(`http://localhost:3001/users?sort=${typeSort}`)
+      const result = response.data;
+
+      return dispatch({ type: SORT_EMPLOYEE_NAME , payload: result})
+
+    } catch (error) {
+      const err = error.response.data.error
+      alert(err);
     }
   }
 }

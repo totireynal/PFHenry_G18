@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import { getEmployees } from "../../state/redux/actions/actions";
+import Sort from "../../Components/Sort/Sort";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
@@ -29,6 +30,10 @@ const Employees = () => {
       user?.lastName?.toLowerCase().includes(searchEmployee.toLowerCase())
   );
 
+   const handleRefresh = (event) => {
+    dispatch(getEmployees());
+    }
+
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
       <SideBar />
@@ -41,6 +46,11 @@ const Employees = () => {
             </button>
           </Link>
         </div>
+        <Sort></Sort>
+          <button
+            className="flex relative h-12 w-40 justify-center items-center rounded-md border border-solid border-black" 
+            onClick={handleRefresh}
+            >Refresh</button>
         <div className="flex flex-row flex-wrap gap-6 justify-center overflow-auto h-[630px] pt-3 ">
           {filteredUsers.map((user) => {
             return (
@@ -59,6 +69,7 @@ const Employees = () => {
           })}
         </div>
       </div>
+
     </div>
   );
 };
