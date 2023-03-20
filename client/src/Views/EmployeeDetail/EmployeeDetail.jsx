@@ -134,7 +134,7 @@ return (
             <div className="text-xl flex flex-col w-1/2 h-full items-center justify-center ">
               <p>Position: {position}</p>
               <p>Area: {area}</p>
-              <p>Address: {dateOfAdmission}</p>
+              <p>Date of Admission: {dateOfAdmission}</p>
               <p>Cuil: {cuil}</p>
               <p>CBU: {cbu}</p>
             </div>

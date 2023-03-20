@@ -132,10 +132,9 @@ const EditEmployee = () => {
           </div>
 
 {/* ++++++++++++++BOTON BACK EditEmployee+++++++++++++++++++ */}
-          
-            <button onClick={()=>navigate(-1)} className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
+            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
+                    onClick={() => navigate(-1)}
             >BACK</button>
-          
 {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 
           <div className="flex gap-16">
