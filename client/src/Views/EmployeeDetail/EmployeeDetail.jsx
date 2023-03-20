@@ -87,6 +87,14 @@ const EmployeeDetail = () => {
           >
             Delete
           </button>
+
+          {/* ++++++++++++++BOTON BACK EmployeeDetail+++++++++++++++++++ */}
+          <Link to='/employees'>
+            <button className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+            >BACK</button>
+          </Link>
+          {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
+
           <Link to={`/editemployee/${id}`}>
             <button className="flex relative h-12 w-40 justify-center items-center rounded-md border border-solid border-black">
               Edit Employee
