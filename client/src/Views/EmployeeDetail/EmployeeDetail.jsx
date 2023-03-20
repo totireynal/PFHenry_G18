@@ -28,7 +28,7 @@ const EmployeeDetail = () => {
 
   const deletedEmplote = () => {
     dispatch(deleteEmployee(id));
-    navigate("/employees");
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -65,7 +65,7 @@ return (
           className="flex flex-col justify-between w-[600px] h-[200px] bg-white rounded p-6 text-xl transition-all duration-100"
         >
           <h3>Esta seguro que quiere borrar a este empleado?</h3>
-          <div className="text-end text-base flex justify-between  ">
+          <div className="text-end text-base flex justify-between">
             <div
               
               className="flex justify-center items-center text-base  bg-green-400 rounded w-60 opacity-0"
