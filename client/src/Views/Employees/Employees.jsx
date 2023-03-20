@@ -17,7 +17,6 @@ const Employees = () => {
 
   useEffect(() => {
     dispatch(getEmployees());
-    console.log("toy");
   }, [dispatch]);
 
   // const [searchEmployee, setSearchEmployee] = useState("");
@@ -43,38 +42,42 @@ const Employees = () => {
         <div className="flex flex-row items-center justify-center h-24 gap-2.5">
           <SearchBar />
           <Link to={"/addemployee/"}>
-            <button className="flex relative h-12 w-40 justify-center items-center rounded-md border border-solid border-black">
+            <button className="bg-sky-700 text-white rounded border border-sky-700 overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600">
               Add Employee
             </button>
           </Link>
         </div>
-        <Sort></Sort>
+        <div className="flex justify-center items-center gap-8 mb-8">
           <button
-            className="flex relative h-12 w-40 justify-center items-center rounded-md border border-solid border-black" 
+            className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
             onClick={handleRefresh}
-            >Refresh</button>
-        <Area/>
-        <Position/>
-        <Rol></Rol>
-        <div className="flex flex-row flex-wrap gap-6 justify-center overflow-auto h-[630px] pt-3 ">
-          {users.map((user) => {
+          >
+            Refresh
+          </button>
+          <Sort />
+          <Area />
+          <Position />
+          <Rol />
+        </div>
+        <div className="flex flex-row flex-wrap gap-6 justify-center overflow-auto h-4/5 pt-3 ">
+          {users?.map((user, i) => {
+            console.log(user?.id);
             return (
-              <Link key={user.id} to={`/employee/${user.id}`}>
+              <Link key={i} to={`/employee/${user?.id}`}>
                 <Employee
-                  id={user.id}
-                  name={user.name}
-                  lastName={user.lastName}
+                  id={user?.id}
+                  name={user?.name}
+                  lastName={user?.lastName}
                   // image={user.image}
-                  area={user.area}
-                  position={user.position}
-                  role={user.role}
+                  area={user?.area}
+                  position={user?.position}
+                  role={user?.role}
                 />
               </Link>
             );
           })}
         </div>
       </div>
-
     </div>
   );
 };

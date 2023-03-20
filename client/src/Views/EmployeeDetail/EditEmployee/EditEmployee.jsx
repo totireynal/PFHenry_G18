@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SideBar from "../../../Components/SideBar/SideBar";
 import { updateEmployee } from "../../../state/redux/actions/actions";
 import validate from "../../../utils/functions/validate";
 import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../utils/hooks/errors";
-import { Link } from "react-router-dom";
+import { useAnswer } from "../../../utils/hooks/answer"; 
 
 const EditEmployee = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { errors, setAllErrors } = useErrors();
 
+  const {answer, showAnswer} = useAnswer()
+
   const currentEmployee = useSelector((state) => state.employeeDetail);
 
-  
-  
   const [touched, setTouched] = useState({
     name: false,
     lastName: false,
@@ -55,17 +56,17 @@ const EditEmployee = () => {
   const handleInput = (e) => {
     const { value, name } = e.target;
 
-    setUpdatedUser({
-      ...updatedUser,
-      [name]: value,
-    });
-
     setAllErrors(
       validate({
         ...updatedUser,
         [name]: value,
       })
     );
+    setUpdatedUser({
+      ...updatedUser,
+      [name]: value,
+    });
+
 
     setTouched({
       ...touched,
@@ -80,7 +81,6 @@ const EditEmployee = () => {
 
   const handleSelect = (e) => {
     const { value, name } = e.target;
-    console.log(value, name);
     if (name === "role") {
       setUpdatedUser({
         ...updatedUser,
@@ -93,14 +93,13 @@ const EditEmployee = () => {
     e.preventDefault();
     // const allErrors = Object.values(errors).length;
     // if (!allErrors) {
-    setSubmited(true);
-    setTimeout(() => {
-      setSubmited(false);
+      dispatch(updateEmployee(id, updatedUser, showAnswer));
+      setSubmited(true);
+      setTimeout(() => {
+        setSubmited(false);
+        navigate(-1);
     }, 3000);
-    dispatch(updateEmployee(id, updatedUser));
     setErrorButton(true);
-
-    console.log(updatedUser.birthDate);
 
     setAllErrors({
       name: "",
@@ -113,13 +112,14 @@ const EditEmployee = () => {
       position: "",
       area: "",
       dateOfAdmission: "",
-      role: "user",
+      role: "",
       image: "",
       cuil: "",
       cbu: "",
     });
-    // }
   };
+
+  console.log(answer, 'edittttt');
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
@@ -148,6 +148,7 @@ const EditEmployee = () => {
                 errorButton={errorButton}
                 submited={submited}
                 button="Edit Employee"
+                answer={answer}
               />
             </div>
           </div>

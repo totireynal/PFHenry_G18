@@ -1,9 +1,16 @@
 import { RiAlertFill } from "react-icons/ri";
 
-const SelectForm = ({ name, handler, optionQuantity, error, label }) => {
+const SelectForm = ({
+  name,
+  handler,
+  optionQuantity,
+  error,
+  label,
+  touched,
+}) => {
   return (
     <div className="m-4 w-60">
-      <label className={` text-base`} valid={error}>
+      <label className={`text-base`} valid={error}>
         {label}
       </label>
       <select

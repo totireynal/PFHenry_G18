@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import {AiFillInstagram} from 'react-icons/ai';
-
+import { AiFillInstagram } from "react-icons/ai";
 
 const Home = () => {
-
   const container =
     "max-w-[1200px] m-auto flex flex-col justify-center items-center";
-  const styleSectionPrimary = 'flex flex-col bg-slate-100 justify-center items-center h-screen'
-  const styleSectionSecodary = 'flex flex-col  justify-center items-center h-screen'
+  const styleSectionPrimary =
+    "flex flex-col bg-slate-100 justify-center items-center h-screen";
+  const styleSectionSecodary =
+    "flex flex-col  justify-center items-center h-screen";
   const styleText = "text-center text-6xl font-black";
 
   return (
@@ -89,7 +89,8 @@ const Home = () => {
               <p>
                 Easily navigate through your staff, sort them and click for full
                 details...
-              </p><br />
+              </p>
+              <br />
               <p>
                 Expertise: Our team of experienced HR professionals has the
                 knowledge and expertise to handle all aspects of HR management.
@@ -113,47 +114,38 @@ const Home = () => {
         </div>
       </section>
 
-      <footer className="bg-slate-600 px-4 py-6">
-        <div className="container ml-2 mr-1">
-          <div className="flex justify-between bg-yellow-400">
-            <div className="w-1/3">
-              <div className="text-center text-white bg-slate-400 px-10">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXRffPuFBvvRFjhn46hKBxJATOfFLl-VkWA&usqp=CAU"
-                  alt=""
-                />
-              </div>
-            </div>
+      <footer className="bg-slate-600">
+        <div className="flex flex-row text-white">
+          <div className="w-1/3">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXRffPuFBvvRFjhn46hKBxJATOfFLl-VkWA&usqp=CAU"
+              alt="logo"
+            />
+          </div>
 
-            <div className="w-2/6 text-left pl-12 text-white bg-blue-400">
-              <h5 className="uppercase mb-6 font-bold">Contact Us</h5>
-              <p>email@staffPhere.com</p>
-              <p className="pt-2">tel: +54-11-555-1234</p>
-            </div>
+          <div className="flex flex-col items-center justify-center w-1/3 text-lg">
+            <h5 className="">Contact Us</h5>
+            <p>email@staffPhere.com</p>
+            <p className="">tel: +54-11-555-1234</p>
+          </div>
 
-            <div className="w-4/6 text-left text-white bg-blue-800">
-              <h5 className="uppercase mb-6 font-bold">Send us a review</h5>
-              <p>Link a un form para cargar.</p>
-              <button className="flex pt-3 bg-slate-200 text-black">
-                instadestaff{" "}
-                <span>
-                  <AiFillInstagram className="pt-1" size={23}></AiFillInstagram>
-                </span>
-              </button>
-            </div>
+          <div className="flex flex-col items-center justify-center w-1/3 text-lg">
+            <h5 className="">Send us a review</h5>
+            <p>Link a un form para cargar.</p>
+
+            <span>
+              <AiFillInstagram size={23}></AiFillInstagram>
+            </span>
           </div>
         </div>
       </footer>
     </div>
   );
-}
-
+};
 
 export default Home;
-
 
 //Register to payment
 //About us
 //process description/screenshots
 //Contacts
-

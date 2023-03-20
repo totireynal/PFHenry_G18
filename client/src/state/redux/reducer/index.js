@@ -57,12 +57,8 @@ function rootReducer(state = initialState, action) {
         allEmployees: action.payload,
       };
     case UPDATE_EMPLOYEE:
-      const updatedUser = state.allEmployees.filter(
-        (employee) => employee.id !== action.payload.id
-      );
       return {
         ...state,
-        allEmployees: [...updatedUser, action.payload],
       };
     case GET_EMPLOYEE_DETAIL:
       return {
@@ -70,7 +66,6 @@ function rootReducer(state = initialState, action) {
         employeeDetail: action.payload,
       };
     case DELETE_EMPLOYEE:
-      // const employeeToDelete = state.allEmployees.filter(employee => employee.id !== action.payload.id)
       return {
         ...state,
       };

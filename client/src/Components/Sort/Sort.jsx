@@ -14,20 +14,23 @@ const Sort = () => {
         dispatch(sortEmployeeName(typeSort)) 
     }
 
-    return(
-        <div>
-            <legend>Sort ascendent / descendent</legend>
-            <select 
-                name=""
-                onChange={handleChange}
-                defaultValue="default"
-            >
-                <option value="default" hidden >Elegir</option>
-                <option value={AtZ}>Ascendent</option>
-                <option value={ZtA}>Descendent</option>
-            </select>
-        </div>
-    )
+    return (
+      <div className=" flex ">
+        <h2 className="flex justify-center items-center mr-2">Order: </h2>
+        <select
+          className="border-2 border-gray-200"
+          name=""
+          onChange={handleChange}
+          defaultValue="default"
+        >
+          <option value="default" hidden>
+            Elegir
+          </option>
+          <option value={AtZ}>Ascendent</option>
+          <option value={ZtA}>Descendent</option>
+        </select>
+      </div>
+    );
 }
 
 export default Sort;

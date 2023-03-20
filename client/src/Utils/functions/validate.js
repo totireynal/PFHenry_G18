@@ -9,13 +9,14 @@ const validate = (values) => {
   const errors = {};
 
   // if (!values.image.length) errors.image = 'No ha ingresado ningun caracter';
-  if (!regex.image.test(values.image)) errors.image = "No es un url apropiado";
-
-  // if (values.role === "default")
-  //   errors.role = "Debe elegir in Role";
+  // if (!regex.image.test(values.image)) errors.image = "No es un url apropiado";
+  // console.log(values);
+  if (values.role === "default")
+    errors.role = "Debe elegir in Role";
   if (!values.name.length) errors.name = "No ha ingresado ningun caracter";
   if (!values.lastName.length)
     errors.lastName = "No ha ingresado ningun caracter";
+  if (!values.cuil.length) errors.cuil = "No ha ingresado ningun caracter";
   if (!values.cuil.length) errors.cuil = "No ha ingresado ningun caracter";
   if (!values.cbu.length) errors.cbu = "No ha ingresado ningun caracter";
   if (!values.address.length)

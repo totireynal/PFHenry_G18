@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch } from "react-redux";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createEmployee } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
 import validate from "../../../utils/functions/validate";
 import { useErrors } from "../../../utils/hooks/errors";
-import { Link } from "react-router-dom";
+import { useAnswer } from "../../../utils/hooks/answer";
 
 const AddEmployee = () => {
   // const { employeeCreated } = useSelector((state) => state);
@@ -33,6 +33,7 @@ const AddEmployee = () => {
   const [errorButton, setErrorButton] = useState(true);
 
   const { errors, setAllErrors } = useErrors();
+  const {answer, showAnswer} = useAnswer()
 
   const [touched, setTouched] = useState({});
 
@@ -56,7 +57,7 @@ const AddEmployee = () => {
       [event.target.name]: true,
     });
 
-    const allErrors = Object.values(errors).length;
+    const allErrors = Object.keys(errors).length;
     if (!allErrors) {
       setErrorButton(false);
     } else {
@@ -66,7 +67,6 @@ const AddEmployee = () => {
 
   const handleSelect = (e) => {
     const { value, name } = e.target;
-    console.log(value, name);
     if (name === "role") {
       setEmployee({
         ...employee,
@@ -75,15 +75,13 @@ const AddEmployee = () => {
     }
   };
 
-  console.log(employee);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmited(true);
+    dispatch(createEmployee(employee, showAnswer));
     setTimeout(() => {
       setSubmited(false);
     }, 3000);
-    dispatch(createEmployee(employee));
     setErrorButton(true);
     setEmployee({
       name: "",
@@ -93,7 +91,7 @@ const AddEmployee = () => {
       dni: "",
       tel: "",
       address: "",
-      role: "",
+      role: "User",
       image: "",
       position: "",
       area: "",
@@ -110,7 +108,7 @@ const AddEmployee = () => {
       dni: "",
       tel: "",
       address: "",
-      role: "User",
+      role: "",
       image: "",
       position: "",
       area: "",
@@ -119,7 +117,7 @@ const AddEmployee = () => {
       dateOfAdmission: "",
     });
   };
-
+// console.log(errors);
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
       <SideBar />
@@ -147,6 +145,7 @@ const AddEmployee = () => {
                 errorButton={errorButton}
                 submited={submited}
                 button="Add Employee"
+                answer={answer}
               />
             </div>
           </div>

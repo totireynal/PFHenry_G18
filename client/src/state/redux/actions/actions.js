@@ -40,14 +40,16 @@ export function resetCreate() {
   return { type: RESET_CREATE, payload: [] };
 }
 
-export const createEmployee = (info) => {
+export const createEmployee = (info, showAnswer) => {
   return function (dispatch) {
     return axios.post("http://localhost:3001/users", info).then(
       (response) => {
+        console.log(response.data.message, '........');
+        showAnswer(response.data.message)
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },
       (error) => {
-        console.log(error);
+        showAnswer(error)
         dispatch({ type: CREATE_EMPLOYEE, payload: error.response.data });
       }
     );
@@ -73,7 +75,7 @@ export const getEmployees = (name) => {
   };
 };
 
-export const updateEmployee = (id, user) => {
+export const updateEmployee = (id, user, showAnswer) => {
   return async (dispatch) => {
     try {
       const response = await axios.put(
@@ -81,12 +83,15 @@ export const updateEmployee = (id, user) => {
         user
       );
       const result = response.data;
+      console.log(result, 'updateeee');
+      showAnswer(response.data)
 
       return dispatch({
         type: UPDATE_EMPLOYEE,
-        payload: result,
       });
-    } catch (error) {}
+    } catch (error) {
+      showAnswer(error.message)
+    }
   };
 };
 
@@ -103,18 +108,18 @@ export const getEmployeeDetail = (id) => {
   };
 };
 
-export const deleteEmployee = (id) => {
+export const deleteEmployee = (id, showAnswer) => {
   return async (dispatch) => {
     try {
       const response = await axios.delete(`http://localhost:3001/users/${id}`);
       const result = response.data;
-      
+      showAnswer(result);
+
       return dispatch({
         type: DELETE_EMPLOYEE,
-        payload: result,
-      });
+      })
     } catch (error) {
-      console.log(error);
+      showAnswer(error);
     }
   };
 };
