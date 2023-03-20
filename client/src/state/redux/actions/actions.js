@@ -49,7 +49,8 @@ export const createEmployee = (info, showAnswer) => {
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },
       (error) => {
-        showAnswer(error)
+        showAnswer(error.response.data.error)
+        console.log(error.response.data)
         dispatch({ type: CREATE_EMPLOYEE, payload: error.response.data });
       }
     );
@@ -90,7 +91,7 @@ export const updateEmployee = (id, user, showAnswer) => {
         type: UPDATE_EMPLOYEE,
       });
     } catch (error) {
-      showAnswer(error.message)
+      showAnswer(error.response.data.error)
     }
   };
 };
