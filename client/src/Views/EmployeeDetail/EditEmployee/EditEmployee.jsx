@@ -7,6 +7,7 @@ import validate from "../../../utils/functions/validate";
 import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../utils/hooks/errors";
 import { useAnswer } from "../../../utils/hooks/answer"; 
+import { Link } from "react-router-dom";
 
 const EditEmployee = () => {
   const { id } = useParams();
@@ -132,7 +133,8 @@ const EditEmployee = () => {
 
 {/* ++++++++++++++BOTON BACK EditEmployee+++++++++++++++++++ */}
           <Link to={`/employee/${id}`}>
-            <button>BACK</button>
+            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
+            >BACK</button>
           </Link>
 {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 

@@ -93,11 +93,18 @@ return (
       <div className="col-span-5 p-8">
         <div className="flex flex-row gap-6 items-center justify-center">
           {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
+          <Link to='/employees'>
+            <button className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+            >BACK</button>
+          </Link>
+          
           <Link to={`/editemployee/${id}`}>
             <button className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600">
               Edit Employee
             </button>
           </Link>
+
+
           <button
             className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
             onClick={modalActive}

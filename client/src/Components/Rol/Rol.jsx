@@ -28,7 +28,7 @@ const Rol = () =>{
           onChange={handleChange}
           defaultValue="default"
         >
-          <option hidden>Elegir</option>
+          <option hidden>Select</option>
           <option>Admin</option>
           <option>User</option>
         </select>

@@ -30,7 +30,7 @@ const Position = () =>{
           defaultValue="default"
         >
           <option value="default" hidden>
-            Elegir
+            Select
           </option>
           {positions.map((e, i) => (
             <option key={i} value={e}>

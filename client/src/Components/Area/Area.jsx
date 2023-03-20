@@ -30,7 +30,7 @@ const Area = () =>{
           defaultValue="default"
         >
           <option value="default" hidden>
-            Elegir
+            Select
           </option>
           {areas.map((e, i) => (
             <option key={i} value={e}>

@@ -13,7 +13,7 @@ const SideBar = () => {
       <div className="h-screen flex flex-col justify-between items-center">
         <div className="flex py-16">
           <i className="mr-2">logo</i>
-          <h1>StuffSphere</h1>
+          <h1>StaffSphere</h1>
         </div>
         <div className="">
           <div className=" grid items-end grid-cols-1 grid-rows-2 justify-between">
@@ -22,12 +22,12 @@ const SideBar = () => {
               <ButtonSideBar url="/employees">Employees</ButtonSideBar>
               <ButtonSideBar url="/notifications">Notifications</ButtonSideBar>
               <ButtonSideBar url="/calendar">Calendar</ButtonSideBar>
-              <ButtonSideBar url="/organization">Organization</ButtonSideBar>
+              {/* <ButtonSideBar url="/organization">Organization</ButtonSideBar> */}
             </div>
             <div>
               <div className="flex flex-col gap-4">
                 <ButtonSideBar url={url}>My Profile</ButtonSideBar>
-                <ButtonSideBar url="/logout">Log Out</ButtonSideBar>
+                <ButtonSideBar url="/home">Log Out</ButtonSideBar>
               </div>
             </div>
           </div>
