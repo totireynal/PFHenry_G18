@@ -6,6 +6,7 @@ import { createEmployee } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
 import validate from "../../../utils/functions/validate";
 import { useErrors } from "../../../utils/hooks/errors";
+import { Link } from "react-router-dom";
 
 const AddEmployee = () => {
   // const { employeeCreated } = useSelector((state) => state);
@@ -127,6 +128,13 @@ const AddEmployee = () => {
           <div className="text-center">
             <span className="text-4xl">Add Employee</span>
           </div>
+
+{/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
+          <Link to='/employees'>
+            <button>BACK</button>
+          </Link>
+{/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
+
           <div className="flex gap-16">
             <div>
               <Form

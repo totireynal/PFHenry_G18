@@ -6,6 +6,7 @@ import { updateEmployee } from "../../../state/redux/actions/actions";
 import validate from "../../../utils/functions/validate";
 import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../utils/hooks/errors";
+import { Link } from "react-router-dom";
 
 const EditEmployee = () => {
   const { id } = useParams();
@@ -128,6 +129,13 @@ const EditEmployee = () => {
           <div className="text-center">
             <span className="text-4xl">Edit Employee</span>
           </div>
+
+{/* ++++++++++++++BOTON BACK EditEmployee+++++++++++++++++++ */}
+          <Link to={`/employee/${id}`}>
+            <button>BACK</button>
+          </Link>
+{/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
+
           <div className="flex gap-16">
             <div>
               <Form
