@@ -28,7 +28,7 @@ const EmployeeDetail = () => {
 
   const deletedEmplote = () => {
     dispatch(deleteEmployee(id));
-    navigate("/employees");
+    navigate(-1);
   };
 
   useEffect(() => {
