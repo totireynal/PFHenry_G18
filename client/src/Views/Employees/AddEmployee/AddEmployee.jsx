@@ -7,6 +7,7 @@ import Form from "../../../Components/Form/Form";
 import validate from "../../../utils/functions/validate";
 import { useErrors } from "../../../utils/hooks/errors";
 import { useAnswer } from "../../../utils/hooks/answer";
+import { Link } from "react-router-dom";
 
 const AddEmployee = () => {
   // const { employeeCreated } = useSelector((state) => state);
@@ -126,6 +127,14 @@ const AddEmployee = () => {
           <div className="text-center">
             <span className="text-4xl">Add Employee</span>
           </div>
+
+{/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
+          <Link to='/employees'>
+            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
+            >BACK</button>
+          </Link>
+{/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
+
           <div className="flex gap-16">
             <div>
               <Form

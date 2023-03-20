@@ -24,7 +24,7 @@ const Sort = () => {
           defaultValue="default"
         >
           <option value="default" hidden>
-            Elegir
+            Select
           </option>
           <option value={AtZ}>Ascendent</option>
           <option value={ZtA}>Descendent</option>
