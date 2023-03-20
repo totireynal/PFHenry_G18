@@ -1,52 +1,33 @@
-import SideBar from "../../Components/SideBar/SideBar";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import { useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import "./App.css";
+import { getMonth } from "./util";
+import CalendarHeader from "./components/CalendarHeader";
+import Sidebar from "./components/Sidebar";
+import Month from "./components/Month";
+import GlobalContext from "./context/GlobalContext";
+import EventModal from "./components/EventModal";
 
-const events = [{ title: "Meeting", start: new Date() }];
 const Calendar = () => {
-  return (
-    <div className="h-screen grid grid-cols-6 grid-rows-1 ">
-      <SideBar />
-      <div className="col-span-5 h-screen p-8">
-        <div className="h-full flex flex-col justify-evenly">
-          <div className="text-center">
-            <input
-              className="bg-gray-200 w-96 text-center"
-              placeholder="Buscar..."
-              type="text"
-            />
-          </div>
-          <div className="flex gap-5">
-            <button className="p-3 bg-slate-200">Feriados</button>
-            <button className="p-3 bg-slate-200">Eventos</button>
-          </div>
-          <div className="flex justify-center items-center">
+  const [currenMonth, setCurrentMonth] = useState(getMonth());
+  const { monthIndex, showEventModal } = useContext(GlobalContext);
 
-          <div className="w-[600px]">
-            <FullCalendar
-              className=""
-              plugins={[dayGridPlugin]}
-              initialView="dayGridMonth"
-              weekends={true}
-              events={events}
-              eventContent={renderEventContent}
-              />
-              </div>
-          </div>
+  useEffect(() => {
+    setCurrentMonth(getMonth(monthIndex));
+  }, [monthIndex]);
+
+  return (
+    <React.Fragment>
+      {showEventModal && <EventModal />}
+
+      <div className="h-screen flex flex-col">
+        <CalendarHeader />
+        <div className="flex flex-1">
+          <Sidebar />
+          <Month month={currenMonth} />
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
-
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  );
-}
 
 export default Calendar;

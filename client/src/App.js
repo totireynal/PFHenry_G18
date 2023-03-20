@@ -20,6 +20,8 @@ import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 import { useDispatch } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
+import ContextWrapper from "./context/ContextWrapper";
+
 
 function App() {
   // const [user, setUser] = useState(null);
@@ -64,8 +66,10 @@ function App() {
             <Route path="/employee/:id" element={<EmployeeDetail />} />
             <Route path="/addemployee" element={<AddEmployee />} />
             <Route path="/editemployee/:id" element={<EditEmployee />} />
-            <Route path="/organization" element={<Organization />} />
+            <ContextWrapper>
             <Route path="/calendar" element={<Calendar />} />
+            </ContextWrapper>
+            <Route path="/organization" element={<Organization />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
           <Route path="/myprofile/:id" element={<MyProfile />} />
