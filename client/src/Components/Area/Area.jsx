@@ -21,14 +21,25 @@ const Area = () =>{
     }
 
     return (
-        <div>
-            <legend>Area</legend>
-            <select name="" onChange={handleChange} defaultValue="default">
-            <option value="default" hidden>Elegir</option>
-            {areas.map((e,i)=>(<option key={i} value={e}>{e}</option>))}
-            </select>
-        </div>
-    )
+      <div className="flex justify-center items-center mr-2">
+        <h3>Area: </h3>
+        <select
+          className="border-2 border-gray-200 ml-2"
+          name=""
+          onChange={handleChange}
+          defaultValue="default"
+        >
+          <option value="default" hidden>
+            Elegir
+          </option>
+          {areas.map((e, i) => (
+            <option key={i} value={e}>
+              {e}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
 }
 
 export default Area;

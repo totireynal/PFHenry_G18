@@ -21,14 +21,25 @@ const Position = () =>{
     }
 
     return (
-        <div>
-            <legend>Position</legend>
-            <select name="" onChange={handleChange} defaultValue="default">
-            <option value="default" hidden>Elegir</option>
-            {positions.map((e, i)=>(<option key={i} value={e}>{e}</option>))}
-            </select>
-        </div>
-    )
+      <div className="flex justify-center items-center mr-2">
+        <h3>Position: </h3>
+        <select
+          className="border-2 border-gray-200 ml-2"
+          name=""
+          onChange={handleChange}
+          defaultValue="default"
+        >
+          <option value="default" hidden>
+            Elegir
+          </option>
+          {positions.map((e, i) => (
+            <option key={i} value={e}>
+              {e}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
 }
 
 export default Position;

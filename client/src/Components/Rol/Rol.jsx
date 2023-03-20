@@ -20,15 +20,20 @@ const Rol = () =>{
     }
 
     return (
-        <div>
-            <legend>Rols</legend>
-            <select name="" onChange={handleChange} defaultValue="default">
-            <option hidden>Elegir</option>
-            <option>Admin</option>
-            <option>User</option>
-            </select>
-        </div>
-    )
+      <div className="flex">
+        <h3 className= "flex justify-center items-center mr-2">Rols: </h3>
+        <select
+          className="border-2 border-gray-200"
+          name=""
+          onChange={handleChange}
+          defaultValue="default"
+        >
+          <option hidden>Elegir</option>
+          <option>Admin</option>
+          <option>User</option>
+        </select>
+      </div>
+    );
 }
 
 export default Rol;

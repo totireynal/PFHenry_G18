@@ -14,7 +14,7 @@ const Form = ({
   answer
 }) => {
 
-  console.log(answer, '------------');
+  console.log(answer, 'Formmmm');
   return (
     <form
       onSubmit={handleSubmit}
@@ -207,7 +207,7 @@ const Form = ({
           {button}
         </button>
       ) : (
-          <p className="px-20 py-4 bg-green-400 text-white ">res</p>
+          <p className="px-20 py-4 bg-green-400 text-white rounded">{answer}</p>
       )}
       {/* <p className="px-20 py-4 bg-green-400 rounded">hola que ase</p> */}
       {/* {submited && <p className="text-green-800">{answer}</p>} */}

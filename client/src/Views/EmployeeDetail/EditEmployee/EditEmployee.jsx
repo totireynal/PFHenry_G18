@@ -117,8 +117,9 @@ const EditEmployee = () => {
       cuil: "",
       cbu: "",
     });
-    // }
   };
+
+  console.log(answer, 'edittttt');
 
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">

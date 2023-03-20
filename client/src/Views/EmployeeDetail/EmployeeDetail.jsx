@@ -13,7 +13,7 @@ const EmployeeDetail = () => {
   let employeeDetail = useSelector((state) => state.employeeDetail);
   let navigate = useNavigate();
 
-  const { answer, showAnswer } = useAnswer();
+  // const { answer, showAnswer } = useAnswer();
 
   let dispatch = useDispatch();
   let refModal = useRef();
@@ -32,8 +32,8 @@ const EmployeeDetail = () => {
   };
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id, showAnswer));
-  }, [id, dispatch, showAnswer]);
+    dispatch(getEmployeeDetail(id));
+  }, [id, dispatch]);
 
   const {
     name,

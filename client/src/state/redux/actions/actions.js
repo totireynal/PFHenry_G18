@@ -83,27 +83,25 @@ export const updateEmployee = (id, user, showAnswer) => {
         user
       );
       const result = response.data;
-      console.log(result);
-      showAnswer(result)
+      console.log(result, 'updateeee');
+      showAnswer(response.data)
 
       return dispatch({
         type: UPDATE_EMPLOYEE,
       });
     } catch (error) {
-      showAnswer(error)
+      showAnswer(error.message)
     }
   };
 };
 
-export const getEmployeeDetail = (id, showAnswer) => {
+export const getEmployeeDetail = (id) => {
   return function (dispatch) {
     return axios.get(`http://localhost:3001/users/${id}`).then(
       (response) => {
-        showAnswer(response);
         dispatch({ type: GET_EMPLOYEE_DETAIL, payload: response.data });
       },
       (error) => {
-        showAnswer(error);
         dispatch({ type: GET_EMPLOYEE_DETAIL, payload: error.response.data });
       }
     );
