@@ -33,10 +33,8 @@ console.log(employeeDetail);
 
 
   return (
-    <div className="grid grid-cols-6 grid-rows-1 h-screen">
      
-      <SideBar />
-      <div className="col-span-5 p-8">
+      <div className="w-full pt-16">
         <div className="flex flex-row gap-6 items-center justify-center">
           {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
           <Link to={`/editemployee/${id}`}>
@@ -74,7 +72,6 @@ console.log(employeeDetail);
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };

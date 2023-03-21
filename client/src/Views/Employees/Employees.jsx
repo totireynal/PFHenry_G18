@@ -36,9 +36,7 @@ const Employees = () => {
     }
 
   return (
-    <div className="grid grid-cols-6 grid-rows-1 h-screen">
-      <SideBar />
-      <div className="col-span-5 px-8 pb-8">
+      <div className="w-full h-screen overflow-auto ">
         <div className="flex flex-row items-center justify-center h-24 gap-2.5">
           <SearchBar />
           <Link to={"/addemployee/"}>
@@ -47,7 +45,7 @@ const Employees = () => {
             </button>
           </Link>
         </div>
-        <div className="flex justify-center items-center gap-8 mb-8">
+        <div className="flex flex-row justify-center items-center gap-8 mb-8">
           <button
             className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
             onClick={handleRefresh}
@@ -59,15 +57,15 @@ const Employees = () => {
           <Position />
           <Rol />
         </div>
-        <div className="flex flex-row flex-wrap gap-6 justify-center overflow-auto h-4/5 pt-3 ">
+        <div className="block mr-10 overflow-auto  pt-3 ">
           {users?.map((user, i) => {
-            console.log(user?.id);
             return (
               <Link key={i} to={`/employee/${user?.id}`}>
                 <Employee
                   id={user?.id}
                   name={user?.name}
                   lastName={user?.lastName}
+                  email={user?.email}
                   // image={user.image}
                   area={user?.area}
                   position={user?.position}
@@ -78,7 +76,6 @@ const Employees = () => {
           })}
         </div>
       </div>
-    </div>
   );
 };
 

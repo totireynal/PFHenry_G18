@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Route, Routes, useLocation, } from "react-router-dom";
 import Calendar from "./Views/Calendar/Calendar";
 import Dashboard from "./Views/Dashboard";
 import Employees from "./Views/Employees";
@@ -14,69 +14,111 @@ import MyProfile from "./Views/MyProfile/MyProfile";
 import Notifications from "./Views/Notifications/Notifications";
 import Organization from "./Views/Organization";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
-// import SideBar from "./Components/SideBar/SideBar";
+import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 import { useDispatch } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
-import ContextWrapper from "./context/ContextWrapper";
+import { Squash as Hamburger } from "hamburger-react";
 
 
 function App() {
   // const [user, setUser] = useState(null);
-  // const { pathname } = useLocation();
+  const [isOpen, setOpen] = useState(true);
+  const { pathname } = useLocation();
+
+  const refSideBar = useRef()
+  
   const [user, setUser] = useState({
     id: 2,
     name: "juan",
     role: ["admin"],
   });
   // const login = (user) => {
-  //   setUser(user)
-  // }
+    //   setUser(user)
+    // }
+  
+  const fn = () => {
+    
+    if (isOpen) {
+      refSideBar.current.style.transform = 'translateX(-100%)'
+    } else {
+      refSideBar.current.style.transform = "translateX(0)";
+      
+    }
+      
+  
+  }
+  console.log(isOpen);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(getCurrentEmployee(user))
-  }, [])
+  useEffect(() => {
+    dispatch(getCurrentEmployee(user));
+  }, []);
 
   return (
-    <div className="App">
-      {/* {(pathname === "/home" ||
-        pathname === "/home/login" ||
-        pathname === "/home/login/register") ? '' : <SideBar />} */}
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/home/login" element={<Login />} />
-        <Route path="/home/login/register" element={<Register />} />
-        <Route path="/home/login/register/payment" element={<Payment />} />
-        <Route element={<ProtectedRoute isAllowed={!!user} />}>
-          <Route
-            element={
-              <ProtectedRoute
-                isAllowed={!!user && user.role.includes("admin")}
-                redirectTo="/myprofile"
-              />
-            }
-          >
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/employees" element={<Employees />} />
-            <Route path="/employee/:id" element={<EmployeeDetail />} />
-            <Route path="/addemployee" element={<AddEmployee />} />
-            <Route path="/editemployee/:id" element={<EditEmployee />} />
-            <ContextWrapper>
-            <Route path="/calendar" element={<Calendar />} />
-            </ContextWrapper>
-            <Route path="/organization" element={<Organization />} />
-            <Route path="/notifications" element={<Notifications />} />
+    <div className="flex bg-slate-100  ">
+      <div
+        onClick={fn}
+        className=" ssm:fixed sm:hidden  ssm:left-4 ssm:top-1 z-10 "
+      >
+        {/* <button onClick={e => setOpen(true)}>aca</button> */}
+        <Hamburger
+          toggled={isOpen}
+          toggle={() => setOpen(!isOpen)}
+          color="#0369a1"
+        />
+      </div>
+      <div
+        ref={refSideBar}
+        className=" ssm:m-0 lg:inline-block sm:translate-x-0 ssm:-translate-x-full"
+      >
+        <div>
+          {pathname === "/" ||
+          pathname === "/home" ||
+          pathname === "/home/login" ||
+          pathname === "/home/login/register" ? (
+            ""
+          ) : (
+            <div className="bg-white">
+              <SideBar isOpen={isOpen} />
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="flex-1 px-16">
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/home/login" element={<Login />} />
+          <Route path="/home/login/register" element={<Register />} />
+          <Route path="/home/login/register/payment" element={<Payment />} />
+          <Route element={<ProtectedRoute isAllowed={!!user} />}>
+            <Route
+              element={
+                <ProtectedRoute
+                  isAllowed={!!user && user.role.includes("admin")}
+                  redirectTo="/myprofile"
+                />
+              }
+            >
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/employees" element={<Employees />} />
+              <Route path="/employee/:id" element={<EmployeeDetail />} />
+              <Route path="/addemployee" element={<AddEmployee />} />
+              <Route path="/editemployee/:id" element={<EditEmployee />} />
+              <Route path="/organization" element={<Organization />} />
+              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/notifications" element={<Notifications />} />
+            </Route>
+            <Route path="/myprofile/:id" element={<MyProfile />} />
+            {/* <Route path={`/myprofile/${user.id}`} element={<EditMyProfile />} /> */}
           </Route>
-          <Route path="/myprofile/:id" element={<MyProfile />} />
-          {/* <Route path={`/myprofile/${user.id}`} element={<EditMyProfile />} /> */}
-        </Route>
-        <Route path="*" element={<h1>Ruta equivocada</h1>} />
-      </Routes>
+          <Route path="*" element={<h1>Ruta equivocada</h1>} />
+        </Routes>
+      </div>
     </div>
   );
 }

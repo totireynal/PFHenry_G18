@@ -5,3 +5,5 @@
   <path fill="#EA4335" d="M20 16V6h-4v14z"></path>
   <path fill="none" d="M0 0h36v36H0z"></path>
 </svg>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />

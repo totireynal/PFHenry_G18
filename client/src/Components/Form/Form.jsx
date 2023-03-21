@@ -14,7 +14,6 @@ const Form = ({
   answer
 }) => {
 
-  console.log(answer, 'Formmmm');
   return (
     <form
       onSubmit={handleSubmit}

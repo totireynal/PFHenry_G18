@@ -20,6 +20,8 @@ const EmployeeDetail = () => {
   let refDivModal = useRef();
   let refSuccessful = useRef();
 
+  // console.log(refDivModal);
+
   const modalActive = () => {
     refModal.current.style.display = "flex";
     refDivModal.current.style.transform = "scale-1";
@@ -52,7 +54,7 @@ const EmployeeDetail = () => {
   } = employeeDetail;
 
 return (
-    <div className="grid grid-cols-6 grid-rows-1 h-screen">
+    <div className="w-full pt-16">
       <div
         onClick={() => {
           refModal.current.style = "none";
@@ -89,8 +91,7 @@ return (
           </div>
         </div>
       </div>
-      <SideBar />
-      <div className="col-span-5 p-8">
+      <div className="w-full">
         <div className="flex flex-row gap-6 items-center justify-center">
           {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
           <Link to='/employees'>

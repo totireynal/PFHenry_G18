@@ -27,7 +27,7 @@ const SearchBar = () => {
       className="flex relative justify-center items-center rounded-md pl-2 border border-sky-700"
     >
       <input
-        className="border-none outline-none text-base"
+        className="border-none outline-none text-base bg-slate-100"
         value={input}
         onChange={onChange}
         name="game"
