@@ -36,8 +36,8 @@ const Employees = () => {
     }
 
   return (
-      <div className="w-full h-screen overflow-auto ">
-        <div className="flex flex-row items-center justify-center h-24 gap-2.5">
+      <div className=" relative w-full h-screen overflow-auto xl:pl-72 ssm:pl-36">
+        <div className="flex flex-wrap sticky top-0 z-10 bg-slate-100 mb-3 items-center justify-center h-24 gap-2.5">
           <SearchBar />
           <Link to={"/addemployee/"}>
             <button className="bg-sky-700 text-white rounded border border-sky-700 overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600">
@@ -45,9 +45,9 @@ const Employees = () => {
             </button>
           </Link>
         </div>
-        <div className="flex flex-row justify-center items-center gap-8 mb-8">
+        <div className="flex flex-wrap h-auto justify-center items-center gap-8 mb-8">
           <button
-            className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
+            className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-auto justify-center items-center rounded text-white border  "
             onClick={handleRefresh}
           >
             Refresh
@@ -57,7 +57,7 @@ const Employees = () => {
           <Position />
           <Rol />
         </div>
-        <div className="block mr-10 overflow-auto  pt-3 ">
+        <div className="flex flex-col gap-2 mr-10   pt-3 ">
           {users?.map((user, i) => {
             return (
               <Link key={i} to={`/employee/${user?.id}`}>

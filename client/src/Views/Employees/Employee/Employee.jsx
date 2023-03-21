@@ -1,6 +1,6 @@
 const Employee = (props) => {
   return (
-    <div className="  bg-white rounded-xl h-20 mb-2 border hover:shadow-xl hover:border-2 hover:-translate-y-1 transition duration-100 overflow-hidden relative ">
+    <div className="  bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:-translate-y-1 transition duration-100 overflow-hidden relative">
       <span className="text-slate-300 absolute left-36 bottom-2 text-xs text-start font-medium ">
         {props.role}
       </span>

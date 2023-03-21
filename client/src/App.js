@@ -62,7 +62,7 @@ function App() {
     <div className="flex bg-slate-100  ">
       <div
         onClick={fn}
-        className=" ssm:fixed sm:hidden  ssm:left-4 ssm:top-1 z-10 "
+        className=" ssm:fixed sm:hidden  ssm:left-4 ssm:top-1 z-20 "
       >
         {/* <button onClick={e => setOpen(true)}>aca</button> */}
         <Hamburger
@@ -73,7 +73,7 @@ function App() {
       </div>
       <div
         ref={refSideBar}
-        className=" ssm:m-0 lg:inline-block sm:translate-x-0 ssm:-translate-x-full"
+        className=" ssm:m-0 z-10 fixed transition-all duration-200 sm:translate-x-0 ssm:-translate-x-full"
       >
         <div>
           {pathname === "/" ||
@@ -88,7 +88,7 @@ function App() {
           )}
         </div>
       </div>
-      <div className="flex-1 px-16">
+      {/* <div className="flex-1 pl-16"> */}
         <Routes>
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
@@ -118,7 +118,7 @@ function App() {
           </Route>
           <Route path="*" element={<h1>Ruta equivocada</h1>} />
         </Routes>
-      </div>
+      {/* </div> */}
     </div>
   );
 }

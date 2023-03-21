@@ -8,7 +8,7 @@ const Calendar = () => {
     //   <div className="col-span-3 ">
     //     {/* <SideBar /> */}
     //   </div>
-      <div className="w-full ">
+      <div className="w-full h-screen">
         <ContextWrapper>
           <CalendarAPI />
         </ContextWrapper>

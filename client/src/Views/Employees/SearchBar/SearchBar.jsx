@@ -24,7 +24,7 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex relative justify-center items-center rounded-md pl-2 border border-sky-700"
+      className="flex relative pl-2 justify-center items-center rounded-md border border-sky-700"
     >
       <input
         className="border-none outline-none text-base bg-slate-100"

@@ -2,9 +2,9 @@ import SideBar from "../../Components/SideBar/SideBar";
 
 const Notifications = () => {
   return (
-      <div className="w-full p-8">
-        <span>View Notifications</span>
-      </div>
+    <div className=" w-full h-screen p-8 ml-72">
+      <span>View Notifications</span>
+    </div>
   );
 };
 
