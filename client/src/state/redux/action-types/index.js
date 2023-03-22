@@ -18,3 +18,4 @@ export const GET_ROLES = "GET_ROLES";
 export const GET_ROL_EMPLOYEES = "GET_ROL_EMPLOYEES";
 export const GET_FILTER = 'GET_FILTER'
 export const CONTENT_FILTERS = 'CONTENT_FILTERS'
+export const CLEAN_URL = 'CLEAN_URL'

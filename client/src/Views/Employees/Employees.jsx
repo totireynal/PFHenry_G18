@@ -5,7 +5,14 @@ import Employee from "./Employee/Employee";
 import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
-import { getEmployees, getFilter } from "../../state/redux/actions/actions";
+import {
+  cleanUrl,
+  getAreas,
+  getEmployees,
+  getFilter,
+  getPositions,
+  getRoles,
+} from "../../state/redux/actions/actions";
 import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
@@ -14,6 +21,15 @@ import Rol from "../../Components/Rol/Rol";
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
   const dispatch = useDispatch();
+  const [selectedOption, setSelectedOption] = useState("default");
+
+  const handleReset = () => {
+    setSelectedOption("default");
+  };
+
+  const handleSelectChange = (value) => {
+    setSelectedOption(value);
+  };
 
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
@@ -26,7 +42,12 @@ const Employees = () => {
   }, [arrContentFilters]);
 
   const handleRefresh = (event) => {
+    dispatch(cleanUrl());
     dispatch(getEmployees());
+    dispatch(getAreas());
+    dispatch(getRoles());
+    dispatch(getPositions());
+    handleReset();
   };
 
   return (
@@ -46,10 +67,22 @@ const Employees = () => {
         >
           Refresh
         </button>
-        <Sort />
-        <Area />
-        <Position />
-        <Rol />
+        <Sort
+          selectedOption={selectedOption}
+          handleSelectChange={handleSelectChange}
+        />
+        <Area
+          selectedOption={selectedOption}
+          handleSelectChange={handleSelectChange}
+        />
+        <Position
+          selectedOption={selectedOption}
+          handleSelectChange={handleSelectChange}
+        />
+        <Rol
+          selectedOption={selectedOption}
+          handleSelectChange={handleSelectChange}
+        />
       </div>
       <div className="flex flex-col gap-2 mr-10 pt-3 ">
         {users &&

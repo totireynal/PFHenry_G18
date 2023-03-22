@@ -17,6 +17,7 @@ import {
   CURRENT_EMPLOYEE,
   GET_FILTER,
   CONTENT_FILTERS,
+  CLEAN_URL,
 } from "../action-types/index";
 
 const initialState = {
@@ -78,50 +79,56 @@ function rootReducer(state = initialState, action) {
     //     allEmployees: action.payload,
     //   }
     case GET_AREAS:
-    return {
+      return {
         ...state,
         areas: action.payload,
-      }
+      };
     case GET_POSITIONS:
       return {
-            ...state,
-            positions: action.payload,
-          }
-    case GET_POSITIONS_EMPLOYEES:
-      return {
         ...state,
-        allEmployees: action.payload,
-      }
+        positions: action.payload,
+      };
+    // case GET_POSITIONS_EMPLOYEES:
+    //   return {
+    //     ...state,
+    //     allEmployees: action.payload,
+    //   };
     case GET_ROLES:
-      return{
-        ...state,
-        roles: action.payload
-      }
-    case GET_ROL_EMPLOYEES:
       return {
         ...state,
-        allEmployees: action.payload
-      }
-    case SORT_EMPLOYEE_NAME:
-      return {
-        ...state,
-        allEmployees: action.payload
-      }
-    case CURRENT_EMPLOYEE:
-      return {
-        ...state,
-        currentEmployee: action.payload
-      }
+        roles: action.payload,
+      };
+    // case GET_ROL_EMPLOYEES:
+    //   return {
+    //     ...state,
+    //     allEmployees: action.payload,
+    //   };
+    // case SORT_EMPLOYEE_NAME:
+    //   return {
+    //     ...state,
+    //     allEmployees: action.payload,
+    //   };
+    // case CURRENT_EMPLOYEE:
+    //   return {
+    //     ...state,
+    //     currentEmployee: action.payload,
+    //   };
     case GET_FILTER:
       return {
         ...state,
-        allEmployees: action.payload
-      }
+        // allEmployees: action.payload,
+      };
     case CONTENT_FILTERS:
       return {
         ...state,
-        arrContentFilters: { ...state.arrContentFilters, ...action.payload }
+        arrContentFilters: { ...state.arrContentFilters, ...action.payload },
+      };
+    case CLEAN_URL:
+      return {
+        ...state,
+        arrContentFilters: {}
       }
+
     default:
       return state;
   }

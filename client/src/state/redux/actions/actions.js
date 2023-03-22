@@ -19,6 +19,7 @@ import {
   CURRENT_EMPLOYEE,
   GET_FILTER,
   CONTENT_FILTERS,
+  CLEAN_URL,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -60,13 +61,13 @@ export const createEmployee = (info, showAnswer) => {
   };
 };
 
-export const getEmployees = (name) => {
+export const getEmployees = (filters) => {
   return function (dispatch) {
     let url = "http://localhost:3001/users";
 
-    if (name) {
-      url += `?name=${name}`;
-    }
+    // if (name) {
+    //   url += `?name=${name}`;
+    // }
 
     // const all = [role, area, position, sort];
     // console.log(all);
@@ -75,13 +76,13 @@ export const getEmployees = (name) => {
     // // console.log(allDefined);
     // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
 
-
-    return axios.get(url).then(
+    return axios.get(addUrlQueries(filters, url)).then(
       (response) => {
+        // console.log(response);
         dispatch({ type: GET_EMPLOYEES, payload: response.data });
       },
       (error) => {
-        dispatch({ type: GET_EMPLOYEES, payload: error.response.data });
+        console.log(error.response.data);
       }
     );
   };
@@ -93,14 +94,12 @@ export const getFilter = (filters) => {
       let url = "http://localhost:3001/users";
 
       // console.log(encontrandoSimbolo);
-      console.log(filters, 'segundo');
       
     
   
       const response = await axios(addUrlQueries(filters, url));
       const result = response.data
   
-      console.log(url, 'urllllll');
       // console.log(result);
       return dispatch({
         type: GET_FILTER,
@@ -108,7 +107,7 @@ export const getFilter = (filters) => {
       });
       
     } catch (error) {
-      console.log(error.response.data);
+      // console.log(error.response.data);
     }
 
   };
@@ -178,12 +177,10 @@ export const getPositions=(filters)=>{
       let url = "http://localhost:3001/positions";
 
       // console.log(encontrandoSimbolo);
-      console.log(filters, "segundo");
 
       const response = await axios(addUrlQueries(filters, url));
       const result = response.data;
 
-      console.log(url, "urllllll");
       // console.log(result);
       return dispatch({
         type: GET_POSITIONS,
@@ -214,7 +211,6 @@ export const getAreas = (filters) => {
         let url = "http://localhost:3001/areas";
 
         // console.log(encontrandoSimbolo);
-        console.log(filters, "segundo");
 
 
 
@@ -255,16 +251,28 @@ export const getAreas = (filters) => {
 // }
 
 
-export const getRoles=()=>{
-  return async function(dispatch){
-    try {
-      const response = await axios.get("http://localhost:3001/roles")
-      const result = response.data;
-      return dispatch({type: GET_ROLES, payload: result})
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
+export const getRoles=(filters)=>{
+    return async function (dispatch) {
+      try {
+        let url = "http://localhost:3001/roles";
+
+        // console.log(encontrandoSimbolo);
+
+
+
+        const response = await axios(addUrlQueries(filters, url));
+        const result = response.data;
+
+        // console.log(url, "urllllll");
+        // console.log(result);
+        return dispatch({
+          type: GET_ROLES,
+          payload: result,
+        });
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
 }
 
 // export const getRolEmployees = (role) => {
@@ -305,3 +313,10 @@ export const getCurrentEmployee = (user) => {
     payload:user
   }
 }
+
+export const cleanUrl = () => {
+  return {
+    type: CLEAN_URL,
+  }
+}
+
