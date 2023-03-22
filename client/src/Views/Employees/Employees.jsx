@@ -21,10 +21,20 @@ import Rol from "../../Components/Rol/Rol";
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
   const dispatch = useDispatch();
-  const [selectedOption, setSelectedOption] = useState("default");
+  const [selectedOption, setSelectedOption] = useState({
+    area: "default",
+    sort: "default",
+    position: "default",
+    role: "default",
+  });
 
   const handleReset = () => {
-    setSelectedOption("default");
+    setSelectedOption({
+      area: "default",
+      sort: "default",
+      position: "default",
+      role: "default",
+    });
   };
 
   const handleSelectChange = (value) => {

@@ -19,14 +19,14 @@ const Rol = ({ selectedOption, handleSelectChange }) => {
   const handleChange = (event) => {
     const role = event.target.value;
     dispatch(contentFilters({ role: role }));
-    handleSelectChange(role)
+    handleSelectChange({ ...selectedOption, role: role });
   };
 
   return (
     <div className="flex">
       <h3 className="flex justify-center items-center mr-2">Rols: </h3>
       <select
-        value={selectedOption}
+        value={selectedOption.role}
         className="border-2 border-gray-200"
         name=""
         onChange={handleChange}

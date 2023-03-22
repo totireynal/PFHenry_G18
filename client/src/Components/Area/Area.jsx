@@ -18,14 +18,14 @@ const Area = ({ selectedOption, handleSelectChange }) => {
   const handleChange = (event) => {
     const area = event.target.value;
     dispatch(contentFilters({ area: area }));
-    handleSelectChange(area);
+    handleSelectChange({...selectedOption, area: area});
   };
 
   return (
     <div className="flex justify-center items-center mr-2">
       <h3>Area: </h3>
       <select
-        value={selectedOption}
+        value={selectedOption.area}
         className="border-2 border-gray-200 ml-2"
         name=""
         onChange={handleChange}

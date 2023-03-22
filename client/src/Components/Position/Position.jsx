@@ -18,14 +18,14 @@ const Position = ({ selectedOption, handleSelectChange }) => {
   const handleChange = (event) => {
     const position = event.target.value;
     dispatch(contentFilters({ position: position }));
-    handleSelectChange(position)
+    handleSelectChange({ ...selectedOption, position: position });
   };
 
   return (
     <div className="flex justify-center items-center mr-2">
       <h3>Position: </h3>
       <select
-        value={selectedOption}
+        value={selectedOption.position}
         className="border-2 border-gray-200 ml-2"
         name=""
         onChange={handleChange}
