@@ -1,4 +1,5 @@
 import axios from "axios";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -16,6 +17,8 @@ import {
   GET_ROL_EMPLOYEES,
   SORT_EMPLOYEE_NAME,
   CURRENT_EMPLOYEE,
+  GET_FILTER,
+  CONTENT_FILTERS,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -65,6 +68,14 @@ export const getEmployees = (name) => {
       url += `?name=${name}`;
     }
 
+    // const all = [role, area, position, sort];
+    // console.log(all);
+
+    // const allDefined = all.flatMap(el => el === undefined ? [] : el)
+    // // console.log(allDefined);
+    // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
+
+
     return axios.get(url).then(
       (response) => {
         dispatch({ type: GET_EMPLOYEES, payload: response.data });
@@ -75,6 +86,40 @@ export const getEmployees = (name) => {
     );
   };
 };
+
+export const getFilter = (filters) => {
+  return async function (dispatch) {
+    try {
+      let url = "http://localhost:3001/users";
+
+      // console.log(encontrandoSimbolo);
+      console.log(filters, 'segundo');
+      
+    
+  
+      const response = await axios(addUrlQueries(filters, url));
+      const result = response.data
+  
+      console.log(url, 'urllllll');
+      // console.log(result);
+      return dispatch({
+        type: GET_FILTER,
+        payload: result,
+      });
+      
+    } catch (error) {
+      console.log(error.response.data);
+    }
+
+  };
+}
+
+export const contentFilters = (filter) => {
+  return {
+    type: CONTENT_FILTERS,
+    payload: filter
+  }
+}
 
 export const updateEmployee = (id, user, showAnswer) => {
   return async (dispatch) => {
@@ -127,54 +172,87 @@ export const deleteEmployee = (id, showAnswer) => {
 
 
 
-export const getPositions=()=>{
-  return async function(dispatch){
+export const getPositions=(filters)=>{
+  return async function (dispatch) {
     try {
-      const response = await axios.get("http://localhost:3001/positions")
+      let url = "http://localhost:3001/positions";
+
+      // console.log(encontrandoSimbolo);
+      console.log(filters, "segundo");
+
+      const response = await axios(addUrlQueries(filters, url));
       const result = response.data;
-      return dispatch({type: GET_POSITIONS, payload: result})
+
+      console.log(url, "urllllll");
+      // console.log(result);
+      return dispatch({
+        type: GET_POSITIONS,
+        payload: result,
+      });
     } catch (error) {
-      console.log(error.message)
+      console.log(error.response.data);
     }
-  }
+  };
 }
 
-export const getPositionsEmployees = (position) => {
-  return async function(dispatch){
-    try {
-      const response = await axios.get(`http://localhost:3001/users?position=${position}`)
-      const result = response.data;
-      return dispatch({type: GET_POSITIONS_EMPLOYEES, payload: result})
-    } catch(error){
-      console.log(error.message)
-    }
-  }
-}
+// export const getPositionsEmployees = (position) => {
+//   return async function(dispatch){
+//     try {
+//       const response = await axios.get(`http://localhost:3001/users?position=${position}`)
+//       const result = response.data;
+//       return dispatch({type: GET_POSITIONS_EMPLOYEES, payload: result})
+//     } catch(error){
+//       console.log(error.message)
+//     }
+//   }
+// }
 
 
-export const getAreas=()=>{
-  return async function(dispatch){
-    try {
-      const response = await axios.get("http://localhost:3001/areas")
-      const result = response.data;
-      return dispatch({type: GET_AREAS, payload: result})
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
+export const getAreas = (filters) => {
+    return async function (dispatch) {
+      try {
+        let url = "http://localhost:3001/areas";
+
+        // console.log(encontrandoSimbolo);
+        console.log(filters, "segundo");
+
+
+
+        const response = await axios(addUrlQueries(filters, url));
+        const result = response.data;
+
+        // console.log(url, "urllllll");
+        // console.log(result);
+        return dispatch({
+          type: GET_AREAS,
+          payload: result,
+        });
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    };
+  // return async function(dispatch){
+  //   try {
+  //     const response = await axios.get("http://localhost:3001/areas")
+  //     const result = response.data;
+  //     return dispatch({type: GET_AREAS, payload: result})
+  //   } catch (error) {
+  //     console.log(error.message)
+  //   }
+  // }
 }
 
-export const getAreasEmployees = (area) => {
-  return async function(dispatch){
-    try {
-      const response = await axios.get(`http://localhost:3001/users?area=${area}`)
-      const result = response.data;
-      return dispatch({type: GET_AREAS_EMPLOYEES, payload: result})
-    } catch(error){
-      console.log(error.message)
-    }
-  }
-}
+// export const getAreasEmployees = (area) => {
+//   return async function(dispatch){
+//     try {
+//       const response = await axios.get(`http://localhost:3001/users?area=${area}`)
+//       const result = response.data;
+//       return dispatch({type: GET_AREAS_EMPLOYEES, payload: result})
+//     } catch(error){
+//       console.log(error.message)
+//     }
+//   }
+// }
 
 
 export const getRoles=()=>{
@@ -189,35 +267,35 @@ export const getRoles=()=>{
   }
 }
 
-export const getRolEmployees = (role) => {
-  return async function(dispatch){
-    try {
-      const response = await axios.get(`http://localhost:3001/users?role=${role}`)
-      const result = response.data;
-      return dispatch({type: GET_ROL_EMPLOYEES, payload: result})
-    } catch(error){
-      console.log(error.message)
-    }
-  }
-}
+// export const getRolEmployees = (role) => {
+//   return async function(dispatch){
+//     try {
+//       const response = await axios.get(`http://localhost:3001/users?role=${role}`)
+//       const result = response.data;
+//       return dispatch({type: GET_ROL_EMPLOYEES, payload: result})
+//     } catch(error){
+//       console.log(error.message)
+//     }
+//   }
+// }
 
 
 
-export const sortEmployeeName = (typeSort) => {
-  return async function (dispatch) {
-    try {
-      console.log(typeSort);
-      const response = await axios.get(`http://localhost:3001/users?sort=${typeSort}`)
-      const result = response.data;
+// export const sortEmployeeName = (typeSort) => {
+//   return async function (dispatch) {
+//     try {
+//       console.log(typeSort);
+//       const response = await axios.get(`http://localhost:3001/users?sort=${typeSort}`)
+//       const result = response.data;
 
-      return dispatch({ type: SORT_EMPLOYEE_NAME , payload: result})
+//       return dispatch({ type: SORT_EMPLOYEE_NAME , payload: result})
 
-    } catch (error) {
-      const err = error.response.data.error
-      alert(err);
-    }
-  }
-}
+//     } catch (error) {
+//       const err = error.response.data.error
+//       alert(err);
+//     }
+//   }
+// }
 
 
 

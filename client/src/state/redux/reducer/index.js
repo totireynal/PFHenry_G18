@@ -15,6 +15,8 @@ import {
   GET_ROL_EMPLOYEES,
   SORT_EMPLOYEE_NAME,
   CURRENT_EMPLOYEE,
+  GET_FILTER,
+  CONTENT_FILTERS,
 } from "../action-types/index";
 
 const initialState = {
@@ -23,10 +25,11 @@ const initialState = {
   employeeCreated: [],
   allEmployees: [],
   employeeDetail: {},
-  positions:[],
+  positions: [],
   areas: [],
-  roles:[],
+  roles: [],
   currentEmployee: {},
+  arrContentFilters: {}
 };
 
 function rootReducer(state = initialState, action) {
@@ -69,11 +72,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-    case GET_AREAS_EMPLOYEES:
-      return {
-        ...state,
-        allEmployees: action.payload,
-      }
+    // case GET_AREAS_EMPLOYEES:
+    //   return {
+    //     ...state,
+    //     allEmployees: action.payload,
+    //   }
     case GET_AREAS:
     return {
         ...state,
@@ -108,6 +111,16 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         currentEmployee: action.payload
+      }
+    case GET_FILTER:
+      return {
+        ...state,
+        allEmployees: action.payload
+      }
+    case CONTENT_FILTERS:
+      return {
+        ...state,
+        arrContentFilters: { ...state.arrContentFilters, ...action.payload }
       }
     default:
       return state;

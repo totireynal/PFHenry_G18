@@ -18,7 +18,6 @@ const SearchBar = () => {
     } else {
       alert("Must write something to search");
     }
-    setInput("");
   }
 
   return (
