@@ -23,9 +23,9 @@ const initialState = {
   employeeCreated: [],
   allEmployees: [],
   employeeDetail: {},
-  positions:[],
+  positions: [],
   areas: [],
-  roles:[],
+  roles: [],
   currentEmployee: {},
 };
 
@@ -73,42 +73,42 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allEmployees: action.payload,
-      }
+      };
     case GET_AREAS:
-    return {
+      return {
         ...state,
         areas: action.payload,
-      }
+      };
     case GET_POSITIONS:
       return {
-            ...state,
-            positions: action.payload,
-          }
+        ...state,
+        positions: action.payload,
+      };
     case GET_POSITIONS_EMPLOYEES:
       return {
         ...state,
         allEmployees: action.payload,
-      }
+      };
     case GET_ROLES:
-      return{
+      return {
         ...state,
-        roles: action.payload
-      }
+        roles: action.payload,
+      };
     case GET_ROL_EMPLOYEES:
       return {
         ...state,
-        allEmployees: action.payload
-      }
+        allEmployees: action.payload,
+      };
     case SORT_EMPLOYEE_NAME:
       return {
         ...state,
-        allEmployees: action.payload
-      }
+        allEmployees: action.payload,
+      };
     case CURRENT_EMPLOYEE:
       return {
         ...state,
-        currentEmployee: action.payload
-      }
+        currentEmployee: action.payload,
+      };
     default:
       return state;
   }

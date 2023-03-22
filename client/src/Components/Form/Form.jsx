@@ -1,5 +1,6 @@
 import InputForm from "../InputForm";
 import SelectForm from "../SelectForm/SelectForm";
+import UploadImage from "../Upload/UploadImage";
 
 const Form = ({
   handleInput,
@@ -11,9 +12,9 @@ const Form = ({
   errorButton,
   submited,
   button,
-  answer
+  answer,
+  handleChangeImage,
 }) => {
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -178,19 +179,7 @@ const Form = ({
               { value: "Admin", html: "Admin", disable: true },
             ]}
           />
-
-          {/* <input type="file" accept="image/png, image/jpeg" /> */}
-          <InputForm
-            label="Image"
-            placeholder="Image"
-            type="text"
-            name="image"
-            touched={touched.image}
-            value={users.image}
-            handler={handleInput}
-            id="image"
-            error={errors.image}
-          />
+          <UploadImage handleChangeImage={handleChangeImage} />
         </div>
       </div>
       {!submited ? (
@@ -206,7 +195,7 @@ const Form = ({
           {button}
         </button>
       ) : (
-          <p className="px-20 py-4 bg-green-400 text-white rounded">{answer}</p>
+        <p className="px-20 py-4 bg-green-400 text-white rounded">{answer}</p>
       )}
       {/* <p className="px-20 py-4 bg-green-400 rounded">hola que ase</p> */}
       {/* {submited && <p className="text-green-800">{answer}</p>} */}

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch } from "react-redux";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createEmployee } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
 import validate from "../../../utils/functions/validate";
@@ -10,8 +10,6 @@ import { useAnswer } from "../../../utils/hooks/answer";
 import { Link } from "react-router-dom";
 
 const AddEmployee = () => {
-  // const { employeeCreated } = useSelector((state) => state);
-
   const dispatch = useDispatch();
 
   const [employee, setEmployee] = useState({
@@ -34,7 +32,8 @@ const AddEmployee = () => {
   const [errorButton, setErrorButton] = useState(true);
 
   const { errors, setAllErrors } = useErrors();
-  const {answer, showAnswer} = useAnswer()
+
+  const { answer, showAnswer } = useAnswer();
 
   const [touched, setTouched] = useState({});
 
@@ -64,6 +63,13 @@ const AddEmployee = () => {
     } else {
       setErrorButton(true);
     }
+  };
+
+  const handleChangeImage = (url) => {
+    setEmployee({
+      ...employee,
+      image: url,
+    });
   };
 
   const handleSelect = (e) => {
@@ -118,7 +124,7 @@ const AddEmployee = () => {
       dateOfAdmission: "",
     });
   };
-// console.log(errors);
+  // console.log(errors);
   return (
     <div className="grid grid-cols-6 grid-rows-1 h-screen">
       <SideBar />
@@ -128,12 +134,13 @@ const AddEmployee = () => {
             <span className="text-4xl">Add Employee</span>
           </div>
 
-{/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
-          <Link to='/employees'>
-            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
-            >BACK</button>
+          {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
+          <Link to="/employees">
+            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  ">
+              BACK
+            </button>
           </Link>
-{/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
+          {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 
           <div className="flex gap-16">
             <div>
@@ -148,6 +155,7 @@ const AddEmployee = () => {
                 submited={submited}
                 button="Add Employee"
                 answer={answer}
+                handleChangeImage={handleChangeImage}
               />
             </div>
           </div>
