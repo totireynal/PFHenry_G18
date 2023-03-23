@@ -21,6 +21,7 @@ import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 import { useDispatch } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
+import Calendar2 from "./Views/Calendar2/Calendar2";
 
 
 function App() {

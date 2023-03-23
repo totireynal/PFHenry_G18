@@ -1,11 +1,17 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getEmployees } from "../../../state/redux/actions/actions";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { contentFilters, getEmployees } from "../../../state/redux/actions/actions";
 
 const SearchBar = () => {
   const [input, setInput] = useState("");
   let dispatch = useDispatch();
+  const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
+
+    useEffect(() => {
+      dispatch(getEmployees(arrContentFilters));
+    }, [arrContentFilters, dispatch]);
+  
   function onChange(e) {
     setInput(e.target.value);
   }
@@ -14,11 +20,12 @@ const SearchBar = () => {
     e.preventDefault();
 
     if (input.trim().length > 0) {
-      dispatch(getEmployees(input));
+      // dispatch(getEmployees(input));
+      dispatch(contentFilters({ name: input }));
+      setInput('')
     } else {
       alert("Must write something to search");
     }
-    setInput("");
   }
 
   return (
