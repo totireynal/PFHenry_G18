@@ -1,9 +1,9 @@
-import SideBar from "../../Components/SideBar/SideBar";
+import MailForm from "../../Views/Notifications/Mail/MailForm";
 
 const Notifications = () => {
   return (
     <div className=" w-full h-screen p-8 ml-72">
-      <span>View Notifications</span>
+      <MailForm />
     </div>
   );
 };

@@ -17,9 +17,6 @@ import {
   GET_ROL_EMPLOYEES,
   SORT_EMPLOYEE_NAME,
   CURRENT_EMPLOYEE,
-  GET_FILTER,
-  CONTENT_FILTERS,
-  CLEAN_URL,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -48,13 +45,13 @@ export const createEmployee = (info, showAnswer) => {
   return function (dispatch) {
     return axios.post("http://localhost:3001/users", info).then(
       (response) => {
-        console.log(response.data.message, '........');
-        showAnswer(response.data.message)
+        console.log(response.data.message, "........");
+        showAnswer(response.data.message);
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },
       (error) => {
-        showAnswer(error.response.data.error)
-        console.log(error.response.data)
+        showAnswer(error.response.data.error);
+        console.log(error.response.data);
         dispatch({ type: CREATE_EMPLOYEE, payload: error.response.data });
       }
     );
@@ -128,14 +125,14 @@ export const updateEmployee = (id, user, showAnswer) => {
         user
       );
       const result = response.data;
-      console.log(result, 'updateeee');
-      showAnswer(response.data)
+      console.log(result, "updateeee");
+      showAnswer(response.data);
 
       return dispatch({
         type: UPDATE_EMPLOYEE,
       });
     } catch (error) {
-      showAnswer(error.response.data.error)
+      showAnswer(error.response.data.error);
     }
   };
 };
@@ -162,7 +159,7 @@ export const deleteEmployee = (id, showAnswer) => {
 
       return dispatch({
         type: DELETE_EMPLOYEE,
-      })
+      });
     } catch (error) {
       showAnswer(error);
     }

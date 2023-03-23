@@ -17,9 +17,13 @@ import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
+import Area from "../../Components/Area/Area";
+import Rol from "../../Components/Rol/Rol";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
+  console.log(users);
+
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState({
     area: "default",

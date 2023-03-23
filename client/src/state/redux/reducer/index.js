@@ -80,8 +80,10 @@ function rootReducer(state = initialState, action) {
     //   }
     case GET_AREAS:
       return {
+      return {
         ...state,
         areas: action.payload,
+      };
       };
     case GET_POSITIONS:
       return {
