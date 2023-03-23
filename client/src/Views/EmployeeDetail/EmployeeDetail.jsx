@@ -114,6 +114,10 @@ const EmployeeDetail = () => {
             <img className="object-cover h-36" src={image} alt="" />
             <div className="flex flex-col items-center justify-center w-full">
               <div className="flex items-end justify-center h-1/2  w-full text-2xl">
+                <img
+                  src="https://res.cloudinary.com/dtqhqhc9e/image/upload/v1679583901/Images/xzbq1dsuewfxlhzqnrmd.jpg"
+                  alt="profilepic"
+                />
                 <p>{role}</p>
               </div>
               <div className="flex items-start justify-center h-1/2  w-full gap-1 font-bold text-3xl ">
