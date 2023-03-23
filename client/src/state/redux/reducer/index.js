@@ -30,7 +30,7 @@ const initialState = {
   areas: [],
   roles: [],
   currentEmployee: {},
-  arrContentFilters: {}
+  arrContentFilters: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -80,10 +80,8 @@ function rootReducer(state = initialState, action) {
     //   }
     case GET_AREAS:
       return {
-      return {
         ...state,
         areas: action.payload,
-      };
       };
     case GET_POSITIONS:
       return {
@@ -128,8 +126,8 @@ function rootReducer(state = initialState, action) {
     case CLEAN_URL:
       return {
         ...state,
-        arrContentFilters: {}
-      }
+        arrContentFilters: {},
+      };
 
     default:
       return state;

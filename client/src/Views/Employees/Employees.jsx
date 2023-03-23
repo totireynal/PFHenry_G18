@@ -107,7 +107,7 @@ const Employees = () => {
                 image={user?.User?.image}
                 area={user?.Area?.area}
                 position={user?.Position?.position}
-                role={user?.User.role}
+                role={user?.User?.role}
               />
             </Link>
           );
