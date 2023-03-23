@@ -12,6 +12,7 @@ import Rol from "../../Components/Rol/Rol";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
+  console.log(users);
 
   const dispatch = useDispatch();
 
@@ -50,16 +51,15 @@ const Employees = () => {
           return (
             <Link key={i} to={`/employee/${user?.id}`}>
               <Employee
-                id={user?.id}
-                name={user?.name}
-                lastName={user?.lastName}
-                email={user?.email}
-                image={user?.image}
-                area={user?.area}
-                position={user?.position}
-                role={user?.role}
+              // id={user?.id}
+              // name={user?.user.name}
+              // lastName={user?.lastName}
+              // email={user?.email}
+              // image={user?.image}
+              // area={user?.area}
+              // position={user?.position}
+              // role={user?.role}
               />
-              {console.log(user.email)}
             </Link>
           );
         })}
