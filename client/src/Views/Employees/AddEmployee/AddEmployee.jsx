@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import SideBar from "../../../Components/SideBar/SideBar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { createEmployee } from "../../../state/redux/actions/actions";
+import { createEmployee, getAreasNum, getPositionsNum } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
 import validate from "../../../utils/functions/validate";
 import { useErrors } from "../../../utils/hooks/errors";
@@ -11,6 +11,14 @@ import { Link } from "react-router-dom";
 
 const AddEmployee = () => {
   const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(getPositionsNum());
+      dispatch(getAreasNum());
+    }, [dispatch]);
+
+    const positionsNum = useSelector((state) => state.positionsNum);
+    const areasNum = useSelector((state) => state.areasNum);
 
   const [employee, setEmployee] = useState({
     name: "",
@@ -22,14 +30,14 @@ const AddEmployee = () => {
     address: "",
     role: "User",
     image: "",
-    position: "",
-    area: "",
+    PositionId: 0,
+    AreaId: 0,
     cuil: "",
     cbu: "",
     dateOfAdmission: "",
   });
 
-  const [errorButton, setErrorButton] = useState(true);
+  const [errorButton, setErrorButton] = useState(false);
 
   const { errors, setAllErrors } = useErrors();
 
@@ -58,14 +66,14 @@ const AddEmployee = () => {
 
     setTouched({
       ...touched,
-      [event.target.name]: true,
+      [event.target.name]: false,
     });
 
     const allErrors = Object.keys(errors).length;
     if (!allErrors) {
       setErrorButton(false);
     } else {
-      setErrorButton(true);
+      setErrorButton(false);
     }
   };
 
@@ -84,16 +92,29 @@ const AddEmployee = () => {
         [name]: value,
       });
     }
+    if (name === "AreaId") {
+      console.log(name, value, 'daleeeee');
+      setEmployee({
+        ...employee,
+        [name]: Number(value),
+      });
+    }
+    if (name === "PositionId") {
+      setEmployee({
+        ...employee,
+        [name]: Number(value),
+      });
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmited(true);
+    setSubmited(false);
     dispatch(createEmployee(employee, showAnswer));
     setTimeout(() => {
       setSubmited(false);
     }, 3000);
-    setErrorButton(true);
+    setErrorButton(false);
     setEmployee({
       name: "",
       lastName: "",
@@ -104,8 +125,8 @@ const AddEmployee = () => {
       address: "",
       role: "User",
       image: "",
-      position: "",
-      area: "",
+      PositionId: 0,
+      AreaId: 0,
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
@@ -121,8 +142,8 @@ const AddEmployee = () => {
       address: "",
       role: "",
       image: "",
-      position: "",
-      area: "",
+      PositionId: 0,
+      AreaId: 0,
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
