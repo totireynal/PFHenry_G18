@@ -11,7 +11,7 @@ const Home = () => {
   const styleText = "text-center text-6xl font-black";
 
   return (
-    <div className="">
+    <div className="w-full">
       <Link to={"/home/login"}>
         <button
           type="submit"
@@ -47,7 +47,7 @@ const Home = () => {
           <div className="flex flex-col justify-center items-center gap-8">
             <h2 className={styleText}>About us...</h2>
             <p className="text-xl text-center">
-              At StaffPhere, we believe that managing your human resources
+              At StaffSphere, we believe that managing your human resources
               should be easy, intuitive, and stress-free. That's why we've
               developed a cutting-edge HR management tool that will make it
               eaasy for you. Our mission is to help businesses of all sizes
@@ -61,7 +61,7 @@ const Home = () => {
               customer service and support to ensure that your HR management
               tool works seamlessly for your business. Our software is
               cloud-based, secure, and accessible from anywhere, making it the
-              perfect solution for businesses with remote teams. At StaffPhere,
+              perfect solution for businesses with remote teams. At StaffSphere,
               we're always looking to the future. We're constantly updating and
               improving our tool to meet the evolving needs of our customers and
               stay ahead of the curve in the HR management space. With our tool,
@@ -74,7 +74,7 @@ const Home = () => {
       <section className={styleSectionPrimary}>
         <div className={container}>
           <div>
-            <h2 className={styleText}>Why StaffPhere...</h2>
+            <h2 className={styleText}>Why StaffSphere...</h2>
             <div className="text-xl mt-8 text-center">
               <p>
                 Our system allows you to experience the easiest way to manage
@@ -125,7 +125,7 @@ const Home = () => {
 
           <div className="flex flex-col items-center justify-center w-1/3 text-lg">
             <h5 className="">Contact Us</h5>
-            <p>email@staffPhere.com</p>
+            <p>email@StaffSphere.com</p>
             <p className="">tel: +54-11-555-1234</p>
           </div>
 
