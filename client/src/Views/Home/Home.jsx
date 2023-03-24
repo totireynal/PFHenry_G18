@@ -11,7 +11,7 @@ const Home = () => {
   const styleText = "text-center text-6xl font-black";
 
   return (
-    <div className="">
+    <div className="w-full">
       <Link to={"/home/login"}>
         <button
           type="submit"

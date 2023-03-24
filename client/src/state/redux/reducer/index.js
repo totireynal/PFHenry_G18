@@ -15,6 +15,11 @@ import {
   GET_ROL_EMPLOYEES,
   SORT_EMPLOYEE_NAME,
   CURRENT_EMPLOYEE,
+  GET_FILTER,
+  CONTENT_FILTERS,
+  CLEAN_URL,
+  GET_POSITIONS_NUM,
+  GET_AREAS_NUM,
 } from "../action-types/index";
 
 const initialState = {
@@ -23,10 +28,13 @@ const initialState = {
   employeeCreated: [],
   allEmployees: [],
   employeeDetail: {},
-  positions:[],
+  positions: [],
+  positionsNum: [],
   areas: [],
-  roles:[],
+  areasNum: [],
+  roles: [],
   currentEmployee: {},
+  arrContentFilters: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -69,46 +77,73 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-    case GET_AREAS_EMPLOYEES:
+    // case GET_AREAS_EMPLOYEES:
+    //   return {
+    //     ...state,
+    //     allEmployees: action.payload,
+    //   }
+    case GET_AREAS:
+
       return {
         ...state,
-        allEmployees: action.payload,
-      }
-    case GET_AREAS:
-    return {
-        ...state,
         areas: action.payload,
+      };
+    case GET_AREAS_NUM:
+      return {
+        ...state,
+        areasNum: action.payload
       }
     case GET_POSITIONS:
       return {
-            ...state,
-            positions: action.payload,
-          }
-    case GET_POSITIONS_EMPLOYEES:
+        ...state,
+        positions: action.payload,
+      };
+    case GET_POSITIONS_NUM:
       return {
         ...state,
-        allEmployees: action.payload,
+        positionsNum: action.payload,
       }
+    // case GET_POSITIONS_EMPLOYEES:
+    //   return {
+    //     ...state,
+    //     allEmployees: action.payload,
+    //   };
     case GET_ROLES:
-      return{
-        ...state,
-        roles: action.payload
-      }
-    case GET_ROL_EMPLOYEES:
       return {
         ...state,
-        allEmployees: action.payload
-      }
-    case SORT_EMPLOYEE_NAME:
+        roles: action.payload,
+      };
+    // case GET_ROL_EMPLOYEES:
+    //   return {
+    //     ...state,
+    //     allEmployees: action.payload,
+    //   };
+    // case SORT_EMPLOYEE_NAME:
+    //   return {
+    //     ...state,
+    //     allEmployees: action.payload,
+    //   };
+    // case CURRENT_EMPLOYEE:
+    //   return {
+    //     ...state,
+    //     currentEmployee: action.payload,
+    //   };
+    case GET_FILTER:
       return {
         ...state,
-        allEmployees: action.payload
-      }
-    case CURRENT_EMPLOYEE:
+        // allEmployees: action.payload,
+      };
+    case CONTENT_FILTERS:
       return {
         ...state,
-        currentEmployee: action.payload
-      }
+        arrContentFilters: { ...state.arrContentFilters, ...action.payload },
+      };
+    case CLEAN_URL:
+      return {
+        ...state,
+        arrContentFilters: {},
+      };
+
     default:
       return state;
   }

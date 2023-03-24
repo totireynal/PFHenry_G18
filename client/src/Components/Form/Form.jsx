@@ -1,5 +1,9 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAreasNum, getPositionsNum } from "../../state/redux/actions/actions";
 import InputForm from "../InputForm";
 import SelectForm from "../SelectForm/SelectForm";
+import UploadImage from "../Upload/UploadImage";
 
 const Form = ({
   handleInput,
@@ -11,10 +15,21 @@ const Form = ({
   errorButton,
   submited,
   button,
-  answer
+  answer,
+  handleChangeImage,
 }) => {
 
-  console.log(answer, 'Formmmm');
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+// dispatch(getPositionsNum())
+// dispatch(getAreasNum())
+//   }, [dispatch])
+
+  const positionsNum = useSelector((state) => state.positionsNum);
+  const areasNum = useSelector((state) => state.areasNum);
+  // console.log(positionsNum, "nummmm");
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -131,7 +146,7 @@ const Form = ({
           />
         </div>
         <div>
-          <InputForm
+          {/* <InputForm
             label="Position"
             placeholder="Position"
             type="text"
@@ -153,8 +168,7 @@ const Form = ({
             handler={handleInput}
             id="area"
             error={errors.area}
-          />
-
+          /> */}
           <InputForm
             label="Admission Date"
             placeholder="Admission Date"
@@ -166,7 +180,6 @@ const Form = ({
             id="dateOfAdmission"
             error={errors.dateOfAdmission}
           />
-
           <SelectForm
             label="Role"
             name="role"
@@ -180,18 +193,34 @@ const Form = ({
             ]}
           />
 
-          {/* <input type="file" accept="image/png, image/jpeg" /> */}
-          <InputForm
-            label="Image"
-            placeholder="Image"
-            type="text"
-            name="image"
-            touched={touched.image}
-            value={users.image}
-            handler={handleInput}
-            id="image"
-            error={errors.image}
-          />
+          <select
+            onChange={handleSelect}
+            name="PositionId"
+            id="PositionId"
+            defaultValue="default"
+          >
+            <option value="default" hidden>
+              Position:
+            </option>
+            {positionsNum.map((pos) => (
+              <option value={pos.id}>{pos.position}</option>
+            ))}
+          </select>
+
+          <select
+            onChange={handleSelect}
+            name="AreaId"
+            id="AreaId"
+            defaultValue="default"
+          >
+            <option value="default" hidden>
+              Areas:
+            </option>
+            {areasNum.map((pos) => (
+              <option value={pos.id}>{pos.area}</option>
+            ))}
+          </select>
+          <UploadImage handleChangeImage={handleChangeImage} />
         </div>
       </div>
       {!submited ? (
@@ -199,7 +228,7 @@ const Form = ({
           className={
             errorButton
               ? "cursor-not-allowed border px-16 py-3 h-auto rounded shadow-md shadow-slate-300 bg-gray-400 text-slate-300"
-              : "bg-sky-700 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+              : "bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
           }
           onClick={handleSubmit}
           disabled={errorButton}
@@ -207,7 +236,7 @@ const Form = ({
           {button}
         </button>
       ) : (
-          <p className="px-20 py-4 bg-green-400 text-white rounded">{answer}</p>
+        <p className="px-20 py-4 bg-green-400 text-white rounded">{answer}</p>
       )}
       {/* <p className="px-20 py-4 bg-green-400 rounded">hola que ase</p> */}
       {/* {submited && <p className="text-green-800">{answer}</p>} */}

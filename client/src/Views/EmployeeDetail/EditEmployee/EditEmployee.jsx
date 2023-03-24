@@ -120,21 +120,17 @@ const EditEmployee = () => {
     });
   };
 
-  console.log(answer, 'edittttt');
-
   return (
-    <div className="grid grid-cols-6 grid-rows-1 h-screen">
-      <SideBar />
-      <div className="col-span-5 p-8 flex flex-col justify-center items-center">
-        <div className="flex flex-col gap-6 px-10 py-4 rounded-2xl shadow-md shadow-slate-500 bg-slate-200">
-          <div className="text-center">
-            <span className="text-4xl">Edit Employee</span>
-          </div>
+    <div className="w-full h-screen ml-72 flex justify-center items-center">
+<div>
+        <div className="w-full text-center mb-14 font-bold">
+          <span className="text-4xl text-sky-400">Edit Employee</span>
+        </div>
 
 {/* ++++++++++++++BOTON BACK EditEmployee+++++++++++++++++++ */}
-            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
+            {/* <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
                     onClick={() => navigate(-1)}
-            >BACK</button>
+            >BACK</button> */}
 {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 
           <div className="flex gap-16">
@@ -155,7 +151,6 @@ const EditEmployee = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
