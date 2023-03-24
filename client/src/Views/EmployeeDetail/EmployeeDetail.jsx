@@ -95,7 +95,7 @@ const EmployeeDetail = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-between w-full ">
+        <div className="flex justify-evenly w-full ">
           <div className="flex flex-col gap-3">
             <p className="mb-5 text-xl">
               <span className="n font-bold block">Birth Date:</span> {birthDate}
