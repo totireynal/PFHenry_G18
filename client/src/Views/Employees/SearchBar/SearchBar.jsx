@@ -1,11 +1,17 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getEmployees } from "../../../state/redux/actions/actions";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { contentFilters, getEmployees } from "../../../state/redux/actions/actions";
 
 const SearchBar = () => {
   const [input, setInput] = useState("");
   let dispatch = useDispatch();
+  const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
+
+    useEffect(() => {
+      dispatch(getEmployees(arrContentFilters));
+    }, [arrContentFilters, dispatch]);
+  
   function onChange(e) {
     setInput(e.target.value);
   }
@@ -14,20 +20,21 @@ const SearchBar = () => {
     e.preventDefault();
 
     if (input.trim().length > 0) {
-      dispatch(getEmployees(input));
+      // dispatch(getEmployees(input));
+      dispatch(contentFilters({ name: input }));
+      setInput('')
     } else {
       alert("Must write something to search");
     }
-    setInput("");
   }
 
   return (
     <form
       onSubmit={onSubmit}
-      className="flex relative justify-center items-center rounded-md pl-2 border border-sky-700"
+      className="flex sm:flex-row ssm:flex-col relative pl-2 justify-center items-center rounded-md sm:border ssm:border-transparent sm:border-sky-400 z-10  ssm:w-fit"
     >
       <input
-        className="border-none outline-none text-base"
+        className="border-none w-30 sm:w-30 ssm:bg-white p-1 sm:text-start ssm:text-center outline-none text-base sm:bg-slate-100"
         value={input}
         onChange={onChange}
         name="game"
@@ -35,7 +42,8 @@ const SearchBar = () => {
         placeholder="Search a Employee"
       ></input>
       <button
-        className="bg-sky-700 text-white rounded-r overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+        className="bg-sky-400
+shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden sm:px-16 sm:py-3 1 active:translate-y-1 active:shadow-2xl ssm:px-8 ssm:py-1"
         type="submit"
       >
         Search
