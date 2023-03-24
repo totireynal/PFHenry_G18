@@ -8,8 +8,8 @@ import store from "./state/redux/store/store"
 
 import { Auth0Provider } from '@auth0/auth0-react'
 
-const domain = 'dev-a5lp6h1utxb70h27.us.auth0.com';
-const clientId = 'KzGcYaMK0yVq39wFL8WaAH8BjmQ7yqlj';
+const domain = 'https://dev-zb5ab7mg5ollsy01.us.auth0.com';
+const clientId = 'yEXJ9J7A6wYtioS9Y8E1p535jZnzxmYR';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,8 +17,12 @@ root.render(
     <BrowserRouter>
       <Auth0Provider 
         domain={domain} 
-        clientID={clientId} 
-        authorizationParams={{redirectUri: window.location.origin}}
+        clientId={clientId} 
+        authorizationParams={{
+          redirect_uri: window.location.origin,
+          audience:'https://staffsphere/api',
+          scope:'openid profile email'
+        }}
         >
           <App />
       </Auth0Provider>
