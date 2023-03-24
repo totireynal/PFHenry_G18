@@ -17,9 +17,14 @@ root.render(
     <BrowserRouter>
       <Auth0Provider 
         domain={domain} 
-        clientID={clientId} 
-        authorizationParams={{redirectUri: window.location.origin}}
-        >
+        clientId={clientId} 
+        authorizationParams={{
+          redirectUri: window.location.origin,
+          //poner la ruta del callback de Auth0
+          audience: 'staffsphere identifier',
+          scope: 'openid profile email'
+        }}
+      >
           <App />
       </Auth0Provider>
     </BrowserRouter>
