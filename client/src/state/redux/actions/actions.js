@@ -20,6 +20,9 @@ import {
   GET_FILTER,
   CONTENT_FILTERS,
   CLEAN_URL,
+  GET_FILTER,
+  CONTENT_FILTERS,
+  CLEAN_URL,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -95,31 +98,27 @@ export const getFilter = (filters) => {
       let url = "http://localhost:3001/users";
 
       // console.log(encontrandoSimbolo);
-      
-    
-  
+
       const response = await axios(addUrlQueries(filters, url));
-      const result = response.data
-  
+      const result = response.data;
+
       // console.log(result);
       return dispatch({
         type: GET_FILTER,
         payload: result,
       });
-      
     } catch (error) {
       // console.log(error.response.data);
     }
-
   };
-}
+};
 
 export const contentFilters = (filter) => {
   return {
     type: CONTENT_FILTERS,
-    payload: filter
-  }
-}
+    payload: filter,
+  };
+};
 
 export const updateEmployee = (id, user, showAnswer) => {
   return async (dispatch) => {
@@ -170,7 +169,7 @@ export const deleteEmployee = (id, showAnswer) => {
   };
 };
 
-export const getPositions=(filters)=>{
+export const getPositions = (filters) => {
   return async function (dispatch) {
     try {
       let url = "http://localhost:3001/positions";
@@ -189,7 +188,7 @@ export const getPositions=(filters)=>{
       console.log(error.response.data);
     }
   };
-}
+};
 
 // export const getPositionsEmployees = (position) => {
 //   return async function(dispatch){
@@ -203,29 +202,26 @@ export const getPositions=(filters)=>{
 //   }
 // }
 
-
 export const getAreas = (filters) => {
-    return async function (dispatch) {
-      try {
-        let url = "http://localhost:3001/areas";
+  return async function (dispatch) {
+    try {
+      let url = "http://localhost:3001/areas";
 
-        // console.log(encontrandoSimbolo);
+      // console.log(encontrandoSimbolo);
 
+      const response = await axios(addUrlQueries(filters, url));
+      const result = response.data;
 
-
-        const response = await axios(addUrlQueries(filters, url));
-        const result = response.data;
-
-        // console.log(url, "urllllll");
-        // console.log(result);
-        return dispatch({
-          type: GET_AREAS,
-          payload: result,
-        });
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
+      // console.log(url, "urllllll");
+      // console.log(result);
+      return dispatch({
+        type: GET_AREAS,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
   // return async function(dispatch){
   //   try {
   //     const response = await axios.get("http://localhost:3001/areas")
@@ -235,7 +231,7 @@ export const getAreas = (filters) => {
   //     console.log(error.message)
   //   }
   // }
-}
+};
 
 // export const getAreasEmployees = (area) => {
 //   return async function(dispatch){
@@ -249,30 +245,27 @@ export const getAreas = (filters) => {
 //   }
 // }
 
+export const getRoles = (filters) => {
+  return async function (dispatch) {
+    try {
+      let url = "http://localhost:3001/roles";
 
-export const getRoles=(filters)=>{
-    return async function (dispatch) {
-      try {
-        let url = "http://localhost:3001/roles";
+      // console.log(encontrandoSimbolo);
 
-        // console.log(encontrandoSimbolo);
+      const response = await axios(addUrlQueries(filters, url));
+      const result = response.data;
 
-
-
-        const response = await axios(addUrlQueries(filters, url));
-        const result = response.data;
-
-        // console.log(url, "urllllll");
-        // console.log(result);
-        return dispatch({
-          type: GET_ROLES,
-          payload: result,
-        });
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
-}
+      // console.log(url, "urllllll");
+      // console.log(result);
+      return dispatch({
+        type: GET_ROLES,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+};
 
 // export const getRolEmployees = (role) => {
 //   return async function(dispatch){
@@ -285,8 +278,6 @@ export const getRoles=(filters)=>{
 //     }
 //   }
 // }
-
-
 
 // export const sortEmployeeName = (typeSort) => {
 //   return async function (dispatch) {
@@ -304,18 +295,15 @@ export const getRoles=(filters)=>{
 //   }
 // }
 
-
-
 export const getCurrentEmployee = (user) => {
   return {
     type: CURRENT_EMPLOYEE,
-    payload:user
-  }
-}
+    payload: user,
+  };
+};
 
 export const cleanUrl = () => {
   return {
     type: CLEAN_URL,
-  }
-}
-
+  };
+};
