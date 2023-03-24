@@ -20,6 +20,7 @@ import Rol from "../../Components/Rol/Rol";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
+  console.log(users);
 
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState({

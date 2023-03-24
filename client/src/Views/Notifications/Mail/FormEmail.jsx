@@ -13,7 +13,11 @@ const FormEmail = () => {
     e.preventDefault();
 
     try {
-      await axios.post("ruta", { to, subject, text });
+      await axios.post("http://localhost:3001/notifications", {
+        to,
+        subject,
+        text,
+      });
       setSent(true);
       setError(null);
     } catch (error) {
@@ -67,7 +71,11 @@ const FormEmail = () => {
           </button>
         </form>
         {error && error}
-        {sent && <p>E-mail sent!</p>}
+        {sent && (
+          <p className="font-semibold text-1xl text-green-700">
+            E-mail sent correctly!
+          </p>
+        )}
       </div>
     </div>
   );

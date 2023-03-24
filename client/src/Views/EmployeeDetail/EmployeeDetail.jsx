@@ -10,6 +10,7 @@ const EmployeeDetail = () => {
   let { id } = useParams();
 
   let employeeDetail = useSelector((state) => state.employeeDetail);
+  console.log(employeeDetail);
 
   let navigate = useNavigate();
 
