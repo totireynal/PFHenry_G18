@@ -1,32 +1,45 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { contentFilters } from '../../state/redux/actions/actions';
+import { contentFilters, getEmployees, getRoles } from '../../state/redux/actions/actions';
 
 
-const Rol = () => {
+const Rol = ({ selectedOption, handleSelectChange }) => {
   const dispatch = useDispatch();
+  const roles = useSelector((state) => state.roles);
+  const arrContentFilters = useSelector((state) => state.arrContentFilters);
   // const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
   // useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    dispatch(getEmployees(arrContentFilters));
+    dispatch(getRoles(arrContentFilters));
+  }, [arrContentFilters, dispatch]);
 
   const handleChange = (event) => {
     const role = event.target.value;
     dispatch(contentFilters({ role: role }));
+    handleSelectChange({ ...selectedOption, role: role });
   };
 
   return (
     <div className="flex">
       <h3 className="flex justify-center items-center mr-2">Rols: </h3>
       <select
+        value={selectedOption.role}
         className="border-2 border-gray-200"
         name=""
         onChange={handleChange}
         defaultValue="default"
       >
-        <option hidden>Select</option>
-        <option>Admin</option>
-        <option>User</option>
+        <option value="default" hidden>
+          Select
+        </option>
+        {roles.map((e, i) => (
+          <option key={i} value={e}>
+            {e}
+          </option>
+        ))}
       </select>
     </div>
   );

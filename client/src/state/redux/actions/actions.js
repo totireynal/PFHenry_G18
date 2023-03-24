@@ -19,6 +19,7 @@ import {
   CURRENT_EMPLOYEE,
   GET_FILTER,
   CONTENT_FILTERS,
+  CLEAN_URL,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -47,26 +48,26 @@ export const createEmployee = (info, showAnswer) => {
   return function (dispatch) {
     return axios.post("http://localhost:3001/users", info).then(
       (response) => {
-        console.log(response.data.message, '........');
-        showAnswer(response.data.message)
+        console.log(response.data.message, "........");
+        showAnswer(response.data.message);
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },
       (error) => {
-        showAnswer(error.response.data.error)
-        console.log(error.response.data)
+        showAnswer(error.response.data.error);
+        console.log(error.response.data);
         dispatch({ type: CREATE_EMPLOYEE, payload: error.response.data });
       }
     );
   };
 };
 
-export const getEmployees = (name) => {
+export const getEmployees = (filters) => {
   return function (dispatch) {
     let url = "http://localhost:3001/users";
 
-    if (name) {
-      url += `?name=${name}`;
-    }
+    // if (name) {
+    //   url += `?name=${name}`;
+    // }
 
     // const all = [role, area, position, sort];
     // console.log(all);
@@ -75,13 +76,13 @@ export const getEmployees = (name) => {
     // // console.log(allDefined);
     // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
 
-
-    return axios.get(url).then(
+    return axios.get(addUrlQueries(filters, url)).then(
       (response) => {
+        // console.log(response);
         dispatch({ type: GET_EMPLOYEES, payload: response.data });
       },
       (error) => {
-        dispatch({ type: GET_EMPLOYEES, payload: error.response.data });
+        console.log(error.response.data);
       }
     );
   };
@@ -93,33 +94,27 @@ export const getFilter = (filters) => {
       let url = "http://localhost:3001/users";
 
       // console.log(encontrandoSimbolo);
-      console.log(filters, 'segundo');
-      
-    
-  
+
       const response = await axios(addUrlQueries(filters, url));
-      const result = response.data
-  
-      console.log(url, 'urllllll');
+      const result = response.data;
+
       // console.log(result);
       return dispatch({
         type: GET_FILTER,
         payload: result,
       });
-      
     } catch (error) {
-      console.log(error.response.data);
+      // console.log(error.response.data);
     }
-
   };
-}
+};
 
 export const contentFilters = (filter) => {
   return {
     type: CONTENT_FILTERS,
-    payload: filter
-  }
-}
+    payload: filter,
+  };
+};
 
 export const updateEmployee = (id, user, showAnswer) => {
   return async (dispatch) => {
@@ -129,14 +124,14 @@ export const updateEmployee = (id, user, showAnswer) => {
         user
       );
       const result = response.data;
-      console.log(result, 'updateeee');
-      showAnswer(response.data)
+      console.log(result, "updateeee");
+      showAnswer(response.data);
 
       return dispatch({
         type: UPDATE_EMPLOYEE,
       });
     } catch (error) {
-      showAnswer(error.response.data.error)
+      showAnswer(error.response.data.error);
     }
   };
 };
@@ -163,27 +158,23 @@ export const deleteEmployee = (id, showAnswer) => {
 
       return dispatch({
         type: DELETE_EMPLOYEE,
-      })
+      });
     } catch (error) {
       showAnswer(error);
     }
   };
 };
 
-
-
-export const getPositions=(filters)=>{
+export const getPositions = (filters) => {
   return async function (dispatch) {
     try {
       let url = "http://localhost:3001/positions";
 
       // console.log(encontrandoSimbolo);
-      console.log(filters, "segundo");
 
       const response = await axios(addUrlQueries(filters, url));
       const result = response.data;
 
-      console.log(url, "urllllll");
       // console.log(result);
       return dispatch({
         type: GET_POSITIONS,
@@ -193,7 +184,7 @@ export const getPositions=(filters)=>{
       console.log(error.response.data);
     }
   };
-}
+};
 
 // export const getPositionsEmployees = (position) => {
 //   return async function(dispatch){
@@ -207,30 +198,26 @@ export const getPositions=(filters)=>{
 //   }
 // }
 
-
 export const getAreas = (filters) => {
-    return async function (dispatch) {
-      try {
-        let url = "http://localhost:3001/areas";
+  return async function (dispatch) {
+    try {
+      let url = "http://localhost:3001/areas";
 
-        // console.log(encontrandoSimbolo);
-        console.log(filters, "segundo");
+      // console.log(encontrandoSimbolo);
 
+      const response = await axios(addUrlQueries(filters, url));
+      const result = response.data;
 
-
-        const response = await axios(addUrlQueries(filters, url));
-        const result = response.data;
-
-        // console.log(url, "urllllll");
-        // console.log(result);
-        return dispatch({
-          type: GET_AREAS,
-          payload: result,
-        });
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
+      // console.log(url, "urllllll");
+      // console.log(result);
+      return dispatch({
+        type: GET_AREAS,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
   // return async function(dispatch){
   //   try {
   //     const response = await axios.get("http://localhost:3001/areas")
@@ -240,7 +227,7 @@ export const getAreas = (filters) => {
   //     console.log(error.message)
   //   }
   // }
-}
+};
 
 // export const getAreasEmployees = (area) => {
 //   return async function(dispatch){
@@ -254,18 +241,27 @@ export const getAreas = (filters) => {
 //   }
 // }
 
-
-export const getRoles=()=>{
-  return async function(dispatch){
+export const getRoles = (filters) => {
+  return async function (dispatch) {
     try {
-      const response = await axios.get("http://localhost:3001/roles")
+      let url = "http://localhost:3001/roles";
+
+      // console.log(encontrandoSimbolo);
+
+      const response = await axios(addUrlQueries(filters, url));
       const result = response.data;
-      return dispatch({type: GET_ROLES, payload: result})
+
+      // console.log(url, "urllllll");
+      // console.log(result);
+      return dispatch({
+        type: GET_ROLES,
+        payload: result,
+      });
     } catch (error) {
-      console.log(error.message)
+      console.log(error.response.data);
     }
-  }
-}
+  };
+};
 
 // export const getRolEmployees = (role) => {
 //   return async function(dispatch){
@@ -278,8 +274,6 @@ export const getRoles=()=>{
 //     }
 //   }
 // }
-
-
 
 // export const sortEmployeeName = (typeSort) => {
 //   return async function (dispatch) {
@@ -297,11 +291,15 @@ export const getRoles=()=>{
 //   }
 // }
 
-
-
 export const getCurrentEmployee = (user) => {
   return {
     type: CURRENT_EMPLOYEE,
-    payload:user
-  }
-}
+    payload: user,
+  };
+};
+
+export const cleanUrl = () => {
+  return {
+    type: CLEAN_URL,
+  };
+};
