@@ -6,11 +6,12 @@ export default function CreateEventButton() {
   return (
     <button
       onClick={() => setShowEventModal(true)}
-      className="border p-2 rounded flex items-center shadow-md hover:shadow-2xl"
+      className="border p-2 rounded flex items-center shadow-md  bg-sky-400
+shadow-sky-200 hover:bg-sky-300 active:shadow-2xl"
     >
-      <span class="material-symbols-outlined">add</span>
+      <span class="material-symbols-outlined ">add</span>
       {/* <img src={plusImg} alt="create_event" className="w-7 h-7" /> */}
-      <span className="pl-3 pr-7"> Create</span>
+      <span className="pl-3 pr-7 "> Create</span>
     </button>
   );
 }

@@ -34,11 +34,14 @@ const Position = ({ selectedOption, handleSelectChange }) => {
         <option value="default" hidden>
           Select
         </option>
-        {positions.map((e, i) => (
-          <option key={i} value={e}>
+        {positions.map((e, i) => {
+          return (
+            <option key={i} value={e}>
             {e}
           </option>
-        ))}
+            )
+      }
+        )}
       </select>
     </div>
   );

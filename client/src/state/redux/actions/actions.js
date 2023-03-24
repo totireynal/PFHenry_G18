@@ -11,8 +11,10 @@ import {
   DELETE_EMPLOYEE,
   GET_AREAS_EMPLOYEES,
   GET_AREAS,
+  GET_AREAS_NUM,
   GET_POSITIONS_EMPLOYEES,
   GET_POSITIONS,
+  GET_POSITIONS_NUM,
   GET_ROLES,
   GET_ROL_EMPLOYEES,
   SORT_EMPLOYEE_NAME,
@@ -46,6 +48,7 @@ export function resetCreate() {
 
 export const createEmployee = (info, showAnswer) => {
   return function (dispatch) {
+    console.log(info, "infoooo");
     return axios.post("http://localhost:3001/users", info).then(
       (response) => {
         console.log(response.data.message, "........");
@@ -78,7 +81,7 @@ export const getEmployees = (filters) => {
 
     return axios.get(addUrlQueries(filters, url)).then(
       (response) => {
-        // console.log(response);
+        console.log(response.data, "responseee");
         dispatch({ type: GET_EMPLOYEES, payload: response.data });
       },
       (error) => {
@@ -119,13 +122,13 @@ export const contentFilters = (filter) => {
 export const updateEmployee = (id, user, showAnswer) => {
   return async (dispatch) => {
     try {
+      // console.log(user, 'user upppp');
       const response = await axios.put(
         `http://localhost:3001/users/${id}`,
         user
       );
       const result = response.data;
-      console.log(result, "updateeee");
-      showAnswer(response.data);
+      showAnswer(result);
 
       return dispatch({
         type: UPDATE_EMPLOYEE,
@@ -170,14 +173,30 @@ export const getPositions = (filters) => {
     try {
       let url = "http://localhost:3001/positions";
 
-      // console.log(encontrandoSimbolo);
-
       const response = await axios(addUrlQueries(filters, url));
       const result = response.data;
 
-      // console.log(result);
       return dispatch({
         type: GET_POSITIONS,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+};
+
+export const getPositionsNum = (filters) => {
+  return async function (dispatch) {
+    try {
+      let url = "http://localhost:3001/positions/raw";
+
+      const response = await axios(url);
+      const result = response.data;
+      console.log(result, "rrrrrr");
+
+      return dispatch({
+        type: GET_POSITIONS_NUM,
         payload: result,
       });
     } catch (error) {
@@ -218,6 +237,7 @@ export const getAreas = (filters) => {
       console.log(error.response.data);
     }
   };
+
   // return async function(dispatch){
   //   try {
   //     const response = await axios.get("http://localhost:3001/areas")
@@ -227,6 +247,24 @@ export const getAreas = (filters) => {
   //     console.log(error.message)
   //   }
   // }
+};
+
+export const getAreasNum = (filters) => {
+  return async function (dispatch) {
+    try {
+      let url = "http://localhost:3001/areas/ars";
+
+      const response = await axios(url);
+      const result = response.data;
+
+      return dispatch({
+        type: GET_AREAS_NUM,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 };
 
 // export const getAreasEmployees = (area) => {

@@ -7,6 +7,7 @@ import { contentFilters, getEmployees, getRoles } from '../../state/redux/action
 const Rol = ({ selectedOption, handleSelectChange }) => {
   const dispatch = useDispatch();
   const roles = useSelector((state) => state.roles);
+  // console.log(roles,'rollll');
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
   // const arrContentFilters = useSelector((state) => state.arrContentFilters);
 

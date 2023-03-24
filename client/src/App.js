@@ -60,7 +60,7 @@ function App() {
   }, []);
 
   return (
-    <div className="flex bg-slate-100  ">
+    <div className="flex bg-slate-100">
       <div
         onClick={fn}
         className=" ssm:fixed sm:hidden  ssm:left-4 ssm:top-1 z-20 "

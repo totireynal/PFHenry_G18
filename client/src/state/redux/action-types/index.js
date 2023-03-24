@@ -18,3 +18,5 @@ export const GET_ROL_EMPLOYEES = "GET_ROL_EMPLOYEES";
 export const GET_FILTER = 'GET_FILTER'
 export const CONTENT_FILTERS = 'CONTENT_FILTERS'
 export const CLEAN_URL = 'CLEAN_URL'
+export const GET_POSITIONS_NUM = 'GET_POSITIONS_NUM'
+export const GET_AREAS_NUM = 'GET_AREAS_NUM'
