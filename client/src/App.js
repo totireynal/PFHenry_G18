@@ -32,7 +32,7 @@ function App() {
   const refSideBar = useRef()
   
   const [user, setUser] = useState({
-    id: 2,
+    id:1,
     name: "juan",
     role: ["admin"],
   });

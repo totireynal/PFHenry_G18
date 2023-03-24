@@ -11,7 +11,7 @@ const ButtonSideBar = ({ children, url, icon }) => {
           <div className="">
             <button
               className=" h-9 p-2 w-full xl:inline-block ssm:hidden
-            hover:border hover:border-sky-400 hover:shadow-md hover:shadow-sky-200 hover:text-sky-400"
+             hover:border-t hover:shadow-lg hover:shadow-sky-200 hover:text-sky-400"
             >
               {children}
             </button>
