@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch } from "react-redux";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createEmployee } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
 import validate from "../../../utils/functions/validate";
@@ -38,6 +38,10 @@ const AddEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
+
+  useEffect(() => {
+
+}, [])
 
   const handleInput = (event) => {
     setEmployee({
@@ -126,38 +130,35 @@ const AddEmployee = () => {
   };
   // console.log(errors);
   return (
-    <div className="grid grid-cols-6 grid-rows-1 h-screen">
-      <SideBar />
-      <div className="col-span-5 p-8 flex flex-col justify-center items-center">
-        <div className="flex flex-col gap-6 px-10 py-4 rounded-2xl shadow-md shadow-slate-500 bg-slate-200">
-          <div className="text-center">
-            <span className="text-4xl">Add Employee</span>
-          </div>
+    <div className="w-full h-screen ml-72 flex justify-center items-center">
+      <div>
+        <div className="w-full text-center mb-14 font-bold">
+          <span className="text-4xl text-sky-400">Add Employee</span>
+        </div>
 
-          {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
-          <Link to="/employees">
+        {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
+        {/* <Link to="/employees">
             <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  ">
-              BACK
+            BACK
             </button>
-          </Link>
-          {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
+          </Link> */}
+        {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 
-          <div className="flex gap-16">
-            <div>
-              <Form
-                handleInput={handleInput}
-                handleSubmit={handleSubmit}
-                handleSelect={handleSelect}
-                touched={touched}
-                errors={errors}
-                users={employee}
-                errorButton={errorButton}
-                submited={submited}
-                button="Add Employee"
-                answer={answer}
-                handleChangeImage={handleChangeImage}
-              />
-            </div>
+        <div className="flex gap-16">
+          <div>
+            <Form
+              handleInput={handleInput}
+              handleSubmit={handleSubmit}
+              handleSelect={handleSelect}
+              touched={touched}
+              errors={errors}
+              users={employee}
+              errorButton={errorButton}
+              submited={submited}
+              button="Add Employee"
+              answer={answer}
+              handleChangeImage={handleChangeImage}
+            />
           </div>
         </div>
       </div>

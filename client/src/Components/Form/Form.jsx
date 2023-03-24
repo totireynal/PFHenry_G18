@@ -15,6 +15,9 @@ const Form = ({
   answer,
   handleChangeImage,
 }) => {
+
+  // console.log(users, 'userrrr');
+  
   return (
     <form
       onSubmit={handleSubmit}
@@ -187,7 +190,7 @@ const Form = ({
           className={
             errorButton
               ? "cursor-not-allowed border px-16 py-3 h-auto rounded shadow-md shadow-slate-300 bg-gray-400 text-slate-300"
-              : "bg-sky-700 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+              : "bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
           }
           onClick={handleSubmit}
           disabled={errorButton}

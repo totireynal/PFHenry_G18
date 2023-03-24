@@ -14,7 +14,7 @@ const SelectForm = ({
         {label}
       </label>
       <select
-        className={` rounded-md border-2 border-gray-800 block w-60 h-10 px-2 group focus:border-blue-400`}
+        className={` rounded-md border-2 border-transparent block w-60 h-10 px-2 group focus:border-blue-400`}
         name={name}
         defaultValue="default"
         onChange={handler}

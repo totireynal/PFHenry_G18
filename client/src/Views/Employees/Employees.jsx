@@ -62,18 +62,19 @@ const Employees = () => {
   };
 
   return (
-    <div className=" relative w-full h-screen overflow-auto xl:pl-72 ssm:pl-36">
-      <div className="flex flex-wrap sticky top-0 z-10 bg-slate-100 mb-3 items-center justify-center h-24 gap-2.5">
+    <div className=" relative w-full mr-10 h-screen overflow-auto  xl:pl-72 sm:pl-36 ssm:pl-12 z-0">
+      <div className="flex sm:flex-col flex-wrap sticky h-auto pt-12 pb-5 top-0 z-10 bg-slate-100 mb-3 items-center justify-center gap-2.5">
         <SearchBar />
         <Link to={"/addemployee/"}>
-          <button className="bg-sky-700 text-white rounded border border-sky-700 overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600">
+          <button className="bg-sky-400 text-white rounded  overflow-hidden sm:px-16 sm:py-3 ssm:px-8 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
             Add Employee
           </button>
         </Link>
       </div>
-      <div className="flex flex-wrap h-auto justify-center items-center gap-8 mb-8">
+      <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8">
         <button
-          className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-auto justify-center items-center rounded text-white border  "
+          className="flex relative bg-sky-400
+shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2 "
           onClick={handleRefresh}
         >
           Refresh
@@ -95,7 +96,7 @@ const Employees = () => {
           handleSelectChange={handleSelectChange}
         />
       </div>
-      <div className="flex flex-col gap-2 mr-10   pt-3 ">
+      <div className="flex flex-col gap-2  pt-3 ">
         {users?.map((user, i) => {
           return (
             <Link key={i} to={`/employee/${user?.id}`}>
@@ -107,7 +108,7 @@ const Employees = () => {
                 image={user?.User?.image}
                 area={user?.Area?.area}
                 position={user?.Position?.position}
-                role={user?.User.role}
+                role={user?.User?.role}
               />
             </Link>
           );

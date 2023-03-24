@@ -18,7 +18,7 @@ const errorStyle = error && touched
 
 
   return (
-    <div className="m-4 w-60 ">
+    <div className="m-4 w-60">
       <div>
         <label
           className={`${error && touched ? "text-red-400" : ''} text-base`}
@@ -29,8 +29,8 @@ const errorStyle = error && touched
         </label>
         <input
           className={`${
-            error && touched ? "border-red-400 " : ''
-          } rounded-md border-2 border-gray-800 block w-60 h-10 px-2 outline-none focus:border-blue-400`}
+            error && touched ? "border-red-400 border-2 " : ''
+          } rounded-md  block w-60 h-10 px-2 outline-none focus:border-blue-400`}
           type={type}
           name={name}
           value={value}

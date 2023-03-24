@@ -17,6 +17,9 @@ import {
   GET_ROL_EMPLOYEES,
   SORT_EMPLOYEE_NAME,
   CURRENT_EMPLOYEE,
+  GET_FILTER,
+  CONTENT_FILTERS,
+  CLEAN_URL,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -43,9 +46,10 @@ export function resetCreate() {
 
 export const createEmployee = (info, showAnswer) => {
   return function (dispatch) {
+    console.log(info, 'infoooo');
     return axios.post("http://localhost:3001/users", info).then(
       (response) => {
-        console.log(response.data.message, "........");
+        // console.log(response.data.message, "........");
         showAnswer(response.data.message);
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },
@@ -75,7 +79,7 @@ export const getEmployees = (filters) => {
 
     return axios.get(addUrlQueries(filters, url)).then(
       (response) => {
-        // console.log(response);
+        // console.log(response.data, 'responseee');
         dispatch({ type: GET_EMPLOYEES, payload: response.data });
       },
       (error) => {
@@ -120,13 +124,13 @@ export const contentFilters = (filter) => {
 export const updateEmployee = (id, user, showAnswer) => {
   return async (dispatch) => {
     try {
+      // console.log(user, 'user upppp');
       const response = await axios.put(
         `http://localhost:3001/users/${id}`,
         user
       );
       const result = response.data;
-      console.log(result, "updateeee");
-      showAnswer(response.data);
+      showAnswer(result);
 
       return dispatch({
         type: UPDATE_EMPLOYEE,
@@ -165,8 +169,6 @@ export const deleteEmployee = (id, showAnswer) => {
     }
   };
 };
-
-
 
 export const getPositions=(filters)=>{
   return async function (dispatch) {
