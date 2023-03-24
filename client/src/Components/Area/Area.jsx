@@ -28,6 +28,7 @@ const Area = () =>{
           name=""
           onChange={handleChange}
           defaultValue="default"
+          id="area"
         >
           <option value="default" hidden>
             Select

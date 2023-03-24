@@ -28,6 +28,7 @@ const Position = () =>{
           name=""
           onChange={handleChange}
           defaultValue="default"
+          id="position"
         >
           <option value="default" hidden>
             Select

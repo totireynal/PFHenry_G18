@@ -6,7 +6,7 @@ import {
   deleteEmployee,
   getEmployeeDetail,
 } from "../../state/redux/actions/actions";
-import { useAnswer } from "../../utils/hooks/answer";
+import { useAnswer } from "../../Utils/hooks/answer";
 
 const EmployeeDetail = () => {
   let { id } = useParams();

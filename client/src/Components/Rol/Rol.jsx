@@ -7,16 +7,20 @@ import { getRoles, getRolEmployees } from '../../state/redux/actions/actions';
 
 const Rol = () =>{
     const dispatch = useDispatch();
-
+    const [area, setArea] = useState("Select")
+    const [position, setPosition] = useState("")
 
     useEffect(()=> {
-        
-        
+  
+
     }, [dispatch])
 
     const handleChange = (event) => {
         const role = event.target.value;
+    
+        
         dispatch(getRolEmployees(role))
+        
     }
 
     return (
@@ -27,6 +31,8 @@ const Rol = () =>{
           name=""
           onChange={handleChange}
           defaultValue="default"
+          id="roles"
+          
         >
           <option hidden>Select</option>
           <option>Admin</option>
