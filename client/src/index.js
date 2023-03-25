@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from "./state/redux/store/store"
+import { CookiesProvider } from "react-cookie";
 
 import { Auth0Provider } from '@auth0/auth0-react'
 
@@ -14,16 +15,23 @@ const clientId = 'KzGcYaMK0yVq39wFL8WaAH8BjmQ7yqlj';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Auth0Provider 
-        domain={domain} 
-        clientID={clientId} 
-        authorizationParams={{redirectUri: window.location.origin}}
+    <CookiesProvider>
+      <BrowserRouter>
+        <Auth0Provider 
+          domain={domain} 
+          clientId={clientId} 
+          authorizationParams={{
+            redirect_uri: "http://localhost:3000/authorization",
+            //poner la ruta del callback de Auth0
+            audience: 'staffsphere identifier',
+            scope: 'openid profile email'
+          }}
         >
-          <App />
-      </Auth0Provider>
-    </BrowserRouter>
-    </Provider>
+            <App />
+        </Auth0Provider>
+      </BrowserRouter>
+    </CookiesProvider>
+  </Provider>
 );
 
 
