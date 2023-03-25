@@ -49,7 +49,6 @@ const EmployeeDetail = () => {
     cbu,
     dateOfAdmission,
     image,
-    image,
   } = employeeDetail;
   
   return (
@@ -86,7 +85,7 @@ const EmployeeDetail = () => {
             </div>
           </div>
         </div>
-      </div>;
+      </div>
     <div className="flex w-full h-screen ml-72 pt-16 pr-16">
       <div className="flex flex-col h-full w-[500px]">
         <img
@@ -190,6 +189,7 @@ shadow-sky-200 hover:bg-sky-300 text-xs text-white rounded overflow-hidden px-8 
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );
