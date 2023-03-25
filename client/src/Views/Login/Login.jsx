@@ -7,43 +7,42 @@ const Login = () => {
   const { loginWithRedirect,
           loginWithPopup,
           logout,
+          isAuthenticated,
           getAccessTokenSilently
   } = useAuth0();
 
-  const callProtectedApi = async () => {
-    try {        
-        const token = await getAccessTokenSilently();
-        console.log(token)
-        const response = await axios.get("http://localhost:3001/protected", {
-            headers: {
-                authorization: `Bearer ${token}`
-            }
-        })
-        console.log(response.data.email);
-    } catch (error) {
-        console.log(error.message);
-    }
-  }
 
-  useEffect(() => {
-    return callProtectedApi();
-  },[])
+
+  const handleLogin = async () => {
+    await loginWithRedirect({
+      appState: {
+        returnTo: "/authorization",
+      },
+      authorizationParams: {
+        prompt: "login",
+      },
+    });
+  };
 
 
   return (
     <div className="m-auto mt-44 w-1/3 h-80 rounded flex flex-col items-center justify-center gap-6 shadow-slate-400 bg-slate-100 shadow">
+      
+      <h3>User is {isAuthenticated ? "Logged in" : "Not logged in"} </h3>
+      
       <button
         className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
-        onClick={() => loginWithRedirect()}
+        // onClick={() => loginWithRedirect()}
+        onClick={handleLogin}
       >
         Login With Redirect
       </button>
-      <button
+      {/* <button
         className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
         onClick={() => loginWithPopup()}
       >
         Login With Popup
-      </button>
+      </button> */}
       <button
         className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
         onClick={() => logout()}

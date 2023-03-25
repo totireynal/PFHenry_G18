@@ -18,6 +18,7 @@ import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
+import Authorization from "./Views/Authorization/Authorization";
 import { useDispatch } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
@@ -113,6 +114,7 @@ function App() {
               <Route path="/organization" element={<Organization />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/notifications" element={<Notifications />} />
+              <Route path="/authorization" element={<Authorization />} />
             </Route>
             <Route path="/myprofile/:id" element={<MyProfile />} />
             {/* <Route path={`/myprofile/${user.id}`} element={<EditMyProfile />} /> */}

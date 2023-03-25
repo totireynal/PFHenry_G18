@@ -19,7 +19,7 @@ root.render(
         domain={domain} 
         clientId={clientId} 
         authorizationParams={{
-          redirectUri: window.location.origin,
+          redirectUri: "http://localhost:3000/authorization",
           //poner la ruta del callback de Auth0
           audience: 'staffsphere identifier',
           scope: 'openid profile email'

@@ -20,31 +20,6 @@ const Home = () => {
   return (
     <>
 
-    {/* <div className="m-auto mt-44 w-1/3 h-80 rounded flex flex-col items-center justify-center gap-6 shadow-slate-400 bg-slate-100 shadow">
-      <button
-        className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
-        onClick={() => loginWithRedirect()}
-      >
-        Login With Redirect
-      </button>
-      <button
-        className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
-        onClick={() => loginWithPopup()}
-      >
-        Login With Popup
-      </button>
-      <button
-        className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
-        onClick={() => logout()}
-      >
-        Logout
-      </button>
-  </div>
- */}
-
-
-
-
     <div className="w-full">
       <Link to={"/home/login"}>
         <button
