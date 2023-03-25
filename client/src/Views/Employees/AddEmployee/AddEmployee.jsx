@@ -2,23 +2,27 @@
 import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { createEmployee, getAreasNum, getPositionsNum } from "../../../state/redux/actions/actions";
+import {
+  createEmployee,
+  getAreasNum,
+  getPositionsNum,
+} from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
-import validate from "../../../Utils/functions/validate";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 import { Link } from "react-router-dom";
 
 const AddEmployee = () => {
   const dispatch = useDispatch();
 
-    useEffect(() => {
-      dispatch(getPositionsNum());
-      dispatch(getAreasNum());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getPositionsNum());
+    dispatch(getAreasNum());
+  }, [dispatch]);
 
-    const positionsNum = useSelector((state) => state.positionsNum);
-    const areasNum = useSelector((state) => state.areasNum);
+  const positionsNum = useSelector((state) => state.positionsNum);
+  const areasNum = useSelector((state) => state.areasNum);
 
   const [employee, setEmployee] = useState({
     name: "",
@@ -47,9 +51,7 @@ const AddEmployee = () => {
 
   const [submited, setSubmited] = useState(false);
 
-  useEffect(() => {
-
-}, [])
+  useEffect(() => {}, []);
 
   const handleInput = (event) => {
     setEmployee({
@@ -93,7 +95,7 @@ const AddEmployee = () => {
       });
     }
     if (name === "AreaId") {
-      console.log(name, value, 'daleeeee');
+      console.log(name, value, "daleeeee");
       setEmployee({
         ...employee,
         [name]: Number(value),

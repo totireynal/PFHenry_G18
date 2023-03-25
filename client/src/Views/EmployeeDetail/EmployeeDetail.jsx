@@ -48,7 +48,7 @@ const EmployeeDetail = () => {
     cuil,
     cbu,
     dateOfAdmission,
-    // image,
+    image,
   } = employeeDetail;
 
   return (
@@ -89,11 +89,11 @@ const EmployeeDetail = () => {
       ;
       <div className="flex w-full h-screen ml-72 pt-16 pr-16">
         <div className="flex flex-col h-full w-[500px]">
-          <img
+          {/* <img
             src={image}
             alt="profilepic"
             className="object-cover w-full h-[40%] rounded-xl mb-10"
-          />
+          /> */}
           <div>
             <p className="mb-10">
               <span className="font-medium">Role:</span> {role}
@@ -117,7 +117,7 @@ const EmployeeDetail = () => {
         <div className="w-full h-screen xl:ml-72 ssm:pl-36  pt-16 flex flex-col gap-10">
           <div className="flex gap-16">
             <img
-              src="https://res.cloudinary.com/dtqhqhc9e/image/upload/v1679583901/Images/xzbq1dsuewfxlhzqnrmd.jpg"
+              src={image}
               alt="profilepic"
               className="object-cover w-4/12 rounded-md"
             />
