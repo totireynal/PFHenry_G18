@@ -5,8 +5,8 @@ import SideBar from "../../../Components/SideBar/SideBar";
 import { updateEmployee } from "../../../state/redux/actions/actions";
 import validate from "../../../Utils/functions/validate";
 import Form from "../../../Components/Form/Form";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer"; 
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer"; 
 import { Link } from "react-router-dom";
 
 const EditEmployee = () => {
