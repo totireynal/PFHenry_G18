@@ -48,7 +48,7 @@ const EmployeeDetail = () => {
     cuil,
     cbu,
     dateOfAdmission,
-    // image,
+    image,
   } = employeeDetail;
   
   return (
