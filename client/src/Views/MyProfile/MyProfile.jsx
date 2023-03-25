@@ -7,7 +7,6 @@ import { getEmployeeDetail } from "../../state/redux/actions/actions";
 const EmployeeDetail = () => {
   let { id } = useParams();
   let employeeDetail = useSelector((state) => state.employeeDetail);
-console.log(employeeDetail);
   let dispatch = useDispatch();
 
   useEffect(() => {
