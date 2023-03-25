@@ -113,7 +113,7 @@ const EmployeeDetail = () => {
         </div>
       </div>
       ;
-      <div className="w-full h-screen xl:ml-72 ssm:pl-36  pt-16 flex flex-col gap-10">
+      {/* <div className="w-full h-screen xl:ml-72 ssm:pl-36  pt-16 flex flex-col gap-10">
         <div className="flex gap-16">
           <img
             src="https://res.cloudinary.com/dtqhqhc9e/image/upload/v1679583901/Images/xzbq1dsuewfxlhzqnrmd.jpg"
@@ -142,6 +142,55 @@ const EmployeeDetail = () => {
             <p className="">
               <span className="font-medium"> Role: </span>
               {role}
+            </p>
+            <p className="mb-5 text-xl">
+              <span className="font-bold block">DNI:</span> {dni}
+            </p>
+            <p className="mb-5 text-xl">
+              <span className="font-bold block">Phone:</span> {tel}
+            </p>
+            <p className="mb-5 text-xl">
+              <span className="font-bold block">Address:</span> {address}
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <p className="mb-5 text-xl">
+              <span className="font-bold block">E-mail:</span> {email}
+            </p>
+            <p className="mb-5 text-xl">
+              <span className="font-bold block">Date of Admission:</span>{" "}
+              {dateOfAdmission}
+            </p>
+            <p className="mb-5 text-xl">
+              <span className="font-bold block">Cuil:</span> {cuil}
+            </p>
+            <p className="mb-5 text-xl">
+              <span className="font-bold block">CBU:</span> {cbu}
+            </p>
+          </div>
+        </div>
+      </div> */}
+       <div className="pl-20 w-full h-full">
+        <div className="h-[40%] flex justify-start items-center mb-10">
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-5 text-6xl">
+              <p>{name}</p>
+              <p>{lastName}</p>
+            </div>
+            <div className="flex flex-col gap-1">
+              <p>
+                <span className="font-medium">Position:</span> {position}
+              </p>
+              <p>
+                <span className="font-medium">Area:</span> {area}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between w-full ">
+          <div className="flex flex-col gap-3">
+            <p className="mb-5 text-xl">
+              <span className="n font-bold block">Birth Date:</span> {birthDate}
             </p>
             <p className="mb-5 text-xl">
               <span className="font-bold block">DNI:</span> {dni}
