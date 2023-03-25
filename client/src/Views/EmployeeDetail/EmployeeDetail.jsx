@@ -10,7 +10,6 @@ const EmployeeDetail = () => {
   let { id } = useParams();
 
   let employeeDetail = useSelector((state) => state.employeeDetail);
-  console.log(employeeDetail);
 
   let navigate = useNavigate();
 
@@ -88,78 +87,85 @@ const EmployeeDetail = () => {
         </div>
       </div>
       ;
-      <div className="w-full h-screen xl:ml-72 ssm:pl-36  pt-16 flex flex-col gap-10">
-        <div className="flex gap-16">
+      <div className="flex w-full h-screen ml-72 pt-16 pr-16">
+        <div className="flex flex-col h-full w-[500px]">
           <img
-            src="https://res.cloudinary.com/dtqhqhc9e/image/upload/v1679583901/Images/xzbq1dsuewfxlhzqnrmd.jpg"
+            src={image}
             alt="profilepic"
-            className="object-cover w-4/12 rounded-md"
+            className="object-cover w-full h-[40%] rounded-xl mb-10"
           />
-          <div className="flex felx-col gap-10 w-8/12 ">
-            <div className="flex flex-col justify-center items-start gap-5">
-              <div className="flex gap-5 text-6xl">
-                <p>{name}</p>
-                <p>{lastName}</p>
-              </div>
-              <div>
-                <p>
-                  <span className="font-bold">Position:</span> {position}
-                </p>
-                <p>
-                  <span className="font-bold">Area:</span> {area}
-                </p>
-              </div>
-            </div>
+          <div>
+            <p className="mb-10">
+              <span className="font-medium">Role:</span> {role}
+            </p>
+
+            <Link to={`/editemployee/${id}`}>
+              <button className="bg-sky-400 block mb-2 text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+                Edit Employee
+              </button>
+            </Link>
+            <button
+              className=" text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl bg-sky-400
+ shadow-sky-200 hover:bg-sky-300 "
+              onClick={modalActive}
+            >
+              Delete
+            </button>
           </div>
         </div>
-        <div className="flex gap-16 ">
-          <div className="w-4/12">
-            <p className="">
-              <span className="font-medium"> Role: </span>
-              {role}
-            </p>
-            <div className="flex flex-col w-fit mt-10 gap-5">
-              <Link to={`/editemployee/${id}`}>
-                <button className="bg-sky-400 text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
-                  Edit Employee
-                </button>
-              </Link>
-              <button
-                className="bg-sky-400
-shadow-sky-200 hover:bg-sky-300 text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl "
-                onClick={modalActive}
-              >
-                Delete
-              </button>
+        ;
+        <div className="w-full h-screen xl:ml-72 ssm:pl-36  pt-16 flex flex-col gap-10">
+          <div className="flex gap-16">
+            <img
+              src="https://res.cloudinary.com/dtqhqhc9e/image/upload/v1679583901/Images/xzbq1dsuewfxlhzqnrmd.jpg"
+              alt="profilepic"
+              className="object-cover w-4/12 rounded-md"
+            />
+            <div className="flex felx-col gap-10 w-8/12 ">
+              <div className="flex flex-col justify-center items-start gap-5">
+                <div className="flex gap-5 text-6xl">
+                  <p>{name}</p>
+                  <p>{lastName}</p>
+                </div>
+                <div>
+                  <p>
+                    <span className="font-bold">Position:</span> {position}
+                  </p>
+                  <p>
+                    <span className="font-bold">Area:</span> {area}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="flex w-1/2 text-xl pt-20">
-            <div className="flex flex-col justify-between w-full gap-4 ">
-              <p className="mb-5">
-                <span className="font-bold block">Birth Date:</span> {birthDate}
+          <div className="flex gap-16 ">
+            <div className="w-4/12">
+              <p className="">
+                <span className="font-medium"> Role: </span>
+                {role}
               </p>
-              <p className="mb-5">
+              <p className="mb-5 text-xl">
                 <span className="font-bold block">DNI:</span> {dni}
               </p>
-              <p className="mb-5">
+              <p className="mb-5 text-xl">
                 <span className="font-bold block">Phone:</span> {tel}
               </p>
-              <p className="mb-5">
+              <p className="mb-5 text-xl">
                 <span className="font-bold block">Address:</span> {address}
               </p>
             </div>
-            <div className="flex flex-col justify-between w-full gap-3">
-              <p className="mb-5">
+            <div className="flex flex-col gap-3">
+              <p className="mb-5 text-xl">
                 <span className="font-bold block">E-mail:</span> {email}
               </p>
-              <p className="mb-5">
+              <p className="mb-5 text-xl">
                 <span className="font-bold block">Date of Admission:</span>{" "}
                 {dateOfAdmission}
               </p>
-              <p className="mb-5">
+              <p className="mb-5 text-xl">
                 <span className="font-bold block">Cuil:</span> {cuil}
               </p>
-              <p className="mb-5">
+              <p className="mb-5 text-xl">
                 <span className="font-bold block">CBU:</span> {cbu}
               </p>
             </div>
@@ -171,37 +177,3 @@ shadow-sky-200 hover:bg-sky-300 text-xs text-white rounded overflow-hidden px-8 
 };
 
 export default EmployeeDetail;
-
-//  <div
-//    onClick={() => {
-//      refModal.current.style = "none";
-//    }}
-//    ref={refModal}
-//    className="fixed w-screen h-screen justify-center items-center bg-black bg-opacity-50 hidden z-10"
-//  >
-//    <div
-//      ref={refDivModal}
-//      className="flex flex-col justify-between w-[600px] h-[200px] bg-white rounded p-6 text-xl transition-all duration-100"
-//    >
-//      <h3>Esta seguro que quiere borrar a este empleado?</h3>
-//      <div className="text-end text-base flex justify-between">
-//        <div className="flex justify-center items-center text-base  bg-green-400 rounded w-60 opacity-0">
-//          <p className="pr-42 pl-2 py-1">Se deleteo</p>
-//        </div>
-//        <div>
-//          <button
-//            className="mr-6 px-6 py-2 bg-blue-400 rounded"
-//            onClick={deletedEmplote}
-//          >
-//            Delete
-//          </button>
-//          <button
-//            className=" px-6 py-2 bg-red-400 rounded"
-//            onClick={() => (refModal.current.style = "none")}
-//          >
-//            Cancel
-//          </button>
-//        </div>
-//      </div>
-//    </div>
-//  </div>;
