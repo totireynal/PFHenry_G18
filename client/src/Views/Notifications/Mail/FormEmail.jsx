@@ -6,22 +6,49 @@ const FormEmail = () => {
   const [subject, setSubject] = useState("");
   const [text, setText] = useState("");
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({});
   const [sent, setSent] = useState(false);
+
+  const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
+  const validateForm = () => {
+    const errors = {};
+
+    if (!validateEmail(to)) {
+      errors.to = "Invalid e-mail address";
+    }
+
+    if (subject.trim() === "") {
+      errors.subject = "Subject is required";
+    }
+
+    if (text.trim() === "") {
+      errors.text = "Message is required";
+    }
+
+    setError(errors);
+
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await axios.post("http://localhost:3001/notifications", {
-        to,
-        subject,
-        text,
-      });
-      setSent(true);
-      setError(null);
-    } catch (error) {
-      setError(error.response.data);
+    if (validateForm()) {
+      try {
+        await axios.post("http://localhost:3001/notifications", {
+          to,
+          subject,
+          text,
+        });
+        setSent(true);
+        setError({});
+      } catch (error) {
+        setError(error.response.data);
+      }
     }
   };
 
@@ -39,8 +66,11 @@ const FormEmail = () => {
               type="email"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              className="rounded-md border-2 border-gray-800 blockpx-2 h-12 pl-4 outline-none focus:border-blue-400`"
+              className={`rounded-md border-2 border-gray-800 block px-2 h-12 pl-4 outline-none focus:border-blue-400 ${
+                error.to ? "border-red-500" : ""
+              }`}
             />
+            {error.to && <p className="text-red-500">{error.to}</p>}
           </div>
           <div className="flex flex-col w-2/3 gap-2">
             <label className="font-semibold text-xl">Subject</label>
@@ -48,21 +78,25 @@ const FormEmail = () => {
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="rounded-md border-2 border-gray-800 blockpx-2 h-12 pl-4 outline-none focus:border-blue-400`"
+              className={`rounded-md border-2 border-gray-800 block px-2 h-12 pl-4 outline-none focus:border-blue-400 ${
+                error.subject ? "border-red-500" : ""
+              }`}
             />
+            {error.subject && <p className="text-red-500">{error.subject}</p>}
           </div>
           <div className="flex flex-col w-2/3 gap-2">
             <label className="font-semibold text-xl">Message</label>
             <textarea
-              type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
               cols="10"
               rows="10"
-              className="rounded-md border-2 border-gray-800 blockpx-2 h-30 pl-4 outline-none focus:border-blue-400` resize-none"
+              className={`rounded-md border-2 border-gray-800 block px-2 h-30 pl-4 outline-none focus:border-blue-400 resize-none ${
+                error.text ? "border-red-500" : ""
+              }`}
             />
+            {error.text && <p className="text-red-500">{error.text}</p>}
           </div>
-
           <button
             type="submit"
             className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
@@ -70,7 +104,7 @@ const FormEmail = () => {
             SEND
           </button>
         </form>
-        {error && error}
+        {error.message && <p className="text-red-500">{error.message}</p>}
         {sent && (
           <p className="font-semibold text-1xl text-green-700">
             E-mail sent correctly!

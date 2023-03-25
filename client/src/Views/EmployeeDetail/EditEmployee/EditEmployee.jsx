@@ -52,6 +52,7 @@ const EditEmployee = () => {
     role: `${currentEmployee.role}`,
     cuil: `${currentEmployee.cuil}`,
     cbu: `${currentEmployee.cbu}`,
+    image: `${currentEmployee.image}`,
   });
 
   const handleInput = (e) => {
@@ -87,6 +88,13 @@ const EditEmployee = () => {
         [name]: value,
       });
     }
+  };
+
+  const handleChangeImage = (url) => {
+    setUpdatedUser({
+      ...updatedUser,
+      image: url,
+    });
   };
 
   const handleSubmit = (e) => {
@@ -145,6 +153,7 @@ const EditEmployee = () => {
               submited={submited}
               button="Edit Employee"
               answer={answer}
+              handleChangeImage={handleChangeImage}
             />
           </div>
         </div>
