@@ -16,6 +16,8 @@ const AddEmployee = () => {
       dispatch(getPositionsNum());
       dispatch(getAreasNum());
     }, [dispatch]);
+  
+  
 
     const positionsNum = useSelector((state) => state.positionsNum);
     const areasNum = useSelector((state) => state.areasNum);
@@ -37,7 +39,7 @@ const AddEmployee = () => {
     dateOfAdmission: "",
   });
 
-  const [errorButton, setErrorButton] = useState(false);
+  const [errorButton, setErrorButton] = useState(true);
 
   const { errors, setAllErrors } = useErrors();
 
@@ -66,14 +68,14 @@ const AddEmployee = () => {
 
     setTouched({
       ...touched,
-      [event.target.name]: false,
+      [event.target.name]: true,
     });
 
     const allErrors = Object.keys(errors).length;
     if (!allErrors) {
       setErrorButton(false);
     } else {
-      setErrorButton(false);
+      setErrorButton(true);
     }
   };
 
@@ -93,7 +95,6 @@ const AddEmployee = () => {
       });
     }
     if (name === "AreaId") {
-      console.log(name, value, 'daleeeee');
       setEmployee({
         ...employee,
         [name]: Number(value),
@@ -109,12 +110,12 @@ const AddEmployee = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmited(false);
+    setSubmited(true);
     dispatch(createEmployee(employee, showAnswer));
     setTimeout(() => {
       setSubmited(false);
     }, 3000);
-    setErrorButton(false);
+    setErrorButton(true);
     setEmployee({
       name: "",
       lastName: "",
@@ -149,12 +150,12 @@ const AddEmployee = () => {
       dateOfAdmission: "",
     });
   };
-  // console.log(errors);
+  console.log(errors);
   return (
-    <div className="w-full h-screen ml-72 flex justify-center items-center">
+    <div className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto">
       <div>
         <div className="w-full text-center mb-14 font-bold">
-          <span className="text-4xl text-sky-400">Add Employee</span>
+          <span className="text-4xl text-sky-400">Add Employe</span>
         </div>
 
         {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
@@ -166,7 +167,7 @@ const AddEmployee = () => {
         {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 
         <div className="flex gap-16">
-          <div>
+          <div className="">
             <Form
               handleInput={handleInput}
               handleSubmit={handleSubmit}

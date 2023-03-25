@@ -123,11 +123,11 @@ function rootReducer(state = initialState, action) {
     //     ...state,
     //     allEmployees: action.payload,
     //   };
-    // case CURRENT_EMPLOYEE:
-    //   return {
-    //     ...state,
-    //     currentEmployee: action.payload,
-    //   };
+    case CURRENT_EMPLOYEE:
+      return {
+        ...state,
+        currentEmployee: action.payload,
+      };
     case GET_FILTER:
       return {
         ...state,

@@ -25,7 +25,7 @@ const UploadImage = ({ handleChangeImage }) => {
   };
 
   return (
-    <div className="w-60  ml-4 mt-9 flex gap-4 items-end justify-start text-start">
+    <div className="w-60  lg:ml-4  flex gap-4 items-end justify-start text-start">
       <div className="">
         <h3 className="pb-4">Image</h3>
       <label className="bg-white p-2 rounded cursor-pointer" htmlFor="image">Upload Image</label>

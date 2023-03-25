@@ -32,44 +32,82 @@ const EmployeeDetail = () => {
 
 
   return (
-    <div className="w-full h-screen pt-16 ml-72">
-      <div className="flex flex-row gap-6 items-center justify-center">
-        {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
-        <Link to={`/editemployee/${id}`}>
-          <button className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600">
-            Edit Employee
-          </button>
-        </Link>
-      </div>
-      {/* <div className={style.mainCointainer}> */}
-      <div className="m-auto mt-28 flex flex-col items-center justify-center w-[700px] h-[280px] rounded-3xl bg-slate-300 shadow shadow-slate-700 hover:translate-y-1 hover:scale-104 transition ease-in-out delay-100 duration-400 overflow-hidden">
-        <div className="text-2xl flex flex-col items-center justify-center h-1/3 bg-slate-800 w-full text-slate-200">
-          <div className="flex w-full h-1/2 items-end justify-center">
-            <p>{role}</p>
-          </div>
-          <div className="flex flex-row gap-2 w-full h-1/2 justify-center items-start">
-            <p>{name}</p>
-            <p>{lastName}</p>
-          </div>
-        </div>
-        <div className="flex flex-row items-center justify-center h-2/3 w-full ">
-          <div className="text-xl flex flex-col w-1/2 h-full items-center justify-center ">
-            <p>DNI: {dni}</p>
-            <p>Phone: {tel}</p>
-            <p>Birth Date: {birthDate}</p>
-            <p>Address: {address}</p>
-            <p>E-mail: {email}</p>
-          </div>
-          <div className="text-xl flex flex-col w-1/2 h-full items-center justify-center ">
-            <p>Position: {position}</p>
-            <p>Area: {area}</p>
-            <p>Address: {dateOfAdmission}</p>
-            <p>Cuil: {cuil}</p>
-            <p>CBU: {cbu}</p>
+    <>
+      
+      <div className="w-full lg:h-screen  xl:ml-72 sm:ml-36 ssm:m-auto pt-16 flex  flex-col gap-10 pb-16">
+        <div className="flex gap-16 lg:flex-row ssm:items-center ssm:flex-col-reverse">
+          <img
+            src="https://res.cloudinary.com/dtqhqhc9e/image/upload/v1679583901/Images/xzbq1dsuewfxlhzqnrmd.jpg"
+            alt="profilepic"
+            className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md "
+          />
+          <div className="flex felx-col gap-10 w-8/12 lg:justify-start ssm:justify-center ">
+            <div className="flex flex-col justify-center lg:items-start ssm:items-center gap-5">
+              <div className="flex gap-5 text-6xl">
+                <p>{name}</p>
+                <p>{lastName}</p>
+              </div>
+              <div className="lg:text-start ssm:text-center">
+                <p>
+                  <span className="font-bold">Position:</span> {position}
+                </p>
+                <p>
+                  <span className="font-bold">Area:</span> {area}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+        <div className="flex  lg:items-start lg:justify-start lg:flex-row ssm:flex-col-reverse ssm:items-center ssm:justify-center gap-16">
+          <div className="lg:p-0 lg:inliine-block lg:items-start ssm:flex ssm:justify-center ssm:items-center ssm:flex-col w-4/12 lg:text-start ssm:text-center ssm:pb-16">
+            <p className="">
+              <span className="font-medium"> Role: </span>
+              {role}
+            </p>
+            <div className="flex flex-col  lg:w-fit ssm: mt-10 gap-3 ">
+              <Link to={`/editemployee/${id}`}>
+                <button className="bg-sky-400 text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+                  Edit Employee
+                </button>
+              </Link>
+
+            </div>
+          </div>
+          <div className="flex md:flex-row ssm:flex-col lg:text-start ssm:justify-center ssm:text-center w-1/2 text-xl pt-16">
+            <div className="flex flex-col lg:justify-between w-full ">
+              <p className="mb-5">
+                <span className="font-bold block">Birth Date:</span> {birthDate}
+              </p>
+              <p className="mb-5">
+                <span className="font-bold block">DNI:</span> {dni}
+              </p>
+              <p className="mb-5">
+                <span className="font-bold block">Phone:</span> {tel}
+              </p>
+              <p className="mb-5">
+                <span className="font-bold block">Address:</span> {address}
+              </p>
+            </div>
+            <div className="flex flex-col justify-between w-full gap-3">
+              <p className="mb-5">
+                <span className="font-bold block">E-mail:</span> {email}
+              </p>
+              <p className="mb-5">
+                <span className="font-bold block">Date of Admission:</span>{" "}
+                {dateOfAdmission}
+              </p>
+              <p className="mb-5">
+                <span className="font-bold block">Cuil:</span> {cuil}
+              </p>
+              <p className="mb-5">
+                <span className="font-bold block">CBU:</span> {cbu}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
+  
   );
 };
 

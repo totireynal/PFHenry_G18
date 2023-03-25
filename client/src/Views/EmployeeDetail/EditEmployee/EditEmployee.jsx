@@ -52,6 +52,7 @@ const EditEmployee = () => {
     role: `${currentEmployee.role}`,
     cuil: `${currentEmployee.cuil}`,
     cbu: `${currentEmployee.cbu}`,
+    image: `${currentEmployee.image}`,
   });
 
   const handleInput = (e) => {

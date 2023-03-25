@@ -21,9 +21,9 @@ const validate = (values) => {
   if (!values.cbu.length) errors.cbu = "No ha ingresado ningun caracter";
   if (!values.address.length)
     errors.address = "No ha ingresado ningun caracter";
-  if (values.positionId === 0)
-    errors.positionId = "No ha ingresado ningun caracter";
-  if (!values.areaId === 0) errors.areaId = "No ha ingresado ningun caracter";
+  if (values.PositionId === 0)
+    errors.PositionId = "No ha seleccionado ninguna opcion";
+  if (values.AreaId === 0) errors.AreaId = "No ha seleccionado ninguna opcion";
   if (!values.tel.length) errors.tel = "No ha ingresado ningun caracter";
   if (!values.birthDate.length)
     errors.birthDate = "No ha ingresado ninguna fecha";
