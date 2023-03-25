@@ -13,7 +13,7 @@ const FormEmail = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:3001/notifications", { to, subject, text });
+      await axios.post('http://localhost:3001/notifications', { to, subject, text });
       setSent(true);
       setError(null);
     } catch (error) {
