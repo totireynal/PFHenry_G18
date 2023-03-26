@@ -34,12 +34,13 @@ const Login = () => {
         className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
         // onClick={() => loginWithRedirect()}
         onClick={handleLogin}
-      >
+        >
         Login With Redirect
       </button>
       {/* <button
         className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
-        onClick={() => loginWithPopup()}
+        // onClick={() => loginWithPopup()}
+        onClick={handleLogin}
       >
         Login With Popup
       </button> */}
@@ -62,7 +63,7 @@ const Login = () => {
           <button>Succesful login</button>
         </Link>
       </div>
-    </div>
+    
   );
 };
 
