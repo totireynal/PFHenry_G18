@@ -7,6 +7,9 @@ import {
 import InputForm from "../InputForm";
 import SelectForm from "../SelectForm/SelectForm";
 import UploadImage from "../Upload/UploadImage";
+import { RiAlertFill } from "react-icons/ri";
+import SelectFormSec from "../SelectFormSec/SelectFormSec";
+
 
 const Form = ({
   handleInput,
@@ -37,8 +40,8 @@ const Form = ({
       onSubmit={handleSubmit}
       className="flex flex-col justify-center items-center"
     >
-      <div className="flex gap-8 justify-center items-start mb-10">
-        <div>
+      <div className="flex lg:flex-row ssm:flex-col ssm:gap-0 lg:gap-8 justify-center items-start mb-10">
+        <div className="w-full">
           <InputForm
             label="Name"
             placeholder="Name"
@@ -99,7 +102,7 @@ const Form = ({
             error={errors.cuil}
           />
         </div>
-        <div>
+        <div className="w-full">
           <InputForm
             label="CBU"
             placeholder="CBU"
@@ -147,30 +150,7 @@ const Form = ({
             error={errors.address}
           />
         </div>
-        <div>
-          {/* <InputForm
-            label="Position"
-            placeholder="Position"
-            type="text"
-            name="position"
-            touched={touched.position}
-            value={users.position}
-            handler={handleInput}
-            id="position"
-            error={errors.position}
-          />
-
-          <InputForm
-            label="Area"
-            placeholder="Area"
-            type="text"
-            name="area"
-            touched={touched.area}
-            value={users.area}
-            handler={handleInput}
-            id="area"
-            error={errors.area}
-          /> */}
+        <div className="w-full">
           <InputForm
             label="Admission Date"
             placeholder="Admission Date"
@@ -185,43 +165,34 @@ const Form = ({
           <SelectForm
             label="Role"
             name="role"
+            id='role'
             touched={touched.role}
             handler={handleSelect}
             error={errors.role}
             optionQuantity={[
-              { value: "default", html: "Role", disable: false },
               { value: "User", html: "User", disable: false },
               { value: "Admin", html: "Admin", disable: true },
             ]}
           />
-
-          <select
-            onChange={handleSelect}
+          
+          <SelectFormSec
+            label="Position"
             name="PositionId"
-            id="PositionId"
-            defaultValue="default"
-          >
-            <option value="default" hidden>
-              Position:
-            </option>
-            {positionsNum.map((pos) => (
-              <option value={pos.id}>{pos.position}</option>
-            ))}
-          </select>
-
-          <select
-            onChange={handleSelect}
-            name="AreaId"
-            id="AreaId"
-            defaultValue="default"
-          >
-            <option value="default" hidden>
-              Areas:
-            </option>
-            {areasNum.map((pos) => (
-              <option value={pos.id}>{pos.area}</option>
-            ))}
-          </select>
+            id='PositionId'
+            touched={touched.PositionId}
+            handler={handleSelect}
+            error={errors.PositionId}
+            optionQuantity={positionsNum}
+          />
+              <SelectFormSec
+                label="Area"
+                name="AreaId"
+                id='AreaId'
+                touched={touched.AreaId}
+                handler={handleSelect}
+                error={errors.AreaId}
+                optionQuantity={areasNum}
+              />
           <UploadImage handleChangeImage={handleChangeImage} />
         </div>
       </div>
