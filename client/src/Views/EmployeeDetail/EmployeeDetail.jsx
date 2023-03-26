@@ -86,44 +86,19 @@ const EmployeeDetail = () => {
           </div>
         </div>
       </div>
-      <div className="flex w-full h-screen ml-72 pt-16 pr-16">
-        <div className="flex flex-col h-full w-[500px]">
-          <img
-            src={image}
-            alt="profilepic"
-            className="object-cover w-full h-[40%] rounded-xl mb-10"
-          />
-          <div>
-            <p className="mb-10">
-              <span className="font-medium">Role:</span> {role}
-            </p>
-
-            <Link to={`/editemployee/${id}`}>
-              <button className="bg-sky-400 block mb-2 text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
-                Edit Employee
-              </button>
-            </Link>
-            <button
-              className=" text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl bg-sky-400
- shadow-sky-200 hover:bg-sky-300 "
-              onClick={modalActive}
-            >
-              Delete
-            </button>
-          </div>
-        </div>
+        
         <div className="w-full lg:h-screen  xl:ml-72 sm:ml-36 ssm:m-auto pt-16 flex  flex-col gap-10 pb-16">
           <div className="flex gap-16 lg:flex-row ssm:items-center ssm:flex-col-reverse">
             <img
               src={image}
               alt="profilepic"
-              className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md "
+              className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md h-[200px] "
             />
             <div className="flex felx-col gap-10 w-8/12 lg:justify-start ssm:justify-center ">
               <div className="flex flex-col justify-center lg:items-start ssm:items-center gap-5">
-                <div className="flex gap-5 text-6xl">
-                  <p>{name}</p>
-                  <p>{lastName}</p>
+                <div className="flex lg:flex-wrap lg:text-start  ssm:flex-wrap ssm:text-center gap-5 text-6xl flex-wrap">
+                  <p className="w-full">{name}</p>
+                  <p className="w-full">{lastName}</p>
                 </div>
                 <div className="lg:text-start ssm:text-center">
                   <p>
@@ -166,32 +141,31 @@ shadow-sky-200 hover:bg-sky-300 text-xs text-white rounded overflow-hidden px-8 
                 <p className="mb-5">
                   <span className="font-bold block">DNI:</span> {dni}
                 </p>
-                <p className="mb-5 text-xl">
+                <p className="mb-5">
                   <span className="font-bold block">Phone:</span> {tel}
                 </p>
-                <p className="mb-5 text-xl">
+                <p className="mb-5">
                   <span className="font-bold block">Address:</span> {address}
                 </p>
               </div>
-              <div className="flex flex-col gap-3">
-                <p className="mb-5 text-xl">
+              <div className="flex flex-col justify-between w-full gap-3">
+                <p className="mb-5">
                   <span className="font-bold block">E-mail:</span> {email}
                 </p>
-                <p className="mb-5 text-xl">
+                <p className="mb-5">
                   <span className="font-bold block">Date of Admission:</span>{" "}
                   {dateOfAdmission}
                 </p>
-                <p className="mb-5 text-xl">
+                <p className="mb-5">
                   <span className="font-bold block">Cuil:</span> {cuil}
                 </p>
-                <p className="mb-5 text-xl">
+                <p className="mb-5">
                   <span className="font-bold block">CBU:</span> {cbu}
                 </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

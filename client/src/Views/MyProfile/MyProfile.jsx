@@ -26,7 +26,8 @@ const EmployeeDetail = () => {
     area,
     cuil,
     cbu,
-    dateOfAdmission
+    dateOfAdmission,
+    image
   } = employeeDetail;
 
 
@@ -37,9 +38,9 @@ const EmployeeDetail = () => {
       <div className="w-full lg:h-screen  xl:ml-72 sm:ml-36 ssm:m-auto pt-16 flex  flex-col gap-10 pb-16">
         <div className="flex gap-16 lg:flex-row ssm:items-center ssm:flex-col-reverse">
           <img
-            src="https://res.cloudinary.com/dtqhqhc9e/image/upload/v1679583901/Images/xzbq1dsuewfxlhzqnrmd.jpg"
+            src={image}
             alt="profilepic"
-            className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md "
+            className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md ssm:h-[200px]"
           />
           <div className="flex felx-col gap-10 w-8/12 lg:justify-start ssm:justify-center ">
             <div className="flex flex-col justify-center lg:items-start ssm:items-center gap-5">
