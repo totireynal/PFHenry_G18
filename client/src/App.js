@@ -23,7 +23,6 @@ import { useDispatch } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
 import Calendar2 from "./Views/Calendar2/Calendar2";
-import { useAuth0 } from "@auth0/auth0-react";
 
 
 function App() {
@@ -57,7 +56,7 @@ function App() {
       
   
   }
-  // console.log(isOpen);
+  console.log(isOpen);
 
   console.log(user);
 
@@ -100,9 +99,17 @@ function App() {
           <Route path="/home/login" element={<Login />} />
           <Route path="/home/login/register" element={<Register />} />
           <Route path="/home/login/register/payment" element={<Payment />} />
-          
-            {isAuthenticated &&
-              <Route path="/dashboard" element={<Dashboard />} />}
+            <Route path="/authorization" element={<Authorization />} />
+          <Route element={<ProtectedRoute isAllowed={!!user} />}>
+            <Route
+              element={
+                <ProtectedRoute
+                  isAllowed={!!user && user.role.includes("admin")}
+                  redirectTo="/myprofile"
+                />
+              }
+            >
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/employees" element={<Employees />} />
               <Route path="/employee/:id" element={<EmployeeDetail />} />
               <Route path="/addemployee" element={<AddEmployee />} />
@@ -110,10 +117,10 @@ function App() {
               <Route path="/organization" element={<Organization />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/notifications" element={<Notifications />} />
-           
+            </Route>
             <Route path="/myprofile/:id" element={<MyProfile />} />
             {/* <Route path={`/myprofile/${user.id}`} element={<EditMyProfile />} /> */}
-        
+          </Route>
           <Route path="*" element={<h1>Ruta equivocada</h1>} />
         </Routes>
       {/* </div> */}
