@@ -26,7 +26,6 @@ function Payment() {
 
   return (
     <>
-      <h1>StaffSphere Register Company</h1>
       {clientSecret && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <Register options={clientSecret} />

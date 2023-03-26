@@ -22,11 +22,14 @@ import {
   GET_FILTER,
   CONTENT_FILTERS,
   CLEAN_URL,
+  GET_COMPANIES_CUIT
 } from "../action-types/index";
 
 export function postCompany(payload) {
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/register", payload)
+    console.log("Payload: ", payload)
+    const response = await axios.post("http://localhost:3001/companies/register", payload)
+    console.log("Response.data: ", response.data)
     return dispatch({ type: ADD_COMPANY, payload: response.data });
   };
 }
@@ -341,3 +344,17 @@ export const cleanUrl = () => {
     type: CLEAN_URL,
   };
 };
+
+
+export const getCompaniesCuit = (cuit) => {
+  return async function(dispatch){
+    try {
+      const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
+       const result = response.data;
+       console.log("Respuesta: ", result)
+       return dispatch({type: GET_COMPANIES_CUIT, payload: result})
+     } catch(error){
+       console.log(error.message)
+     }
+   }
+ }

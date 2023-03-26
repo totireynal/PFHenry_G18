@@ -17,11 +17,13 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
+import AddFisrtEmployee from "./Views/Employees/AddFirstEmployee/AddFirstEmployee"
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 import { useDispatch } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
 import Calendar2 from "./Views/Calendar2/Calendar2";
+import Form from "./Components/Form/Form"
 
 
 function App() {
@@ -80,7 +82,8 @@ function App() {
           {pathname === "/" ||
           pathname === "/home" ||
           pathname === "/home/login" ||
-          pathname === "/home/login/register" ? (
+          pathname === "/home/login/register" ||
+          pathname === "/addFirstEmployee" ? (
             ""
           ) : (
             <div className="bg-white">
@@ -95,6 +98,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/home/login" element={<Login />} />
           <Route path="/home/login/register" element={<Payment />} />
+          <Route path="/addFirstEmployee" element={<AddFisrtEmployee/>}/>
           {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route

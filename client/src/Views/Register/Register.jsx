@@ -2,11 +2,11 @@ import { React, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postCompany } from "../../state/redux/actions/actions";
-import fondo from "./fondo.jpg";
 import {CardElement} from "@stripe/react-stripe-js";
 import {useStripe, useElements} from "@stripe/react-stripe-js"
+import { getCompaniesCuit } from "../../state/redux/actions/actions";
 
-import logo from "./logo.jpg";
+
 
 function validate(input) {
   let errors = {};
@@ -62,8 +62,9 @@ export default function CreateCompany(props) {
 
   const dispatch = useDispatch();
   const history = useNavigate();
-  const companies = useSelector((state) => state.companies);
   const [errors, setErrors] = useState({});
+
+
 
   const [input, setInput] = useState({
     name: "",
@@ -75,6 +76,7 @@ export default function CreateCompany(props) {
     email: "",
   });
 
+
   const handleSubmit = async (e)=> {
     e.preventDefault();
 
@@ -84,8 +86,11 @@ export default function CreateCompany(props) {
       return;
     }
 
-   
+    const response = await getCompaniesCuit(input.cuit);
+    if(response.data != "The company PruebaCUIT has been created correctly"){
 
+    };
+    
     if (
       !input.name ||
       !input.cuit ||
@@ -118,7 +123,7 @@ export default function CreateCompany(props) {
     }
 
   setIsProcessing(false);
-
+    console.log("Input pasado a post: ",input)
     dispatch(postCompany(input));
     console.log(input);
     setInput({
@@ -138,6 +143,7 @@ export default function CreateCompany(props) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
+      InformationId:1
     });
     setErrors(
       validate({
@@ -148,27 +154,19 @@ export default function CreateCompany(props) {
   }
 
   return (
-    <div className="min-height-full flex">
-      {/* <div className="hidden lg:block relative h-full flex-1">
-        <img src={fondo} className="height" alt="" />
-      </div> */}
+    <div className="min-height-full flex h-screen">
+      <div className="hidden lg:block relative h-full flex-1 text-6xl">
+      <h1>StaffSphere Register Company</h1>
+      <div className="text-2xl">Simplify your team management for only U$S 2,000</div>
+      </div>
       <div className="flex-1 flex flex-col py-14 px-4 sm:pax-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
           <div className="text-center lg:text-left">
             <h2 className="mt-1 text-3x1 font-extrabold text-gray-900">
               Registre su empresa
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Si ya tiene cuenta
-              <a
-                href="login.html"
-                className="font-medium text-sky-600 hover:text-sky-500"
-              >
-                . Inicia sesion
-              </a>
-            </p>
           </div>
-          <di className="mt-6">
+          <div className="mt-6">
             <form
               action=""
               className="space-y-1"
@@ -340,15 +338,15 @@ export default function CreateCompany(props) {
                     </span>
                 </button>
                  {/* Show any error or success messages */}
-                {message && <div id="payment-message">{message}</div>}
+                 {message && <div className="mb-4">{message}</div>}
               </div>
             </form>
-          </di>
-          <div>
-            {formSubmitted && <Link to="/register/addEmployee">Registre a su administrador</Link>}
+            <div>{formSubmitted && <button><Link to="/addFirstEmployee" className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Registre a su administrador</Link></button>}</div>
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
+
