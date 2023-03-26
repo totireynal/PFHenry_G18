@@ -18,6 +18,7 @@ import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
+import Authorization from "./Views/Authorization/Authorization";
 import { useDispatch } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
@@ -36,7 +37,7 @@ function App() {
   }, []);
 
   const [user, setUser] = useState({
-    id:5,
+    id:26,
     name: "juan",
     role: ["admin"],
   });
@@ -81,7 +82,8 @@ function App() {
           {pathname === "/" ||
           pathname === "/home" ||
           pathname === "/home/login" ||
-          pathname === "/home/login/register" ? (
+          pathname === "/home/login/register" ||
+          pathname === "/authorization" ? (
             ""
           ) : (
             <div className="bg-white">
@@ -97,6 +99,7 @@ function App() {
           <Route path="/home/login" element={<Login />} />
           <Route path="/home/login/register" element={<Register />} />
           <Route path="/home/login/register/payment" element={<Payment />} />
+            <Route path="/authorization" element={<Authorization />} />
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route
               element={

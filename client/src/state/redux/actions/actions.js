@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -51,8 +51,8 @@ export const createEmployee = (info, showAnswer) => {
     console.log(info, "infoooo");
     return axios.post("http://localhost:3001/users", info).then(
       (response) => {
-        console.log(response.data.message, "........");
-        showAnswer(response.data.message);
+        console.log(response.data, "........");
+        showAnswer(response.data);
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },
       (error) => {

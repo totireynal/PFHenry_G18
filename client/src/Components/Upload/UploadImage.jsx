@@ -28,16 +28,15 @@ const UploadImage = ({ handleChangeImage }) => {
     <div className="w-60  lg:ml-4  flex gap-4 items-end justify-start text-start">
       <div className="">
         <h3 className="pb-4">Image</h3>
-      <label className="bg-white p-2 rounded cursor-pointer" htmlFor="image">Upload Image</label>
-        <input className="hidden" type="file" name="file" id='image' onChange={upload} />
-      </div>
-      <div>
-        <img
-          src={image}
-          alt="profilepic"
-          className="rounded-md  border-none shadow-none text-transparent w-20 h-10 object-cover"
-          width="200px"
-          height="100"
+        <label className="bg-white p-2 rounded cursor-pointer" htmlFor="image">
+          Upload Image
+        </label>
+        <input
+          className="hidden"
+          type="file"
+          name="file"
+          id="image"
+          onChange={upload}
         />
       </div>
     </div>
