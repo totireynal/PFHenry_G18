@@ -4,9 +4,12 @@ import axios from 'axios';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import Spinner from '../../Components/Spinner/Spinner'
+import { useState } from "react";
 
 const Authorization = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const [cookies, setCookie] = useCookies(['token']);
 
@@ -29,13 +32,12 @@ const Authorization = () => {
             if (Object.keys(response.data).some(key => ['token', 'access_token', 'jwt_token'].includes(key))
             ) {
                 setCookie('token', response.data.token);
-                // console.log(response.data.token);
+                console.log(response.data.token);
                 console.log('Response is a token, congrats!!!');
                 navigate(`/employees`);
             } else {
                 console.log('Response is text, get out');
-                // navigate("/");
-                
+                navigate("/");                
             }
             
         } catch (error) {
@@ -45,14 +47,24 @@ const Authorization = () => {
         }
       }
     
-      useEffect(() => {
-        callProtectedApi();
+      const handleSpinner = () => {
+        setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 9000);
+      }
 
+      useEffect(() => {
+        handleSpinner();
+        callProtectedApi();
       },[])
+
+      
 
     return(
         <div>
             <h1>Authenticating...</h1>
+            {isLoading && <Spinner />}
         </div>
     )
 }

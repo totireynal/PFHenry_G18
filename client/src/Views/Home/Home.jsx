@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AiFillInstagram } from "react-icons/ai";
 
+
 const Home = () => {
   const container =
     "max-w-[1200px] m-auto flex flex-col justify-center items-center";
