@@ -37,7 +37,7 @@ function App() {
   }, []);
 
   const [user, setUser] = useState({
-    id:5,
+    id:26,
     name: "juan",
     role: ["admin"],
   });
@@ -115,7 +115,7 @@ function App() {
               <Route path="/addemployee" element={<AddEmployee />} />
               <Route path="/editemployee/:id" element={<EditEmployee />} />
               <Route path="/organization" element={<Organization />} />
-              {/* <Route path="/calendar" element={<Calendar />} /> */}
+              <Route path="/calendar" element={<Calendar />} />
               <Route path="/notifications" element={<Notifications />} />
             </Route>
             <Route path="/myprofile/:id" element={<MyProfile />} />
