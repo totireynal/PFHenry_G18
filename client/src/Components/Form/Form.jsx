@@ -10,7 +10,6 @@ import UploadImage from "../Upload/UploadImage";
 import { RiAlertFill } from "react-icons/ri";
 import SelectFormSec from "../SelectFormSec/SelectFormSec";
 
-
 const Form = ({
   handleInput,
   handleSubmit,
@@ -165,7 +164,7 @@ const Form = ({
           <SelectForm
             label="Role"
             name="role"
-            id='role'
+            id="role"
             touched={touched.role}
             handler={handleSelect}
             error={errors.role}
@@ -174,26 +173,33 @@ const Form = ({
               { value: "Admin", html: "Admin", disable: true },
             ]}
           />
-          
+
           <SelectFormSec
             label="Position"
             name="PositionId"
-            id='PositionId'
+            id="PositionId"
             touched={touched.PositionId}
             handler={handleSelect}
             error={errors.PositionId}
             optionQuantity={positionsNum}
           />
-              <SelectFormSec
-                label="Area"
-                name="AreaId"
-                id='AreaId'
-                touched={touched.AreaId}
-                handler={handleSelect}
-                error={errors.AreaId}
-                optionQuantity={areasNum}
-              />
-          <UploadImage handleChangeImage={handleChangeImage} />
+          <SelectFormSec
+            label="Area"
+            name="AreaId"
+            id="AreaId"
+            touched={touched.AreaId}
+            handler={handleSelect}
+            error={errors.AreaId}
+            optionQuantity={areasNum}
+          />
+          <div className="flex flex-row w-60">
+            <UploadImage handleChangeImage={handleChangeImage} />
+            <img
+              src={users.image}
+              alt="profilepic"
+              className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
+            />
+          </div>
         </div>
       </div>
       {!submited ? (

@@ -33,7 +33,8 @@ const AddEmployee = () => {
     tel: "",
     address: "",
     role: "User",
-    image: "",
+    image:
+      "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
     PositionId: 0,
     AreaId: 0,
     cuil: "",
@@ -125,7 +126,8 @@ const AddEmployee = () => {
       tel: "",
       address: "",
       role: "User",
-      image: "",
+      image:
+        "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
       PositionId: 0,
       AreaId: 0,
       cuil: "",
