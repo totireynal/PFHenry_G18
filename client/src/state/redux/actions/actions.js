@@ -54,8 +54,8 @@ export const createEmployee = (info, showAnswer) => {
     console.log(info, "infoooo");
     return axios.post("http://localhost:3001/users", info).then(
       (response) => {
-        console.log(response.data.message, "........");
-        showAnswer(response.data.message);
+        console.log(response.data, "........");
+        showAnswer(response.data);
         dispatch({ type: CREATE_EMPLOYEE, payload: response.data });
       },
       (error) => {
@@ -67,7 +67,7 @@ export const createEmployee = (info, showAnswer) => {
   };
 };
 
-export const getEmployees = (filters) => {
+export const getEmployees = (filters, showAnswer) => {
   return function (dispatch) {
     let url = "http://localhost:3001/users";
 
@@ -82,13 +82,14 @@ export const getEmployees = (filters) => {
     // // console.log(allDefined);
     // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
 
-    return axios.get(addUrlQueries(filters, url)).then(
+     axios.get(addUrlQueries(filters, url)).then(
       (response) => {
-        console.log(response.data, "responseee");
-        dispatch({ type: GET_EMPLOYEES, payload: response.data });
+      
+        showAnswer('');
+        return dispatch({ type: GET_EMPLOYEES, payload: response.data });
       },
       (error) => {
-        console.log(error.response.data);
+        showAnswer(error.response.data.error);
       }
     );
   };
@@ -332,12 +333,27 @@ export const getRoles = (filters) => {
 //   }
 // }
 
-export const getCurrentEmployee = (user) => {
-  return {
-    type: CURRENT_EMPLOYEE,
-    payload: user,
+export const getCurrentEmployee = (id) => {
+  return function (dispatch) {
+    return axios.get(`http://localhost:3001/users/${id}`).then(
+      (response) => {
+        console.log(response.data);
+        dispatch({ type: CURRENT_EMPLOYEE, payload: response.data });
+      },
+      (error) => {
+        dispatch({ type: CURRENT_EMPLOYEE, payload: error.response.data });
+      }
+    );
   };
 };
+
+// export const getCurrentEmployee = (user) => {
+//   console.log(user, 'esteeee');
+//   return {
+//     type: CURRENT_EMPLOYEE,
+//     payload: user,
+//   };
+// };
 
 export const cleanUrl = () => {
   return {

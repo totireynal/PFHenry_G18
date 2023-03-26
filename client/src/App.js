@@ -19,28 +19,59 @@ import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 import AddFisrtEmployee from "./Views/Employees/AddFirstEmployee/AddFirstEmployee"
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
-import { useDispatch } from "react-redux";
+import Authorization from "./Views/Authorization/Authorization";
+import { useDispatch, useSelector } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
 import Calendar2 from "./Views/Calendar2/Calendar2";
 import Form from "./Components/Form/Form"
 
+import { useCookies } from 'react-cookie';
 
 function App() {
-  // const [user, setUser] = useState(null);
   const [isOpen, setOpen] = useState(true);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  
+  // const [cookies] = useCookies(['token']);
+  // const [user, setUser] = useState(null)
+
+  // useEffect(() => {
+  //   if (cookies.token) {
+  //     const userData = JSON.parse(atob(cookies.token.split('.')[1]));
+  //     setUser(userData);
+  //     console.log(userData);
+  //   }
+  // }, [cookies.token]);
+  
+  // const [user, setUser] = useState({});
+
+  const user = useSelector(state => state.currentEmployee)
+
+  // if (Object.keys(user).length === 0) {
+  //   setUser({id: 1});
+  // } else {
+  //   setUser(userCookies)
+  // }
+
+
+
+  console.log(user);
 
   const refSideBar = useRef()
   
-  const [user, setUser] = useState({
-    id: 2,
-    name: "juan",
-    role: ["admin"],
-  });
+  // useEffect(() => {
+  //   dispatch(getCurrentEmployee(user.id));
+  // }, []);
+
+  // const [user, setUser] = useState({
+  //   id:3,
+  //   name: "Juan",
+  //   role: "admin",
+  // });
   // const login = (user) => {
-    //   setUser(user)
-    // }
+  //     setUser(user)
+  //   }
   
   const fn = () => {
     
@@ -53,13 +84,9 @@ function App() {
       
   
   }
-  console.log(isOpen);
+  // console.log(isOpen);
 
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getCurrentEmployee(user));
-  }, []);
 
   return (
     <div className="flex bg-slate-100">
@@ -83,6 +110,7 @@ function App() {
           pathname === "/home" ||
           pathname === "/home/login" ||
           pathname === "/home/login/register" ||
+          pathname === "/authorization" ||
           pathname === "/addFirstEmployee" ? (
             ""
           ) : (
@@ -100,11 +128,12 @@ function App() {
           <Route path="/home/login/register" element={<Payment />} />
           <Route path="/addFirstEmployee" element={<AddFisrtEmployee/>}/>
           {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
+            <Route path="/authorization" element={<Authorization />} />
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route
               element={
                 <ProtectedRoute
-                  isAllowed={!!user && user.role.includes("admin")}
+                  isAllowed={!!user && user.role === "User"}
                   redirectTo="/myprofile"
                 />
               }

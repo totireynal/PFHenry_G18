@@ -2,7 +2,11 @@
 import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { createEmployee, getAreasNum, getPositionsNum } from "../../../state/redux/actions/actions";
+import {
+  createEmployee,
+  getAreasNum,
+  getPositionsNum,
+} from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
 import validate from "../../../Utils/functions/validate";
 import { useErrors } from "../../../Utils/hooks/errors";
@@ -12,13 +16,13 @@ import { Link } from "react-router-dom";
 const AddEmployee = () => {
   const dispatch = useDispatch();
 
-    useEffect(() => {
-      dispatch(getPositionsNum());
-      dispatch(getAreasNum());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getPositionsNum());
+    dispatch(getAreasNum());
+  }, [dispatch]);
 
-    const positionsNum = useSelector((state) => state.positionsNum);
-    const areasNum = useSelector((state) => state.areasNum);
+  const positionsNum = useSelector((state) => state.positionsNum);
+  const areasNum = useSelector((state) => state.areasNum);
 
   const [employee, setEmployee] = useState({
     name: "",
@@ -29,7 +33,8 @@ const AddEmployee = () => {
     tel: "",
     address: "",
     role: "User",
-    image: "",
+    image:
+      "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
     PositionId: 0,
     AreaId: 0,
     cuil: "",
@@ -37,7 +42,9 @@ const AddEmployee = () => {
     dateOfAdmission: "",
   });
 
-  const [errorButton, setErrorButton] = useState(false);
+  
+
+  const [errorButton, setErrorButton] = useState(true);
 
   const { errors, setAllErrors } = useErrors();
 
@@ -47,9 +54,13 @@ const AddEmployee = () => {
 
   const [submited, setSubmited] = useState(false);
 
-  useEffect(() => {
+      useEffect(() => {
+        if (Object.keys(errors).length === 0) {
+          setErrorButton(false);
+        }
+      }, [errors]);
 
-}, [])
+  useEffect(() => {}, []);
 
   const handleInput = (event) => {
     setEmployee({
@@ -66,14 +77,14 @@ const AddEmployee = () => {
 
     setTouched({
       ...touched,
-      [event.target.name]: false,
+      [event.target.name]: true,
     });
 
     const allErrors = Object.keys(errors).length;
     if (!allErrors) {
       setErrorButton(false);
     } else {
-      setErrorButton(false);
+      setErrorButton(true);
     }
   };
 
@@ -93,7 +104,6 @@ const AddEmployee = () => {
       });
     }
     if (name === "AreaId") {
-      console.log(name, value, 'daleeeee');
       setEmployee({
         ...employee,
         [name]: Number(value),
@@ -107,14 +117,17 @@ const AddEmployee = () => {
     }
   };
 
+
+
   const handleSubmit = (event) => {
+    console.log(employee, 'employeeeee');
     event.preventDefault();
-    setSubmited(false);
+    setSubmited(true);
     dispatch(createEmployee(employee, showAnswer));
     setTimeout(() => {
       setSubmited(false);
     }, 3000);
-    setErrorButton(false);
+    setErrorButton(true);
     setEmployee({
       name: "",
       lastName: "",
@@ -124,7 +137,8 @@ const AddEmployee = () => {
       tel: "",
       address: "",
       role: "User",
-      image: "",
+      image:
+        "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
       PositionId: 0,
       AreaId: 0,
       cuil: "",
@@ -149,12 +163,12 @@ const AddEmployee = () => {
       dateOfAdmission: "",
     });
   };
-  // console.log(errors);
+  console.log(errors);
   return (
-    <div className="w-full h-screen ml-72 flex justify-center items-center">
+    <div className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto">
       <div>
         <div className="w-full text-center mb-14 font-bold">
-          <span className="text-4xl text-sky-400">Add Employee</span>
+          <span className="text-4xl text-sky-400">Add Employe</span>
         </div>
 
         {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
@@ -166,7 +180,7 @@ const AddEmployee = () => {
         {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 
         <div className="flex gap-16">
-          <div>
+          <div className="">
             <Form
               handleInput={handleInput}
               handleSubmit={handleSubmit}
@@ -179,6 +193,8 @@ const AddEmployee = () => {
               button="Add Employee"
               answer={answer}
               handleChangeImage={handleChangeImage}
+              positionsNum={positionsNum}
+              areasNum={areasNum}
             />
           </div>
         </div>

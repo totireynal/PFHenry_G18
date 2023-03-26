@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { AiFillInstagram } from "react-icons/ai";
 
+
 const Home = () => {
   const container =
     "max-w-[1200px] m-auto flex flex-col justify-center items-center";
   const styleSectionPrimary =
     "flex flex-col bg-slate-100 justify-center items-center h-screen";
-  const styleSectionSecodary =
-    "flex flex-col  justify-center items-center h-screen";
+  const styleSectionSecondary =
+    "flex flex-col  justify-center items-center h-screen bg-white";
   const styleText = "text-center text-6xl font-black";
 
   return (
@@ -15,7 +16,7 @@ const Home = () => {
       <Link to={"/home/login"}>
         <button
           type="submit"
-          className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+          className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
         >
           {" "}
           Login
@@ -33,7 +34,7 @@ const Home = () => {
           <Link to={"/home/login/register"}>
             <button
               type="submit"
-              className="flex-row m2-2 w-m p-3 text-white rounded bg-sky-700 px-16 py-3 mt-20 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+              className="flex-row m2-2 w-m p-3 text-white rounded bg-sky-400 px-16 py-3 mt-20 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
             >
               {" "}
               Register now!
@@ -42,7 +43,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className={styleSectionSecodary}>
+      <section className={styleSectionSecondary}>
         <div className={container}>
           <div className="flex flex-col justify-center items-center gap-8">
             <h2 className={styleText}>About us...</h2>
@@ -114,11 +115,11 @@ const Home = () => {
         </div>
       </section>
 
-      <footer className="bg-slate-600">
-        <div className="flex flex-row text-white">
+      <footer className="bg-gray-200">
+        <div className="flex flex-row">
           <div className="w-1/3">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXRffPuFBvvRFjhn46hKBxJATOfFLl-VkWA&usqp=CAU"
+              src="https://t3.ftcdn.net/jpg/00/73/99/94/360_F_73999426_RBb9vOl2ifBaaK3LavR21st0A6Q16G7N.jpg"
               alt="logo"
             />
           </div>
