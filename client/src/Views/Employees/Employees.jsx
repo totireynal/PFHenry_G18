@@ -21,6 +21,7 @@ import { useAnswer } from "../../utils/hooks/answer";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
+  console.log(users);
 
   const { answer, showAnswer } = useAnswer()
   console.log(answer, 'nnnnn');

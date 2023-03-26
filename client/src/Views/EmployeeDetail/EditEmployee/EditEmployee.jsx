@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import SideBar from "../../../Components/SideBar/SideBar";
 import { updateEmployee } from "../../../state/redux/actions/actions";
 import validate from "../../../utils/functions/validate";
+import validate from "../../../utils/functions/validate";
 import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../utils/hooks/errors";
 import { useAnswer } from "../../../utils/hooks/answer"; 
@@ -16,7 +17,7 @@ const EditEmployee = () => {
 
   const { errors, setAllErrors } = useErrors();
 
-  const {answer, showAnswer} = useAnswer()
+  const { answer, showAnswer } = useAnswer();
 
   const currentEmployee = useSelector((state) => state.employeeDetail);
 
@@ -69,7 +70,6 @@ const EditEmployee = () => {
       [name]: value,
     });
 
-
     setTouched({
       ...touched,
       [name]: true,
@@ -91,15 +91,22 @@ const EditEmployee = () => {
     }
   };
 
+  const handleChangeImage = (url) => {
+    setUpdatedUser({
+      ...updatedUser,
+      image: url,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // const allErrors = Object.values(errors).length;
     // if (!allErrors) {
-      dispatch(updateEmployee(id, updatedUser, showAnswer));
-      setSubmited(true);
-      setTimeout(() => {
-        setSubmited(false);
-        navigate(-1);
+    dispatch(updateEmployee(id, updatedUser, showAnswer));
+    setSubmited(true);
+    setTimeout(() => {
+      setSubmited(false);
+      navigate(-1);
     }, 3000);
     setErrorButton(true);
 
@@ -123,35 +130,36 @@ const EditEmployee = () => {
 
   return (
     <div className="w-full h-screen ml-72 flex justify-center items-center">
-<div>
+      <div>
         <div className="w-full text-center mb-14 font-bold">
           <span className="text-4xl text-sky-400">Edit Employee</span>
         </div>
 
-{/* ++++++++++++++BOTON BACK EditEmployee+++++++++++++++++++ */}
-            {/* <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
+        {/* ++++++++++++++BOTON BACK EditEmployee+++++++++++++++++++ */}
+        {/* <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
                     onClick={() => navigate(-1)}
             >BACK</button> */}
-{/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
+        {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 
-          <div className="flex gap-16">
-            <div>
-              <Form
-                handleInput={handleInput}
-                handleSubmit={handleSubmit}
-                handleSelect={handleSelect}
-                touched={touched}
-                errors={errors}
-                users={updatedUser}
-                errorButton={errorButton}
-                submited={submited}
-                button="Edit Employee"
-                answer={answer}
-              />
-            </div>
+        <div className="flex gap-16">
+          <div>
+            <Form
+              handleInput={handleInput}
+              handleSubmit={handleSubmit}
+              handleSelect={handleSelect}
+              touched={touched}
+              errors={errors}
+              users={updatedUser}
+              errorButton={errorButton}
+              submited={submited}
+              button="Edit Employee"
+              answer={answer}
+              handleChangeImage={handleChangeImage}
+            />
           </div>
         </div>
       </div>
+    </div>
   );
 };
 

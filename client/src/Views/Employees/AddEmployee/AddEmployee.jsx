@@ -2,7 +2,11 @@
 import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { createEmployee, getAreasNum, getPositionsNum } from "../../../state/redux/actions/actions";
+import {
+  createEmployee,
+  getAreasNum,
+  getPositionsNum,
+} from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
 import validate from "../../../utils/functions/validate";
 import { useErrors } from "../../../utils/hooks/errors";
@@ -12,15 +16,13 @@ import { Link } from "react-router-dom";
 const AddEmployee = () => {
   const dispatch = useDispatch();
 
-    useEffect(() => {
-      dispatch(getPositionsNum());
-      dispatch(getAreasNum());
-    }, [dispatch]);
-  
-  
+  useEffect(() => {
+    dispatch(getPositionsNum());
+    dispatch(getAreasNum());
+  }, [dispatch]);
 
-    const positionsNum = useSelector((state) => state.positionsNum);
-    const areasNum = useSelector((state) => state.areasNum);
+  const positionsNum = useSelector((state) => state.positionsNum);
+  const areasNum = useSelector((state) => state.areasNum);
 
   const [employee, setEmployee] = useState({
     name: "",
@@ -49,9 +51,7 @@ const AddEmployee = () => {
 
   const [submited, setSubmited] = useState(false);
 
-  useEffect(() => {
-
-}, [])
+  useEffect(() => {}, []);
 
   const handleInput = (event) => {
     setEmployee({

@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAreasNum, getPositionsNum } from "../../state/redux/actions/actions";
+import {
+  getAreasNum,
+  getPositionsNum,
+} from "../../state/redux/actions/actions";
 import InputForm from "../InputForm";
 import SelectForm from "../SelectForm/SelectForm";
 import UploadImage from "../Upload/UploadImage";
@@ -21,13 +24,12 @@ const Form = ({
   answer,
   handleChangeImage,
 }) => {
+  //   const dispatch = useDispatch();
 
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-// dispatch(getPositionsNum())
-// dispatch(getAreasNum())
-//   }, [dispatch])
+  //   useEffect(() => {
+  // dispatch(getPositionsNum())
+  // dispatch(getAreasNum())
+  //   }, [dispatch])
 
   const positionsNum = useSelector((state) => state.positionsNum);
   const areasNum = useSelector((state) => state.areasNum);
