@@ -31,7 +31,7 @@ const Login = () => {
       <h3>User is {isAuthenticated ? "Logged in" : "Not logged in"} </h3>
       
       <button
-        className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+        className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
         // onClick={() => loginWithRedirect()}
         onClick={handleLogin}
         >
@@ -45,7 +45,7 @@ const Login = () => {
         Login With Popup
       </button> */}
       <button
-        className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+        className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
         onClick={() => logout()}
       >
         Logout
@@ -54,13 +54,13 @@ const Login = () => {
         <h2>You are not registered yet, please press the button</h2>
       </div>
       <Link to="/home/login/register">
-        <button className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600">
+        <button className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600">
           Register
         </button>
       </Link>
 
         <Link to="/dashboard">
-          <button>Succesful login</button>
+          <button className="text-gray-200 hover:text-gray-600">Succesful login</button>
         </Link>
       </div>
     

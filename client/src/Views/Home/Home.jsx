@@ -119,7 +119,7 @@ const Home = () => {
         <div className="flex flex-row">
           <div className="w-1/3">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXRffPuFBvvRFjhn46hKBxJATOfFLl-VkWA&usqp=CAU"
+              src="https://t3.ftcdn.net/jpg/00/73/99/94/360_F_73999426_RBb9vOl2ifBaaK3LavR21st0A6Q16G7N.jpg"
               alt="logo"
             />
           </div>

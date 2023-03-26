@@ -17,7 +17,13 @@ const SideBar = () => {
       <div className="h-screen flex flex-col justify-between items-center  w-full">
         <div className="flex py-16 items-center">
           {/* <i className="mr-2">logo</i> */}
-          <span class="material-symbols-outlined">circle</span>
+          <div>
+            <img 
+              src="https://t3.ftcdn.net/jpg/00/73/99/94/360_F_73999426_RBb9vOl2ifBaaK3LavR21st0A6Q16G7N.jpg"
+              alt="logo"
+            />
+          </div>
+          {/* <span class="material-symbols-outlined">circle</span> */}
           <h2 className="xl:flex ssm:hidden font-bold text-2xl pl-2">
             StaffSphere
           </h2>

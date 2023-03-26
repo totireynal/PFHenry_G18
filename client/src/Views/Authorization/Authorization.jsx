@@ -15,6 +15,8 @@ const Authorization = () => {
 
     const { 
         getAccessTokenSilently,
+        user,
+        isAuthenticated
 } = useAuth0();
 
     const callProtectedApi = async () => {
@@ -41,7 +43,7 @@ const Authorization = () => {
             }
             
         } catch (error) {
-            const err = error.response.data
+            // const err = error.response.data
             alert("you are not allowed!");
             navigate("/");
         }
@@ -64,7 +66,13 @@ const Authorization = () => {
     return(
         <div>
             <h1>Authenticating...</h1>
-            {isLoading && <Spinner />}
+            {/* {isLoading && <Spinner />} */}
+
+            {/* {isAuthenticated && (
+                <pre style={{textAlign:'start' }}>
+                {JSON.stringify(user, null, 2)}
+                </pre>
+            )} */}
         </div>
     )
 }
