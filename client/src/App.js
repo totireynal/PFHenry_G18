@@ -18,6 +18,7 @@ import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
+import Authorization from "./Views/Authorization/Authorization";
 import { useDispatch } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
@@ -26,15 +27,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 function App() {
-  // const [user, setUser] = useState(null);
   const [isOpen, setOpen] = useState(true);
   const { pathname } = useLocation();
-  const { isAuthenticated } = useAuth0()
+  const dispatch = useDispatch();
 
   const refSideBar = useRef()
   
+  useEffect(() => {
+    dispatch(getCurrentEmployee(user.id));
+  }, []);
+
   const [user, setUser] = useState({
-    id:1,
+    id:26,
     name: "juan",
     role: ["admin"],
   });
@@ -55,11 +59,8 @@ function App() {
   }
   // console.log(isOpen);
 
-  const dispatch = useDispatch();
+  console.log(user);
 
-  useEffect(() => {
-    dispatch(getCurrentEmployee(user));
-  }, []);
 
   return (
     <div className="flex bg-slate-100">
@@ -82,7 +83,8 @@ function App() {
           {pathname === "/" ||
           pathname === "/home" ||
           pathname === "/home/login" ||
-          pathname === "/home/login/register" ? (
+          pathname === "/home/login/register" ||
+          pathname === "/authorization" ? (
             ""
           ) : (
             <div className="bg-white">

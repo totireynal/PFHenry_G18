@@ -9,16 +9,19 @@ const SelectForm = ({
   touched,
 }) => {
   return (
-    <div className="m-4 w-60">
-      <label className={`text-base`} valid={error}>
+    <div className="lg:m-4 lg:w-60 md:w-[600px] sm:w-[450px] ssm:[200px] ssm:m-auto">
+      <label className={`text-base block`} valid={error}>
         {label}
       </label>
       <select
-        className={` rounded-md border-2 border-transparent block w-60 h-10 px-2 group focus:border-blue-400`}
+        className={` rounded-md border-0 outline-none border-transparent h-10 px-2 group focus:border-blue-400 lg:m- lg:w-60 md:w-[600px] sm:w-[450px] ssm:w-full ssm:m-auto`}
         name={name}
         defaultValue="default"
         onChange={handler}
       >
+        <option value="default" hidden>
+          {label}
+        </option>
         {optionQuantity.map((el, i) => (
           <option disabled={el.disable} value={el.value} key={i}>
             {el.html}
@@ -26,12 +29,12 @@ const SelectForm = ({
         ))}
       </select>
       <div className="text-end">
-        {/* <p className="text-red-400 text-xs">
-              <i className="text-red-400 inline-block">
-                <RiAlertFill />
-              </i>
-              {error}
-            </p> */}
+        <p className="text-red-400 text-xs">
+          <i className="text-red-400 inline-block opacity-0">
+            <RiAlertFill />
+          </i>
+          {error}
+        </p>
       </div>
     </div>
   );

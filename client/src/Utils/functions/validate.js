@@ -11,8 +11,7 @@ const validate = (values) => {
   // if (!values.image.length) errors.image = 'No ha ingresado ningun caracter';
   // if (!regex.image.test(values.image)) errors.image = "No es un url apropiado";
   // console.log(values);
-  if (values.role === "default")
-    errors.role = "Debe elegir in Role";
+  if (values.role === "default") errors.role = "Debe elegir in Role";
   if (!values.name.length) errors.name = "No ha ingresado ningun caracter";
   if (!values.lastName.length)
     errors.lastName = "No ha ingresado ningun caracter";
@@ -21,9 +20,9 @@ const validate = (values) => {
   if (!values.cbu.length) errors.cbu = "No ha ingresado ningun caracter";
   if (!values.address.length)
     errors.address = "No ha ingresado ningun caracter";
-  if (values.positionId === 0)
-    errors.positionId = "No ha ingresado ningun caracter";
-  if (!values.areaId === 0) errors.areaId = "No ha ingresado ningun caracter";
+  if (values.PositionId === 0)
+    errors.PositionId = "No ha seleccionado ninguna opcion";
+  if (values.AreaId === 0) errors.AreaId = "No ha seleccionado ninguna opcion";
   if (!values.tel.length) errors.tel = "No ha ingresado ningun caracter";
   if (!values.birthDate.length)
     errors.birthDate = "No ha ingresado ninguna fecha";
@@ -37,6 +36,19 @@ const validate = (values) => {
   if (!values.email.length) errors.email = "No ha ingresado ningun caracter";
   if (!regex.email.test(values.email)) errors.email = "El email es invalido";
 
+  const currentYear = new Date().getFullYear();
+  const year = values.birthDate.split("-")[0];
+  const yearAdmission = values.dateOfAdmission.split("-")[0];
+  const admission = currentYear - yearAdmission;
+  const age = currentYear - year;
+  console.log(year);
+  console.log(age);
+  console.log(admission);
+
+  if (age < 18) errors.birthDate = "Invalid age";
+  if (age < admission) errors.dateOfAdmission = "La fecha es mayor a tu edad";
+  if (admission >= age - 18)
+    errors.dateOfAdmission = "La fecha no puede ser antes de tus 18 años";
   return errors;
 };
 

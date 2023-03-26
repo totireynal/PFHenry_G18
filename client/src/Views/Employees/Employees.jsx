@@ -17,9 +17,14 @@ import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
+import { useAnswer } from "../../utils/hooks/answer";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
+  console.log(users);
+
+  const { answer, showAnswer } = useAnswer();
+  console.log(answer, "nnnnn");
 
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState({
@@ -45,7 +50,7 @@ const Employees = () => {
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
   useEffect(() => {
-    dispatch(getEmployees());
+    dispatch(getEmployees(undefined, showAnswer));
   }, [dispatch]);
 
   useEffect(() => {
@@ -96,23 +101,27 @@ shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded tex
           handleSelectChange={handleSelectChange}
         />
       </div>
-      <div className="flex flex-col gap-2  pt-3 ">
-        {users?.map((user, i) => {
-          return (
-            <Link key={i} to={`/employee/${user?.id}`}>
-              <Employee
-                id={user?.id}
-                name={user?.name}
-                lastName={user?.lastName}
-                email={user?.email}
-                image={user?.image}
-                area={user?.area}
-                position={user?.position}
-                role={user?.role}
-              />
-            </Link>
-          );
-        })}
+      <div className="flex flex-col gap-2 pb-8 pt-3 ">
+        {users ? (
+          users?.map((user, i) => {
+            return (
+              <Link key={i} to={`/employee/${user?.id}`}>
+                <Employee
+                  id={user?.id}
+                  name={user?.name}
+                  lastName={user?.lastName}
+                  email={user?.email}
+                  image={user?.image}
+                  area={user?.area}
+                  position={user?.position}
+                  role={user?.role}
+                />
+              </Link>
+            );
+          })
+        ) : (
+          <h3>{answer}</h3>
+        )}
       </div>
     </div>
   );
