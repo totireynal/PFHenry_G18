@@ -58,9 +58,10 @@ const Login = () => {
         </button>
       </Link>
 
-      <Link to="/dashboard">
-        <button>Succesful login</button>
-      </Link>
+        <Link to="/dashboard">
+          <button>Succesful login</button>
+        </Link>
+      </div>
     </div>
   );
 };

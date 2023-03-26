@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -64,7 +64,7 @@ export const createEmployee = (info, showAnswer) => {
   };
 };
 
-export const getEmployees = (filters) => {
+export const getEmployees = (filters, showAnswer) => {
   return function (dispatch) {
     let url = "http://localhost:3001/users";
 
@@ -79,13 +79,14 @@ export const getEmployees = (filters) => {
     // // console.log(allDefined);
     // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
 
-    return axios.get(addUrlQueries(filters, url)).then(
+     axios.get(addUrlQueries(filters, url)).then(
       (response) => {
-        console.log(response.data, "responseee");
-        dispatch({ type: GET_EMPLOYEES, payload: response.data });
+      
+        showAnswer('');
+        return dispatch({ type: GET_EMPLOYEES, payload: response.data });
       },
       (error) => {
-        console.log(error.response.data);
+        showAnswer(error.response.data.error);
       }
     );
   };
@@ -330,6 +331,7 @@ export const getRoles = (filters) => {
 // }
 
 export const getCurrentEmployee = (user) => {
+  console.log(user, 'esteeee');
   return {
     type: CURRENT_EMPLOYEE,
     payload: user,

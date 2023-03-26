@@ -26,14 +26,18 @@ import Calendar2 from "./Views/Calendar2/Calendar2";
 
 
 function App() {
-  // const [user, setUser] = useState(null);
   const [isOpen, setOpen] = useState(true);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   const refSideBar = useRef()
   
+  useEffect(() => {
+    dispatch(getCurrentEmployee(user.id));
+  }, []);
+
   const [user, setUser] = useState({
-    id: 2,
+    id:5,
     name: "juan",
     role: ["admin"],
   });
@@ -54,11 +58,8 @@ function App() {
   }
   console.log(isOpen);
 
-  const dispatch = useDispatch();
+  console.log(user);
 
-  useEffect(() => {
-    dispatch(getCurrentEmployee(user));
-  }, []);
 
   return (
     <div className="flex bg-slate-100">
