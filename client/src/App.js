@@ -94,8 +94,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/home/login" element={<Login />} />
-          <Route path="/home/login/register" element={<Register />} />
-          <Route path="/home/login/register/payment" element={<Payment />} />
+          <Route path="/home/login/register" element={<Payment />} />
+          {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route
               element={

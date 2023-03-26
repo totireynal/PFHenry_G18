@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postCompany } from "../../state/redux/actions/actions";
 import fondo from "./fondo.jpg";
+import {CardElement} from "@stripe/react-stripe-js";
+import {useStripe, useElements} from "@stripe/react-stripe-js"
+
 import logo from "./logo.jpg";
 
 function validate(input) {
@@ -20,21 +23,21 @@ function validate(input) {
   ) {
     errors.cuit = "Ingrese un formato valido de CUIT";
   }
-  if (!input.rubro) {
-    errors.rubro = "Campo necesario";
-  } else if (/[^A-Za-z0-9 ]+/g.test(input.rubro)) {
-    errors.rubro = "Nombre no puede tener caracteres especiales o tildes";
+  if (!input.industry) {
+    errors.industry = "Campo necesario";
+  } else if (/[^A-Za-z0-9 ]+/g.test(input.industry)) {
+    errors.industry = "Nombre no puede tener caracteres especiales o tildes";
   }
   if (!input.location) {
     errors.location = "Campo necesario";
   }
-  if (!input.amount) {
-    errors.amount = "Campo necesario";
-  } else if (!/^[0-9]+$/.test(input.amount)) {
-    errors.amount = "Ingrese formato numero";
+  if (!input.numberEmployees) {
+    errors.numberEmployees = "Campo necesario";
+  } else if (!/^[0-9]+$/.test(input.numberEmployees)) {
+    errors.numberEmployees = "Ingrese formato numero";
   }
-  if (!input.phone) {
-    errors.phone = "Campo necesario";
+  if (!input.tel) {
+    errors.tel = "Campo necesario";
   }
   if (!input.email) {
     errors.email = "Campo necesario";
@@ -48,7 +51,15 @@ function validate(input) {
   return errors;
 }
 
-export default function CreateCompany() {
+export default function CreateCompany(props) {
+  let clientSecret = props.options;
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const [message, setMessage] = useState(null)
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const dispatch = useDispatch();
   const history = useNavigate();
   const companies = useSelector((state) => state.companies);
@@ -57,34 +68,69 @@ export default function CreateCompany() {
   const [input, setInput] = useState({
     name: "",
     cuit: "",
-    rubro: "",
+    industry: "",
     location: "",
-    amount: "",
-    phone: "",
+    numberEmployees: "",
+    tel: "",
     email: "",
   });
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e)=> {
     e.preventDefault();
+
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+
+   
+
     if (
       !input.name ||
       !input.cuit ||
-      !input.rubro ||
-      !input.amount ||
-      !input.email
+      !input.industry ||
+      !input.numberEmployees ||
+      !input.email ||
+      !input.tel ||
+      !input.location 
     ) {
       return alert("Complete correctamente el formulario antes de enviarlo");
     }
+
+    setIsProcessing(true);
+    const {error, paymentIntent} = await stripe.confirmCardPayment(
+      clientSecret,{
+      payment_method:{
+      card: elements.getElement(CardElement)
+      }
+    },
+  )
+  if(error){
+    setMessage(error.message);
+    } else if(paymentIntent)
+    {
+      console.log(paymentIntent)
+    setMessage("Payment status: succeeded Thank you! 🎉")
+    
+    } else {
+    setMessage("Unexpected state");
+    }
+
+  setIsProcessing(false);
+
     dispatch(postCompany(input));
     console.log(input);
-    alert("Empresa registrada correctamente");
     setInput({
       name: "",
       cuit: "",
-      rubro: "",
-      amount: "",
+      industry: "",
+      numberEmployees: "",
       email: "",
+      location:"",
+      tel:"",
     });
+    setFormSubmitted(true);
     // history("/home")
   }
 
@@ -103,9 +149,9 @@ export default function CreateCompany() {
 
   return (
     <div className="min-height-full flex">
-      <div className="hidden lg:block relative h-full flex-1">
+      {/* <div className="hidden lg:block relative h-full flex-1">
         <img src={fondo} className="height" alt="" />
-      </div>
+      </div> */}
       <div className="flex-1 flex flex-col py-14 px-4 sm:pax-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
           <div className="text-center lg:text-left">
@@ -122,7 +168,7 @@ export default function CreateCompany() {
               </a>
             </p>
           </div>
-          <div className="mt-6">
+          <di className="mt-6">
             <form
               action=""
               className="space-y-1"
@@ -154,9 +200,9 @@ export default function CreateCompany() {
                 <div>
                   <label
                     htmlFor="ID"
-                    class="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
+                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    ID
+                    CUIT
                   </label>
                   <input
                     className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -174,22 +220,85 @@ export default function CreateCompany() {
                 </div>
                 <div>
                   <label
-                    htmlFor="Rubro"
+                    htmlFor="Industry"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    Rubro
+                    Industry
+                  </label>
+                  <input
+                  className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                   type ="text"
+                   name="industry"
+                   value={input.industry}
+                   onChange={(e) => handleChange(e)}
+                   placeholder="Industry"
+                  />
+                  {errors.industry && (
+                    <section className="m-0  text-red-600">
+                      {errors.industry}
+                    </section>
+                  )}
+                </div>
+                <div>
+                  <label
+                    htmlFor="Location"
+                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
+                  >
+                    Location
                   </label>
                   <input
                     type="text"
                     className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Rubro"
-                    value={input.rubro}
-                    name="rubro"
+                    placeholder="Location"
+                    value={input.location}
+                    name="location"
                     onChange={(e) => handleChange(e)}
                   />
-                  {errors.rubro && (
+                  {errors.location && (
                     <section className="m-0  text-red-600">
-                      {errors.rubro}
+                      {errors.location}
+                    </section>
+                  )}
+                </div>
+                <div>
+                  <label
+                    htmlFor="numberEmployees"
+                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
+                  >
+                    Number of employees
+                  </label>
+                  <input
+                    type="number"
+                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Number of employees"
+                    value={input.numberEmployees}
+                    name="numberEmployees"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  {errors.numberEmployees && (
+                    <section className="m-0  text-red-600">
+                      {errors.numberEmployees}
+                    </section>
+                  )}
+                </div>
+              <div>
+                  <label
+                    htmlFor="Tel"
+                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
+                  >
+                    Phone
+                  </label>
+                  <input
+                    type="number"
+                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Phone"
+                    value={input.tel}
+                    name="tel"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  {errors.tel && (
+                    <section className="m-0  text-red-600">
+                      {errors.tel}
                     </section>
                   )}
                 </div>
@@ -214,88 +323,32 @@ export default function CreateCompany() {
                     </section>
                   )}
                 </div>
-                <div>
-                  <label
-                    htmlFor="Amount"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
-                    Number of employees
-                  </label>
-                  <input
-                    type="number"
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Number of employees"
-                    value={input.amount}
-                    name="amount"
-                    onChange={(e) => handleChange(e)}
-                  />
-                  {errors.amount && (
-                    <section className="m-0  text-red-600">
-                      {errors.amount}
-                    </section>
-                  )}
                 </div>
-              </div>
+                <div>
+                <CardElement id="payment-element" />
+                </div>
               <div>
                 <button
                   type="submit"
                   className="m2-2 w-full py-3 bg-sky-700 text-white"
+                  disabled={isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees}
                 >
                   {" "}
-                  Registrarse
+                  
+                    <span>
+                    {isProcessing ? "Processing ... " : "Register and pay now"}
+                    </span>
                 </button>
+                 {/* Show any error or success messages */}
+                {message && <div id="payment-message">{message}</div>}
               </div>
             </form>
+          </di>
+          <div>
+            {formSubmitted && <Link to="/register/addEmployee">Registre a su administrador</Link>}
           </div>
         </div>
       </div>
     </div>
-    // <div class ="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
-    //     <div>
-    //     </div>
-    //     <div>
-    //         <h2>Registra tu empresa</h2>
-    //         <form onSubmit={(e) => handleSubmit(e)}>
-    //             <div>
-    //                 <label>Name: </label>
-    //                 <input type="text" value={input.name} name="name" onChange={(e)=> handleChange(e)}/>
-    //                 {errors.name && (<section>{errors.name}</section>)}
-    //             </div>
-    //             <div>
-    //                 <label>CUIT: </label>
-    //                 <input type="number" value={input.cuit} name="cuit" onChange={(e)=> handleChange(e)} placeholder="e.g 30203445606"/>
-    //                 {errors.cuit && (<section>{errors.cuit}</section>)}
-    //             </div>
-    //             <div>
-    //                 <label>Rubro: </label>
-    //                 <input type="text" value={input.rubro} name="rubro" onChange={(e)=> handleChange(e)}/>
-    //                 {errors.rubro && (<section>{errors.rubro}</section>)}
-    //             </div>
-    //             <div>
-    //                 <label>Location: </label>
-    //                 <input type="text" value={input.location} name="location" onChange={(e)=> handleChange(e)}/>
-    //                 {errors.location && (<section>{errors.location}</section>)}
-    //             </div>
-    //             <div>
-    //                 <label>Amount: </label>
-    //                 <input type="number" value={input.amount} name="amount" onChange={(e)=> handleChange(e)}/>
-    //                 {errors.amount && (<section>{errors.amount}</section>)}
-    //             </div>
-    //             <div>
-    //                 <label>Phone: </label>
-    //                 <input type="number" value={input.phone} name="phone" onChange={(e)=> handleChange(e)}/>
-    //                 {errors.phone && (<section>{errors.phone}</section>)}
-    //             </div>
-    //             <div>
-    //                 <label>Email: </label>
-    //                 <input type="email" value={input.email} name="email" onChange={(e)=> handleChange(e)}/>
-    //                 {errors.email && (<section>{errors.email}</section>)}
-    //             </div>
-    //             <div>
-    //                 <button type="submit" disabled={Object.keys(errors).length === 0?false:true}>Registrar</button>
-    //             </div>
-    //         </form>
-    //     </div>
-    // </div>
   );
 }

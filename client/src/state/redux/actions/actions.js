@@ -26,8 +26,8 @@ import {
 
 export function postCompany(payload) {
   return async function (dispatch) {
-    // const response = await axios.post("http://localhost:3001/data/post/", payload)
-    return dispatch({ type: ADD_COMPANY, payload: payload });
+    const response = await axios.post("http://localhost:3001/register", payload)
+    return dispatch({ type: ADD_COMPANY, payload: response.data });
   };
 }
 

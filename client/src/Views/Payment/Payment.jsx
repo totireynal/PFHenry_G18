@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "./CheckoutForm";
+import Register from "../Register/Register"
 import { loadStripe } from "@stripe/stripe-js";
 
 function Payment() {
@@ -26,14 +26,13 @@ function Payment() {
 
   return (
     <>
-      <h1>React Stripe and the Payment Element</h1>
+      <h1>StaffSphere Register Company</h1>
       {clientSecret && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm />
+          <Register options={clientSecret} />
         </Elements>
       )}
     </>
   );
 }
-
 export default Payment;
