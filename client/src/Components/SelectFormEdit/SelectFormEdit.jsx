@@ -1,6 +1,6 @@
 import { RiAlertFill } from "react-icons/ri";
 
-const SelectFormSec = ({
+const SelectFormEdit = ({
   label,
   name,
   id,
@@ -9,14 +9,12 @@ const SelectFormSec = ({
   error,
   optionQuantity,
   userName,
-  userNum,
+  userNum
 }) => {
-  console.log(userName, userNum);
-
-const errorStyle =
-  error && touched
-    ? "opacity-1 transition-all duration-500"
-    : "opacity-0 transition-all duration-500";
+  const errorStyle =
+    error && touched
+      ? "opacity-1 transition-all duration-500"
+      : "opacity-0 transition-all duration-500";
 
 
   return (
@@ -33,12 +31,12 @@ const errorStyle =
         onChange={handler}
         name={name}
         id={id}
-        defaultValue="default"
+        defaultValue={userName}
       >
-        <option value="default" hidden>
-          {label}
+        <option value={userNum}>
+          {userName}
         </option>
-        {optionQuantity.map((pos) => (
+        {optionQuantity?.map((pos) => (
           <option value={pos.id}>{pos?.position || pos?.area}</option>
         ))}
       </select>
@@ -51,7 +49,9 @@ const errorStyle =
         </p>
       </div>
     </div>
-  );
+  )
 };
 
-export default SelectFormSec;
+export default SelectFormEdit;
+
+

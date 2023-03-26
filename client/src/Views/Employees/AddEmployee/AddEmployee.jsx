@@ -8,9 +8,9 @@ import {
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
-import validate from "../../../Utils/functions/validate";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 import { Link } from "react-router-dom";
 
 const AddEmployee = () => {
@@ -33,13 +33,16 @@ const AddEmployee = () => {
     tel: "",
     address: "",
     role: "User",
-    image: "",
+    image:
+      "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
     PositionId: 0,
     AreaId: 0,
     cuil: "",
     cbu: "",
     dateOfAdmission: "",
   });
+
+  
 
   const [errorButton, setErrorButton] = useState(true);
 
@@ -50,6 +53,12 @@ const AddEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
+
+      useEffect(() => {
+        if (Object.keys(errors).length === 0) {
+          setErrorButton(false);
+        }
+      }, [errors]);
 
   useEffect(() => {}, []);
 
@@ -108,7 +117,10 @@ const AddEmployee = () => {
     }
   };
 
+
+
   const handleSubmit = (event) => {
+    console.log(employee, 'employeeeee');
     event.preventDefault();
     setSubmited(true);
     dispatch(createEmployee(employee, showAnswer));
@@ -125,7 +137,8 @@ const AddEmployee = () => {
       tel: "",
       address: "",
       role: "User",
-      image: "",
+      image:
+        "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
       PositionId: 0,
       AreaId: 0,
       cuil: "",
@@ -180,6 +193,8 @@ const AddEmployee = () => {
               button="Add Employee"
               answer={answer}
               handleChangeImage={handleChangeImage}
+              positionsNum={positionsNum}
+              areasNum={areasNum}
             />
           </div>
         </div>

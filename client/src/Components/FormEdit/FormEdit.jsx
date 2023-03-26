@@ -9,8 +9,9 @@ import SelectForm from "../SelectForm/SelectForm";
 import UploadImage from "../Upload/UploadImage";
 import { RiAlertFill } from "react-icons/ri";
 import SelectFormSec from "../SelectFormSec/SelectFormSec";
+import SelectFormEdit from "../SelectFormEdit/SelectFormEdit";
 
-const Form = ({
+const FormEdit = ({
   handleInput,
   handleSubmit,
   handleSelect,
@@ -22,8 +23,6 @@ const Form = ({
   button,
   answer,
   handleChangeImage,
-  positionsNum,
-  areasNum,
 }) => {
   //   const dispatch = useDispatch();
 
@@ -31,6 +30,10 @@ const Form = ({
   // dispatch(getPositionsNum())
   // dispatch(getAreasNum())
   //   }, [dispatch])
+
+  const positionsNum = useSelector((state) => state.positionsNum);
+  const areasNum = useSelector((state) => state.areasNum);
+  // console.log(positionsNum, "nummmm");
 
   return (
     <form
@@ -112,39 +115,6 @@ const Form = ({
             error={errors.cbu}
           />
 
-          <SelectForm
-            label="Role"
-            name="role"
-            id="role"
-            touched={touched.role}
-            handler={handleSelect}
-            error={errors.role}
-            optionQuantity={[
-              { value: "User", html: "User", disable: false },
-              { value: "Admin", html: "Admin", disable: true },
-            ]}
-          />
-
-          <SelectFormSec
-            label="Position"
-            name="PositionId"
-            id="PositionId"
-            touched={touched.PositionId}
-            handler={handleSelect}
-            error={errors.PositionId}
-            optionQuantity={positionsNum}
-          />
-          <SelectFormSec
-            label="Area"
-            name="AreaId"
-            id="AreaId"
-            touched={touched.AreaId}
-            handler={handleSelect}
-            error={errors.AreaId}
-            optionQuantity={areasNum}
-          />
-        </div>
-        <div className="w-full">
           <InputForm
             label="DNI"
             placeholder="DNI"
@@ -179,6 +149,8 @@ const Form = ({
             id="address"
             error={errors.address}
           />
+        </div>
+        <div className="w-full">
           <InputForm
             label="Admission Date"
             placeholder="Admission Date"
@@ -189,6 +161,41 @@ const Form = ({
             handler={handleInput}
             id="dateOfAdmission"
             error={errors.dateOfAdmission}
+          />
+          <SelectForm
+            label="Role"
+            name="role"
+            id="role"
+            touched={touched.role}
+            handler={handleSelect}
+            error={errors.role}
+            optionQuantity={[
+              { value: "User", html: "User", disable: false },
+              { value: "Admin", html: "Admin", disable: true },
+            ]}
+          />
+
+          <SelectFormEdit
+            label="Position"
+            name="PositionId"
+            id="PositionId"
+            userName={users.position}
+            userNum={users.positionId}
+            touched={touched.PositionId}
+            handler={handleSelect}
+            error={errors.PositionId}
+            optionQuantity={positionsNum}
+          />
+          <SelectFormEdit
+            label="Area"
+            name="AreaId"
+            id="AreaId"
+            userName={users.area}
+            userNum={users.areaId}
+            touched={touched.AreaId}
+            handler={handleSelect}
+            error={errors.AreaId}
+            optionQuantity={areasNum}
           />
           <div className="flex flex-row w-60">
             <UploadImage handleChangeImage={handleChangeImage} />
@@ -221,4 +228,4 @@ const Form = ({
   );
 };
 
-export default Form;
+export default FormEdit;
