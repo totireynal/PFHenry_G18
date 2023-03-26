@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import SideBar from "../../../Components/SideBar/SideBar";
-import { updateEmployee } from "../../../state/redux/actions/actions";
-import validate from "../../../utils/functions/validate";
-import validate from "../../../utils/functions/validate";
+import { getAreasNum, getPositionsNum, updateEmployee } from "../../../state/redux/actions/actions";
+import validate from "../../../Utils/functions/validate";
 import Form from "../../../Components/Form/Form";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer"; 
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer"; 
 import { Link } from "react-router-dom";
 
 const EditEmployee = () => {
@@ -15,11 +14,17 @@ const EditEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    dispatch(getPositionsNum());
+    dispatch(getAreasNum());
+  }, [dispatch]);
+
   const { errors, setAllErrors } = useErrors();
 
   const { answer, showAnswer } = useAnswer();
 
   const currentEmployee = useSelector((state) => state.employeeDetail);
+  
 
   const [touched, setTouched] = useState({
     name: false,
@@ -55,7 +60,7 @@ const EditEmployee = () => {
     cbu: `${currentEmployee.cbu}`,
     image: `${currentEmployee.image}`,
   });
-
+console.log(currentEmployee.cuil)
   const handleInput = (e) => {
     const { value, name } = e.target;
 

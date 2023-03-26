@@ -27,6 +27,7 @@ const validate = (values) => {
   if (!values.tel.length) errors.tel = "No ha ingresado ningun caracter";
   if (!values.birthDate.length)
     errors.birthDate = "No ha ingresado ninguna fecha";
+    console.log(values.birthDate);
   if (!values.dateOfAdmission.length)
     errors.dateOfAdmission = "No ha ingresado ninguna fecha";
   if (!values.dni.length) errors.dni = "No ha ingresado ningun caracter";

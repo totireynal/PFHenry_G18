@@ -32,7 +32,7 @@ const errorStyle =
         defaultValue="default"
       >
         <option value="default" hidden>
-          Position:
+      {label}
         </option>
         {optionQuantity.map((pos) => (
           <option value={pos.id}>{pos?.position || pos?.area}</option>
