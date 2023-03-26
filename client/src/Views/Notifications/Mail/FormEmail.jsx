@@ -44,8 +44,15 @@ const FormEmail = () => {
           subject,
           text,
         });
-        setSent(true);
+        setSent(true); // Mostrar mensaje
+
+        setTimeout(function () {
+          setSent(false); // Ocultar mensaje después de 2 segundos
+        }, 2000);
         setError({});
+        setTo("");
+        setSubject("");
+        setText("");
       } catch (error) {
         setError(error.response.data);
       }
@@ -100,6 +107,11 @@ const FormEmail = () => {
           <button
             type="submit"
             className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+            // className={
+            //   errorButton
+            //     ? "cursor-not-allowed bg-sky-300 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600"
+            //     : "bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+            // }
           >
             SEND
           </button>

@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import SideBar from "../../../Components/SideBar/SideBar";
 import { getAreasNum, getPositionsNum, updateEmployee } from "../../../state/redux/actions/actions";
+import validate from "../../../utils/functions/validate";
+import { getAreasNum, getPositionsNum, updateEmployee } from "../../../state/redux/actions/actions";
 import validate from "../../../Utils/functions/validate";
 import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer"; 
 import { Link } from "react-router-dom";
+import SelectFormEdit from "../../../Components/SelectFormEdit/SelectFormEdit";
+import FormEdit from "../../../Components/FormEdit/FormEdit";
 
 const EditEmployee = () => {
   const { id } = useParams();
@@ -24,7 +28,6 @@ const EditEmployee = () => {
   const { answer, showAnswer } = useAnswer();
 
   const currentEmployee = useSelector((state) => state.employeeDetail);
-  
 
   const [touched, setTouched] = useState({
     name: false,
@@ -148,7 +151,7 @@ console.log(currentEmployee.cuil)
 
         <div className="flex gap-16">
           <div>
-            <Form
+            <FormEdit
               handleInput={handleInput}
               handleSubmit={handleSubmit}
               handleSelect={handleSelect}

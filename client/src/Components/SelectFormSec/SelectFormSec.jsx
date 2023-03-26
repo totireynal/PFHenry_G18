@@ -8,12 +8,16 @@ const SelectFormSec = ({
   handler,
   error,
   optionQuantity,
+  userName,
+  userNum,
 }) => {
+  console.log(userName, userNum);
 
 const errorStyle =
   error && touched
     ? "opacity-1 transition-all duration-500"
     : "opacity-0 transition-all duration-500";
+
 
   return (
     <div className="lg:m-4 lg:w-60 md:w-[600px] sm:w-[450px] ssm:[200px] ssm:m-auto">
@@ -32,7 +36,7 @@ const errorStyle =
         defaultValue="default"
       >
         <option value="default" hidden>
-      {label}
+          {label}
         </option>
         {optionQuantity.map((pos) => (
           <option value={pos.id}>{pos?.position || pos?.area}</option>

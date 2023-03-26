@@ -23,8 +23,8 @@ const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
   console.log(users);
 
-  const { answer, showAnswer } = useAnswer()
-  console.log(answer, 'nnnnn');
+  const { answer, showAnswer } = useAnswer();
+  console.log(answer, "nnnnn");
 
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState({
@@ -102,22 +102,26 @@ shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded tex
         />
       </div>
       <div className="flex flex-col gap-2 pb-8 pt-3 ">
-        {users ? users?.map((user, i) => {
-          return (
-            <Link key={i} to={`/employee/${user?.id}`}>
-              <Employee
-                id={user?.id}
-                name={user?.name}
-                lastName={user?.lastName}
-                email={user?.email}
-                image={user?.image}
-                area={user?.area}
-                position={user?.position}
-                role={user?.role}
-              />
-            </Link>
-          );
-        }) : <h3>{answer}</h3> }
+        {users ? (
+          users?.map((user, i) => {
+            return (
+              <Link key={i} to={`/employee/${user?.id}`}>
+                <Employee
+                  id={user?.id}
+                  name={user?.name}
+                  lastName={user?.lastName}
+                  email={user?.email}
+                  image={user?.image}
+                  area={user?.area}
+                  position={user?.position}
+                  role={user?.role}
+                />
+              </Link>
+            );
+          })
+        ) : (
+          <h3>{answer}</h3>
+        )}
       </div>
     </div>
   );
