@@ -41,6 +41,8 @@ const AddEmployee = () => {
     dateOfAdmission: "",
   });
 
+  
+
   const [errorButton, setErrorButton] = useState(true);
 
   const { errors, setAllErrors } = useErrors();
@@ -50,6 +52,12 @@ const AddEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
+
+      useEffect(() => {
+        if (Object.keys(errors).length === 0) {
+          setErrorButton(false);
+        }
+      }, [errors]);
 
   useEffect(() => {}, []);
 
@@ -108,7 +116,10 @@ const AddEmployee = () => {
     }
   };
 
+
+
   const handleSubmit = (event) => {
+    console.log(employee, 'employeeeee');
     event.preventDefault();
     setSubmited(true);
     dispatch(createEmployee(employee, showAnswer));
@@ -180,6 +191,8 @@ const AddEmployee = () => {
               button="Add Employee"
               answer={answer}
               handleChangeImage={handleChangeImage}
+              positionsNum={positionsNum}
+              areasNum={areasNum}
             />
           </div>
         </div>

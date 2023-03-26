@@ -92,7 +92,7 @@ const EmployeeDetail = () => {
             <img
               src={image}
               alt="profilepic"
-              className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md "
+              className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md h-[180px] "
             />
             <div className="flex felx-col gap-10 w-8/12 lg:justify-start ssm:justify-center ">
               <div className="flex flex-col justify-center lg:items-start ssm:items-center gap-5">
