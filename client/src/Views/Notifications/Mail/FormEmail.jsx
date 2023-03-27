@@ -38,16 +38,19 @@ const FormEmail = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      try {
-        await axios.post("http://localhost:3001/notifications", {
-          to,
-          subject,
-          text,
-        });
-        setSent(true); // Mostrar mensaje
+      const toList = to.split(",").map((email) => email.trim());
 
+      try {
+        for (const email of toList) {
+          await axios.post("http://localhost:3001/notifications", {
+            to: email,
+            subject,
+            text,
+          });
+        }
+        setSent(true);
         setTimeout(function () {
-          setSent(false); // Ocultar mensaje después de 2 segundos
+          setSent(false);
         }, 2000);
         setError({});
         setTo("");
@@ -70,7 +73,7 @@ const FormEmail = () => {
           <div className="flex flex-col w-2/3 gap-2">
             <label className="font-semibold text-xl">To</label>
             <input
-              type="email"
+              type="text"
               value={to}
               onChange={(e) => setTo(e.target.value)}
               className={`rounded-md border-2 border-gray-800 block px-2 h-12 pl-4 outline-none focus:border-blue-400 ${
@@ -107,11 +110,6 @@ const FormEmail = () => {
           <button
             type="submit"
             className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
-            // className={
-            //   errorButton
-            //     ? "cursor-not-allowed bg-sky-300 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600"
-            //     : "bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
-            // }
           >
             SEND
           </button>
