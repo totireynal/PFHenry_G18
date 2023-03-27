@@ -198,36 +198,16 @@ const FormEdit = ({
             error={errors.dateOfAdmission}
           />
 
-          <UploadImage handleChangeImage={handleChangeImage} />
-          <SelectFormEdit
-            label="Position"
-            name="PositionId"
-            id="PositionId"
-            userName={users.position}
-            userNum={users.positionId}
-            touched={touched.PositionId}
-            handler={handleSelect}
-            error={errors.PositionId}
-            optionQuantity={positionsNum}
-          />
-          <SelectFormEdit
-            label="Area"
-            name="AreaId"
-            id="AreaId"
-            userName={users.area}
-            userNum={users.areaId}
-            touched={touched.AreaId}
-            handler={handleSelect}
-            error={errors.AreaId}
-            optionQuantity={areasNum}
-          />
-          <div className="flex flex-row w-60">
-            <UploadImage handleChangeImage={handleChangeImage} />
-            <img
+          <div className="flex flex-row w-72">
+            <UploadImage
+              handleChangeImage={handleChangeImage}
+              user={users.image}
+            />
+            {/* <img
               src={users.image}
               alt="profilepic"
               className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
-            />
+            /> */}
           </div>
         </div>
       </div>

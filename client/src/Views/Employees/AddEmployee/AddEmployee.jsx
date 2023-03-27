@@ -8,9 +8,9 @@ import {
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
-import validate from "../../../Utils/functions/validate";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 import { Link } from "react-router-dom";
 
 const AddEmployee = () => {
@@ -162,8 +162,8 @@ const AddEmployee = () => {
   console.log(errors);
   return (
     <div
-      className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:pt-0
-ssm:pt-16"
+      className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0
+ssm:py-16"
     >
       <div>
         <div className="w-full text-center mb-14 font-bold">
