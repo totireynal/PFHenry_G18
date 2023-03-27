@@ -330,13 +330,27 @@ export const getRoles = (filters) => {
 //   }
 // }
 
-export const getCurrentEmployee = (user) => {
-  console.log(user, 'esteeee');
-  return {
-    type: CURRENT_EMPLOYEE,
-    payload: user,
+export const getCurrentEmployee = (id) => {
+  return function (dispatch) {
+    return axios.get(`http://localhost:3001/users/${id}`).then(
+      (response) => {
+        console.log(response.data);
+        dispatch({ type: CURRENT_EMPLOYEE, payload: response.data });
+      },
+      (error) => {
+        dispatch({ type: CURRENT_EMPLOYEE, payload: error.response.data });
+      }
+    );
   };
 };
+
+// export const getCurrentEmployee = (user) => {
+//   console.log(user, 'esteeee');
+//   return {
+//     type: CURRENT_EMPLOYEE,
+//     payload: user,
+//   };
+// };
 
 export const cleanUrl = () => {
   return {
