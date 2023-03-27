@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getEmployeeDetail } from "../../state/redux/actions/actions";
 
-const EmployeeDetail = () => {
+const MyProfile = () => {
   let { id } = useParams();
   let employeeDetail = useSelector((state) => state.employeeDetail);
   let dispatch = useDispatch();
@@ -147,4 +147,4 @@ const EmployeeDetail = () => {
 //   );
 // };
 
-export default EmployeeDetail;
+export default MyProfile;

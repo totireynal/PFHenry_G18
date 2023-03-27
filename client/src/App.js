@@ -37,7 +37,7 @@ function App() {
   }, []);
 
   const [user, setUser] = useState({
-    id:26,
+    id:2,
     name: "juan",
     role: ["admin"],
   });

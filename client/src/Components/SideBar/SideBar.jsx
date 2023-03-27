@@ -6,6 +6,8 @@ import { useRef } from "react";
 const SideBar = () => {
 
   const current = useSelector(state => state.currentEmployee)
+  const currentEmployee = useSelector((state) => state.employeeDetail);
+
   console.log(current, 'currr');
 
   const url = `/myprofile/${current}`
