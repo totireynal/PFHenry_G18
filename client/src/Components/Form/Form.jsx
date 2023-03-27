@@ -10,7 +10,6 @@ import UploadImage from "../Upload/UploadImage";
 import { RiAlertFill } from "react-icons/ri";
 import SelectFormSec from "../SelectFormSec/SelectFormSec";
 
-
 const Form = ({
   handleInput,
   handleSubmit,
@@ -191,7 +190,14 @@ const Form = ({
             id="dateOfAdmission"
             error={errors.dateOfAdmission}
           />
-          <UploadImage handleChangeImage={handleChangeImage} />
+          <div className="flex flex-row w-60">
+            <UploadImage handleChangeImage={handleChangeImage} />
+            <img
+              src={users.image}
+              alt="profilepic"
+              className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
+            />
+          </div>
         </div>
       </div>
       {!submited ? (

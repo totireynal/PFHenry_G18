@@ -10,10 +10,11 @@ const MyProfile = () => {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id));
-  }, [id, dispatch]);
+    dispatch(getEmployeeDetail(paramsId));
+  }, [paramsId, dispatch]);
 
   const {
+    id,
     name,
     lastName,
     birthDate,
@@ -27,7 +28,7 @@ const MyProfile = () => {
     cuil,
     cbu,
     dateOfAdmission,
-    image
+    image,
   } = employeeDetail;
 
 

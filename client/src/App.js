@@ -17,33 +17,61 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
+import AddFisrtEmployee from "./Views/Employees/AddFirstEmployee/AddFirstEmployee"
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 import Authorization from "./Views/Authorization/Authorization";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
 import Calendar2 from "./Views/Calendar2/Calendar2";
+import Form from "./Components/Form/Form"
 
+import { useCookies } from 'react-cookie';
 
 function App() {
   const [isOpen, setOpen] = useState(true);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+  
+  // const [cookies] = useCookies(['token']);
+  // const [user, setUser] = useState(null)
+
+  // useEffect(() => {
+  //   if (cookies.token) {
+  //     const userData = JSON.parse(atob(cookies.token.split('.')[1]));
+  //     setUser(userData);
+  //     console.log(userData);
+  //   }
+  // }, [cookies.token]);
+  
+  // const [user, setUser] = useState({});
+
+  const user = useSelector(state => state.currentEmployee)
+
+  // if (Object.keys(user).length === 0) {
+  //   setUser({id: 1});
+  // } else {
+  //   setUser(userCookies)
+  // }
+
+
+
+  console.log(user);
 
   const refSideBar = useRef()
   
-  useEffect(() => {
-    dispatch(getCurrentEmployee(user.id));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCurrentEmployee(user.id));
+  // }, []);
 
-  const [user, setUser] = useState({
-    id:2,
-    name: "juan",
-    role: ["admin"],
-  });
+  // const [user, setUser] = useState({
+  //   id:3,
+  //   name: "Juan",
+  //   role: "admin",
+  // });
   // const login = (user) => {
-    //   setUser(user)
-    // }
+  //     setUser(user)
+  //   }
   
   const fn = () => {
     
@@ -56,9 +84,8 @@ function App() {
       
   
   }
-  console.log(isOpen);
+  // console.log(isOpen);
 
-  console.log(user);
 
 
   return (
@@ -83,7 +110,8 @@ function App() {
           pathname === "/home" ||
           pathname === "/home/login" ||
           pathname === "/home/login/register" ||
-          pathname === "/authorization" ? (
+          pathname === "/authorization" ||
+          pathname === "/addFirstEmployee" ? (
             ""
           ) : (
             <div className="bg-white">
@@ -97,14 +125,15 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/home/login" element={<Login />} />
-          <Route path="/home/login/register" element={<Register />} />
-          <Route path="/home/login/register/payment" element={<Payment />} />
+          <Route path="/home/login/register" element={<Payment />} />
+          <Route path="/addFirstEmployee" element={<AddFisrtEmployee/>}/>
+          {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
             <Route path="/authorization" element={<Authorization />} />
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route
               element={
                 <ProtectedRoute
-                  isAllowed={!!user && user.role.includes("admin")}
+                  isAllowed={!!user && user.role === "User"}
                   redirectTo="/myprofile"
                 />
               }
