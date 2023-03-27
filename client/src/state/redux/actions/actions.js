@@ -22,6 +22,7 @@ import {
   GET_FILTER,
   CONTENT_FILTERS,
   CLEAN_URL,
+  RESET_CURRENT_EMPLOYEE
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -40,6 +41,10 @@ export function getCompanies() {
       })
       .catch((err) => console.log(err.message));
   };
+}
+
+export function resetCurrentEmployee() {
+  return { type: RESET_CURRENT_EMPLOYEE };
 }
 
 export function resetCreate() {

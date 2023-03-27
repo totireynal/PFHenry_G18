@@ -20,6 +20,7 @@ import {
   CLEAN_URL,
   GET_POSITIONS_NUM,
   GET_AREAS_NUM,
+  RESET_CURRENT_EMPLOYEE
 } from "../action-types/index";
 
 const initialState = {
@@ -59,6 +60,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         employeeCreated: action.payload,
       };
+    // case RESET_CURRENT_EMPLOYEE:
+    //   return {
+    //     ...state,
+    //     currentEmployee: {},
+    //   };
     case GET_EMPLOYEES:
       return {
         ...state,
