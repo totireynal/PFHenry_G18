@@ -5,14 +5,11 @@ import { useEffect } from "react";
 import { getEmployeeDetail } from "../../state/redux/actions/actions";
 
 const MyProfile = () => {
-  let { id } = useParams();
+  // let { id } = useParams();
   let employeeDetail = useSelector((state) => state.employeeDetail);
   let dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getEmployeeDetail(paramsId));
-  }, [paramsId, dispatch]);
-
+  
   const {
     id,
     name,
@@ -31,6 +28,9 @@ const MyProfile = () => {
     image,
   } = employeeDetail;
 
+  useEffect(() => {
+    dispatch(getEmployeeDetail(id));
+  }, [id, dispatch]);
 
 
   return (
