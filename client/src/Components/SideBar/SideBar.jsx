@@ -1,15 +1,22 @@
 import ButtonSideBar from "./ButtonSideBar/ButtonSideBar";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 
 const SideBar = () => {
 
   const current = useSelector(state => state.currentEmployee)
+  const currentEmployee = useSelector((state) => state.employeeDetail);
+
   console.log(current, 'currr');
 
-  const url = `/myprofile/${current}`
+  const url = `/myprofile/${current.id}`
 
+  const { 
+    logout,
+} = useAuth0();
 
 
   return (
@@ -17,8 +24,15 @@ const SideBar = () => {
       <div className="h-screen flex flex-col justify-between items-center  w-full">
         <div className="flex py-16 items-center">
           {/* <i className="mr-2">logo</i> */}
-          <span class="material-symbols-outlined">circle</span>
-          <h2 className="xl:flex ssm:hidden font-bold text-2xl pl-2">
+          <div className="text-start">
+            <img
+              className="object-cover w-12"
+              src="https://res.cloudinary.com/dtqhqhc9e/image/upload/v1679883961/Images/mqu3wnxbcotfu4t0gbqx.png"
+              alt="logo"
+            />
+          </div>
+          {/* <span class="material-symbols-outlined">circle</span> */}
+          <h2 className="text-start xl:flex ssm:hidden font-bold text-2xl ">
             StaffSphere
           </h2>
         </div>
@@ -48,17 +62,34 @@ const SideBar = () => {
                 <ButtonSideBar url={url} icon="person">
                   My Profile
                 </ButtonSideBar>
-                <ButtonSideBar url="/home" icon="logout">
+                <div
+                  className="relative w-full h-9 xl:m-0 ssm:my-5 hover:text-sky-400 cursor-pointer"
+                  onClick={() => logout()}
+                >
+                  <span className="absolute h-9  leading-9 xl:left-10 ssm:left-7 material-symbols-outlined">
+                    logout
+                  </span>
+                  <div className="">
+                    <button
+                      className="h-9 p-2 w-full xl:inline-block ssm:hidden
+             hover:border-t hover:shadow-lg hover:shadow-sky-200 hover:text-sky-400"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+
+                {/* <ButtonSideBar url="/home" icon="logout">
                   Log Out
-                </ButtonSideBar>
+                </ButtonSideBar> */}
               </div>
             </div>
           </div>
         </div>
 
         <img
-          className="xl:inline-block ssm:hidden w-60 object-cover "
-          src="https://datepsychology.com/wp-content/uploads/2022/09/gigachad.jpg"
+          className="xl:inline-block h-[200px] ssm:hidden w-60 object-cover "
+          src={current.image}
           alt=""
         />
       </div>
