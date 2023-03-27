@@ -1,17 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAreasNum,
-  getPositionsNum,
-} from "../../state/redux/actions/actions";
+import { getAreasNum, getPositionsNum } from "../../state/redux/actions/actions";
 import InputForm from "../InputForm";
 import SelectForm from "../SelectForm/SelectForm";
 import UploadImage from "../Upload/UploadImage";
-import { RiAlertFill } from "react-icons/ri";
-import SelectFormSec from "../SelectFormSec/SelectFormSec";
-import SelectFormEdit from "../SelectFormEdit/SelectFormEdit";
 
-const FormEdit = ({
+const Form = ({
   handleInput,
   handleSubmit,
   handleSelect,
@@ -24,12 +18,13 @@ const FormEdit = ({
   answer,
   handleChangeImage,
 }) => {
-  //   const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  // dispatch(getPositionsNum())
-  // dispatch(getAreasNum())
-  //   }, [dispatch])
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+// dispatch(getPositionsNum())
+// dispatch(getAreasNum())
+//   }, [dispatch])
 
   const positionsNum = useSelector((state) => state.positionsNum);
   const areasNum = useSelector((state) => state.areasNum);
@@ -40,8 +35,8 @@ const FormEdit = ({
       onSubmit={handleSubmit}
       className="flex flex-col justify-center items-center"
     >
-      <div className="flex lg:flex-row ssm:flex-col ssm:gap-0 lg:gap-8 justify-center items-start mb-10">
-        <div className="w-full">
+      <div className="flex gap-8 justify-center items-start mb-10">
+        <div>
           <InputForm
             label="Name"
             placeholder="Name"
@@ -102,7 +97,7 @@ const FormEdit = ({
             error={errors.cuil}
           />
         </div>
-        <div className="w-full">
+        <div>
           <InputForm
             label="CBU"
             placeholder="CBU"
@@ -114,44 +109,7 @@ const FormEdit = ({
             id="cbu"
             error={errors.cbu}
           />
-          <SelectForm
-            label="Role"
-            name="role"
-            id="role"
-            touched={touched.role}
-            value={users.role}
-            handler={handleSelect}
-            error={errors.role}
-            optionQuantity={[
-              { value: "User", html: "User", disable: false },
-              { value: "Admin", html: "Admin", disable: true },
-            ]}
-          />
 
-          <SelectFormEdit
-            label="Position"
-            name="PositionId"
-            id="PositionId"
-            userName={users.position}
-            userNum={users.positionId}
-            touched={touched.PositionId}
-            handler={handleSelect}
-            error={errors.PositionId}
-            optionQuantity={positionsNum}
-          />
-          <SelectFormEdit
-            label="Area"
-            name="AreaId"
-            id="AreaId"
-            userName={users.area}
-            userNum={users.areaId}
-            touched={touched.AreaId}
-            handler={handleSelect}
-            error={errors.AreaId}
-            optionQuantity={areasNum}
-          />
-        </div>
-        <div className="w-full">
           <InputForm
             label="DNI"
             placeholder="DNI"
@@ -186,6 +144,31 @@ const FormEdit = ({
             id="address"
             error={errors.address}
           />
+        </div>
+        <div>
+          {/* <InputForm
+            label="Position"
+            placeholder="Position"
+            type="text"
+            name="position"
+            touched={touched.position}
+            value={users.position}
+            handler={handleInput}
+            id="position"
+            error={errors.position}
+          />
+
+          <InputForm
+            label="Area"
+            placeholder="Area"
+            type="text"
+            name="area"
+            touched={touched.area}
+            value={users.area}
+            handler={handleInput}
+            id="area"
+            error={errors.area}
+          /> */}
           <InputForm
             label="Admission Date"
             placeholder="Admission Date"
@@ -197,38 +180,47 @@ const FormEdit = ({
             id="dateOfAdmission"
             error={errors.dateOfAdmission}
           />
+          <SelectForm
+            label="Role"
+            name="role"
+            touched={touched.role}
+            handler={handleSelect}
+            error={errors.role}
+            optionQuantity={[
+              { value: "default", html: "Role", disable: false },
+              { value: "User", html: "User", disable: true },
+              { value: "Admin", html: "Admin", disable: false },
+            ]}
+          />
 
-          <UploadImage handleChangeImage={handleChangeImage} />
-          <SelectFormEdit
-            label="Position"
+          <select
+            onChange={handleSelect}
             name="PositionId"
             id="PositionId"
-            userName={users.position}
-            userNum={users.positionId}
-            touched={touched.PositionId}
-            handler={handleSelect}
-            error={errors.PositionId}
-            optionQuantity={positionsNum}
-          />
-          <SelectFormEdit
-            label="Area"
+            defaultValue="default"
+          >
+            <option value="default" hidden>
+              Position:
+            </option>
+            {positionsNum.map((pos) => (
+              <option value={pos.id}>{pos.position}</option>
+            ))}
+          </select>
+
+          <select
+            onChange={handleSelect}
             name="AreaId"
             id="AreaId"
-            userName={users.area}
-            userNum={users.areaId}
-            touched={touched.AreaId}
-            handler={handleSelect}
-            error={errors.AreaId}
-            optionQuantity={areasNum}
-          />
-          <div className="flex flex-row w-60">
-            <UploadImage handleChangeImage={handleChangeImage} />
-            <img
-              src={users.image}
-              alt="profilepic"
-              className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
-            />
-          </div>
+            defaultValue="default"
+          >
+            <option value="default" hidden>
+              Areas:
+            </option>
+            {areasNum.map((pos) => (
+              <option value={pos.id}>{pos.area}</option>
+            ))}
+          </select>
+          <UploadImage handleChangeImage={handleChangeImage} />
         </div>
       </div>
       {!submited ? (
@@ -252,4 +244,4 @@ const FormEdit = ({
   );
 };
 
-export default FormEdit;
+export default Form;

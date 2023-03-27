@@ -61,7 +61,9 @@ const EditEmployee = () => {
     cbu: `${currentEmployee.cbu}`,
     image: `${currentEmployee.image}`,
   });
-console.log(currentEmployee.cuil)
+
+  console.log(currentEmployee.birthDate, 'adamisinsi');
+  console.log(currentEmployee.dateOfAdmission, 'adamisinsi');
   const handleInput = (e) => {
     const { value, name } = e.target;
 
@@ -135,7 +137,7 @@ console.log(currentEmployee.cuil)
   };
 
   return (
-    <div className="w-full h-screen ml-72 flex justify-center items-center">
+    <div className="w-full lg:h-screen lg:pt-0 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto ssm:pt-16">
       <div>
         <div className="w-full text-center mb-14 font-bold">
           <span className="text-4xl text-sky-400">Edit Employee</span>

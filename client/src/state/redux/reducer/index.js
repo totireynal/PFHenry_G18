@@ -20,11 +20,13 @@ import {
   CLEAN_URL,
   GET_POSITIONS_NUM,
   GET_AREAS_NUM,
+  GET_COMPANIES_CUIT
 } from "../action-types/index";
 
 const initialState = {
   allCompanies: [],
   companies: [],
+  company: {},
   employeeCreated: [],
   allEmployees: [],
   employeeDetail: {},
@@ -143,6 +145,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         arrContentFilters: {},
       };
+    case GET_COMPANIES_CUIT:
+      return{
+        ...state,
+        company: action.payload
+      }
 
     default:
       return state;

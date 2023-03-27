@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getEmployeeDetail } from "../../state/redux/actions/actions";
 
-const EmployeeDetail = () => {
+const MyProfile = () => {
   let { id } = useParams();
   let employeeDetail = useSelector((state) => state.employeeDetail);
   let dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id));
-  }, [id, dispatch]);
+    dispatch(getEmployeeDetail(paramsId));
+  }, [paramsId, dispatch]);
 
   const {
+    id,
     name,
     lastName,
     birthDate,
@@ -27,7 +28,7 @@ const EmployeeDetail = () => {
     cuil,
     cbu,
     dateOfAdmission,
-    image
+    image,
   } = employeeDetail;
 
 
@@ -147,4 +148,4 @@ const EmployeeDetail = () => {
 //   );
 // };
 
-export default EmployeeDetail;
+export default MyProfile;
