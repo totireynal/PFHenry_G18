@@ -375,15 +375,46 @@ export const getCompaniesCuit = (cuit) => {
    }
  }
 
-//  export const getCompaniesCuit = (cuit) => {
-//   return async function(dispatch){
-//     try {
-//       const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
-//        const result = response.data;
-//        console.log("Respuesta: ", result)
-//        return dispatch({type: GET_COMPANIES_CUIT, payload: result})
-//      } catch(error){
-//        console.log(error.message)
-//      }
-//    }
-//  }
+ export const getCompaniesName = (name) => {
+  return async function(dispatch){
+    try {
+      const response = await axios.get(`http://localhost:3001/companies?name=${name}`)
+       const result = response.data;
+       console.log("Respuesta: ", result)
+       return result
+     } catch(error){
+       console.log(error.message)
+     }
+   }
+ }
+
+ export const getCompaniesTel = (tel) => {
+  return async function(dispatch){
+    try {
+      const response = await axios.get(`http://localhost:3001/companies?tel=${tel}`)
+       const result = response.data;
+       console.log("Respuesta: ", result)
+       return result
+     } catch(error){
+       console.log(error.message)
+     }
+   }
+ }
+
+ export const getCompaniesEmail = (email) => {
+  return async function(dispatch){
+    try {
+      const response = await axios.get(`http://localhost:3001/companies?email=${email}`)
+       const result = response.data;
+       console.log("Respuesta: ", result)
+       return result
+     } catch(error){
+       console.log(error.message)
+     }
+   }
+ }
+
+
+
+
+

@@ -5,6 +5,10 @@ import { postCompany } from "../../state/redux/actions/actions";
 import {CardElement} from "@stripe/react-stripe-js";
 import {useStripe, useElements} from "@stripe/react-stripe-js"
 import { getCompaniesCuit } from "../../state/redux/actions/actions";
+import { getCompaniesEmail } from "../../state/redux/actions/actions";
+import { getCompaniesName } from "../../state/redux/actions/actions";
+import { getCompaniesTel } from "../../state/redux/actions/actions";
+
 
 
 function validate(input) {
@@ -86,56 +90,57 @@ export default function CreateCompany(props) {
 
     const cuit = event.target.value;
       dispatch(getCompaniesCuit(cuit)).then(resultado => {
-      if (resultado?.mensaje) {
-        setMensajeCuit(resultado?.mensaje);
+      if (resultado?.message) {
+        setMensajeCuit(resultado?.message);
       } else {
         setMensajeCuit(null);
       }
       console.log("Valor", cuit);
-      console.log("Mensaje: ", resultado?.mensaje)
+      console.log("Mensaje: ", resultado?.message)
     });
+    console.log("asdasdasd")
   }
 
   const handleBlurName = (event) => {
 
     const name = event.target.value;
-      dispatch(getCompaniesCuit(name)).then(resultado => {
-      if (resultado?.mensaje) {
-        setMensajeCuit(resultado?.mensaje);
+      dispatch(getCompaniesName(name)).then(resultado => {
+      if (resultado?.message) {
+        setMensajeName(resultado?.message);
       } else {
-        setMensajeCuit(null);
+        setMensajeName(null);
       }
       console.log("Valor", name);
-      console.log("Mensaje: ", resultado?.mensaje)
+      console.log("Mensaje: ", resultado?.message)
     });
   }
 
 
-  const handleBlurCorreo = (event) => {
+  const handleBlurEmail = (event) => {
 
-    const correo = event.target.value;
-      dispatch(getCompaniesCuit(correo)).then(resultado => {
-      if (resultado?.mensaje) {
-        setMensajeCuit(resultado?.mensaje);
+    const email = event.target.value;
+      dispatch(getCompaniesEmail(email)).then(resultado => {
+      if (resultado?.message) {
+        setMensajeEmail(resultado?.message);
       } else {
-        setMensajeCuit(null);
+        setMensajeEmail(null);
       }
-      console.log("Valor", correo);
-      console.log("Mensaje: ", resultado?.mensaje)
+      console.log("Valor", email);
+      console.log("Mensaje: ", resultado?.message)
     });
   }
 
   const handleBlurTel = (event) => {
 
     const valor = event.target.value;
-      dispatch(getCompaniesCuit(valor)).then(resultado => {
-      if (resultado?.mensaje) {
-        setMensajeCuit(resultado?.mensaje);
+      dispatch(getCompaniesTel(valor)).then(resultado => {
+      if (resultado?.message) {
+        setMensajeTel(resultado?.message);
       } else {
-        setMensajeCuit(null);
+        setMensajeTel(null);
       }
       console.log("Valor", valor);
-      console.log("Mensaje: ", resultado?.mensaje)
+      console.log("Mensaje: ", resultado?.message)
     });
   }
   
@@ -250,6 +255,7 @@ export default function CreateCompany(props) {
                     value={input.name}
                     name="name"
                     onChange={(e) => handleChange(e)}
+                    onBlur={(event)=> handleBlurName(event)}
                   />
                   {errors.name && (
                     <section className="m-0 text-red-600">
@@ -362,6 +368,7 @@ export default function CreateCompany(props) {
                     value={input.tel}
                     name="tel"
                     onChange={(e) => handleChange(e)}
+                    onBlur={(event)=> handleBlurTel(event)}
                   />
                   {errors.tel && (
                     <section className="m-0  text-red-600">
@@ -385,6 +392,7 @@ export default function CreateCompany(props) {
                     value={input.email}
                     name="email"
                     onChange={(e) => handleChange(e)}
+                    onBlur={(event)=> handleBlurEmail(event)}
                   />
                   {errors.email && (
                     <section className="m-0  text-red-600">
@@ -402,7 +410,7 @@ export default function CreateCompany(props) {
                 <button
                   type="submit"
                   className="m2-2 w-full py-3 bg-sky-700 text-white"
-                  disabled={isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees}
+                  disabled={isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees || mensajeCuit || mensajeName || mensajeEmail|| mensajeTel}
                 >
                   {" "}
                   
