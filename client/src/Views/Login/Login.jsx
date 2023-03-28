@@ -15,6 +15,15 @@
 //           getAccessTokenSilently
 //   } = useAuth0();
 
+//   const [cookies] = useCookies(['token']);
+//   const [name, setName] = useState('');
+
+//   useEffect(() => {
+//     if (cookies.token) {
+//       const { name } = JSON.parse(atob(cookies.token.split('.')[1]));
+//       setName(name);
+//     }
+//   }, [cookies.token]);
 
 //   const handleLogin = async () => {
 //     await loginWithRedirect({
@@ -33,7 +42,7 @@
 
 //     <div className="h-screen w-screen flex flex-col justify-center items-center bg-white">
 //       <div className="bg-slate-100 flex flex-col gap-5 justify-center items-center rounded-md p-5">
-     
+//       <h3> {isAuthenticated ? ` ${name} is Logged in` : "User is not logged in"} </h3>
 
 //         <button
 //           className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"

@@ -113,8 +113,7 @@ function App() {
           pathname === "/home/login" ||
           pathname === "/home/login/register" ||
           pathname === "/authorizationone" ||
-          pathname === "/authorization" ||
-          pathname === "/addFirstEmployee" ? (
+          pathname === "/authorization" ? (
             ""
           ) : (
             <div className="bg-white">
