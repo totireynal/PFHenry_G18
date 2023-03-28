@@ -21,7 +21,8 @@ import {
   GET_POSITIONS_NUM,
   GET_AREAS_NUM,
   GET_COMPANIES_CUIT,
-  ADD_RATING
+  ADD_RATING,
+  GET_ARRAY_EMAILS
 } from "../action-types/index";
 
 const initialState = {
@@ -38,7 +39,8 @@ const initialState = {
   roles: [],
   currentEmployee: {},
   arrContentFilters: {},
-  ratings:[]
+  ratings: [],
+  emailsArray: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -157,6 +159,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         ratings: [...state.ratings, action.payload]
       }
+    case GET_ARRAY_EMAILS:
+      return {
+        ...state,
+        emailsArray: action.payload
+      };
     default:
       return state;
   }

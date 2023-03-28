@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Employee from "./Employee/Employee";
 import SearchBar from "./SearchBar/SearchBar";
@@ -8,6 +8,7 @@ import SideBar from "../../Components/SideBar/SideBar";
 import {
   cleanUrl,
   getAreas,
+  getArrayEmails,
   getEmployees,
   getFilter,
   getPositions,
@@ -20,11 +21,12 @@ import Rol from "../../Components/Rol/Rol";
 import { useAnswer } from "../../utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiMailAddLine } from "react-icons/ri";
+import { SiMinutemailer } from "react-icons/si";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
   // console.log(users);
-
+const navigate = useNavigate()
   const { answer, showAnswer } = useAnswer();
 
   const dispatch = useDispatch();
@@ -41,7 +43,14 @@ const Employees = () => {
     });
   };
 
-  console.log(emailsSelection);
+  const [emailsUnselect, setEmailsUnselect] = useState(false)
+
+  const sendEmails = () => {
+    dispatch(getArrayEmails(emailsSelection));
+    navigate("/notifications");
+  }
+
+
 
   const [selectedOption, setSelectedOption] = useState({
     area: "default",
@@ -92,9 +101,20 @@ const Employees = () => {
               <AiOutlinePlus size={20} />
             </button>
           </Link>
-          <button className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+          <button
+            onClick={() => setEmailsUnselect(!emailsUnselect)}
+            className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+          >
             <RiMailAddLine size={20} />
           </button>
+          {emailsSelection.length ? (
+            <button
+              onClick={sendEmails}
+              className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+              
+              <SiMinutemailer />
+            </button>
+          ) : ''}
         </div>
       </div>
       <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8">
@@ -139,6 +159,7 @@ shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded tex
                 role={user?.role}
                 catchEmails={catchEmails}
                 emailsSelection={emailsSelection}
+                emailsUnselect={emailsUnselect}
               />
               // </Link>
             );

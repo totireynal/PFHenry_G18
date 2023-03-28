@@ -23,7 +23,8 @@ import {
   CONTENT_FILTERS,
   CLEAN_URL,
   GET_COMPANIES_CUIT,
-  ADD_RATING
+  ADD_RATING,
+  GET_ARRAY_EMAILS
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -390,5 +391,12 @@ export const addRating = (rating, commentary) => {
     } catch (err) {
       
     }
+  }
+}
+
+export const getArrayEmails = (emails) => {
+  return {
+    type: GET_ARRAY_EMAILS,
+    payload: emails
   }
 }

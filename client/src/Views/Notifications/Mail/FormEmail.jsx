@@ -1,8 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { isArray } from "mathjs";
+
 
 const FormEmail = () => {
+
+  const emailsArray = useSelector((state) => state.emailsArray);
+  console.log(emailsArray);
+
+  
   const [to, setTo] = useState("");
+  
   const [subject, setSubject] = useState("");
   const [text, setText] = useState("");
 
@@ -39,9 +48,9 @@ const FormEmail = () => {
 
     if (validateForm()) {
       const toList = to.split(",").map((email) => email.trim());
-
+      const checkEmails = [...emailsArray, ...toList];
       try {
-        for (const email of toList) {
+        for (const email of checkEmails) {
           await axios.post("http://localhost:3001/notifications", {
             to: email,
             subject,

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import {useRef} from 'react'
 
 const Employee = (props) => {
   const handleCheck = (e) => {
@@ -7,9 +8,18 @@ const Employee = (props) => {
     props.catchEmails(props.email, checked);
   };
 
+  const refDivCheck = useRef();
+
+  // emailsUnselect
+
+  // refDivCheck.current.style.display = 'none'
+
   return (
-    <div className="bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
-      <div className="absolute h-full w-full bg-transparent">
+    <div className=" bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
+      <div
+        ref={refDivCheck}
+        className={`${props.emailsUnselect ? 'inline-block' : 'hidden'} absolute h-full w-full bg-transparent`}
+      >
         <input
           className="absolute right-10 top-10"
           type="checkbox"
