@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+input[type='radio']{
+  display: none;
+}
+
 .height{
     background-position: center center;
     height: 650px;

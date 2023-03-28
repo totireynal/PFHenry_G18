@@ -20,11 +20,14 @@ import {
   CLEAN_URL,
   GET_POSITIONS_NUM,
   GET_AREAS_NUM,
+  GET_COMPANIES_CUIT,
+  ADD_RATING
 } from "../action-types/index";
 
 const initialState = {
   allCompanies: [],
   companies: [],
+  company: {},
   employeeCreated: [],
   allEmployees: [],
   employeeDetail: {},
@@ -35,6 +38,7 @@ const initialState = {
   roles: [],
   currentEmployee: {},
   arrContentFilters: {},
+  ratings:[]
 };
 
 function rootReducer(state = initialState, action) {
@@ -143,7 +147,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         arrContentFilters: {},
       };
-
+    case GET_COMPANIES_CUIT:
+      return{
+        ...state,
+        company: action.payload
+      }
+    case ADD_RATING:
+      return {
+        ...state,
+        ratings: [...state.ratings, action.payload]
+      }
     default:
       return state;
   }

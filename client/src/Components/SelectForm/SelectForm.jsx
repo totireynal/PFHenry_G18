@@ -7,6 +7,7 @@ const SelectForm = ({
   error,
   label,
   touched,
+  value
 }) => {
   return (
     <div className="lg:m-4 lg:w-60 md:w-[600px] sm:w-[450px] ssm:[200px] ssm:m-auto">
@@ -19,8 +20,8 @@ const SelectForm = ({
         defaultValue="default"
         onChange={handler}
       >
-        <option value="default" hidden>
-          {label}
+        <option value={value} hidden>
+          {value}
         </option>
         {optionQuantity.map((el, i) => (
           <option disabled={el.disable} value={el.value} key={i}>

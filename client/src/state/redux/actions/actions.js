@@ -22,12 +22,16 @@ import {
   GET_FILTER,
   CONTENT_FILTERS,
   CLEAN_URL,
+  GET_COMPANIES_CUIT,
+  ADD_RATING
 } from "../action-types/index";
 
 export function postCompany(payload) {
   return async function (dispatch) {
-    // const response = await axios.post("http://localhost:3001/data/post/", payload)
-    return dispatch({ type: ADD_COMPANY, payload: payload });
+    console.log("Payload: ", payload)
+    const response = await axios.post("http://localhost:3001/companies/register", payload)
+    console.log("Response.data: ", response.data)
+    return dispatch({ type: ADD_COMPANY, payload: response.data });
   };
 }
 
@@ -330,16 +334,61 @@ export const getRoles = (filters) => {
 //   }
 // }
 
-export const getCurrentEmployee = (user) => {
-  console.log(user, 'esteeee');
-  return {
-    type: CURRENT_EMPLOYEE,
-    payload: user,
+export const getCurrentEmployee = (id) => {
+  return function (dispatch) {
+    return axios.get(`http://localhost:3001/users/${id}`).then(
+      (response) => {
+        console.log(response.data);
+        dispatch({ type: CURRENT_EMPLOYEE, payload: response.data });
+      },
+      (error) => {
+        dispatch({ type: CURRENT_EMPLOYEE, payload: error.response.data });
+      }
+    );
   };
 };
+
+// export const getCurrentEmployee = (user) => {
+//   console.log(user, 'esteeee');
+//   return {
+//     type: CURRENT_EMPLOYEE,
+//     payload: user,
+//   };
+// };
 
 export const cleanUrl = () => {
   return {
     type: CLEAN_URL,
   };
 };
+
+
+export const getCompaniesCuit = (cuit) => {
+  return async function(dispatch){
+    try {
+      const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
+       const result = response.data;
+       console.log("Respuesta: ", result)
+       return dispatch({type: GET_COMPANIES_CUIT, payload: result})
+     } catch(error){
+       console.log(error.message)
+     }
+   }
+}
+ 
+export const addRating = (rating, commentary) => {
+  return async (dispatch) => {
+    const opinion = {rating, commentary}
+    try {
+      const response = await axios('',opinion )
+      const result = response.data
+
+      return dispatch({
+        type: ADD_RATING,
+        payload: result
+      })
+    } catch (err) {
+      
+    }
+  }
+}

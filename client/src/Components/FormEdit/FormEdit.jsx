@@ -114,7 +114,44 @@ const FormEdit = ({
             id="cbu"
             error={errors.cbu}
           />
+          <SelectForm
+            label="Role"
+            name="role"
+            id="role"
+            touched={touched.role}
+            value={users.role}
+            handler={handleSelect}
+            error={errors.role}
+            optionQuantity={[
+              { value: "User", html: "User", disable: false },
+              { value: "Admin", html: "Admin", disable: true },
+            ]}
+          />
 
+          <SelectFormEdit
+            label="Position"
+            name="PositionId"
+            id="PositionId"
+            userName={users.position}
+            userNum={users.positionId}
+            touched={touched.PositionId}
+            handler={handleSelect}
+            error={errors.PositionId}
+            optionQuantity={positionsNum}
+          />
+          <SelectFormEdit
+            label="Area"
+            name="AreaId"
+            id="AreaId"
+            userName={users.area}
+            userNum={users.areaId}
+            touched={touched.AreaId}
+            handler={handleSelect}
+            error={errors.AreaId}
+            optionQuantity={areasNum}
+          />
+        </div>
+        <div className="w-full">
           <InputForm
             label="DNI"
             placeholder="DNI"
@@ -149,8 +186,6 @@ const FormEdit = ({
             id="address"
             error={errors.address}
           />
-        </div>
-        <div className="w-full">
           <InputForm
             label="Admission Date"
             placeholder="Admission Date"
@@ -162,48 +197,17 @@ const FormEdit = ({
             id="dateOfAdmission"
             error={errors.dateOfAdmission}
           />
-          <SelectForm
-            label="Role"
-            name="role"
-            id="role"
-            touched={touched.role}
-            handler={handleSelect}
-            error={errors.role}
-            optionQuantity={[
-              { value: "User", html: "User", disable: false },
-              { value: "Admin", html: "Admin", disable: true },
-            ]}
-          />
 
-          <SelectFormEdit
-            label="Position"
-            name="PositionId"
-            id="PositionId"
-            userName={users.position}
-            userNum={users.positionId}
-            touched={touched.PositionId}
-            handler={handleSelect}
-            error={errors.PositionId}
-            optionQuantity={positionsNum}
-          />
-          <SelectFormEdit
-            label="Area"
-            name="AreaId"
-            id="AreaId"
-            userName={users.area}
-            userNum={users.areaId}
-            touched={touched.AreaId}
-            handler={handleSelect}
-            error={errors.AreaId}
-            optionQuantity={areasNum}
-          />
-          <div className="flex flex-row w-60">
-            <UploadImage handleChangeImage={handleChangeImage} />
-            <img
+          <div className="flex flex-row w-72">
+            <UploadImage
+              handleChangeImage={handleChangeImage}
+              user={users.image}
+            />
+            {/* <img
               src={users.image}
               alt="profilepic"
               className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
-            />
+            /> */}
           </div>
         </div>
       </div>
