@@ -20,6 +20,7 @@ import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 import AddFisrtEmployee from "./Views/Employees/AddFirstEmployee/AddFirstEmployee"
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 import Authorization from "./Views/Authorization/Authorization";
+import Authorizationone from "./Views/Authorization/Authorization1";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
@@ -27,6 +28,7 @@ import Calendar2 from "./Views/Calendar2/Calendar2";
 import Form from "./Components/Form/Form"
 
 import { useCookies } from 'react-cookie';
+
 
 function App() {
   const [isOpen, setOpen] = useState(true);
@@ -110,8 +112,8 @@ function App() {
           pathname === "/home" ||
           pathname === "/home/login" ||
           pathname === "/home/login/register" ||
-          pathname === "/authorization" ||
-          pathname === "/addFirstEmployee" ? (
+          pathname === "/authorizationone" ||
+          pathname === "/authorization" ? (
             ""
           ) : (
             <div className="bg-white">
@@ -129,6 +131,7 @@ function App() {
           <Route path="/addFirstEmployee" element={<AddFisrtEmployee/>}/>
           {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
             <Route path="/authorization" element={<Authorization />} />
+            <Route path="/authorizationone" element={<Authorizationone />} />
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route
               element={
