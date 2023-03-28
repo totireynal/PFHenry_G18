@@ -11,9 +11,8 @@ import { AiFillStar } from "react-icons/ai";
 import { useRef, useState } from "react";
 
 const MyProfile = () => {
-  // let { paramsId } = useParams();
+  // let { id } = useParams();
   let employeeDetail = useSelector((state) => state.currentEmployee);
-  console.log(employeeDetail, "iddddd");
   let dispatch = useDispatch();
 
   const {
@@ -33,6 +32,10 @@ const MyProfile = () => {
     dateOfAdmission,
     image,
   } = employeeDetail;
+
+  useEffect(() => {
+    dispatch(getEmployeeDetail(id));
+  }, [id, dispatch]);
 
   useEffect(() => {
     dispatch(getEmployeeDetail(id));
