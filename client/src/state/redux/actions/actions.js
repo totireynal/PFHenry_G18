@@ -22,7 +22,8 @@ import {
   GET_FILTER,
   CONTENT_FILTERS,
   CLEAN_URL,
-  GET_COMPANIES_CUIT
+  GET_COMPANIES_CUIT,
+  ADD_RATING
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -373,4 +374,21 @@ export const getCompaniesCuit = (cuit) => {
        console.log(error.message)
      }
    }
- }
+}
+ 
+export const addRating = (rating, commentary) => {
+  return async (dispatch) => {
+    const opinion = {rating, commentary}
+    try {
+      const response = await axios('',opinion )
+      const result = response.data
+
+      return dispatch({
+        type: ADD_RATING,
+        payload: result
+      })
+    } catch (err) {
+      
+    }
+  }
+}

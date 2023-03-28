@@ -2,14 +2,20 @@ import { Link, useParams } from "react-router-dom";
 import SideBar from "../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getEmployeeDetail } from "../../state/redux/actions/actions";
+import {
+  addRating,
+  getEmployeeDetail,
+} from "../../state/redux/actions/actions";
+import { GrFormClose } from "react-icons/gr";
+import { AiFillStar } from "react-icons/ai";
+import { useRef, useState } from "react";
 
 const MyProfile = () => {
   // let { paramsId } = useParams();
   let employeeDetail = useSelector((state) => state.currentEmployee);
-  console.log(employeeDetail, 'iddddd');
+  console.log(employeeDetail, "iddddd");
   let dispatch = useDispatch();
-  
+
   const {
     id,
     name,
@@ -27,15 +33,126 @@ const MyProfile = () => {
     dateOfAdmission,
     image,
   } = employeeDetail;
-  
-  
-    useEffect(() => {
-      dispatch(getEmployeeDetail(id));
-    }, [id, dispatch]);
 
+  useEffect(() => {
+    dispatch(getEmployeeDetail(id));
+  }, [id, dispatch]);
+
+  const refQualify = useRef();
+  const refQualifying = useRef();
+  const refModal = useRef();
+
+  const qualifying = (e) => {
+    refQualify.current.style.pointerEvents = "none";
+    refQualify.current.style.opacity = "0";
+    refQualifying.current.style.pointerEvents = "auto";
+    refQualifying.current.style.opacity = "1";
+  };
+  const endQualifying = (e) => {
+    dispatch(addRating(rating, commentary));
+    refModal.current.style.pointerEvents = "none";
+    refModal.current.style.opacity = "0";
+  };
+
+  const [rating, setRating] = useState(0);
+  const [commentary, setCommentary] = useState("");
+  const [hover, setHover] = useState(0);
+
+  const handleTextarea = (e) => {
+    setCommentary(e.target.value);
+  };
+
+  const close = (e) => {
+    refQualify.current.style.pointerEvents = "none";
+    refQualify.current.style.opacity = "0";
+    refQualifying.current.style.pointerEvents = "none";
+    refQualifying.current.style.opacity = "0";
+    refModal.current.style.pointerEvents = "none";
+    refModal.current.style.opacity = "0";
+  };
+
+  console.log(commentary);
 
   return (
     <>
+      <div
+        ref={refModal}
+        className="w-screen h-screen fixed bg-black bg-opacity-50 z-50 flex justify-center items-center text-center "
+      >
+        <div
+          ref={refQualify}
+          className="absolute bg-white h-1/4 flex-1 m-2 rounded-md flex flex-col justify-between items-center p-5 transition-all duration-500 opacity-1 w-[90%]"
+        >
+          Nos encantaria que pudieras calificar nuestra app, y asi poder ofrecer
+          un mejor servicio para nuestros clientes, tu opinion y cada critica
+          constructiva, valen mucho.
+          <button
+            onClick={qualifying}
+            className="py-2 px-5 bg-sky-400 hover:bg-sky-300 active:shadow-lg active:translate-y-1 rounded "
+          >
+            Calificar
+          </button>
+          <button
+            onClick={close}
+            className="absolute right-2 top-2 rounded-full"
+          >
+            <GrFormClose />
+          </button>
+        </div>
+        <div
+          ref={refQualifying}
+          className="absolute bg-white h-[40%] flex-1 m-2 rounded-md flex flex-col justify-between items-center gap-3 p-5 opacity-0 pointer-events-none w-[90%]"
+        >
+          <div className="flex">
+            <button
+              onClick={close}
+              className="absolute right-2 top-2 rounded-full"
+            >
+              <GrFormClose />
+            </button>
+            {[...Array(5).fill(0)].map((start, i) => {
+              const ratingValue = i + 1;
+
+              return (
+                <label className="">
+                  <input
+                    type="radio"
+                    name="rating"
+                    value={ratingValue}
+                    onClick={() => setRating(ratingValue)}
+                  />
+                  <AiFillStar
+                    size={30}
+                    className={`${
+                      ratingValue <= (hover || rating)
+                        ? "text-yellow-200 transition-all duration-200"
+                        : "text-gray-300 transition-all duration-200"
+                    }`}
+                    onMouseEnter={() => setHover(ratingValue)}
+                    onMouseLeave={() => setHover(null)}
+                  />
+                </label>
+              );
+            })}
+          </div>
+          <textarea
+            className="bg-slate-100 outline-none resize-none w-[95%] rounded p-5"
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            value={commentary}
+            onChange={handleTextarea}
+            placeholder="Add a commentary..."
+          />
+          <button
+            onClick={endQualifying}
+            className="py-2 p-5 bg-sky-400 hover:bg-sky-300 focus:shadow-lg rounded active:translate-y-1"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
       <div className="w-full lg:h-screen  xl:ml-72 sm:ml-36 ssm:m-auto pt-16 flex  flex-col gap-10 pb-16">
         <div className="flex gap-16 lg:flex-row ssm:items-center ssm:flex-col-reverse">
           <img
@@ -111,18 +228,14 @@ const MyProfile = () => {
   );
 };
 
-
-
-
-
 //   return (
 //     <div className="grid grid-cols-6 grid-rows-1 h-screen">
-      
+
 //       <SideBar />
 //       <div className="col-span-5 p-8">
 //         <div className={style.buttonCointainer}>
 //           {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
-          
+
 //           <Link to={`/editemployee/${id}`}>
 //             <button className={style.editButton}>Edit Employee</button>
 //           </Link>
