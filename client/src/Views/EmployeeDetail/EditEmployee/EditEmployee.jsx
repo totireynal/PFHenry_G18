@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import SideBar from "../../../Components/SideBar/SideBar";
 import { getAreasNum, getPositionsNum, updateEmployee } from "../../../state/redux/actions/actions";
-import validate from "../../../Utils/functions/validate";
+import validate from "../../../utils/functions/validate";
 import Form from "../../../Components/Form/Form";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer"; 
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer"; 
 import { Link } from "react-router-dom";
 import SelectFormEdit from "../../../Components/SelectFormEdit/SelectFormEdit";
 import FormEdit from "../../../Components/FormEdit/FormEdit";
@@ -62,6 +62,7 @@ const EditEmployee = () => {
     cbu: `${currentEmployee.cbu}`,
     image: `${currentEmployee.image}`,
   });
+
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -136,7 +137,7 @@ const EditEmployee = () => {
   };
 
   return (
-    <div className="w-full h-screen ml-72 flex justify-center items-center">
+    <div className="w-full lg:h-screen lg:pt-0 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto ssm:pt-16">
       <div>
         <div className="w-full text-center mb-14 font-bold">
           <span className="text-4xl text-sky-400">Edit Employee</span>

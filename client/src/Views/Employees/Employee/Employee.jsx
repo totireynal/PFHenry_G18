@@ -2,7 +2,7 @@ const Employee = (props) => {
   console.log(props.image.length);
   return (
     <div className="bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
-      <span className="text-slate-300 absolute left-32 top-1 text-xs text-start font-medium ">
+      <span className="text-slate-300 absolute right-3 top-2 text-xs text-start font-medium ">
         {props.role}
       </span>
       <div className="flex justify-between items-center h-20">

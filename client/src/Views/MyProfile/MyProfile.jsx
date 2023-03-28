@@ -4,15 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getEmployeeDetail } from "../../state/redux/actions/actions";
 
-const EmployeeDetail = () => {
-  let { paramsId } = useParams();
-  let employeeDetail = useSelector((state) => state.currentEmployee);
+const MyProfile = () => {
+  // let { id } = useParams();
+  let employeeDetail = useSelector((state) => state.employeeDetail);
   let dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getEmployeeDetail(paramsId));
-  }, [paramsId, dispatch]);
-
+  
   const {
     id,
     name,
@@ -31,23 +28,25 @@ const EmployeeDetail = () => {
     image,
   } = employeeDetail;
 
+  useEffect(() => {
+    dispatch(getEmployeeDetail(id));
+  }, [id, dispatch]);
 
 
   return (
     <>
-      
       <div className="w-full lg:h-screen  xl:ml-72 sm:ml-36 ssm:m-auto pt-16 flex  flex-col gap-10 pb-16">
         <div className="flex gap-16 lg:flex-row ssm:items-center ssm:flex-col-reverse">
           <img
             src={image}
             alt="profilepic"
-            className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md ssm:h-[200px]"
+            className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md h-[200px] "
           />
           <div className="flex felx-col gap-10 w-8/12 lg:justify-start ssm:justify-center ">
             <div className="flex flex-col justify-center lg:items-start ssm:items-center gap-5">
-              <div className="flex gap-5 text-6xl">
-                <p>{name}</p>
-                <p>{lastName}</p>
+              <div className="flex lg:flex-wrap lg:text-start  ssm:flex-wrap ssm:text-center gap-5 text-6xl flex-wrap">
+                <p className="w-full">{name}</p>
+                <p className="w-full">{lastName}</p>
               </div>
               <div className="lg:text-start ssm:text-center">
                 <p>
@@ -72,7 +71,6 @@ const EmployeeDetail = () => {
                   Edit Employee
                 </button>
               </Link>
-
             </div>
           </div>
           <div className="flex md:flex-row ssm:flex-col lg:text-start ssm:justify-center ssm:text-center w-1/2 text-xl pt-16">
@@ -109,8 +107,42 @@ const EmployeeDetail = () => {
         </div>
       </div>
     </>
-  
   );
 };
 
-export default EmployeeDetail;
+
+
+
+
+//   return (
+//     <div className="grid grid-cols-6 grid-rows-1 h-screen">
+      
+//       <SideBar />
+//       <div className="col-span-5 p-8">
+//         <div className={style.buttonCointainer}>
+//           {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
+          
+//           <Link to={`/editemployee/${id}`}>
+//             <button className={style.editButton}>Edit Employee</button>
+//           </Link>
+//         </div>
+//         <div className={style.mainCointainer}>
+//           <p>Name: {name}</p>
+//           <p>Last Name: {lastName}</p>
+//           <p>Birth Date: {birthDate}</p>
+//           <p>E-mail: {email}</p>
+//           <p>DNI: {dni}</p>
+//           <p>Phone: {tel}</p>
+//           <p>Address: {address}</p>
+//           <p>Role: {role}</p>
+//           <p>Position: {position}</p>
+//           <p>Area: {area}</p>
+//           <p>Cuil: {cuil}</p>
+//           <p>Cbu: {cbu}</p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+export default MyProfile;
