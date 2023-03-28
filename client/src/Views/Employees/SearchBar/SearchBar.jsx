@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { contentFilters, getEmployees } from "../../../state/redux/actions/actions";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import { useAnswer } from "../../../utils/hooks/answer";
 
 const SearchBar = () => {
   const [input, setInput] = useState("");

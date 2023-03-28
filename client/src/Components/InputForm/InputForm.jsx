@@ -16,7 +16,6 @@ const errorStyle = error && touched
   ? "opacity-1 transition-all duration-500"
     : "opacity-0 transition-all duration-500";
 
-
   return (
     <div className="lg:m-4 lg:w-60 md:w-[600px] sm:w-[450px]  ssm:m-auto">
       <div>
