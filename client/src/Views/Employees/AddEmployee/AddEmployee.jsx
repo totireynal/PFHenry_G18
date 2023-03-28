@@ -12,13 +12,21 @@ import validate from "../../../Utils/functions/validate";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
 import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
+import jwt_decode from 'jwt-decode';
 
 const AddEmployee = () => {
+  const [cookies] = useCookies(['cookieBack']);
   const dispatch = useDispatch();
+  const decodedToken = cookies.cookieBack ? jwt_decode(cookies.cookieBack) : null;
+  const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
+  
+
 
   useEffect(() => {
     dispatch(getPositionsNum());
     dispatch(getAreasNum());
+
   }, [dispatch]);
 
   const positionsNum = useSelector((state) => state.positionsNum);
@@ -40,6 +48,7 @@ const AddEmployee = () => {
     cuil: "",
     cbu: "",
     dateOfAdmission: "",
+    CompanyId: ""
   });
 
   const [errorButton, setErrorButton] = useState(true);
@@ -63,6 +72,7 @@ const AddEmployee = () => {
   const handleInput = (event) => {
     setEmployee({
       ...employee,
+      CompanyId: currentCompanyId,
       [event.target.name]: event.target.value,
     });
 
@@ -140,6 +150,7 @@ const AddEmployee = () => {
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
+      CompanyId: ""
     });
 
     setAllErrors({
@@ -194,6 +205,7 @@ ssm:py-16"
               handleChangeImage={handleChangeImage}
               positionsNum={positionsNum}
               areasNum={areasNum}
+              
             />
           </div>
         </div>
