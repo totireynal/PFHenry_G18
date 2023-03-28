@@ -230,7 +230,7 @@ export default function CreateCompany(props) {
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
           <div className="text-center lg:text-left">
             <h2 className="mt-1 text-3x1 font-extrabold text-gray-900">
-              Registre su empresa
+              Register your company
             </h2>
           </div>
           <div className="mt-6">
