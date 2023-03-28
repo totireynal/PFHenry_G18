@@ -62,8 +62,7 @@ const EditEmployee = () => {
     image: `${currentEmployee.image}`,
   });
 
-  console.log(currentEmployee.birthDate, 'adamisinsi');
-  console.log(currentEmployee.dateOfAdmission, 'adamisinsi');
+
   const handleInput = (e) => {
     const { value, name } = e.target;
 

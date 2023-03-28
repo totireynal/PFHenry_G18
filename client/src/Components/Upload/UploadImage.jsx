@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const UploadImage = ({ handleChangeImage }) => {
+const UploadImage = ({ handleChangeImage, user }) => {
   const [image, setImage] = useState("");
 
   const upload = async (e) => {
@@ -38,6 +38,11 @@ const UploadImage = ({ handleChangeImage }) => {
           id="image"
           onChange={upload}
         />
+        {/* <img
+          src={user}
+          alt="profilepic"
+          className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
+        /> */}
       </div>
     </div>
   );

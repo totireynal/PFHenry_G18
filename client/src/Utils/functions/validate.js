@@ -11,31 +11,30 @@ const validate = (values) => {
   // if (!values.image.length) errors.image = 'No ha ingresado ningun caracter';
   // if (!regex.image.test(values.image)) errors.image = "No es un url apropiado";
   // console.log(values);
-  if (values.role === "default") errors.role = "Debe elegir in Role";
+  if (values.role === "default") errors.role = "You must choose a role";
   if (!values.name.length) errors.name = "No ha ingresado ningun caracter";
   if (!values.lastName.length)
-    errors.lastName = "No ha ingresado ningun caracter";
-  if (!values.cuil.length) errors.cuil = "No ha ingresado ningun caracter";
-  if (!values.cuil.length) errors.cuil = "No ha ingresado ningun caracter";
-  if (!values.cbu.length) errors.cbu = "No ha ingresado ningun caracter";
+    errors.lastName = "Last name can't be empty";
+  if (!values.cuil.length) errors.cuil = "Cuil can't be empty";
+  // if (!values.cuil.length) errors.cuil = "No ha ingresado ningun caracter";
+  if (!values.cbu.length) errors.cbu = "Cbu can't be empty";
   if (!values.address.length)
-    errors.address = "No ha ingresado ningun caracter";
+    errors.address = "Address can't be empty";
   if (values.PositionId === 0)
-    errors.PositionId = "No ha seleccionado ninguna opcion";
-  if (values.AreaId === 0) errors.AreaId = "No ha seleccionado ninguna opcion";
-  if (!values.tel.length) errors.tel = "No ha ingresado ningun caracter";
+    errors.PositionId = "You must choose a position";
+  if (values.AreaId === 0) errors.AreaId = "You must choose an area";
+  if (!values.tel.length) errors.tel = "Phone number can't be empty";
   if (!values.birthDate.length)
-    errors.birthDate = "No ha ingresado ninguna fecha";
-    console.log(values.birthDate);
+    errors.birthDate = "You must choose a date";
   if (!values.dateOfAdmission.length)
-    errors.dateOfAdmission = "No ha ingresado ninguna fecha";
-  if (!values.dni.length) errors.dni = "No ha ingresado ningun caracter";
-  if (values.dni.length > 9) errors.dni = "Maximo de 9 caracteres";
-  if (values.tel.length > 13) errors.tel = "Maximo de 13 caracteres";
+    errors.dateOfAdmission = "You must choose a date";
+  if (!values.dni.length) errors.dni = "Dni can't be empty";
+  if (values.dni.length > 9) errors.dni = "Dni can't be greater than 9 characters";
+  if (values.tel.length > 13) errors.tel = "Phone can't be greater than 13 characters";
   // if (!regex.date.test(values.dateOfAdmission)) errors.dateOfAdmission = 'Esto no es una fecha'
   // if (!regex.date.test(values.birthDate)) errors.birthDate = 'Esto no es una fecha'
-  if (!values.email.length) errors.email = "No ha ingresado ningun caracter";
-  if (!regex.email.test(values.email)) errors.email = "El email es invalido";
+  if (!values.email.length) errors.email = "Email can't be empy";
+  if (!regex.email.test(values.email)) errors.email = "Email invalid, please try again";
 
   const currentYear = new Date().getFullYear();
   const year = values.birthDate.split("-")[0];
@@ -47,9 +46,9 @@ const validate = (values) => {
   console.log(admission);
 
   if (age < 18) errors.birthDate = "Invalid age";
-  if (age < admission) errors.dateOfAdmission = "La fecha es mayor a tu edad";
+  if (age < admission) errors.dateOfAdmission = "";
   if (admission >= age - 18)
-    errors.dateOfAdmission = "La fecha no puede ser antes de tus 18 años";
+    errors.dateOfAdmission = "You must be at least be 18years old";
   return errors;
 };
 
