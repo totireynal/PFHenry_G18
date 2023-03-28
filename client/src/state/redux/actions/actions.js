@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -368,9 +368,22 @@ export const getCompaniesCuit = (cuit) => {
       const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
        const result = response.data;
        console.log("Respuesta: ", result)
-       return dispatch({type: GET_COMPANIES_CUIT, payload: result})
+       return result
      } catch(error){
        console.log(error.message)
      }
    }
  }
+
+//  export const getCompaniesCuit = (cuit) => {
+//   return async function(dispatch){
+//     try {
+//       const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
+//        const result = response.data;
+//        console.log("Respuesta: ", result)
+//        return dispatch({type: GET_COMPANIES_CUIT, payload: result})
+//      } catch(error){
+//        console.log(error.message)
+//      }
+//    }
+//  }

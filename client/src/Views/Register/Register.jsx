@@ -7,7 +7,6 @@ import {useStripe, useElements} from "@stripe/react-stripe-js"
 import { getCompaniesCuit } from "../../state/redux/actions/actions";
 
 
-
 function validate(input) {
   let errors = {};
 
@@ -56,6 +55,12 @@ export default function CreateCompany(props) {
   const stripe = useStripe();
   const elements = useElements();
 
+  const [mensajeCuit, setMensajeCuit] = useState(null);
+  const [mensajeName, setMensajeName] = useState(null);
+  const [mensajeEmail, setMensajeEmail] = useState(null);
+  const [mensajeTel, setMensajeTel] = useState(null);
+
+
   const [message, setMessage] = useState(null)
   const [isProcessing, setIsProcessing] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -77,6 +82,63 @@ export default function CreateCompany(props) {
   });
 
 
+  const handleBlurCUIT = (event) => {
+
+    const cuit = event.target.value;
+      dispatch(getCompaniesCuit(cuit)).then(resultado => {
+      if (resultado?.mensaje) {
+        setMensajeCuit(resultado?.mensaje);
+      } else {
+        setMensajeCuit(null);
+      }
+      console.log("Valor", cuit);
+      console.log("Mensaje: ", resultado?.mensaje)
+    });
+  }
+
+  const handleBlurName = (event) => {
+
+    const name = event.target.value;
+      dispatch(getCompaniesCuit(name)).then(resultado => {
+      if (resultado?.mensaje) {
+        setMensajeCuit(resultado?.mensaje);
+      } else {
+        setMensajeCuit(null);
+      }
+      console.log("Valor", name);
+      console.log("Mensaje: ", resultado?.mensaje)
+    });
+  }
+
+
+  const handleBlurCorreo = (event) => {
+
+    const correo = event.target.value;
+      dispatch(getCompaniesCuit(correo)).then(resultado => {
+      if (resultado?.mensaje) {
+        setMensajeCuit(resultado?.mensaje);
+      } else {
+        setMensajeCuit(null);
+      }
+      console.log("Valor", correo);
+      console.log("Mensaje: ", resultado?.mensaje)
+    });
+  }
+
+  const handleBlurTel = (event) => {
+
+    const valor = event.target.value;
+      dispatch(getCompaniesCuit(valor)).then(resultado => {
+      if (resultado?.mensaje) {
+        setMensajeCuit(resultado?.mensaje);
+      } else {
+        setMensajeCuit(null);
+      }
+      console.log("Valor", valor);
+      console.log("Mensaje: ", resultado?.mensaje)
+    });
+  }
+  
   const handleSubmit = async (e)=> {
     e.preventDefault();
 
@@ -194,6 +256,8 @@ export default function CreateCompany(props) {
                       {errors.name}
                     </section>
                   )}
+                  {mensajeName && <section className="m-0  text-red-600">{mensajeName}</section>}
+                   {console.log("Mensaje en section:", mensajeName)}
                 </div>
                 <div>
                   <label
@@ -209,12 +273,17 @@ export default function CreateCompany(props) {
                     name="cuit"
                     onChange={(e) => handleChange(e)}
                     placeholder="e.g 30203445606"
+                    onBlur={(event)=> handleBlurCUIT(event)}
                   />
-                  {errors.cuit && (
+                  
+                   {errors.cuit && (
                     <section className="m-0  text-red-600">
                       {errors.cuit}
                     </section>
-                  )}
+                  )} 
+                   {mensajeCuit && <section className="m-0  text-red-600">{mensajeCuit}</section>}
+                   {console.log("Mensaje en section:", mensajeCuit)}
+                   
                 </div>
                 <div>
                   <label
@@ -299,6 +368,8 @@ export default function CreateCompany(props) {
                       {errors.tel}
                     </section>
                   )}
+                  {mensajeTel && <section className="m-0  text-red-600">{mensajeTel}</section>}
+                   {console.log("Mensaje en section:", mensajeTel)}
                 </div>
                 <div>
                   <label
@@ -320,6 +391,8 @@ export default function CreateCompany(props) {
                       {errors.email}
                     </section>
                   )}
+                  {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
+                   {console.log("Mensaje en section:", mensajeEmail)}
                 </div>
                 </div>
                 <div>
