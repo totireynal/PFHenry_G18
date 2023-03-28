@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { AiFillInstagram } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import ChatBot from "../../Components/ChatBot/ChatBot";
 
 const Home = () => {
   const container =
@@ -20,7 +20,8 @@ const Home = () => {
       image:
         "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
       rating: 5,
-      commentary: "estuvo bien sdgsgfssdfsdfdsfdsfsdf asdf sad fasfsad f fs fasf dsa  fsdf sdfsd fsda fsdf asf",
+      commentary:
+        "estuvo bien sdgsgfssdfsdfdsfdsfsdf asdf sad fasfsad f fs fasf dsa  fsdf sdfsd fsda fsdf asf",
     },
     {
       id: 4,
@@ -40,11 +41,12 @@ const Home = () => {
     },
   ];
 
-  const { loginWithRedirect,
+  const {
+    loginWithRedirect,
     loginWithPopup,
     logout,
     isAuthenticated,
-    getAccessTokenSilently
+    getAccessTokenSilently,
   } = useAuth0();
 
   const handleLogin = async () => {
@@ -58,18 +60,17 @@ const Home = () => {
     });
   };
 
-
   return (
     <div className="w-full">
       {/* <Link to={"/home/login"}> */}
-        <button
-          onClick={handleLogin}
-          type="submit"
-          className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
-        >
-          {" "}
-          Login
-        </button>
+      <button
+        onClick={handleLogin}
+        type="submit"
+        className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+      >
+        {" "}
+        Login
+      </button>
       {/* </Link> */}
 
       <section className={styleSectionPrimary}>
@@ -201,6 +202,12 @@ const Home = () => {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="flex items-center justify-center">
+          <ChatBot />
         </div>
       </section>
 

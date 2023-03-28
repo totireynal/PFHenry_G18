@@ -29,10 +29,18 @@ const Employees = () => {
 
   const dispatch = useDispatch();
 
+  const [emailsSelection, setEmailSelection] = useState([]);
 
-  const [emailsSelection, setEmailSelection] = useState([])
+  const catchEmails = (email, checked) => {
+    setEmailSelection((emails) => {
+      if (checked) {
+        return [...emails, email];
+      } else {
+        return emails.filter((e) => e !== email);
+      }
+    });
+  };
 
-  const catchEmails = (email) => setEmailSelection(emails => [...emails, email])
   console.log(emailsSelection);
 
   const [selectedOption, setSelectedOption] = useState({

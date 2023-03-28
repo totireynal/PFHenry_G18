@@ -1,18 +1,11 @@
 import { Link } from "react-router-dom";
 
 const Employee = (props) => {
-  
   const handleCheck = (e) => {
     const { checked } = e.target;
-    
-    if (checked) {
-      props.catchEmails(props.email)
-    } else {
-        const filterEmail = props.emailsSelection.filter(email => email !== props.email)
-        props.catchEmails(filterEmail)
-      
-    }
-  }
+
+    props.catchEmails(props.email, checked);
+  };
 
   return (
     <div className="bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
@@ -24,7 +17,6 @@ const Employee = (props) => {
           id=""
           onChange={handleCheck}
         />
-
       </div>
       <Link to={`/employee/${props.id}`}>
         <span className="text-slate-300 absolute right-3 top-2 text-xs text-start font-medium ">
