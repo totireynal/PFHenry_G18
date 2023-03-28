@@ -19,11 +19,13 @@ import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 import Authorization from "./Views/Authorization/Authorization";
+import Authorizationone from "./Views/Authorization/Authorization1";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentEmployee } from './state/redux/actions/actions'
 import { Squash as Hamburger } from "hamburger-react";
 import Calendar2 from "./Views/Calendar2/Calendar2";
 import { useCookies } from 'react-cookie';
+
 
 function App() {
   const [isOpen, setOpen] = useState(true);
@@ -107,6 +109,7 @@ function App() {
           pathname === "/home" ||
           pathname === "/home/login" ||
           pathname === "/home/login/register" ||
+          pathname === "/authorizationone" ||
           pathname === "/authorization" ? (
             ""
           ) : (
@@ -124,6 +127,7 @@ function App() {
           <Route path="/home/login/register" element={<Register />} />
           <Route path="/home/login/register/payment" element={<Payment />} />
             <Route path="/authorization" element={<Authorization />} />
+            <Route path="/authorizationone" element={<Authorizationone />} />
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route
               element={

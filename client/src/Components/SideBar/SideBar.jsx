@@ -1,11 +1,18 @@
 import ButtonSideBar from "./ButtonSideBar/ButtonSideBar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { resetCurrentEmployee } from '../../state/redux/actions/actions'
+import { useCookies } from 'react-cookie';
 
 
 
 const SideBar = () => {
+
+  const dispatch = useDispatch();
+
+  const [cookies, removeCookie] = useCookies(['token']);
+
 
   const current = useSelector(state => state.currentEmployee)
   console.log(current, 'currr');
@@ -14,7 +21,13 @@ const SideBar = () => {
 
   const { 
     logout,
-} = useAuth0();
+  } = useAuth0();
+
+const handleLogout = (event) => {
+  // dispatch(resetCurrentEmployee());
+  // removeCookie('token');
+  logout();
+}
 
 
   return (
@@ -61,7 +74,8 @@ const SideBar = () => {
                 </ButtonSideBar>
                 <button
                   className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
-                  onClick={() => logout()}
+                  onClick={handleLogout}
+                  // onClick={() => logout()}
                 >
                   Logout
                 </button>
