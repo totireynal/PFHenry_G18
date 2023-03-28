@@ -2,11 +2,9 @@ import { React, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postCompany } from "../../state/redux/actions/actions";
-import {CardElement} from "@stripe/react-stripe-js";
-import {useStripe, useElements} from "@stripe/react-stripe-js"
+import { CardElement } from "@stripe/react-stripe-js";
+import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { getCompaniesCuit } from "../../state/redux/actions/actions";
-
-
 
 function validate(input) {
   let errors = {};
@@ -55,16 +53,15 @@ export default function CreateCompany(props) {
   let clientSecret = props.options;
   const stripe = useStripe();
   const elements = useElements();
-
-  const [message, setMessage] = useState(null)
+  
+  const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [mensajeCuit, setMensajeCuit] = useState(null);
 
   const dispatch = useDispatch();
   const history = useNavigate();
   const [errors, setErrors] = useState({});
-
-
 
   const [input, setInput] = useState({
     name: "",
@@ -76,8 +73,21 @@ export default function CreateCompany(props) {
     email: "",
   });
 
+  const handleBlurCUIT = async(event) => {
 
-  const handleSubmit = async (e)=> {
+    const valor = event.target.value;
+      dispatch(getCompaniesCuit(valor)).then(resultado => {
+      if (resultado.mensaje) {
+        setMensajeCuit(resultado.mensaje);
+      } else {
+        setMensajeCuit(null)
+      }
+      console.log("Valor", valor);
+      console.log("Mensaje: ", resultado?.mensaje)
+    });
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
@@ -87,10 +97,9 @@ export default function CreateCompany(props) {
     }
 
     const response = await getCompaniesCuit(input.cuit);
-    if(response.data != "The company PruebaCUIT has been created correctly"){
+    if (response.data != "The company PruebaCUIT has been created correctly") {
+    }
 
-    };
-    
     if (
       !input.name ||
       !input.cuit ||
@@ -98,32 +107,31 @@ export default function CreateCompany(props) {
       !input.numberEmployees ||
       !input.email ||
       !input.tel ||
-      !input.location 
+      !input.location
     ) {
       return alert("Complete correctamente el formulario antes de enviarlo");
     }
 
     setIsProcessing(true);
-    const {error, paymentIntent} = await stripe.confirmCardPayment(
-      clientSecret,{
-      payment_method:{
-      card: elements.getElement(CardElement)
+    const { error, paymentIntent } = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
       }
-    },
-  )
-  if(error){
-    setMessage(error.message);
-    } else if(paymentIntent)
-    {
-      console.log(paymentIntent)
-    setMessage("Payment status: succeeded Thank you! 🎉")
-    
+    );
+    if (error) {
+      setMessage(error.message);
+    } else if (paymentIntent) {
+      console.log(paymentIntent);
+      setMessage("Payment status: succeeded Thank you! 🎉");
     } else {
-    setMessage("Unexpected state");
+      setMessage("Unexpected state");
     }
 
-  setIsProcessing(false);
-    console.log("Input pasado a post: ",input)
+    setIsProcessing(false);
+    console.log("Input pasado a post: ", input);
     dispatch(postCompany(input));
     console.log(input);
     setInput({
@@ -132,18 +140,18 @@ export default function CreateCompany(props) {
       industry: "",
       numberEmployees: "",
       email: "",
-      location:"",
-      tel:"",
+      location: "",
+      tel: "",
     });
     setFormSubmitted(true);
     // history("/home")
-  }
+  };
 
   function handleChange(e) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
-      InformationId:1
+      InformationId: 1,
     });
     setErrors(
       validate({
@@ -156,8 +164,10 @@ export default function CreateCompany(props) {
   return (
     <div className="min-height-full flex h-screen">
       <div className="hidden lg:block relative h-full flex-1 text-6xl">
-      <h1>StaffSphere Register Company</h1>
-      <div className="text-2xl">Simplify your team management for only U$S 2,000</div>
+        <h1>StaffSphere Register Company</h1>
+        <div className="text-2xl">
+          Simplify your team management for only U$S 2,000
+        </div>
       </div>
       <div className="flex-1 flex flex-col py-14 px-4 sm:pax-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
@@ -209,12 +219,19 @@ export default function CreateCompany(props) {
                     name="cuit"
                     onChange={(e) => handleChange(e)}
                     placeholder="e.g 30203445606"
+                    onBlur={(event) => handleBlurCUIT(event)}
                   />
                   {errors.cuit && (
                     <section className="m-0  text-red-600">
                       {errors.cuit}
                     </section>
                   )}
+                  {mensajeCuit && (
+                    <section className="m-0  text-red-600">
+                      {mensajeCuit}
+                    </section>
+                  )}
+                  {console.log("Mensaje en section:", mensajeCuit)}
                 </div>
                 <div>
                   <label
@@ -224,12 +241,12 @@ export default function CreateCompany(props) {
                     Industry
                   </label>
                   <input
-                  className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
-                   type ="text"
-                   name="industry"
-                   value={input.industry}
-                   onChange={(e) => handleChange(e)}
-                   placeholder="Industry"
+                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="industry"
+                    value={input.industry}
+                    onChange={(e) => handleChange(e)}
+                    placeholder="Industry"
                   />
                   {errors.industry && (
                     <section className="m-0  text-red-600">
@@ -279,7 +296,7 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                 </div>
-              <div>
+                <div>
                   <label
                     htmlFor="Tel"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
@@ -321,32 +338,52 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                 </div>
-                </div>
-                <div>
+              </div>
+              <div>
                 <CardElement id="payment-element" />
-                </div>
+              </div>
               <div>
                 <button
                   type="submit"
                   className="m2-2 w-full py-3 bg-sky-700 text-white"
-                  disabled={isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees}
+                  disabled={
+                    isProcessing ||
+                    !stripe ||
+                    !elements ||
+                    !input.name ||
+                    !input.cuit ||
+                    !input.email ||
+                    !input.tel ||
+                    !input.location ||
+                    !input.industry ||
+                    !input.numberEmployees
+                  }
                 >
                   {" "}
-                  
-                    <span>
+                  <span>
                     {isProcessing ? "Processing ... " : "Register and pay now"}
-                    </span>
+                  </span>
                 </button>
-                 {/* Show any error or success messages */}
-                 {message && <div className="mb-4">{message}</div>}
+                {/* Show any error or success messages */}
+                {message && <div className="mb-4">{message}</div>}
               </div>
             </form>
-            <div>{formSubmitted && <button><Link to="/addFirstEmployee" className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Registre a su administrador</Link></button>}</div>
+            <div>
+              {formSubmitted && (
+                <button>
+                  <Link
+                    to="/addFirstEmployee"
+                    className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    {" "}
+                    Registre a su administrador
+                  </Link>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
-      
     </div>
   );
 }
-
