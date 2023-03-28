@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { AiFillInstagram } from "react-icons/ai";
 
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const Home = () => {
   const container =
@@ -11,17 +13,37 @@ const Home = () => {
     "flex flex-col  justify-center items-center h-screen bg-white";
   const styleText = "text-center text-6xl font-black";
 
+  const { loginWithRedirect,
+    loginWithPopup,
+    logout,
+    isAuthenticated,
+    getAccessTokenSilently
+  } = useAuth0();
+
+  const handleLogin = async () => {
+    await loginWithRedirect({
+      appState: {
+        returnTo: "/authorization",
+      },
+      authorizationParams: {
+        prompt: "login",
+      },
+    });
+  };
+
+
   return (
     <div className="w-full">
-      <Link to={"/home/login"}>
+      {/* <Link to={"/home/login"}> */}
         <button
+          onClick={handleLogin}
           type="submit"
           className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
         >
           {" "}
           Login
         </button>
-      </Link>
+      {/* </Link> */}
 
       <section className={styleSectionPrimary}>
         <div className={container}>
