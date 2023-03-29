@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -367,19 +367,17 @@ export const cleanUrl = () => {
 };
 
 export const getCompaniesCuit = (cuit) => {
-  return async function(dispatch) {
+  return async function(dispatch){
     try {
-      const response = await axios.get(
-        `http://localhost:3001/companies?cuit=${cuit}`
-      );
-      const result = response.data;
-      console.log("Respuesta: ", result);
-      return dispatch({ type: GET_COMPANIES_CUIT, payload: result });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
+      const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
+       const result = response.data;
+       console.log("Respuesta: ", result)
+       return result
+     } catch(error){
+       console.log(error.message)
+     }
+   }
+ }
 
 export const addRating = (rating, commentary) => {
   return async (dispatch) => {
@@ -409,15 +407,6 @@ export const cleanArrayEmails = () => {
     payload: [],
   };
 };
-      const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return result
-     } catch(error){
-       console.log(error.message)
-     }
-   }
- }
 
  export const getCompaniesName = (name) => {
   return async function(dispatch){
