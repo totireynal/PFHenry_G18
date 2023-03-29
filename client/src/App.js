@@ -28,6 +28,7 @@ import Calendar2 from "./Views/Calendar2/Calendar2";
 import Form from "./Components/Form/Form"
 
 import { useCookies } from 'react-cookie';
+import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
 
 
 function App() {
@@ -150,8 +151,8 @@ function App() {
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/notifications" element={<Notifications />} />
             </Route>
-            <Route path="/myprofile/:id" element={<MyProfile />} />
-            {/* <Route path={`/myprofile/${user.id}`} element={<EditMyProfile />} /> */}
+            {/* <Route path="/myprofile/:id" element={<MyProfile />} /> */}
+            <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
           </Route>
           <Route path="*" element={<h1>Ruta equivocada</h1>} />
         </Routes>
