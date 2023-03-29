@@ -65,14 +65,13 @@ const MyProfile = () => {
               <span className="font-medium"> Role: </span>
               {role}
             </p>
-            <div className="flex flex-col  lg:w-fit ssm: mt-10 gap-3 ">
-              <Link to={`/editemployeemyprofile/${id}`}>
+            {/* <div className="flex flex-col  lg:w-fit ssm: mt-10 gap-3 ">
+              <Link to={`/editemployee/${id}`}>
                 <button className="bg-sky-400 text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
                   Edit Employee
                 </button>
               </Link>
-            </div>
-            <span>EDITAR DATOS DE COMPANY</span>
+            </div> */}
           </div>
           <div className="flex md:flex-row ssm:flex-col lg:text-start ssm:justify-center ssm:text-center w-1/2 text-xl pt-16">
             <div className="flex flex-col lg:justify-between w-full ">

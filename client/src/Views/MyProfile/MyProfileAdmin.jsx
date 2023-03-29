@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getEmployeeDetail } from "../../state/redux/actions/actions";
 
-const MyProfile = () => {
+const MyProfileAdmin = () => {
   // let { id } = useParams();
   let employeeDetail = useSelector((state) => state.currentEmployee);
   let dispatch = useDispatch();
@@ -72,7 +72,6 @@ const MyProfile = () => {
                 </button>
               </Link>
             </div>
-            <span>EDITAR DATOS DE COMPANY</span>
           </div>
           <div className="flex md:flex-row ssm:flex-col lg:text-start ssm:justify-center ssm:text-center w-1/2 text-xl pt-16">
             <div className="flex flex-col lg:justify-between w-full ">
@@ -112,4 +111,4 @@ const MyProfile = () => {
 };
 
 
-export default MyProfile;
+export default MyProfileAdmin;

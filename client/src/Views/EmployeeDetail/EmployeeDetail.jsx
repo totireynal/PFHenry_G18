@@ -26,8 +26,11 @@ const EmployeeDetail = () => {
   };
 
   const deletedEmplote = () => {
+    if(employeeDetail.role === "SuperAdmin") {
+      alert("You cant delete a SuperAdmin")
+    } else {
     dispatch(deleteEmployee(id));
-    navigate(-1);
+    navigate(-1);}
   };
 
   useEffect(() => {
