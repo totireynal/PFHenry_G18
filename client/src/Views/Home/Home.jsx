@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { AiFillInstagram } from "react-icons/ai";
-
+import { AiFillStar } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import ChatBot from "../../Components/ChatBot/ChatBot";
 
 const Home = () => {
   const container =
@@ -13,11 +13,40 @@ const Home = () => {
     "flex flex-col  justify-center items-center h-screen bg-white";
   const styleText = "text-center text-6xl font-black";
 
-  const { loginWithRedirect,
+  const clients = [
+    {
+      id: 4,
+      name: "Juan",
+      image:
+        "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
+      rating: 5,
+      commentary:
+        "estuvo bien sdgsgfssdfsdfdsfdsfsdf asdf sad fasfsad f fs fasf dsa  fsdf sdfsd fsda fsdf asf",
+    },
+    {
+      id: 4,
+      name: "Juan",
+      image:
+        "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
+      rating: 5,
+      commentary: "estuvo bien",
+    },
+    {
+      id: 4,
+      name: "Juan",
+      image:
+        "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
+      rating: 3,
+      commentary: "estuvo bien",
+    },
+  ];
+
+  const {
+    loginWithRedirect,
     loginWithPopup,
     logout,
     isAuthenticated,
-    getAccessTokenSilently
+    getAccessTokenSilently,
   } = useAuth0();
 
   const handleLogin = async () => {
@@ -31,18 +60,17 @@ const Home = () => {
     });
   };
 
-
   return (
     <div className="w-full">
       {/* <Link to={"/home/login"}> */}
-        <button
-          onClick={handleLogin}
-          type="submit"
-          className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
-        >
-          {" "}
-          Login
-        </button>
+      <button
+        onClick={handleLogin}
+        type="submit"
+        className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+      >
+        {" "}
+        Login
+      </button>
       {/* </Link> */}
 
       <section className={styleSectionPrimary}>
@@ -93,8 +121,48 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <section className="flex flex-col bg-slate-100 justify-center items-center h-screen">
+        <h2 className={`${styleText} py-10`}>Some of our clients</h2>
+        <div className="max-w-[1200px] m-auto ">
+          <div className="flex  justify-center items-start gap-10 h-auto flex-wrap">
+            {clients.map(({ id, name, image, rating, commentary }) => {
+              return (
+                <div className="flex flex-col justify-center items-center border-sky-400 p-5 bg-white w-[300px] border-2 rounded-md">
+                  <h3 className="text-2xl pb-1">{name}</h3>
 
-      <section className={styleSectionPrimary}>
+                  <div className="relative flex flex-col justify-center items-center">
+                    <img
+                      className="object-cover rounded-md"
+                      src={image}
+                      alt=""
+                    />
+                    <div className="absolute -bottom-3">
+                      <div className="flex">
+                        {[...Array(rating).fill(0)].map((start, i) => {
+                          return (
+                            <label className="">
+                              <AiFillStar
+                                size={30}
+                                className={`text-yellow-200 transition-all duration-200
+                            `}
+                              />
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center block mt-8 h-32 ">
+                    <p className="">{commentary}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className={styleSectionSecondary}>
         <div className={container}>
           <div>
             <h2 className={styleText}>Why StaffSphere...</h2>
@@ -137,11 +205,17 @@ const Home = () => {
         </div>
       </section>
 
+      <section>
+        <div className="flex items-center justify-center">
+          <ChatBot />
+        </div>
+      </section>
+
       <footer className="bg-gray-200">
         <div className="flex flex-row">
-          <div className="w-1/3">
+          <div className="w-1/3 flex justify-center items-center">
             <img
-              src="https://t3.ftcdn.net/jpg/00/73/99/94/360_F_73999426_RBb9vOl2ifBaaK3LavR21st0A6Q16G7N.jpg"
+              src="https://res.cloudinary.com/dtqhqhc9e/image/upload/v1679883961/Images/mqu3wnxbcotfu4t0gbqx.png"
               alt="logo"
             />
           </div>
