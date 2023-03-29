@@ -8,7 +8,7 @@ const SearchBar = () => {
   let dispatch = useDispatch();
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
   const allEmployees = useSelector((state) => state.allEmployees);
-  console.log(!!allEmployees, 'allll');
+  // console.log(!!allEmployees, 'allll');
 
   const { answer, showAnswer } = useAnswer();
 

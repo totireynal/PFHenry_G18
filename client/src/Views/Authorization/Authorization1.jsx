@@ -17,7 +17,7 @@ const Authorizationone = () => {
     console.log('cookies-->', cookies);
     console.log('decodedToken-->', decodedToken);
     console.log('idCurrent-->', idCurrent);
-    navigate(`/employees`)
+    navigate(`/dashboard`)
   
     const dispatch = useDispatch();
   
