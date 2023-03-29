@@ -47,7 +47,7 @@ const validate = (values) => {
 
   if (age < 18) errors.birthDate = "Invalid age";
   if (age < admission) errors.dateOfAdmission = "";
-  if (admission >= age - 18)
+  if (admission >= age - 17)
     errors.dateOfAdmission = "You must be at least be 18years old";
   return errors;
 };

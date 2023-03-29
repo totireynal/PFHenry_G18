@@ -2,49 +2,49 @@ import ButtonSideBar from "./ButtonSideBar/ButtonSideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { resetCurrentEmployee } from '../../state/redux/actions/actions'
-import { useCookies } from 'react-cookie';
-
-
+import { resetCurrentEmployee } from "../../state/redux/actions/actions";
+import { useCookies } from "react-cookie";
+import { useState } from "react";
 
 const SideBar = () => {
-
   const dispatch = useDispatch();
 
-  const [cookies, removeCookie] = useCookies(['token']);
-
-
-  const current = useSelector(state => state.currentEmployee)
-  const currentEmployee = useSelector((state) => state.employeeDetail);
-
-  console.log(current, 'currr');
-
-  const url = `/myprofile/${current.id}`
-
-  const { 
-    logout,
-  } = useAuth0();
-
-const handleLogout = (event) => {
-  // dispatch(resetCurrentEmployee());
-  // removeCookie('token');
-  // logout();
-  }
+  const [cookies, removeCookie] = useCookies(["token"]);
+  const [active, setActive] = useState({
+    dashboard: false,
+    employees: false,
+    notifications: false,
+    calendar: false,
+    myprofile: false,
+  });
   
-    let refModal = useRef();
+  const handleActive = (name) => {
+    if (name === "My Profile") {
+      name = 'myProfile'
+    }
+      const aux = { [name.toLowerCase()]: true };
 
-    let refDivModal = useRef();
 
-    const modalActive = () => {
-      refModal.current.style.display = "flex";
-      refDivModal.current.style.transform = "scale-1";
-      refDivModal.current.style.opacity = "1";
+    setActive({
+      dashboard: false,
+      employees: false,
+      notifications: false,
+      calendar: false,
+      myProfile: false,
+      ...aux,
+    });
   };
-  
-    const deletedEmplote = () => {
-      refModal.current.style.display = 'none'
-    };
 
+  console.log(active, 'vemoss');
+
+  const current = useSelector((state) => state.currentEmployee);
+  // const currentEmployee = useSelector((state) => state.employeeDetail);
+
+  const url = `/myprofile/${current.id}`;
+
+  const { logout } = useAuth0();
+
+  let refModal = useRef();
 
   return (
     <>
@@ -99,17 +99,37 @@ const handleLogout = (event) => {
               <div className="  ">
                 <div className="w-full ">
                   <div className="w-full">
-                    <ButtonSideBar url="/dashboard" icon="dashboard">
+                    <ButtonSideBar
+                      url="/dashboard"
+                      icon="dashboard"
+                      active={active.dashboard}
+                      handleActive={handleActive}
+                    >
                       Dashboard
                     </ButtonSideBar>
                   </div>
-                  <ButtonSideBar url="/employees" icon="group">
+                  <ButtonSideBar
+                    url="/employees"
+                    icon="group"
+                    active={active.employees}
+                    handleActive={handleActive}
+                  >
                     Employees
                   </ButtonSideBar>
-                  <ButtonSideBar url="/notifications" icon="notifications">
+                  <ButtonSideBar
+                    url="/notifications"
+                    icon="notifications"
+                    active={active.notifications}
+                    handleActive={handleActive}
+                  >
                     Notifications
                   </ButtonSideBar>
-                  <ButtonSideBar url="/calendar" icon="calendar_month">
+                  <ButtonSideBar
+                    url="/calendar"
+                    icon="calendar_month"
+                    active={active.calendar}
+                    handleActive={handleActive}
+                  >
                     Calendar
                   </ButtonSideBar>
                   {/* <ButtonSideBar url="/organization">Organization</ButtonSideBar> */}
@@ -117,7 +137,12 @@ const handleLogout = (event) => {
               </div>
               <div>
                 <div className="flex flex-col w-full xl:mt-10 ssm:mt-24">
-                  <ButtonSideBar url={url} icon="person">
+                  <ButtonSideBar
+                    url={url}
+                    icon="person"
+                    active={active.myprofile}
+                    handleActive={handleActive}
+                  >
                     My Profile
                   </ButtonSideBar>
                   <div

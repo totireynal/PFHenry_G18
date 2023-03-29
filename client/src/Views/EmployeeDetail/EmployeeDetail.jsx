@@ -58,7 +58,7 @@ const EmployeeDetail = () => {
           refModal.current.style.display = "none";
         }}
         ref={refModal}
-        className=" w-screen h-screen justify-center items-center bg-black bg-opacity-50 hidden z-10"
+        className="fixed w-screen h-screen justify-center items-center bg-black bg-opacity-50 hidden z-10"
       >
         <div
           ref={refDivModal}

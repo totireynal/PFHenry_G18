@@ -7,10 +7,9 @@ import { isArray } from "mathjs";
 const FormEmail = () => {
 
   const emailsArray = useSelector((state) => state.emailsArray);
-  console.log(emailsArray);
+  const emailsJoined = emailsArray.join(' ')
 
-  
-  const [to, setTo] = useState("");
+  const [to, setTo] = useState(emailsJoined);
   
   const [subject, setSubject] = useState("");
   const [text, setText] = useState("");
