@@ -26,8 +26,11 @@ const EmployeeDetail = () => {
   };
 
   const deletedEmplote = () => {
+    if(employeeDetail.role === "SuperAdmin") {
+      alert("You cant delete a SuperAdmin")
+    } else {
     dispatch(deleteEmployee(id));
-    navigate(-1);
+    navigate(-1);}
   };
 
   useEffect(() => {
@@ -58,7 +61,7 @@ const EmployeeDetail = () => {
           refModal.current.style.display = "none";
         }}
         ref={refModal}
-        className=" w-screen h-screen justify-center items-center bg-black bg-opacity-50 hidden z-10"
+        className="fixed w-screen h-screen justify-center items-center bg-black bg-opacity-50 hidden z-10"
       >
         <div
           ref={refDivModal}

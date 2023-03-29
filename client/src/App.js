@@ -1,16 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Calendar from "./Views/Calendar/Calendar";
 import Dashboard from "./Views/Dashboard";
 import Employees from "./Views/Employees";
-// import Employee from "./Views/Employees/Employee";
+import EmployeesUser from "./Views/Employees/EmployeesUser";
 import EmployeeDetail from "./Views/EmployeeDetail/EmployeeDetail";
 import Home from "./Views/Home";
-import Login from "./Views/Login";
 // import Register from "./Components/Register/Register.jsx"
 import Register from "./Views/Register";
+import EditEmployeeMyProfile from "./Views/MyProfile/EditEmployeMyProfile";
 import MyProfile from "./Views/MyProfile/MyProfile";
-// import EditMyProfile from "./Views/MyProfile/EditMyProfile";
+import MyProfileAdmin from "./Views/MyProfile/MyProfileAdmin";
+import MyProfileUser from "./Views/MyProfile/MyProfileUser";
 import Notifications from "./Views/Notifications/Notifications";
 import Organization from "./Views/Organization";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
@@ -21,11 +22,10 @@ import AddFisrtEmployee from "./Views/Employees/AddFirstEmployee/AddFirstEmploye
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 import Authorization from "./Views/Authorization/Authorization";
 import Authorizationone from "./Views/Authorization/Authorization1";
-import { useDispatch, useSelector } from "react-redux";
-import { getCurrentEmployee } from "./state/redux/actions/actions";
+import { useSelector } from "react-redux";
 import { Squash as Hamburger } from "hamburger-react";
-import Calendar2 from "./Views/Calendar2/Calendar2";
 import Form from "./Components/Form/Form";
+import CalendarUser from "./Views/CalendarUser/CalendarUser";
 
 import { useCookies } from "react-cookie";
 import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
@@ -33,43 +33,12 @@ import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfile
 function App() {
   const [isOpen, setOpen] = useState(true);
   const { pathname } = useLocation();
-  const dispatch = useDispatch();
-
-  // const [cookies] = useCookies(['token']);
-  // const [user, setUser] = useState(null)
-
-  // useEffect(() => {
-  //   if (cookies.token) {
-  //     const userData = JSON.parse(atob(cookies.token.split('.')[1]));
-  //     setUser(userData);
-  //     console.log(userData);
-  //   }
-  // }, [cookies.token]);
-
-  // const [user, setUser] = useState({});
 
   const user = useSelector((state) => state.currentEmployee);
 
-  // if (Object.keys(user).length === 0) {
-  //   setUser({id: 1});
-  // } else {
-  //   setUser(userCookies)
-  // }
+  console.log(user);
 
   const refSideBar = useRef();
-
-  // useEffect(() => {
-  //   dispatch(getCurrentEmployee(user.id));
-  // }, []);
-
-  // const [user, setUser] = useState({
-  //   id:3,
-  //   name: "Juan",
-  //   role: "admin",
-  // });
-  // const login = (user) => {
-  //     setUser(user)
-  //   }
 
   const fn = () => {
     if (isOpen) {
@@ -116,33 +85,63 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/home/login" element={<Login />} />
+        {/* <Route path="/home/login" element={<Login />} /> */}
         <Route path="/home/login/register" element={<Payment />} />
         <Route path="/addFirstEmployee" element={<AddFisrtEmployee />} />
         {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
         <Route path="/authorization" element={<Authorization />} />
         <Route path="/authorizationone" element={<Authorizationone />} />
-        <Route element={<ProtectedRoute isAllowed={!!user} />}>
-          <Route
-            element={
-              <ProtectedRoute
-                isAllowed={!!user && user.role === "User"}
-                redirectTo="/myprofile"
-              />
-            }
-          >
-            <Route path="/dashboard" element={<Dashboard />} />
+
+        {/* +++++ SUPERADMIN ROUTES +++++ */}
+        {!!user && user.role === "SuperAdmin" && (
+          <>
             <Route path="/employees" element={<Employees />} />
             <Route path="/employee/:id" element={<EmployeeDetail />} />
             <Route path="/addemployee" element={<AddEmployee />} />
             <Route path="/editemployee/:id" element={<EditEmployee />} />
-            <Route path="/organization" element={<Organization />} />
+            <Route
+              path="/editemployeemyprofile/:id"
+              element={<EditEmployeeMyProfile />}
+            />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/notifications" element={<Notifications />} />
-          </Route>
-          {/* <Route path="/myprofile/:id" element={<MyProfile />} /> */}
-          <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
-        </Route>
+            <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
+            {/* FALTA LA DE EDITAR DATOS DE LA EMPRESA */}
+          </>
+        )}
+
+        {/* +++++ ADMIN ROUTES +++++ */}
+
+        {!!user && user.role === "Admin" && (
+          <>
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/employee/:id" element={<EmployeeDetail />} />
+            <Route path="/addemployee" element={<AddEmployee />} />
+            <Route path="/editemployee/:id" element={<EditEmployee />} />
+            <Route
+              path="/editemployeemyprofile/:id"
+              element={<EditEmployeeMyProfile />}
+            />
+            {/* <Route path="/organization" element={<Organization />} /> */}
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/myprofile/:id" element={<MyProfileAdmin />} />
+          </>
+        )}
+
+        {/* +++++ USER ROUTES +++++ */}
+
+        {!!user && user.role === "User" && (
+          <>
+            <Route path="/employees" element={<EmployeesUser />} />
+            <Route path="/myprofile/:id" element={<MyProfileUser />} />
+            <Route path="/calendar" element={<CalendarUser />} />
+          </>
+        )}
+
+        {/* +++++ COMMON ROUTES +++++ */}
+        <Route path="/dashboard" element={<Dashboard />} />
+
         <Route path="*" element={<h1>Ruta equivocada</h1>} />
       </Routes>
       {/* </div> */}
@@ -151,3 +150,24 @@ function App() {
 }
 
 export default App;
+
+// <Route element={<ProtectedRoute isAllowed={!!user} />}>
+// <Route
+//   element={
+//     <ProtectedRoute
+//       isAllowed={!!user
+//         && (
+//         user.role === "SuperAdmin"
+//         )}
+//       redirectTo="/home"
+//     />
+//   }
+// >
+
+/*----------------------------- Calendario User -----------------------------*/
+{
+  /* <Route path="/calendar" element={<CalendarUser />} /> */
+}
+
+/*----------------------------- MyProfile superadmin -----------------------------*/
+/* <Route path="/myprofile/:id" element={<MyProfile />} /> */

@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import SideBar from "../../../Components/SideBar/SideBar";
-import { getAreasNum, getPositionsNum, updateEmployee } from "../../../state/redux/actions/actions";
-import validate from "../../../utils/functions/validate";
-import Form from "../../../Components/Form/Form";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer"; 
+import { getAreasNum, getPositionsNum, updateEmployee, getCurrentEmployee } from "../../state/redux/actions/actions";
+import validate from "../../utils/functions/validate";
+import Form from "../../Components/Form/Form";
+import { useErrors } from "../../utils/hooks/errors";
+import { useAnswer } from "../../utils/hooks/answer"; 
 import { Link } from "react-router-dom";
-import SelectFormEdit from "../../../Components/SelectFormEdit/SelectFormEdit";
-import FormEdit from "../../../Components/FormEdit/FormEdit";
+import SelectFormEdit from "../../Components/SelectFormEdit/SelectFormEdit";
+import FormEdit from "../../Components/FormEdit/FormEdit";
 
-const EditEmployee = () => {
+const EditEmployeeMyProfile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,6 +18,9 @@ const EditEmployee = () => {
     useEffect(() => {
       dispatch(getPositionsNum());
       dispatch(getAreasNum());
+      return () => {
+        dispatch(getCurrentEmployee(id));
+      }
     }, [dispatch]);
 
   const { errors, setAllErrors } = useErrors();
@@ -137,14 +139,7 @@ const EditEmployee = () => {
   };
 
   return (
-    
     <div className="w-full lg:h-screen lg:pt-0 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto ssm:pt-16">
-    
-    {currentEmployee.role !== "SuperAdmin" ? 
-            <>
-
-            
-
       <div>
         <div className="w-full text-center mb-14 font-bold">
           <span className="text-4xl text-sky-400">Edit Employee</span>
@@ -174,20 +169,8 @@ const EditEmployee = () => {
           </div>
         </div>
       </div>
-      </>
-            :
-              <>
-            <h1>You cant edit a SuperAdmin!!!</h1>
-            <br />
-            <Link to="/employees">
-              <button
-                className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
-              >Got it</button>
-            </Link>
-            </>
-            }
     </div>
   );
 };
 
-export default EditEmployee;
+export default EditEmployeeMyProfile;
