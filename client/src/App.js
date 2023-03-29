@@ -25,8 +25,10 @@ import Authorizationone from "./Views/Authorization/Authorization1";
 import { useSelector } from "react-redux";
 import { Squash as Hamburger } from "hamburger-react";
 import Form from "./Components/Form/Form"
+import CalendarUser from "./Views/CalendarUser/CalendarUser";
 
 import { useCookies } from 'react-cookie';
+import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
 
 
 function App() {
@@ -81,62 +83,68 @@ function App() {
         </div>
       </div>
       {/* <div className="flex-1 pl-16"> */}
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          {/* <Route path="/home/login" element={<Login />} /> */}
-          <Route path="/home/login/register" element={<Payment />} />
-          <Route path="/addFirstEmployee" element={<AddFisrtEmployee/>}/>
-          {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
-            <Route path="/authorization" element={<Authorization />} />
-            <Route path="/authorizationone" element={<Authorizationone />} />
-            
-            {/* +++++ SUPERADMIN ROUTES +++++ */}
-            {!!user && user.role === "SuperAdmin" && (
-            <>
-              <Route path="/employees" element={<Employees />} />
-              <Route path="/employee/:id" element={<EmployeeDetail />} />
-              <Route path="/addemployee" element={<AddEmployee />} />
-              <Route path="/editemployee/:id" element={<EditEmployee />} />
-              <Route path="/editemployeemyprofile/:id" element={<EditEmployeeMyProfile />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/notifications" element={<Notifications />} />
-              <Route path="/myprofile/:id" element={<MyProfile />} />
-              {/* FALTA LA DE EDITAR DATOS DE LA EMPRESA */}
-            </>
-            )}
-            
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        {/* <Route path="/home/login" element={<Login />} /> */}
+        <Route path="/home/login/register" element={<Payment />} />
+        <Route path="/addFirstEmployee" element={<AddFisrtEmployee />} />
+        {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
+        <Route path="/authorization" element={<Authorization />} />
+        <Route path="/authorizationone" element={<Authorizationone />} />
 
-            {/* +++++ ADMIN ROUTES +++++ */}
+        {/* +++++ SUPERADMIN ROUTES +++++ */}
+        {!!user && user.role === "SuperAdmin" && (
+          <>
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/employee/:id" element={<EmployeeDetail />} />
+            <Route path="/addemployee" element={<AddEmployee />} />
+            <Route path="/editemployee/:id" element={<EditEmployee />} />
+            <Route
+              path="/editemployeemyprofile/:id"
+              element={<EditEmployeeMyProfile />}
+            />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
+            {/* FALTA LA DE EDITAR DATOS DE LA EMPRESA */}
+          </>
+        )}
 
-            {!!user && user.role === "Admin" && (
-            <>
-              <Route path="/employees" element={<Employees />} />
-              <Route path="/employee/:id" element={<EmployeeDetail />} />
-              <Route path="/addemployee" element={<AddEmployee />} />
-              <Route path="/editemployee/:id" element={<EditEmployee />} />
-              <Route path="/editemployeemyprofile/:id" element={<EditEmployeeMyProfile />} />
-              {/* <Route path="/organization" element={<Organization />} /> */}
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/notifications" element={<Notifications />} />
-              <Route path="/myprofile/:id" element={<MyProfileAdmin />} />
-            </>
-            )}
+        {/* +++++ ADMIN ROUTES +++++ */}
 
-            {/* +++++ USER ROUTES +++++ */}
-            
-            {!!user && user.role === "User" && (
-            <>
-              <Route path="/employees" element={<EmployeesUser />} />
-              <Route path="/myprofile/:id" element={<MyProfileUser />} />
-            </>
-            )}
-            
-            {/* +++++ COMMON ROUTES +++++ */}
-            <Route path="/dashboard" element={<Dashboard />} />
+        {!!user && user.role === "Admin" && (
+          <>
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/employee/:id" element={<EmployeeDetail />} />
+            <Route path="/addemployee" element={<AddEmployee />} />
+            <Route path="/editemployee/:id" element={<EditEmployee />} />
+            <Route
+              path="/editemployeemyprofile/:id"
+              element={<EditEmployeeMyProfile />}
+            />
+            {/* <Route path="/organization" element={<Organization />} /> */}
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/myprofile/:id" element={<MyProfileAdmin />} />
+          </>
+        )}
 
-          <Route path="*" element={<h1>Ruta equivocada</h1>} />
-        </Routes>
+        {/* +++++ USER ROUTES +++++ */}
+
+        {!!user && user.role === "User" && (
+          <>
+            <Route path="/employees" element={<EmployeesUser />} />
+            <Route path="/myprofile/:id" element={<MyProfileUser />} />
+            <Route path="/calendar" element={<CalendarUser />} />
+          </>
+        )}
+
+        {/* +++++ COMMON ROUTES +++++ */}
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="*" element={<h1>Ruta equivocada</h1>} />
+      </Routes>
       {/* </div> */}
     </div>
   );
