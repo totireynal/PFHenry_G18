@@ -1,17 +1,16 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { isArray } from "mathjs";
-
+import { useDispatch, useSelector } from "react-redux";
+import { cleanArrayEmails } from "../../../state/redux/actions/actions";
 
 const FormEmail = () => {
+  const dispatch = useDispatch();
 
   const emailsArray = useSelector((state) => state.emailsArray);
-  console.log(emailsArray);
+  const emailsJoined = emailsArray.join(", ");
 
-  
-  const [to, setTo] = useState("");
-  
+  const [to, setTo] = useState(emailsJoined ? emailsJoined : "");
   const [subject, setSubject] = useState("");
   const [text, setText] = useState("");
 
@@ -48,7 +47,8 @@ const FormEmail = () => {
 
     if (validateForm()) {
       const toList = to.split(",").map((email) => email.trim());
-      const checkEmails = [...emailsArray, ...toList];
+      const checkEmails = [...toList];
+
       try {
         for (const email of checkEmails) {
           await axios.post("http://localhost:3001/notifications", {
@@ -58,7 +58,7 @@ const FormEmail = () => {
           });
         }
         setSent(true);
-        setTimeout(function () {
+        setTimeout(function() {
           setSent(false);
         }, 2000);
         setError({});
@@ -66,10 +66,16 @@ const FormEmail = () => {
         setSubject("");
         setText("");
       } catch (error) {
-        setError(error.response.data);
+        setError("The email could not be sent");
       }
     }
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(cleanArrayEmails());
+    };
+  }, []);
 
   return (
     <div class="flex justify-center items-center h-screen">
@@ -123,7 +129,9 @@ const FormEmail = () => {
             SEND
           </button>
         </form>
-        {error.message && <p className="text-red-500">{error.message}</p>}
+        {error.message && (
+          <p className="font-semibold text-1xl text-red-700">{error.message}</p>
+        )}
         {sent && (
           <p className="font-semibold text-1xl text-green-700">
             E-mail sent correctly!

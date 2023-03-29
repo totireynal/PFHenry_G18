@@ -2,49 +2,40 @@ import ButtonSideBar from "./ButtonSideBar/ButtonSideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { resetCurrentEmployee } from '../../state/redux/actions/actions'
-import { useCookies } from 'react-cookie';
-
-
+import { resetCurrentEmployee } from "../../state/redux/actions/actions";
+import { useCookies } from "react-cookie";
 
 const SideBar = () => {
-
   const dispatch = useDispatch();
 
-  const [cookies, removeCookie] = useCookies(['token']);
+  const [cookies, removeCookie] = useCookies(["token"]);
 
-
-  const current = useSelector(state => state.currentEmployee)
+  const current = useSelector((state) => state.currentEmployee);
   const currentEmployee = useSelector((state) => state.employeeDetail);
 
-  console.log(current, 'currr');
+  const url = `/myprofile/${current.id}`;
 
-  const url = `/myprofile/${current.id}`
+  const { logout } = useAuth0();
 
-  const { 
-    logout,
-  } = useAuth0();
-
-const handleLogout = (event) => {
-  // dispatch(resetCurrentEmployee());
-  // removeCookie('token');
-  // logout();
-  }
-  
-    let refModal = useRef();
-
-    let refDivModal = useRef();
-
-    const modalActive = () => {
-      refModal.current.style.display = "flex";
-      refDivModal.current.style.transform = "scale-1";
-      refDivModal.current.style.opacity = "1";
+  const handleLogout = (event) => {
+    // dispatch(resetCurrentEmployee());
+    // removeCookie('token');
+    // logout();
   };
-  
-    const deletedEmplote = () => {
-      refModal.current.style.display = 'none'
-    };
 
+  let refModal = useRef();
+
+  let refDivModal = useRef();
+
+  const modalActive = () => {
+    refModal.current.style.display = "flex";
+    refDivModal.current.style.transform = "scale-1";
+    refDivModal.current.style.opacity = "1";
+  };
+
+  const deletedEmplote = () => {
+    refModal.current.style.display = "none";
+  };
 
   return (
     <>

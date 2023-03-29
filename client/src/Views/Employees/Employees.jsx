@@ -26,7 +26,7 @@ import { SiMinutemailer } from "react-icons/si";
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
   // console.log(users);
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const { answer, showAnswer } = useAnswer();
 
   const dispatch = useDispatch();
@@ -43,14 +43,12 @@ const navigate = useNavigate()
     });
   };
 
-  const [emailsUnselect, setEmailsUnselect] = useState(false)
+  const [emailsUnselect, setEmailsUnselect] = useState(false);
 
   const sendEmails = () => {
     dispatch(getArrayEmails(emailsSelection));
     navigate("/notifications");
-  }
-
-
+  };
 
   const [selectedOption, setSelectedOption] = useState({
     area: "default",
@@ -110,11 +108,13 @@ const navigate = useNavigate()
           {emailsSelection.length ? (
             <button
               onClick={sendEmails}
-              className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
-              
+              className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+            >
               <SiMinutemailer />
             </button>
-          ) : ''}
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8">

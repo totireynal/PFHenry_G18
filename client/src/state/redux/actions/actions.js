@@ -24,14 +24,18 @@ import {
   CLEAN_URL,
   GET_COMPANIES_CUIT,
   ADD_RATING,
-  GET_ARRAY_EMAILS
+  GET_ARRAY_EMAILS,
+  CLEAN_ARRAY_EMAILS,
 } from "../action-types/index";
 
 export function postCompany(payload) {
-  return async function (dispatch) {
-    console.log("Payload: ", payload)
-    const response = await axios.post("http://localhost:3001/companies/register", payload)
-    console.log("Response.data: ", response.data)
+  return async function(dispatch) {
+    console.log("Payload: ", payload);
+    const response = await axios.post(
+      "http://localhost:3001/companies/register",
+      payload
+    );
+    console.log("Response.data: ", response.data);
     return dispatch({ type: ADD_COMPANY, payload: response.data });
   };
 }
@@ -52,7 +56,7 @@ export function resetCreate() {
 }
 
 export const createEmployee = (info, showAnswer) => {
-  return function (dispatch) {
+  return function(dispatch) {
     console.log(info, "infoooo");
     return axios.post("http://localhost:3001/users", info).then(
       (response) => {
@@ -70,7 +74,7 @@ export const createEmployee = (info, showAnswer) => {
 };
 
 export const getEmployees = (filters, showAnswer) => {
-  return function (dispatch) {
+  return function(dispatch) {
     let url = "http://localhost:3001/users";
 
     // if (name) {
@@ -84,10 +88,9 @@ export const getEmployees = (filters, showAnswer) => {
     // // console.log(allDefined);
     // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
 
-     axios.get(addUrlQueries(filters, url)).then(
+    axios.get(addUrlQueries(filters, url)).then(
       (response) => {
-      
-        showAnswer('');
+        showAnswer("");
         return dispatch({ type: GET_EMPLOYEES, payload: response.data });
       },
       (error) => {
@@ -98,7 +101,7 @@ export const getEmployees = (filters, showAnswer) => {
 };
 
 export const getFilter = (filters) => {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       let url = "http://localhost:3001/users";
 
@@ -146,7 +149,7 @@ export const updateEmployee = (id, user, showAnswer) => {
 };
 
 export const getEmployeeDetail = (id) => {
-  return function (dispatch) {
+  return function(dispatch) {
     return axios.get(`http://localhost:3001/users/${id}`).then(
       (response) => {
         dispatch({ type: GET_EMPLOYEE_DETAIL, payload: response.data });
@@ -175,7 +178,7 @@ export const deleteEmployee = (id, showAnswer) => {
 };
 
 export const getPositions = (filters) => {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       let url = "http://localhost:3001/positions";
 
@@ -193,7 +196,7 @@ export const getPositions = (filters) => {
 };
 
 export const getPositionsNum = (filters) => {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       let url = "http://localhost:3001/positions/raw";
 
@@ -224,7 +227,7 @@ export const getPositionsNum = (filters) => {
 // }
 
 export const getAreas = (filters) => {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       let url = "http://localhost:3001/areas";
 
@@ -256,7 +259,7 @@ export const getAreas = (filters) => {
 };
 
 export const getAreasNum = (filters) => {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       let url = "http://localhost:3001/areas/ars";
 
@@ -286,7 +289,7 @@ export const getAreasNum = (filters) => {
 // }
 
 export const getRoles = (filters) => {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       let url = "http://localhost:3001/roles";
 
@@ -336,7 +339,7 @@ export const getRoles = (filters) => {
 // }
 
 export const getCurrentEmployee = (id) => {
-  return function (dispatch) {
+  return function(dispatch) {
     return axios.get(`http://localhost:3001/users/${id}`).then(
       (response) => {
         console.log(response.data);
@@ -363,40 +366,46 @@ export const cleanUrl = () => {
   };
 };
 
-
 export const getCompaniesCuit = (cuit) => {
-  return async function(dispatch){
+  return async function(dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return dispatch({type: GET_COMPANIES_CUIT, payload: result})
-     } catch(error){
-       console.log(error.message)
-     }
-   }
-}
- 
+      const response = await axios.get(
+        `http://localhost:3001/companies?cuit=${cuit}`
+      );
+      const result = response.data;
+      console.log("Respuesta: ", result);
+      return dispatch({ type: GET_COMPANIES_CUIT, payload: result });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 export const addRating = (rating, commentary) => {
   return async (dispatch) => {
-    const opinion = {rating, commentary}
+    const opinion = { rating, commentary };
     try {
-      const response = await axios('',opinion )
-      const result = response.data
+      const response = await axios("", opinion);
+      const result = response.data;
 
       return dispatch({
         type: ADD_RATING,
-        payload: result
-      })
-    } catch (err) {
-      
-    }
-  }
-}
+        payload: result,
+      });
+    } catch (err) {}
+  };
+};
 
 export const getArrayEmails = (emails) => {
   return {
     type: GET_ARRAY_EMAILS,
-    payload: emails
-  }
-}
+    payload: emails,
+  };
+};
+
+export const cleanArrayEmails = () => {
+  return {
+    type: CLEAN_ARRAY_EMAILS,
+    payload: [],
+  };
+};

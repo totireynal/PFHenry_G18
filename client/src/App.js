@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Route, Routes, useLocation, } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Calendar from "./Views/Calendar/Calendar";
 import Dashboard from "./Views/Dashboard";
 import Employees from "./Views/Employees";
@@ -17,25 +17,24 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
-import AddFisrtEmployee from "./Views/Employees/AddFirstEmployee/AddFirstEmployee"
+import AddFisrtEmployee from "./Views/Employees/AddFirstEmployee/AddFirstEmployee";
 import EditEmployee from "./Views/EmployeeDetail/EditEmployee/EditEmployee";
 import Authorization from "./Views/Authorization/Authorization";
 import Authorizationone from "./Views/Authorization/Authorization1";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentEmployee } from './state/redux/actions/actions'
+import { getCurrentEmployee } from "./state/redux/actions/actions";
 import { Squash as Hamburger } from "hamburger-react";
 import Calendar2 from "./Views/Calendar2/Calendar2";
-import Form from "./Components/Form/Form"
+import Form from "./Components/Form/Form";
 
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
-
 
 function App() {
   const [isOpen, setOpen] = useState(true);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  
+
   // const [cookies] = useCookies(['token']);
   // const [user, setUser] = useState(null)
 
@@ -46,10 +45,10 @@ function App() {
   //     console.log(userData);
   //   }
   // }, [cookies.token]);
-  
+
   // const [user, setUser] = useState({});
 
-  const user = useSelector(state => state.currentEmployee)
+  const user = useSelector((state) => state.currentEmployee);
 
   // if (Object.keys(user).length === 0) {
   //   setUser({id: 1});
@@ -57,12 +56,8 @@ function App() {
   //   setUser(userCookies)
   // }
 
+  const refSideBar = useRef();
 
-
-  console.log(user);
-
-  const refSideBar = useRef()
-  
   // useEffect(() => {
   //   dispatch(getCurrentEmployee(user.id));
   // }, []);
@@ -75,21 +70,15 @@ function App() {
   // const login = (user) => {
   //     setUser(user)
   //   }
-  
+
   const fn = () => {
-    
     if (isOpen) {
-      refSideBar.current.style.transform = 'translateX(-100%)'
+      refSideBar.current.style.transform = "translateX(-100%)";
     } else {
       refSideBar.current.style.transform = "translateX(0)";
-      
     }
-      
-  
-  }
+  };
   // console.log(isOpen);
-
-
 
   return (
     <div className="flex bg-slate-100">
@@ -124,38 +113,38 @@ function App() {
         </div>
       </div>
       {/* <div className="flex-1 pl-16"> */}
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/home/login" element={<Login />} />
-          <Route path="/home/login/register" element={<Payment />} />
-          <Route path="/addFirstEmployee" element={<AddFisrtEmployee/>}/>
-          {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
-            <Route path="/authorization" element={<Authorization />} />
-            <Route path="/authorizationone" element={<Authorizationone />} />
-          <Route element={<ProtectedRoute isAllowed={!!user} />}>
-            <Route
-              element={
-                <ProtectedRoute
-                  isAllowed={!!user && user.role === "User"}
-                  redirectTo="/myprofile"
-                />
-              }
-            >
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/employees" element={<Employees />} />
-              <Route path="/employee/:id" element={<EmployeeDetail />} />
-              <Route path="/addemployee" element={<AddEmployee />} />
-              <Route path="/editemployee/:id" element={<EditEmployee />} />
-              <Route path="/organization" element={<Organization />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/notifications" element={<Notifications />} />
-            </Route>
-            {/* <Route path="/myprofile/:id" element={<MyProfile />} /> */}
-            <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/home/login" element={<Login />} />
+        <Route path="/home/login/register" element={<Payment />} />
+        <Route path="/addFirstEmployee" element={<AddFisrtEmployee />} />
+        {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
+        <Route path="/authorization" element={<Authorization />} />
+        <Route path="/authorizationone" element={<Authorizationone />} />
+        <Route element={<ProtectedRoute isAllowed={!!user} />}>
+          <Route
+            element={
+              <ProtectedRoute
+                isAllowed={!!user && user.role === "User"}
+                redirectTo="/myprofile"
+              />
+            }
+          >
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/employee/:id" element={<EmployeeDetail />} />
+            <Route path="/addemployee" element={<AddEmployee />} />
+            <Route path="/editemployee/:id" element={<EditEmployee />} />
+            <Route path="/organization" element={<Organization />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/notifications" element={<Notifications />} />
           </Route>
-          <Route path="*" element={<h1>Ruta equivocada</h1>} />
-        </Routes>
+          {/* <Route path="/myprofile/:id" element={<MyProfile />} /> */}
+          <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
+        </Route>
+        <Route path="*" element={<h1>Ruta equivocada</h1>} />
+      </Routes>
       {/* </div> */}
     </div>
   );

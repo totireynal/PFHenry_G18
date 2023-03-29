@@ -22,7 +22,8 @@ import {
   GET_AREAS_NUM,
   GET_COMPANIES_CUIT,
   ADD_RATING,
-  GET_ARRAY_EMAILS
+  GET_ARRAY_EMAILS,
+  CLEAN_ARRAY_EMAILS,
 } from "../action-types/index";
 
 const initialState = {
@@ -40,7 +41,7 @@ const initialState = {
   currentEmployee: {},
   arrContentFilters: {},
   ratings: [],
-  emailsArray: []
+  emailsArray: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -89,7 +90,6 @@ function rootReducer(state = initialState, action) {
     //     allEmployees: action.payload,
     //   }
     case GET_AREAS:
-
       return {
         ...state,
         areas: action.payload,
@@ -97,8 +97,8 @@ function rootReducer(state = initialState, action) {
     case GET_AREAS_NUM:
       return {
         ...state,
-        areasNum: action.payload
-      }
+        areasNum: action.payload,
+      };
     case GET_POSITIONS:
       return {
         ...state,
@@ -108,7 +108,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         positionsNum: action.payload,
-      }
+      };
     // case GET_POSITIONS_EMPLOYEES:
     //   return {
     //     ...state,
@@ -150,19 +150,24 @@ function rootReducer(state = initialState, action) {
         arrContentFilters: {},
       };
     case GET_COMPANIES_CUIT:
-      return{
+      return {
         ...state,
-        company: action.payload
-      }
+        company: action.payload,
+      };
     case ADD_RATING:
       return {
         ...state,
-        ratings: [...state.ratings, action.payload]
-      }
+        ratings: [...state.ratings, action.payload],
+      };
     case GET_ARRAY_EMAILS:
       return {
         ...state,
-        emailsArray: action.payload
+        emailsArray: action.payload,
+      };
+    case CLEAN_ARRAY_EMAILS:
+      return {
+        ...state,
+        emailsArray: action.payload,
       };
     default:
       return state;
