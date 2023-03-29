@@ -77,7 +77,8 @@ const handleLogout = (event) => {
                 </ButtonSideBar>
                 <div
                   className="relative w-full h-9 xl:m-0 ssm:my-5 hover:text-sky-400 cursor-pointer"
-                  onClick={() => logout()}
+                  onClick={handleLogout}
+                  // onClick={() => logout()}
                 >
                   <span className="absolute h-9  leading-9 xl:left-10 ssm:left-7 material-symbols-outlined">
                     logout

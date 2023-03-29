@@ -23,7 +23,7 @@ const Form = ({
   answer,
   handleChangeImage,
   positionsNum,
-  areasNum,
+  areasNum
 }) => {
   //   const dispatch = useDispatch();
 
@@ -189,6 +189,14 @@ const Form = ({
             handler={handleInput}
             id="dateOfAdmission"
             error={errors.dateOfAdmission}
+          />
+           <InputForm
+            type="hidden"
+            name="CompanyId"
+            value={users.CompanyId}
+            handler={handleInput}
+            id="CompanyId"
+
           />
           <div className="flex flex-row w-60">
             <UploadImage handleChangeImage={handleChangeImage} />
