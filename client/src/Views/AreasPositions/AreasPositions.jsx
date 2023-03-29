@@ -1,6 +1,8 @@
 const AreasPosition = () => {
   return (
-    <div></div>
+    <div>
+      
+    </div>
   )
 }
 
