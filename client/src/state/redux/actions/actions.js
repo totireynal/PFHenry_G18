@@ -26,6 +26,8 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  GET_DELETED_EMPLOYEES,
+  UPDATE_DELETED_EMPLOYEE,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -78,18 +80,6 @@ export const getEmployees = (filters, showAnswer, idCompany) => {
   return function(dispatch) {
     let url = `http://localhost:3001/users/${idCompany}`;
     console.log("filtrosget", url);
-
-    // if (name) {
-    //   url += `?name=${name}`;
-    // }
-
-    // const all = [role, area, position, sort];
-    // console.log(all);
-
-    // const allDefined = all.flatMap(el => el === undefined ? [] : el)
-    // // console.log(allDefined);
-    // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
-    // console.log(url);
     
     if(idCompany !== undefined) { 
     axios.get(addUrlQueries(filters, url)).then(
@@ -348,7 +338,7 @@ export const getCurrentEmployee = (idCompany, id) => {
   return function(dispatch) {
     return axios.get(`http://localhost:3001/users/${idCompany}/${id}`).then(
       (response) => {
-        console.log(response.data);
+        console.log("FRANN",response.data);
         dispatch({ type: CURRENT_EMPLOYEE, payload: response.data });
       },
       (error) => {
@@ -453,7 +443,45 @@ export const cleanArrayEmails = () => {
    }
  }
 
+  export const getDeletedEmployees = (filters, showAnswer, idCompany) => {
+  console.log('llega',idCompany);
+  return function(dispatch) {
+    let url = `http://localhost:3001/users/deleted/${idCompany}`;
+    console.log("filtrosget", url);
+ 
+    if(idCompany !== undefined) { 
+    axios.get(addUrlQueries(filters, url)).then(
+      (response) => {
+        showAnswer("");
+        console.log("resp-->",response.data);
+        return dispatch({ type: GET_DELETED_EMPLOYEES, payload: response.data });
+      },
+      (error) => {
+        showAnswer(error.response.data);
+        // console.log("resp-err->",error.response.data.error);
+      }
+    );
+  }};
+  };
 
-
+  export const updateDeletedEmployee = (id, user, showAnswer) => {
+    return async (dispatch) => {
+      try {
+        // console.log(user, 'user upppp');
+        const response = await axios.put(
+          `http://localhost:3001/users/restore/${id}`,
+          user
+        );
+        const result = response.data;
+        showAnswer(result);
+  
+        return dispatch({
+          type: UPDATE_DELETED_EMPLOYEE,
+        });
+      } catch (error) {
+        showAnswer(error.response.data.error);
+      }
+    };
+  };
 
 

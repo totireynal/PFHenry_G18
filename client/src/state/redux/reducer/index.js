@@ -24,6 +24,8 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  GET_DELETED_EMPLOYEES,
+  UPDATE_DELETED_EMPLOYEE,
 } from "../action-types/index";
 
 const initialState = {
@@ -42,6 +44,7 @@ const initialState = {
   arrContentFilters: {},
   ratings: [],
   emailsArray: [],
+  deletedEmployees: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -71,12 +74,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         allEmployees: action.payload,
       };
-    case UPDATE_EMPLOYEE:
-      return {
+      case UPDATE_EMPLOYEE:
+        return {
         ...state,
       };
-    case GET_EMPLOYEE_DETAIL:
-      return {
+      case GET_EMPLOYEE_DETAIL:
+        return {
         ...state,
         employeeDetail: action.payload,
       };
@@ -84,8 +87,8 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-    // case GET_AREAS_EMPLOYEES:
-    //   return {
+      // case GET_AREAS_EMPLOYEES:
+      //   return {
     //     ...state,
     //     allEmployees: action.payload,
     //   }
@@ -149,26 +152,35 @@ function rootReducer(state = initialState, action) {
         ...state,
         arrContentFilters: {},
       };
-    case GET_COMPANIES_CUIT:
-      return {
-        ...state,
-        company: action.payload,
-      };
-    case ADD_RATING:
-      return {
-        ...state,
-        ratings: [...state.ratings, action.payload],
-      };
-    case GET_ARRAY_EMAILS:
-      return {
-        ...state,
-        emailsArray: action.payload,
-      };
-    case CLEAN_ARRAY_EMAILS:
-      return {
-        ...state,
-        emailsArray: action.payload,
-      };
+      case GET_COMPANIES_CUIT:
+        return {
+          ...state,
+          company: action.payload,
+        };
+        case ADD_RATING:
+          return {
+            ...state,
+            ratings: [...state.ratings, action.payload],
+          };
+          case GET_ARRAY_EMAILS:
+            return {
+              ...state,
+              emailsArray: action.payload,
+            };
+            case CLEAN_ARRAY_EMAILS:
+              return {
+                ...state,
+                emailsArray: action.payload,
+              };
+              case GET_DELETED_EMPLOYEES:
+                return {
+                  ...state,
+                  deletedEmployees: action.payload,
+                };
+                case UPDATE_DELETED_EMPLOYEE:
+                  return {
+                  ...state,
+                };
     default:
       return state;
   }
