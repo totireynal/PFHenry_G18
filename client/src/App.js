@@ -95,7 +95,7 @@ function App() {
         {/* +++++ SUPERADMIN ROUTES +++++ */}
         {!!user && user.role === "SuperAdmin" && (
           <>
-            <Route path="/employees" element={<Employees />} />
+            <Route path="/employees/:id" element={<Employees />} />
             <Route path="/employee/:id" element={<EmployeeDetail />} />
             <Route path="/addemployee" element={<AddEmployee />} />
             <Route path="/editemployee/:id" element={<EditEmployee />} />
