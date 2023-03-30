@@ -12,7 +12,7 @@ const Position = ({ selectedOption, handleSelectChange, CompanyId }) => {
 
   useEffect(() => {
     dispatch(getEmployees(arrContentFilters, undefined, CompanyId));
-    dispatch(getPositions(arrContentFilters));
+    dispatch(getPositions(arrContentFilters, CompanyId));
   }, [arrContentFilters, dispatch]);
 
   const handleChange = (event) => {
