@@ -10,18 +10,20 @@ import { useAnswer } from "../../../Utils/hooks/answer";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const AddEmployee = () => {
+const AddFirstEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
     useEffect(() => {
-      dispatch(getPositionsNum());
-      dispatch(getAreasNum());
+      
+      // dispatch(getPositionsNum());
+      // dispatch(getAreasNum());
     }, [dispatch]);
 
-    const positionsNum = useSelector((state) => state.positionsNum);
-    const areasNum = useSelector((state) => state.areasNum);
-
+    const companyId = useSelector((state) => state.newCompanyId);
+    console.log("CompanyID: ", companyId)
+    // const areasNum = useSelector((state) => state.areasNum);
+    
   const [employee, setEmployee] = useState({
     name: "",
     lastName: "",
@@ -30,13 +32,14 @@ const AddEmployee = () => {
     dni: "",
     tel: "",
     address: "",
-    role: "Admin",
-    image: "",
-    PositionId: 0,
-    AreaId: 0,
+    role: "SuperAdmin",
+    image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
+    PositionId: 3,
+    AreaId: 5,
     cuil: "",
     cbu: "",
     dateOfAdmission: "",
+    CompanyId: ""
   });
 
   const [errorButton, setErrorButton] = useState(false);
@@ -50,12 +53,17 @@ const AddEmployee = () => {
   const [submited, setSubmited] = useState(false);
 
   useEffect(() => {
+    if (Object.keys(errors).length === 0) {
+      setErrorButton(false);
+    }
+  }, [errors]);
 
-}, [])
+  useEffect(() => {}, []);
 
   const handleInput = (event) => {
     setEmployee({
       ...employee,
+      CompanyId: companyId,
       [event.target.name]: event.target.value,
     });
 
@@ -68,14 +76,14 @@ const AddEmployee = () => {
 
     setTouched({
       ...touched,
-      [event.target.name]: false,
+      [event.target.name]: true,
     });
 
     const allErrors = Object.keys(errors).length;
     if (!allErrors) {
       setErrorButton(false);
     } else {
-      setErrorButton(false);
+      setErrorButton(true);
     }
   };
 
@@ -86,37 +94,38 @@ const AddEmployee = () => {
     });
   };
 
-  const handleSelect = (e) => {
-    const { value, name } = e.target;
-    if (name === "role") {
-      setEmployee({
-        ...employee,
-        [name]: value,
-      });
-    }
-    if (name === "AreaId") {
-      console.log(name, value, 'daleeeee');
-      setEmployee({
-        ...employee,
-        [name]: Number(value),
-      });
-    }
-    if (name === "PositionId") {
-      setEmployee({
-        ...employee,
-        [name]: Number(value),
-      });
-    }
-  };
+  // const handleSelect = (e) => {
+  //   const { value, name } = e.target;
+  //   if (name === "role") {
+  //     setEmployee({
+  //       ...employee,
+  //       [name]: value,
+  //     });
+  //   }
+  //   if (name === "AreaId") {
+  //     console.log(name, value, 'daleeeee');
+  //     setEmployee({
+  //       ...employee,
+  //       [name]: Number(value),
+  //     });
+  //   }
+  //   if (name === "PositionId") {
+  //     setEmployee({
+  //       ...employee,
+  //       [name]: Number(value),
+  //     });
+  //   }
+  // };
 
   const handleSubmit = (event) => {
+    console.log(employee, "employeeeee");
     event.preventDefault();
-    setSubmited(false);
+    setSubmited(true);
     dispatch(createEmployee(employee, showAnswer));
     setTimeout(() => {
       setSubmited(false);
     }, 3000);
-    setErrorButton(false);
+    setErrorButton(true);
     setEmployee({
       name: "",
       lastName: "",
@@ -125,13 +134,14 @@ const AddEmployee = () => {
       dni: "",
       tel: "",
       address: "",
-      role: "Admin",
-      image: "",
-      PositionId: 0,
-      AreaId: 0,
+      role: "SuperAdmin",
+      image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
+      PositionId: 3,
+      AreaId: 5,
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
+      CompanyId: ""
     });
 
     setAllErrors({
@@ -144,17 +154,18 @@ const AddEmployee = () => {
       address: "",
       role: "",
       image: "",
-      PositionId: 0,
-      AreaId: 0,
+      PositionId: 3,
+      AreaId: 5,
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
     });
-    navigate("/dashbord")
+    navigate("/")
   };
-  // console.log(errors);
+  console.log(errors);
   return (
-    <div className="w-full h-screen ml-72 flex justify-center items-center">
+    <div className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0
+    ssm:py-16">
       <div>
         <div className="w-full text-center mb-14 font-bold">
           <span className="text-4xl text-sky-400">Add Employee</span>
@@ -173,7 +184,6 @@ const AddEmployee = () => {
             <FormFirstEmployee
               handleInput={handleInput}
               handleSubmit={handleSubmit}
-              handleSelect={handleSelect}
               touched={touched}
               errors={errors}
               users={employee}
@@ -190,4 +200,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default AddFirstEmployee;

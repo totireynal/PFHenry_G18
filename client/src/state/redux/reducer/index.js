@@ -28,7 +28,7 @@ import {
 
 const initialState = {
   allCompanies: [],
-  companies: [],
+  newCompanyId: {},
   company: {},
   employeeCreated: [],
   allEmployees: [],
@@ -54,7 +54,7 @@ function rootReducer(state = initialState, action) {
     case ADD_COMPANY:
       return {
         ...state,
-        companies: action.payload,
+        newCompanyId: action.payload.CompanyId,
       };
     case CREATE_EMPLOYEE:
       return {

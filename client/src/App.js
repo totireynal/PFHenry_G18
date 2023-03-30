@@ -71,6 +71,7 @@ function App() {
           pathname === "/home" ||
           pathname === "/home/login" ||
           pathname === "/home/login/register" ||
+          pathname === "/addFirstEmployee" ||
           pathname === "/authorizationone" ||
           pathname === "/authorization" ? (
             ""
