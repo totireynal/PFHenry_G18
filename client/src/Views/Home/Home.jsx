@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { AiFillInstagram } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
-import ChatBot from "../../Components/ChatBot/ChatBot";
+// import ChatBot from "../../Components/ChatBot/ChatBot";
+import ButtonChatBot from "../../Components/ChatBot/ButtonChatBot/ButtonChatBot";
 
 const Home = () => {
   const container =
@@ -206,8 +207,8 @@ const Home = () => {
       </section>
 
       <section>
-        <div className="flex items-center justify-center">
-          <ChatBot />
+        <div>
+          <ButtonChatBot />
         </div>
       </section>
 

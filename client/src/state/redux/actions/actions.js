@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -26,6 +26,12 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  POST_CRUD_AREA,
+  GET_CRUD_AREAS,
+  DELETE_CRUD_AREAS,
+  POST_CRUD_POSITION,
+  GET_CRUD_POSITION,
+  DELETE_CRUD_POSITION,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -367,17 +373,19 @@ export const cleanUrl = () => {
 };
 
 export const getCompaniesCuit = (cuit) => {
-  return async function(dispatch){
+  return async function(dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return result
-     } catch(error){
-       console.log(error.message)
-     }
-   }
- }
+      const response = await axios.get(
+        `http://localhost:3001/companies?cuit=${cuit}`
+      );
+      const result = response.data;
+      console.log("Respuesta: ", result);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
 export const addRating = (rating, commentary) => {
   return async (dispatch) => {
@@ -408,46 +416,108 @@ export const cleanArrayEmails = () => {
   };
 };
 
- export const getCompaniesName = (name) => {
-  return async function(dispatch){
+export const getCompaniesName = (name) => {
+  return async function(dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/companies?name=${name}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return result
-     } catch(error){
-       console.log(error.message)
-     }
-   }
- }
+      const response = await axios.get(
+        `http://localhost:3001/companies?name=${name}`
+      );
+      const result = response.data;
+      console.log("Respuesta: ", result);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
- export const getCompaniesTel = (tel) => {
-  return async function(dispatch){
+export const getCompaniesTel = (tel) => {
+  return async function(dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/companies?tel=${tel}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return result
-     } catch(error){
-       console.log(error.message)
-     }
-   }
- }
+      const response = await axios.get(
+        `http://localhost:3001/companies?tel=${tel}`
+      );
+      const result = response.data;
+      console.log("Respuesta: ", result);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
- export const getCompaniesEmail = (email) => {
-  return async function(dispatch){
+export const getCompaniesEmail = (email) => {
+  return async function(dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/companies?email=${email}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return result
-     } catch(error){
-       console.log(error.message)
-     }
-   }
- }
+      const response = await axios.get(
+        `http://localhost:3001/companies?email=${email}`
+      );
+      const result = response.data;
+      console.log("Respuesta: ", result);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
+export function postAreaCrud(area) {
+  return async function(dispatch) {
+    const response = await axios.post("http://localhost:3001/areas", area);
+    return dispatch({ type: POST_CRUD_AREA, payload: response.data });
+  };
+}
 
+export function getAreasCrud() {
+  return (dispatch) => {
+    axios
+      .get("http://localhost:3001/areas/ars")
+      .then((info) => {
+        return dispatch({ type: GET_CRUD_AREAS, payload: info.data });
+      })
+      .catch((error) => console.log(error.message));
+  };
+}
 
+export const deleteAreaCrud = (id) => {
+  return async (dispatch) => {
+    await axios
+      .delete(`http://localhost:3001/areas/${id}`)
+      .then((info) => {
+        return dispatch({ type: DELETE_CRUD_AREAS, payload: id });
+      })
+      .catch((error) => console.log(error.message));
+  };
+};
 
+export function postPositionCrud(position) {
+  return async function(dispatch) {
+    const response = await axios.post(
+      "http://localhost:3001/positions",
+      position
+    );
+    return dispatch({ type: POST_CRUD_POSITION, payload: response.data });
+  };
+}
 
+export function getPositionsCrud() {
+  return (dispatch) => {
+    axios
+      .get("http://localhost:3001/positions/raw")
+      .then((info) => {
+        return dispatch({ type: GET_CRUD_POSITION, payload: info.data });
+      })
+      .catch((error) => console.log(error.message));
+  };
+}
+
+export const deletePositionCrud = (id) => {
+  return async (dispatch) => {
+    await axios
+      .delete(`http://localhost:3001/positions/${id}`)
+      .then((info) => {
+        return dispatch({ type: DELETE_CRUD_POSITION, payload: id });
+      })
+      .catch((error) => console.log(error.message));
+  };
+};

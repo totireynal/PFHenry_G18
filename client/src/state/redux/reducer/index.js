@@ -24,6 +24,10 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  POST_CRUD_AREA,
+  GET_CRUD_AREAS,
+  POST_CRUD_POSITION,
+  GET_CRUD_POSITION,
 } from "../action-types/index";
 
 const initialState = {
@@ -168,6 +172,26 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         emailsArray: action.payload,
+      };
+    case POST_CRUD_AREA:
+      return {
+        ...state,
+        areas: action.payload,
+      };
+    case POST_CRUD_POSITION:
+      return {
+        ...state,
+        positions: action.payload,
+      };
+    case GET_CRUD_AREAS:
+      return {
+        ...state,
+        areas: action.payload,
+      };
+    case GET_CRUD_POSITION:
+      return {
+        ...state,
+        positions: action.payload,
       };
     default:
       return state;

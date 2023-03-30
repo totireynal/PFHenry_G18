@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { contentFilters, getEmployees } from "../../../state/redux/actions/actions";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import {
+  contentFilters,
+  getEmployees,
+} from "../../../state/redux/actions/actions";
+import { useAnswer } from "../../../utils/hooks/answer";
 
 const SearchBar = () => {
   const [input, setInput] = useState("");
@@ -12,10 +15,10 @@ const SearchBar = () => {
 
   const { answer, showAnswer } = useAnswer();
 
-    useEffect(() => {
-      dispatch(getEmployees(arrContentFilters, showAnswer));
-    }, [arrContentFilters, dispatch]);
-  
+  useEffect(() => {
+    dispatch(getEmployees(arrContentFilters, showAnswer));
+  }, [arrContentFilters, dispatch]);
+
   function onChange(e) {
     setInput(e.target.value);
   }
@@ -23,15 +26,13 @@ const SearchBar = () => {
   function onSubmit(e) {
     e.preventDefault();
 
-
     if (input.trim().length > 0) {
       // dispatch(getEmployees(input));
       dispatch(contentFilters({ name: input }));
-      setInput('')
+      setInput("");
     } else {
       setTimeout(() => {
         showAnswer("");
-        
       }, 3000);
     }
   }
@@ -59,9 +60,7 @@ shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden sm:px-16 sm
         </button>
       </form>
       <div>
-        <p className="s text-xs text-red-400">
-          {answer}
-        </p>
+        <p className="s text-xs text-red-400">{answer}</p>
       </div>
     </>
   );
