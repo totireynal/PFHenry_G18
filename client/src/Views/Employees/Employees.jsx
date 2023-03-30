@@ -139,8 +139,7 @@ const Employees = () => {
       </div>
       <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8">
         <button
-          className="flex relative bg-sky-400
-shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2 "
+          className="flex relative bg-sky-400 shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2 "
           onClick={handleRefresh}
         >
           Refresh

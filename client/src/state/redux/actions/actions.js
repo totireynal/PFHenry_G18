@@ -183,10 +183,10 @@ export const deleteEmployee = (id, showAnswer) => {
   };
 };
 
-export const getPositions = (filters) => {
+export const getPositions = (filters, CompanyId) => {
   return async function(dispatch) {
     try {
-      let url = "http://localhost:3001/positions";
+      let url = `http://localhost:3001/positions/${CompanyId}`;
 
       const response = await axios(addUrlQueries(filters, url));
       const result = response.data;
@@ -232,10 +232,10 @@ export const getPositionsNum = (filters) => {
 //   }
 // }
 
-export const getAreas = (filters) => {
+export const getAreas = (filters, CompanyId) => {
   return async function(dispatch) {
     try {
-      let url = "http://localhost:3001/areas";
+      let url = `http://localhost:3001/areas/${CompanyId}`;
 
       // console.log(encontrandoSimbolo);
 
