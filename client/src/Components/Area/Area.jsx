@@ -12,7 +12,7 @@ const Area = ({ selectedOption, handleSelectChange, CompanyId }) => {
 
   useEffect(() => {
     dispatch(getEmployees(arrContentFilters, undefined, CompanyId));
-    dispatch(getAreas(arrContentFilters));
+    dispatch(getAreas(arrContentFilters, CompanyId));
   }, [arrContentFilters, dispatch]);
 
   const handleChange = (event) => {
