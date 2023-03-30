@@ -141,7 +141,7 @@ function rootReducer(state = initialState, action) {
     case GET_FILTER:
       return {
         ...state,
-        // allEmployees: action.payload,
+        allEmployees: action.payload,
       };
     case CONTENT_FILTERS:
       return {

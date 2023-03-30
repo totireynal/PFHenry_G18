@@ -23,6 +23,8 @@ const SearchBar = () => {
     setInput(e.target.value);
   }
 
+  console.log("ANSWER-->", answer);
+
   function onSubmit(e) {
     e.preventDefault();
 
@@ -36,7 +38,7 @@ const SearchBar = () => {
       }, 3000);
     }
   }
-
+  console.log("Didi", answer);
   return (
     <>
       <form
@@ -60,7 +62,7 @@ shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden sm:px-16 sm
         </button>
       </form>
       <div>
-        <p className="s text-xs text-red-400">{answer}</p>
+        <p className="s text-xs text-red-400">{/* {answer} */}</p>
       </div>
     </>
   );

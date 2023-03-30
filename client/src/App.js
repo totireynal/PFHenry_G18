@@ -95,7 +95,7 @@ function App() {
         {/* +++++ SUPERADMIN ROUTES +++++ */}
         {!!user && user.role === "SuperAdmin" && (
           <>
-            <Route path="/employees" element={<Employees />} />
+            <Route path="/employees/:id" element={<Employees />} />
             <Route path="/employee/:id" element={<EmployeeDetail />} />
             <Route path="/addemployee" element={<AddEmployee />} />
             <Route path="/editemployee/:id" element={<EditEmployee />} />
@@ -114,7 +114,7 @@ function App() {
 
         {!!user && user.role === "Admin" && (
           <>
-            <Route path="/employees" element={<Employees />} />
+            <Route path="/employees/:id" element={<Employees />} />
             <Route path="/employee/:id" element={<EmployeeDetail />} />
             <Route path="/addemployee" element={<AddEmployee />} />
             <Route path="/editemployee/:id" element={<EditEmployee />} />
@@ -133,7 +133,7 @@ function App() {
 
         {!!user && user.role === "User" && (
           <>
-            <Route path="/employees" element={<EmployeesUser />} />
+            <Route path="/employees/:id" element={<EmployeesUser />} />
             <Route path="/myprofile/:id" element={<MyProfileUser />} />
             <Route path="/calendar" element={<CalendarUser />} />
           </>
