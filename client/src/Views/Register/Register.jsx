@@ -5,6 +5,9 @@ import { postCompany } from "../../state/redux/actions/actions";
 import {CardElement} from "@stripe/react-stripe-js";
 import {useStripe, useElements} from "@stripe/react-stripe-js"
 import { getCompaniesCuit } from "../../state/redux/actions/actions";
+import { getCompaniesEmail } from "../../state/redux/actions/actions";
+import { getCompaniesName } from "../../state/redux/actions/actions";
+import { getCompaniesTel } from "../../state/redux/actions/actions";
 
 
 
@@ -56,6 +59,12 @@ export default function CreateCompany(props) {
   const stripe = useStripe();
   const elements = useElements();
 
+  const [mensajeCuit, setMensajeCuit] = useState(null);
+  const [mensajeName, setMensajeName] = useState(null);
+  const [mensajeEmail, setMensajeEmail] = useState(null);
+  const [mensajeTel, setMensajeTel] = useState(null);
+
+
   const [message, setMessage] = useState(null)
   const [isProcessing, setIsProcessing] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -77,6 +86,64 @@ export default function CreateCompany(props) {
   });
 
 
+  const handleBlurCUIT = (event) => {
+
+    const cuit = event.target.value;
+      dispatch(getCompaniesCuit(cuit)).then(resultado => {
+      if (resultado?.message) {
+        setMensajeCuit(resultado?.message);
+      } else {
+        setMensajeCuit(null);
+      }
+      console.log("Valor", cuit);
+      console.log("Mensaje: ", resultado?.message)
+    });
+    console.log("asdasdasd")
+  }
+
+  const handleBlurName = (event) => {
+
+    const name = event.target.value;
+      dispatch(getCompaniesName(name)).then(resultado => {
+      if (resultado?.message) {
+        setMensajeName(resultado?.message);
+      } else {
+        setMensajeName(null);
+      }
+      console.log("Valor", name);
+      console.log("Mensaje: ", resultado?.message)
+    });
+  }
+
+
+  const handleBlurEmail = (event) => {
+
+    const email = event.target.value;
+      dispatch(getCompaniesEmail(email)).then(resultado => {
+      if (resultado?.message) {
+        setMensajeEmail(resultado?.message);
+      } else {
+        setMensajeEmail(null);
+      }
+      console.log("Valor", email);
+      console.log("Mensaje: ", resultado?.message)
+    });
+  }
+
+  const handleBlurTel = (event) => {
+
+    const valor = event.target.value;
+      dispatch(getCompaniesTel(valor)).then(resultado => {
+      if (resultado?.message) {
+        setMensajeTel(resultado?.message);
+      } else {
+        setMensajeTel(null);
+      }
+      console.log("Valor", valor);
+      console.log("Mensaje: ", resultado?.message)
+    });
+  }
+  
   const handleSubmit = async (e)=> {
     e.preventDefault();
 
@@ -163,7 +230,7 @@ export default function CreateCompany(props) {
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
           <div className="text-center lg:text-left">
             <h2 className="mt-1 text-3x1 font-extrabold text-gray-900">
-              Registre su empresa
+              Register your company
             </h2>
           </div>
           <div className="mt-6">
@@ -188,12 +255,15 @@ export default function CreateCompany(props) {
                     value={input.name}
                     name="name"
                     onChange={(e) => handleChange(e)}
+                    onBlur={(event)=> handleBlurName(event)}
                   />
                   {errors.name && (
                     <section className="m-0 text-red-600">
                       {errors.name}
                     </section>
                   )}
+                  {mensajeName && <section className="m-0  text-red-600">{mensajeName}</section>}
+                   {console.log("Mensaje en section:", mensajeName)}
                 </div>
                 <div>
                   <label
@@ -209,12 +279,17 @@ export default function CreateCompany(props) {
                     name="cuit"
                     onChange={(e) => handleChange(e)}
                     placeholder="e.g 30203445606"
+                    onBlur={(event)=> handleBlurCUIT(event)}
                   />
-                  {errors.cuit && (
+                  
+                   {errors.cuit && (
                     <section className="m-0  text-red-600">
                       {errors.cuit}
                     </section>
-                  )}
+                  )} 
+                   {mensajeCuit && <section className="m-0  text-red-600">{mensajeCuit}</section>}
+                   {console.log("Mensaje en section:", mensajeCuit)}
+                   
                 </div>
                 <div>
                   <label
@@ -293,12 +368,15 @@ export default function CreateCompany(props) {
                     value={input.tel}
                     name="tel"
                     onChange={(e) => handleChange(e)}
+                    onBlur={(event)=> handleBlurTel(event)}
                   />
                   {errors.tel && (
                     <section className="m-0  text-red-600">
                       {errors.tel}
                     </section>
                   )}
+                  {mensajeTel && <section className="m-0  text-red-600">{mensajeTel}</section>}
+                   {console.log("Mensaje en section:", mensajeTel)}
                 </div>
                 <div>
                   <label
@@ -314,12 +392,15 @@ export default function CreateCompany(props) {
                     value={input.email}
                     name="email"
                     onChange={(e) => handleChange(e)}
+                    onBlur={(event)=> handleBlurEmail(event)}
                   />
                   {errors.email && (
                     <section className="m-0  text-red-600">
                       {errors.email}
                     </section>
                   )}
+                  {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
+                   {console.log("Mensaje en section:", mensajeEmail)}
                 </div>
                 </div>
                 <div>
@@ -329,7 +410,7 @@ export default function CreateCompany(props) {
                 <button
                   type="submit"
                   className="m2-2 w-full py-3 bg-sky-700 text-white"
-                  disabled={isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees}
+                  disabled={isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees || mensajeCuit || mensajeName || mensajeEmail|| mensajeTel}
                 >
                   {" "}
                   

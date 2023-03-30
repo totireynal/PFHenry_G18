@@ -2,19 +2,14 @@ import { Link, useParams } from "react-router-dom";
 import SideBar from "../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  addRating,
-  getEmployeeDetail,
-} from "../../state/redux/actions/actions";
-import { GrFormClose } from "react-icons/gr";
-import { AiFillStar } from "react-icons/ai";
-import { useRef, useState } from "react";
+import { getEmployeeDetail } from "../../state/redux/actions/actions";
 
 const MyProfile = () => {
   // let { id } = useParams();
   let employeeDetail = useSelector((state) => state.currentEmployee);
   let dispatch = useDispatch();
 
+  
   const {
     id,
     name,
@@ -37,48 +32,9 @@ const MyProfile = () => {
     dispatch(getEmployeeDetail(id));
   }, [id, dispatch]);
 
-  useEffect(() => {
-    dispatch(getEmployeeDetail(id));
-  }, [id, dispatch]);
-
-  const refQualify = useRef();
-  const refQualifying = useRef();
-  const refModal = useRef();
-
-  const qualifying = (e) => {
-    refQualify.current.style.pointerEvents = "none";
-    refQualify.current.style.opacity = "0";
-    refQualifying.current.style.pointerEvents = "auto";
-    refQualifying.current.style.opacity = "1";
-  };
-  const endQualifying = (e) => {
-    dispatch(addRating(rating, commentary));
-    refModal.current.style.pointerEvents = "none";
-    refModal.current.style.opacity = "0";
-  };
-
-  const [rating, setRating] = useState(0);
-  const [commentary, setCommentary] = useState("");
-  const [hover, setHover] = useState(0);
-
-  const handleTextarea = (e) => {
-    setCommentary(e.target.value);
-  };
-
-  const close = (e) => {
-    refQualify.current.style.pointerEvents = "none";
-    refQualify.current.style.opacity = "0";
-    refQualifying.current.style.pointerEvents = "none";
-    refQualifying.current.style.opacity = "0";
-    refModal.current.style.pointerEvents = "none";
-    refModal.current.style.opacity = "0";
-  };
-
-  console.log(commentary);
 
   return (
     <>
-     
       <div className="w-full lg:h-screen  xl:ml-72 sm:ml-36 ssm:m-auto pt-16 flex  flex-col gap-10 pb-16">
         <div className="flex gap-16 lg:flex-row ssm:items-center ssm:flex-col-reverse">
           <img
@@ -109,14 +65,13 @@ const MyProfile = () => {
               <span className="font-medium"> Role: </span>
               {role}
             </p>
-            <div className="flex flex-col  lg:w-fit ssm: mt-10 gap-3 ">
-              <Link to={`/editemployeemyprofile/${id}`}>
+            {/* <div className="flex flex-col  lg:w-fit ssm: mt-10 gap-3 ">
+              <Link to={`/editemployee/${id}`}>
                 <button className="bg-sky-400 text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
                   Edit Employee
                 </button>
               </Link>
-            </div>
-            <span>EDITAR DATOS DE COMPANY</span>
+            </div> */}
           </div>
           <div className="flex md:flex-row ssm:flex-col lg:text-start ssm:justify-center ssm:text-center w-1/2 text-xl pt-16">
             <div className="flex flex-col lg:justify-between w-full ">
@@ -155,35 +110,5 @@ const MyProfile = () => {
   );
 };
 
-//   return (
-//     <div className="grid grid-cols-6 grid-rows-1 h-screen">
-
-//       <SideBar />
-//       <div className="col-span-5 p-8">
-//         <div className={style.buttonCointainer}>
-//           {/* <button onClick={() => dispatch(deleteEmployee(id))}>Delete</button> */}
-
-//           <Link to={`/editemployee/${id}`}>
-//             <button className={style.editButton}>Edit Employee</button>
-//           </Link>
-//         </div>
-//         <div className={style.mainCointainer}>
-//           <p>Name: {name}</p>
-//           <p>Last Name: {lastName}</p>
-//           <p>Birth Date: {birthDate}</p>
-//           <p>E-mail: {email}</p>
-//           <p>DNI: {dni}</p>
-//           <p>Phone: {tel}</p>
-//           <p>Address: {address}</p>
-//           <p>Role: {role}</p>
-//           <p>Position: {position}</p>
-//           <p>Area: {area}</p>
-//           <p>Cuil: {cuil}</p>
-//           <p>Cbu: {cbu}</p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
 
 export default MyProfile;

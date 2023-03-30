@@ -5,14 +5,14 @@ import { contentFilters, getAreas, getAreasEmployees, getEmployees, getPositions
 
 
 
-const Area = ({ selectedOption, handleSelectChange }) => {
+const Area = ({ selectedOption, handleSelectChange, CompanyId }) => {
   const dispatch = useDispatch();
   const areas = useSelector((state) => state.areas);
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
   useEffect(() => {
-    dispatch(getEmployees(arrContentFilters));
-    dispatch(getAreas(arrContentFilters));
+    dispatch(getEmployees(arrContentFilters, undefined, CompanyId));
+    dispatch(getAreas(arrContentFilters, CompanyId));
   }, [arrContentFilters, dispatch]);
 
   const handleChange = (event) => {

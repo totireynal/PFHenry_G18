@@ -13,17 +13,19 @@ const Authorizationone = () => {
     const [cookies] = useCookies(['cookieBack']);
     const decodedToken = cookies.cookieBack ? jwt_decode(cookies.cookieBack) : null;
     const idCurrent = decodedToken ? decodedToken.id : null;
+    const idCompany = decodedToken ? decodedToken.CompanyId : null;
   
     console.log('cookies-->', cookies);
     console.log('decodedToken-->', decodedToken);
     console.log('idCurrent-->', idCurrent);
-    navigate(`/employees`)
+    console.log('idCompany-->', idCompany);
+    navigate(`/dashboard`)
   
     const dispatch = useDispatch();
   
     useEffect(() => {
       if (idCurrent) {
-        dispatch(getCurrentEmployee(idCurrent));
+        dispatch(getCurrentEmployee(idCompany, idCurrent));
       }
     }, [dispatch, idCurrent]);
 
