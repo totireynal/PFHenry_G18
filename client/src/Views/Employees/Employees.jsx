@@ -18,7 +18,7 @@ import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
-import { useAnswer } from "../../Utils/hooks/answer";
+import { useAnswer } from "../../utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiMailAddLine } from "react-icons/ri";
 import { SiMinutemailer } from "react-icons/si";
@@ -74,6 +74,8 @@ const Employees = () => {
 
   useEffect(() => {
     dispatch(getEmployees(undefined, showAnswer));
+
+    return handleRefresh()
   }, [dispatch]);
 
   useEffect(() => {
@@ -146,7 +148,6 @@ shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded tex
         {users ? (
           users?.map((user, i) => {
             return (
-              // <Link key={i} to={`/employee/${user?.id}`} >
               <Employee
                 key={i}
                 id={user?.id}
@@ -161,7 +162,6 @@ shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded tex
                 emailsSelection={emailsSelection}
                 emailsUnselect={emailsUnselect}
               />
-              // </Link>
             );
           })
         ) : (

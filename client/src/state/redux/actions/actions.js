@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -77,16 +77,6 @@ export const getEmployees = (filters, showAnswer) => {
   return function(dispatch) {
     let url = "http://localhost:3001/users";
 
-    // if (name) {
-    //   url += `?name=${name}`;
-    // }
-
-    // const all = [role, area, position, sort];
-    // console.log(all);
-
-    // const allDefined = all.flatMap(el => el === undefined ? [] : el)
-    // // console.log(allDefined);
-    // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
 
     axios.get(addUrlQueries(filters, url)).then(
       (response) => {

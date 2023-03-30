@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
-import {useRef} from 'react'
+import {useRef, useState} from 'react'
 
 const Employee = (props) => {
+
+  const [check, setCheck] = useState(false)
+  // console.log(check);
+
   const handleCheck = (e) => {
     const { checked } = e.target;
+    setCheck(ck => !ck)
 
-    props.catchEmails(props.email, checked);
+    props.catchEmails(props.email, check);
   };
 
   const refDivCheck = useRef();
@@ -15,8 +20,11 @@ const Employee = (props) => {
   // refDivCheck.current.style.display = 'none'
 
   return (
-    <div className=" bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
-      <div
+    <div
+      className=" bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
+      <label
+        id='check'
+        onClick={() => setCheck(!check)}
         ref={refDivCheck}
         className={`${props.emailsUnselect ? 'inline-block' : 'hidden'} absolute h-full w-full bg-transparent`}
       >
@@ -24,10 +32,11 @@ const Employee = (props) => {
           className="absolute right-10 top-10"
           type="checkbox"
           name=""
-          id=""
+          id="check"
           onChange={handleCheck}
+          checked={check}
         />
-      </div>
+      </label>
       <Link to={`/employee/${props.id}`}>
         <span className="text-slate-300 absolute right-3 top-2 text-xs text-start font-medium ">
           {props.role}
