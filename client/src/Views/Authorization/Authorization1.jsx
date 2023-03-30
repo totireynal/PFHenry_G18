@@ -1,5 +1,5 @@
 import { useCookies } from 'react-cookie';
-import { getCurrentEmployee } from '../../state/redux/actions/actions';
+import { getCurrentEmployee, getEmployees } from '../../state/redux/actions/actions';
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
@@ -27,6 +27,10 @@ const Authorizationone = () => {
       if (idCurrent) {
         dispatch(getCurrentEmployee(idCompany, idCurrent));
       }
+      // if (idCompanyCurrent) {
+      //   dispatch(getEmployees(undefined, undefined, idCompanyCurrent))
+      // }
+
     }, [dispatch, idCurrent]);
 
 

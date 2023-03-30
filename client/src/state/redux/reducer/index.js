@@ -24,6 +24,7 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  GET_RATING,
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
 } from "../action-types/index";
@@ -157,10 +158,10 @@ function rootReducer(state = initialState, action) {
           ...state,
           company: action.payload,
         };
-        case ADD_RATING:
+        case GET_RATING:
           return {
             ...state,
-            ratings: [...state.ratings, action.payload],
+            ratings: [...state.ratings, ...action.payload],
           };
           case GET_ARRAY_EMAILS:
             return {

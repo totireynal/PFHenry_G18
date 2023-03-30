@@ -3,6 +3,9 @@ import { AiFillInstagram } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
 import ChatBot from "../../Components/ChatBot/ChatBot";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getRating } from "../../state/redux/actions/actions";
 
 const Home = () => {
   const container =
@@ -13,33 +16,42 @@ const Home = () => {
     "flex flex-col  justify-center items-center h-screen bg-white";
   const styleText = "text-center text-6xl font-black";
 
-  const clients = [
-    {
-      id: 4,
-      name: "Juan",
-      image:
-        "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
-      rating: 5,
-      commentary:
-        "estuvo bien sdgsgfssdfsdfdsfdsfsdf asdf sad fasfsad f fs fasf dsa  fsdf sdfsd fsda fsdf asf",
-    },
-    {
-      id: 4,
-      name: "Juan",
-      image:
-        "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
-      rating: 5,
-      commentary: "estuvo bien",
-    },
-    {
-      id: 4,
-      name: "Juan",
-      image:
-        "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
-      rating: 3,
-      commentary: "estuvo bien",
-    },
-  ];
+  const clients = useSelector(state => state.ratings)
+  
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getRating())
+  }, [dispatch])
+  
+  console.log(clients, 'segundo');
+
+  // const clients = [
+  //   {
+  //     id: 4,
+  //     name: "Juan",
+  //     image:
+  //       "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
+  //     rating: 5,
+  //     commentary:
+  //       "estuvo bien sdgsgfssdfsdfdsfdsfsdf asdf sad fasfsad f fs fasf dsa  fsdf sdfsd fsda fsdf asf",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Juan",
+  //     image:
+  //       "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
+  //     rating: 5,
+  //     commentary: "estuvo bien",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Juan",
+  //     image:
+  //       "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
+  //     rating: 3,
+  //     commentary: "estuvo bien",
+  //   },
+  // ];
 
   const {
     loginWithRedirect,
@@ -125,39 +137,40 @@ const Home = () => {
         <h2 className={`${styleText} py-10`}>Some of our clients</h2>
         <div className="max-w-[1200px] m-auto ">
           <div className="flex  justify-center items-start gap-10 h-auto flex-wrap">
-            {clients.map(({ id, name, image, rating, commentary }) => {
-              return (
-                <div className="flex flex-col justify-center items-center border-sky-400 p-5 bg-white w-[300px] border-2 rounded-md">
-                  <h3 className="text-2xl pb-1">{name}</h3>
+            {clients !== undefined &&
+              clients?.map(({ name, image, score, comment }) => {
+                return (
+                  <div className="flex flex-col justify-center items-center border-sky-400 p-5 bg-white w-[300px] border-2 rounded-md">
+                    <h3 className="text-2xl pb-1">{name}</h3>
 
-                  <div className="relative flex flex-col justify-center items-center">
-                    <img
-                      className="object-cover rounded-md"
-                      src={image}
-                      alt=""
-                    />
-                    <div className="absolute -bottom-3">
-                      <div className="flex">
-                        {[...Array(rating).fill(0)].map((start, i) => {
-                          return (
-                            <label className="">
-                              <AiFillStar
-                                size={30}
-                                className={`text-yellow-200 transition-all duration-200
+                    <div className="relative flex flex-col justify-center items-center">
+                      <img
+                        className="object-cover rounded-md"
+                        src={image}
+                        alt=""
+                      />
+                      <div className="absolute -bottom-3">
+                        <div className="flex">
+                          {[...Array(score).fill(0)].map((start, i) => {
+                            return (
+                              <label className="">
+                                <AiFillStar
+                                  size={30}
+                                  className={`text-yellow-200 transition-all duration-200
                             `}
-                              />
-                            </label>
-                          );
-                        })}
+                                />
+                              </label>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
+                    <div className="text-center block mt-8 h-32 ">
+                      <p className="">{comment}</p>
+                    </div>
                   </div>
-                  <div className="text-center block mt-8 h-32 ">
-                    <p className="">{commentary}</p>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
       </section>

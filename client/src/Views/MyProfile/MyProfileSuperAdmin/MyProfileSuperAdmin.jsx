@@ -11,8 +11,16 @@ import {
 } from "../../../state/redux/actions/actions";
 
 const MyProfileSuperAdmin = () => {
+    const refModal = useRef();
+
   // let { id } = useParams();
   let employeeDetail = useSelector((state) => state.currentEmployee);
+    const currentEmployee = useSelector((state) => state.currentEmployee);
+    const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+    const ratings = useSelector((state) => state.ratings);
+  if (ratings) {
+    // refModal.current.style.display = 'none'
+  }
   let dispatch = useDispatch();
 
   const {
@@ -43,16 +51,15 @@ const MyProfileSuperAdmin = () => {
 
   const refQualify = useRef();
   const refQualifying = useRef();
-  const refModal = useRef();
 
-  const qualifying = (e) => {
+  const qualifying = () => {
     refQualify.current.style.pointerEvents = "none";
     refQualify.current.style.opacity = "0";
     refQualifying.current.style.pointerEvents = "auto";
     refQualifying.current.style.opacity = "1";
   };
-  const endQualifying = (e) => {
-    dispatch(addRating(rating, commentary));
+  const endQualifying = () => {
+    dispatch(addRating(rating, commentary, CompanyId));
     refModal.current.style.pointerEvents = "none";
     refModal.current.style.opacity = "0";
     close()
