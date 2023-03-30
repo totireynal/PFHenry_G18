@@ -11,15 +11,17 @@ const SearchBar = () => {
   // console.log(!!allEmployees, 'allll');
 
   const { answer, showAnswer } = useAnswer();
-
-    useEffect(() => {
-      dispatch(getEmployees(arrContentFilters, showAnswer));
-    }, [arrContentFilters, dispatch]);
+  
+  useEffect(() => {
+    dispatch(getEmployees(arrContentFilters, showAnswer));
+  }, [arrContentFilters, dispatch]);
   
   function onChange(e) {
     setInput(e.target.value);
   }
 
+  console.log('ANSWER-->', answer)
+  
   function onSubmit(e) {
     e.preventDefault();
 
@@ -35,7 +37,7 @@ const SearchBar = () => {
       }, 3000);
     }
   }
-
+  console.log("Didi", answer);
   return (
     <>
       <form
@@ -60,7 +62,7 @@ shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden sm:px-16 sm
       </form>
       <div>
         <p className="s text-xs text-red-400">
-          {answer}
+          {/* {answer} */}
         </p>
       </div>
     </>

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Employee from "./Employee/Employee";
 import SearchBar from "./SearchBar/SearchBar";
@@ -25,11 +25,19 @@ import { SiMinutemailer } from "react-icons/si";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
-  // console.log(users);
+
+  const currentEmployee = useSelector((state) => state.currentEmployee);
+  const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+  
+  // const { CompanyId } = useParams()
+  console.log('monta employees-->', CompanyId);
+
   const navigate = useNavigate();
   const { answer, showAnswer } = useAnswer();
 
   const dispatch = useDispatch();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [emailsSelection, setEmailSelection] = useState([]);
 
@@ -73,14 +81,18 @@ const Employees = () => {
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
   useEffect(() => {
-    dispatch(getEmployees(undefined, showAnswer));
-
-    return handleRefresh()
-  }, [dispatch]);
-
+    // setIsLoading(true);  
+    dispatch(getEmployees(undefined, showAnswer, CompanyId))
+    console.log("effect-->", CompanyId);
+      // .then(() => setIsLoading(false));
+  }, [CompanyId]);
+  
+  
   useEffect(() => {
-    dispatch(getFilter(arrContentFilters));
-  }, [arrContentFilters]);
+    // setIsLoading(true);  
+    dispatch(getFilter(arrContentFilters, CompanyId))
+    // .then(() => setIsLoading(false));
+  }, [arrContentFilters, CompanyId]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
@@ -93,6 +105,12 @@ const Employees = () => {
 
   return (
     <div className=" relative w-full mr-10 h-screen overflow-auto  xl:pl-72 sm:pl-36 ssm:pl-12 z-0">
+
+    {/* {
+      isLoading ? <div>loadong</div> : */}
+    
+      {/* <div> */}
+
       <div className="flex sm:flex-col flex-wrap sticky h-auto pt-12 pb-5 top-0 z-10 bg-slate-100 mb-3 items-center justify-center gap-2.5">
         <div className="flex gap-2 ">
           <SearchBar />
@@ -130,18 +148,22 @@ shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded tex
         <Sort
           selectedOption={selectedOption}
           handleSelectChange={handleSelectChange}
+          CompanyId={CompanyId}
         />
         <Area
           selectedOption={selectedOption}
           handleSelectChange={handleSelectChange}
+          CompanyId={CompanyId}
         />
         <Position
           selectedOption={selectedOption}
           handleSelectChange={handleSelectChange}
+          CompanyId={CompanyId}
         />
         <Rol
           selectedOption={selectedOption}
           handleSelectChange={handleSelectChange}
+          CompanyId={CompanyId}
         />
       </div>
       <div className="flex flex-col gap-2 pb-8 pt-3 ">
@@ -168,6 +190,7 @@ shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded tex
           <h3>{answer}</h3>
         )}
       </div>
+      {/* </div>} */}
     </div>
   );
 };
