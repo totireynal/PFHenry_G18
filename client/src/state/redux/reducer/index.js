@@ -46,6 +46,8 @@ const initialState = {
   arrContentFilters: {},
   ratings: [],
   emailsArray: [],
+  areasCrud: [],
+  positionsCrud: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -176,22 +178,22 @@ function rootReducer(state = initialState, action) {
     case POST_CRUD_AREA:
       return {
         ...state,
-        areas: action.payload,
+        areasCrud: action.payload,
       };
     case POST_CRUD_POSITION:
       return {
         ...state,
-        positions: action.payload,
+        positionsCrud: action.payload,
       };
     case GET_CRUD_AREAS:
       return {
         ...state,
-        areas: action.payload,
+        areasCrud: action.payload,
       };
     case GET_CRUD_POSITION:
       return {
         ...state,
-        positions: action.payload,
+        positionsCrud: action.payload,
       };
     default:
       return state;

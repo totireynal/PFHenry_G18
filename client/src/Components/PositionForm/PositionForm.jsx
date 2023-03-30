@@ -5,11 +5,12 @@ import {
   getPositionsCrud,
   deletePositionCrud,
 } from "../../state/redux/actions/actions";
+import { GrFormClose } from "react-icons/gr";
 
 const PositionForm = () => {
   const dispatch = useDispatch();
 
-  const allPositions = useSelector((state) => state.positions);
+  const allPositions = useSelector((state) => state.positionsCrud);
 
   const [position, setPosition] = useState({
     position: "",
@@ -39,13 +40,14 @@ const PositionForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 mt-20">
+    <div className="flex flex-col items-center justify-center gap-2">
       <form onClick={handleSubmitPost} className="flex flex-col gap-2 w-80">
         <input
+          placeholder="Insert Position"
           name="position"
           value={position.position}
           onChange={handleChange}
-          className="rounded-md border-2 border-gray-800 block px-2 h-12 pl-4 outline-none focus:border-sky-400 resize-none"
+          className="rounded-md block h-10 px-2 outline-none focus:border-blue-400"
           autoComplete="off"
         ></input>
         <button
@@ -65,20 +67,20 @@ const PositionForm = () => {
         {showList && (
           <div>
             <ul>
-              {allPositions && allPositions.length > 0 ? (
-                allPositions.map((position) => (
+              {Array.isArray(allPositions) && allPositions?.length > 0 ? (
+                allPositions?.map((position) => (
                   <div className="relative mb-1">
                     <p
-                      key={position.id}
+                      key={position?.id}
                       className="flex justify-center items-center border rounded h-8 font-semibold border-gray-400 bg-white"
                     >
-                      {position.position}
+                      {position?.position}
                     </p>
                     <button
-                      onClick={() => dispatch(deletePositionCrud(position.id))}
+                      onClick={() => dispatch(deletePositionCrud(position?.id))}
                       className="absolute top-2 right-4 font-semibold text-red-600"
                     >
-                      X
+                      <GrFormClose className="bg-sky-400 rounded-full" />
                     </button>
                   </div>
                 ))

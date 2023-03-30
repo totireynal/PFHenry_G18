@@ -6,11 +6,12 @@ import {
   getAreasCrud,
   deleteAreaCrud,
 } from "../../state/redux/actions/actions";
+import { GrFormClose } from "react-icons/gr";
 
 const AreaForm = () => {
   const dispatch = useDispatch();
 
-  const allAreas = useSelector((state) => state.areas);
+  const allAreas = useSelector((state) => state.areasCrud);
 
   const [area, setArea] = useState({
     area: "",
@@ -40,13 +41,14 @@ const AreaForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 mt-20">
+    <div className="flex flex-col items-center justify-center gap-2">
       <form onClick={handleSubmitPost} className="flex flex-col gap-2 w-80">
         <input
+          placeholder="Insert Area"
           name="area"
           value={area.area}
           onChange={handleChange}
-          className="rounded-md border-2 border-gray-800 block px-2 h-12 pl-4 outline-none focus:border-sky-400 resize-none"
+          className="rounded-md block h-10 px-2 outline-none focus:border-blue-400"
           autoComplete="off"
         ></input>
         <button
@@ -66,25 +68,25 @@ const AreaForm = () => {
         {showList && (
           <div>
             <ul>
-              {allAreas && allAreas.length > 0 ? (
-                allAreas.map((area) => (
+              {Array.isArray(allAreas) && allAreas?.length > 0 ? (
+                allAreas?.map((area) => (
                   <div className="relative mb-1">
                     <p
-                      key={area.id}
+                      key={area?.id}
                       className="flex justify-center items-center border rounded h-8 font-semibold border-gray-400 bg-white"
                     >
-                      {area.area}
+                      {area?.area}
                     </p>
                     <button
-                      onClick={() => dispatch(deleteAreaCrud(area.id))}
+                      onClick={() => dispatch(deleteAreaCrud(area?.id))}
                       className="absolute top-2 right-4 font-semibold text-red-600"
                     >
-                      X
+                      <GrFormClose className="bg-sky-400 rounded-full" />
                     </button>
                   </div>
                 ))
               ) : (
-                <p className="flex justify-center items-center  rounded h-8 font-semibold">
+                <p className="flex justify-center items-center rounded h-8 font-semibold">
                   No areas found
                 </p>
               )}

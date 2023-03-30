@@ -80,7 +80,7 @@ export const createEmployee = (info, showAnswer) => {
 };
 
 export const getEmployees = (filters, showAnswer, idCompany) => {
-  console.log('llega',idCompany);
+  console.log("llega", idCompany);
   return function(dispatch) {
     let url = `http://localhost:3001/users/${idCompany}`;
     console.log("filtrosget", url);
@@ -96,20 +96,22 @@ export const getEmployees = (filters, showAnswer, idCompany) => {
     // // console.log(allDefined);
     // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
     // console.log(url);
-    
-    if(idCompany !== undefined) { 
-    axios.get(addUrlQueries(filters, url)).then(
-      (response) => {
-        showAnswer("");
-        console.log("resp-->",response.data);
-        return dispatch({ type: GET_EMPLOYEES, payload: response.data });
-      },
-      (error) => {
-        showAnswer(error.response.data);
-        // console.log("resp-err->",error.response.data.error);
-      }
-    );
-  }};
+
+    if (idCompany !== undefined) {
+      axios.get(addUrlQueries(filters, url)).then(
+        (response) => {
+          console.log(response.data, "LOG NUEVO LPM");
+          showAnswer("");
+          console.log("resp-->", response.data);
+          return dispatch({ type: GET_EMPLOYEES, payload: response.data });
+        },
+        (error) => {
+          showAnswer(error.response.data);
+          // console.log("resp-err->",error.response.data.error);
+        }
+      );
+    }
+  };
 };
 
 export const getFilter = (filters, idCompany) => {
@@ -479,6 +481,7 @@ export function getAreasCrud() {
     axios
       .get("http://localhost:3001/areas/ars")
       .then((info) => {
+        console.log(info.data);
         return dispatch({ type: GET_CRUD_AREAS, payload: info.data });
       })
       .catch((error) => console.log(error.message));
