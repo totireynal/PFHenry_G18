@@ -40,6 +40,7 @@ const SideBar = () => {
   // const currentEmployee = useSelector((state) => state.employeeDetail);
 
   const url = `/myprofile/${current.id}`;
+  const urlCompany = `/employees/${current.CompanyId}`
 
   const { logout } = useAuth0();
 
@@ -108,7 +109,7 @@ const SideBar = () => {
                     </ButtonSideBar>
                   </div>
                   <ButtonSideBar
-                    url="/employees"
+                    url={urlCompany}
                     icon="group"
                     active={active.employees}
                     handleActive={handleActive}
