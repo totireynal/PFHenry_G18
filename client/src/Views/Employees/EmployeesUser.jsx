@@ -21,6 +21,9 @@ import {
 function EmployeesUser () {
     const users = useSelector((state) => state.allEmployees);
 
+    const currentEmployee = useSelector((state) => state.currentEmployee);
+    const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+
     const { answer, showAnswer } = useAnswer();
     console.log(answer, "nnnnn");
 
@@ -48,12 +51,12 @@ function EmployeesUser () {
     const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
     useEffect(() => {
-        dispatch(getEmployees(undefined, showAnswer));
-    }, [dispatch]);
+        dispatch(getEmployees(undefined, showAnswer, CompanyId))
+    }, [CompanyId]);
 
     useEffect(() => {
-        dispatch(getFilter(arrContentFilters));
-    }, [arrContentFilters]);
+        dispatch(getFilter(arrContentFilters, CompanyId));
+    }, [arrContentFilters, CompanyId]);
 
     const handleRefresh = (event) => {
         dispatch(cleanUrl());
@@ -85,18 +88,22 @@ function EmployeesUser () {
                 <Sort
                     selectedOption={selectedOption}
                     handleSelectChange={handleSelectChange}
+                    CompanyId={CompanyId}
                 />
                 <Area
                     selectedOption={selectedOption}
                     handleSelectChange={handleSelectChange}
+                    CompanyId={CompanyId}
                 />
                 <Position
                     selectedOption={selectedOption}
                     handleSelectChange={handleSelectChange}
+                    CompanyId={CompanyId}
                 />
                 <Rol
                     selectedOption={selectedOption}
                     handleSelectChange={handleSelectChange}
+                    CompanyId={CompanyId}
                 />
             </div>
             <div className="flex flex-col gap-2 pb-8 pt-3 ">
@@ -105,6 +112,7 @@ function EmployeesUser () {
                     ? (users?.map((user, i) => {
                         return (
                             <Employee
+                                key={i}
                                 id={user?.id}
                                 name={user?.name}
                                 lastName={user?.lastName}
