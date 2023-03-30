@@ -26,10 +26,10 @@ const Employee = (props) => {
         id='check'
         onClick={() => setCheck(!check)}
         ref={refDivCheck}
-        className={`${props.emailsUnselect ? 'inline-block' : 'hidden'} absolute h-full w-full bg-transparent`}
+        className={`${props.emailsUnselect ? 'inline-block' : 'hidden'} ${check ? 'bg-sky-400 bg-opacity-20' : 'bg-transparent'} absolute h-full w-full `}
       >
         <input
-          className="absolute right-10 top-10"
+          className="absolute right-10 top-10 hidden"
           type="checkbox"
           name=""
           id="check"

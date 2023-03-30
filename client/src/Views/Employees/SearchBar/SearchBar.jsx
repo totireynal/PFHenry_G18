@@ -3,43 +3,42 @@ import { useDispatch, useSelector } from "react-redux";
 import { contentFilters, getEmployees } from "../../../state/redux/actions/actions";
 import { useAnswer } from "../../../utils/hooks/answer";
 
-const SearchBar = () => {
+const SearchBar = ({ answer, showAnswer }) => {
   const [input, setInput] = useState("");
   let dispatch = useDispatch();
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
   const allEmployees = useSelector((state) => state.allEmployees);
   // console.log(!!allEmployees, 'allll');
 
-  const { answer, showAnswer } = useAnswer();
-  
+  // const { answer, showAnswer } = useAnswer();
+
   useEffect(() => {
-    dispatch(getEmployees(arrContentFilters, showAnswer));
+    dispatch(getEmployees(arrContentFilters));
   }, [arrContentFilters, dispatch]);
-  
+
   function onChange(e) {
     setInput(e.target.value);
   }
 
-  console.log('ANSWER-->', answer)
-  
   function onSubmit(e) {
     e.preventDefault();
-
 
     if (input.trim().length > 0) {
       // dispatch(getEmployees(input));
       dispatch(contentFilters({ name: input }));
-      setInput('')
+      setInput("");
     } else {
       setTimeout(() => {
         showAnswer("");
-        
       }, 3000);
     }
   }
+
   console.log("Didi", answer);
+
   return (
     <>
+      <div className="flex flex-col relative pb-2">
       <form
         onSubmit={onSubmit}
         className="flex sm:flex-row ssm:flex-col relative pl-2 justify-center items-center rounded-md sm:border ssm:border-transparent sm:border-sky-400 z-10  ssm:w-fit"
@@ -61,9 +60,8 @@ shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden sm:px-16 sm
         </button>
       </form>
       <div>
-        <p className="s text-xs text-red-400">
-          {/* {answer} */}
-        </p>
+        <p className="text-xs text-red-400 absolute -bottom-2">{answer}</p>
+      </div>
       </div>
     </>
   );
