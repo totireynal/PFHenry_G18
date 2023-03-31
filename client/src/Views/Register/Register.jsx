@@ -68,7 +68,6 @@ export default function CreateCompany(props) {
   const [message, setMessage] = useState(null)
   const [isProcessing, setIsProcessing] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [mensajeCuit, setMensajeCuit] = useState(null);
 
   const dispatch = useDispatch();
   const history = useNavigate();
