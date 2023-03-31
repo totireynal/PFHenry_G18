@@ -38,6 +38,7 @@ const RestoreEmployees = () => {
   const dispatch = useDispatch();
 
   const [deletes, setDeletes] = useState(users);
+  console.log(users, 'decimee');
 
   const fn = (id) => setDeletes(del => {
     const filter = del?.filter(e => e.id !== id)

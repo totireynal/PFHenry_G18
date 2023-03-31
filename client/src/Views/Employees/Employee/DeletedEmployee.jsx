@@ -28,9 +28,11 @@ const DeletedEmployee = (props) => {
 
   const handleClick = (event) => {
     dispatch(updateDeletedEmployee(props.id))
-    props.fn(props.id)  }
+    dispatch(getDeletedEmployees(undefined, undefined, CompanyId));
+    props.fn(props.id)
+  }
 
-
+  
   return (
     <div
       className=" bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
