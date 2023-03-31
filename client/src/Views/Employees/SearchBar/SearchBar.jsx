@@ -63,7 +63,9 @@ shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden sm:px-16 sm
           </button>
         </form>
         <div>
-          <p className="text-xs text-red-400 absolute -bottom-2">{answer}</p>
+          <p className="text-xs text-red-400 absolute -bottom-2">
+            {answer ? answer : ""}
+          </p>
         </div>
       </div>
     </>

@@ -513,6 +513,27 @@ export const getDeletedEmployees = (filters, showAnswer, idCompany) => {
     }
   };
 };
+
+export const updateDeletedEmployee = (id, user, showAnswer) => {
+  return async (dispatch) => {
+    try {
+      // console.log(user, 'user upppp');
+      const response = await axios.put(
+        `http://localhost:3001/users/restore/${id}`,
+        user
+      );
+      const result = response.data;
+      showAnswer(result);
+
+      return dispatch({
+        type: UPDATE_DELETED_EMPLOYEE,
+      });
+    } catch (error) {
+      showAnswer(error.response.data.error);
+    }
+  };
+};
+
 export const deleteAreaCrud = (id) => {
   return async (dispatch) => {
     await axios
@@ -563,7 +584,6 @@ export const updateAreaCrud = (id, area) => {
         `http://localhost:3001/areas/${id}`,
         area
       );
-      console.log(response, "<--- Log Response");
       dispatch({ type: UPDATE_CRUD_AREA, payload: response.data });
     } catch (error) {
       console.log(error.message);
