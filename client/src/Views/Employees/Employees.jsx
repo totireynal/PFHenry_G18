@@ -13,6 +13,7 @@ import {
   getFilter,
   getPositions,
   getRoles,
+  getDeletedEmployees,
 } from "../../state/redux/actions/actions";
 import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
@@ -30,14 +31,14 @@ const Employees = () => {
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
   
   // const { CompanyId } = useParams()
-  console.log('monta employees-->', CompanyId);
+  // console.log('monta employees-->', CompanyId);
 
   const navigate = useNavigate();
   const { answer, showAnswer } = useAnswer();
 
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [emailMode, setEmailMode] = useState(false)
 
   const [emailsSelection, setEmailSelection] = useState([]);
 
@@ -82,15 +83,18 @@ const Employees = () => {
 
   useEffect(() => {
     // setIsLoading(true);  
-    dispatch(getEmployees(undefined, showAnswer, CompanyId))
+    dispatch(getEmployees(undefined, undefined, CompanyId))
     console.log("effect-->", CompanyId);
       // .then(() => setIsLoading(false));
+    return handleRefresh()
   }, [CompanyId]);
   
   
   useEffect(() => {
     // setIsLoading(true);  
-    dispatch(getFilter(arrContentFilters, CompanyId))
+    dispatch(getFilter(arrContentFilters, CompanyId, showAnswer))
+    dispatch(getDeletedEmployees(undefined, showAnswer,CompanyId))
+    dispatch(getDeletedEmployees(undefined, showAnswer,CompanyId))
     // .then(() => setIsLoading(false));
   }, [arrContentFilters, CompanyId]);
 
@@ -102,74 +106,89 @@ const Employees = () => {
     dispatch(getPositions());
     handleReset();
   };
-
+  
   return (
     <div className=" relative w-full mr-10 h-screen overflow-auto  xl:pl-72 sm:pl-36 ssm:pl-12 z-0">
-
-    {/* {
-      isLoading ? <div>loadong</div> : */}
-    
-      {/* <div> */}
-
-      <div className="flex sm:flex-col flex-wrap sticky h-auto pt-12 pb-5 top-0 z-10 bg-slate-100 mb-3 items-center justify-center gap-2.5">
-        <div className="flex gap-2 ">
-          <SearchBar />
-          <Link to={"/addemployee/"}>
-            <button className="bg-sky-400 text-white rounded  overflow-hidden h-full px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
-              <AiOutlinePlus size={20} />
-            </button>
-          </Link>
-          <button
-            onClick={() => setEmailsUnselect(!emailsUnselect)}
-            className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
-          >
-            <RiMailAddLine size={20} />
-          </button>
-          {emailsSelection.length ? (
+      <div className="sticky top-0 z-30 bg-slate-100 pb-2">
+        <div className="flex sm:flex-col flex-wrap  h-auto pt-12    bg-slate-100 mb-3 items-center justify-center gap-2.5">
+          <div className="flex gap-2 ">
+            <Link to={"/deletedemployees/:id"}>
+              <button 
+                className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+              >
+                Borrados
+              </button>
+            </Link>
+            <SearchBar showAnswer={showAnswer} answer={answer} />
+            <Link to={"/addemployee/"}>
+              <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+                <AiOutlinePlus size={20} />
+              </button>
+            </Link>
             <button
-              onClick={sendEmails}
-              className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+              onClick={() => {
+                setEmailsUnselect(!emailsUnselect);
+                setEmailMode(!emailMode);
+              }}
+              className="bg-sky-400 text-white rounded  overflow-hidden px-4 ssm:py-1 h-8 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 "
             >
-              <SiMinutemailer />
+              <RiMailAddLine size={20} />
             </button>
-          ) : (
-            ""
-          )}
+            {emailsSelection.length && emailsUnselect ? (
+              <button
+                onClick={sendEmails}
+                className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+              >
+                <SiMinutemailer />
+              </button>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
-      </div>
-      <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8">
-        <button
-          className="flex relative bg-sky-400 shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2 "
-          onClick={handleRefresh}
-        >
-          Refresh
-        </button>
-        <Sort
-          selectedOption={selectedOption}
-          handleSelectChange={handleSelectChange}
-          CompanyId={CompanyId}
-        />
-        <Area
-          selectedOption={selectedOption}
-          handleSelectChange={handleSelectChange}
-          CompanyId={CompanyId}
-        />
-        <Position
-          selectedOption={selectedOption}
-          handleSelectChange={handleSelectChange}
-          CompanyId={CompanyId}
-        />
-        <Rol
-          selectedOption={selectedOption}
-          handleSelectChange={handleSelectChange}
-          CompanyId={CompanyId}
-        />
+        <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8">
+          <button
+            className="flex relative bg-sky-400
+          shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2"
+            onClick={handleRefresh}
+          >
+            Refresh
+          </button>
+          <Sort
+            selectedOption={selectedOption}
+            handleSelectChange={handleSelectChange}
+            CompanyId={CompanyId}
+          />
+          <Area
+            selectedOption={selectedOption}
+            handleSelectChange={handleSelectChange}
+            CompanyId={CompanyId}
+          />
+          <Position
+            selectedOption={selectedOption}
+            handleSelectChange={handleSelectChange}
+            CompanyId={CompanyId}
+          />
+          <Rol
+            selectedOption={selectedOption}
+            handleSelectChange={handleSelectChange}
+            CompanyId={CompanyId}
+          />
+        </div>
+        <div className="flex justify-center items-center">
+          <p
+            className={`${
+              emailMode ? "inline-block" : "hidden"
+            } text-center text-sky-400 text-sm p-1 border-sky-400 rounded px-8`}
+          >
+            Select the profiles to which you want to send email
+          </p>
+        </div>
       </div>
       <div className="flex flex-col gap-2 pb-8 pt-3 ">
         {users ? (
           users?.map((user, i) => {
             return (
-              // <Link key={i} to={`/employee/${user?.id}`} >
               <Employee
                 key={i}
                 id={user?.id}
@@ -184,16 +203,14 @@ const Employees = () => {
                 emailsSelection={emailsSelection}
                 emailsUnselect={emailsUnselect}
               />
-              // </Link>
             );
           })
         ) : (
           <h3>{answer}</h3>
         )}
       </div>
-      {/* </div>} */}
     </div>
-  );
+  )
 };
 
 export default Employees;

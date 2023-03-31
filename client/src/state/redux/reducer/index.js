@@ -30,6 +30,9 @@ import {
   GET_CRUD_POSITION,
   UPDATE_CRUD_AREA,
   UPDATE_CRUD_POSITION,
+  GET_RATING,
+  GET_DELETED_EMPLOYEES,
+  UPDATE_DELETED_EMPLOYEE,
 } from "../action-types/index";
 
 const initialState = {
@@ -50,6 +53,7 @@ const initialState = {
   emailsArray: [],
   areasCrud: [],
   positionsCrud: [],
+  deletedEmployees: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -162,10 +166,10 @@ function rootReducer(state = initialState, action) {
         ...state,
         company: action.payload,
       };
-    case ADD_RATING:
+    case GET_RATING:
       return {
         ...state,
-        ratings: [...state.ratings, action.payload],
+        ratings: [...state.ratings, ...action.payload],
       };
     case GET_ARRAY_EMAILS:
       return {
@@ -206,6 +210,15 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         positionsCrud: action.payload,
+      };
+    case GET_DELETED_EMPLOYEES:
+      return {
+        ...state,
+        deletedEmployees: action.payload,
+      };
+    case UPDATE_DELETED_EMPLOYEE:
+      return {
+        ...state,
       };
     default:
       return state;

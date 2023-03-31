@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Calendar from "./Views/Calendar/Calendar";
 import Dashboard from "./Views/Dashboard";
+import RestoreEmployees from "./Views/Employees/RestoreEmployee/RestoreEmployees";
 import Employees from "./Views/Employees";
 import EmployeesUser from "./Views/Employees/EmployeesUser";
 import EmployeeDetail from "./Views/EmployeeDetail/EmployeeDetail";
@@ -93,58 +94,77 @@ function App() {
         <Route path="/authorizationone" element={<Authorizationone />} />
 
         {/* +++++ SUPERADMIN ROUTES +++++ */}
-        {!!user && user.role === "SuperAdmin" && (
-          <>
-            <Route path="/employees/:id" element={<Employees />} />
-            <Route path="/employee/:id" element={<EmployeeDetail />} />
-            <Route path="/addemployee" element={<AddEmployee />} />
-            <Route path="/editemployee/:id" element={<EditEmployee />} />
-            <Route
-              path="/editemployeemyprofile/:id"
-              element={<EditEmployeeMyProfile />}
+
+        <Route
+          element={
+            <ProtectedRoute
+              isAllowed={user.role === "SuperAdmin"}
+              redirectTo="/home"
             />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/notifications" element={<Notifications />} />
-            <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
-            {/* FALTA LA DE EDITAR DATOS DE LA EMPRESA */}
-          </>
-        )}
+          }
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/employees/:id" element={<Employees />} />
+          <Route path="/deletedemployees/:id" element={<RestoreEmployees />} />
+          <Route path="/employee/:id" element={<EmployeeDetail />} />
+          <Route path="/addemployee" element={<AddEmployee />} />
+          <Route path="/editemployee/:id" element={<EditEmployee />} />
+          <Route
+            path="/editemployeemyprofile/:id"
+            element={<EditEmployeeMyProfile />}
+          />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
+          {/* FALTA LA DE EDITAR DATOS DE LA EMPRESA */}
+        </Route>
 
         {/* +++++ ADMIN ROUTES +++++ */}
 
-        {!!user && user.role === "Admin" && (
-          <>
-            <Route path="/employees/:id" element={<Employees />} />
-            <Route path="/employee/:id" element={<EmployeeDetail />} />
-            <Route path="/addemployee" element={<AddEmployee />} />
-            <Route path="/editemployee/:id" element={<EditEmployee />} />
-            <Route
-              path="/editemployeemyprofile/:id"
-              element={<EditEmployeeMyProfile />}
+        <Route
+          element={
+            <ProtectedRoute
+              isAllowed={user.role === "Admin"}
+              redirectTo="/home"
             />
-            {/* <Route path="/organization" element={<Organization />} /> */}
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/notifications" element={<Notifications />} />
-            <Route path="/myprofile/:id" element={<MyProfileAdmin />} />
-          </>
-        )}
+          }
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/employees/:id" element={<Employees />} />
+          <Route path="/employee/:id" element={<EmployeeDetail />} />
+          <Route path="/addemployee" element={<AddEmployee />} />
+          <Route path="/editemployee/:id" element={<EditEmployee />} />
+          <Route
+            path="/editemployeemyprofile/:id"
+            element={<EditEmployeeMyProfile />}
+          />
+          {/* <Route path="/organization" element={<Organization />} /> */}
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/myprofile/:id" element={<MyProfileAdmin />} />
+        </Route>
 
         {/* +++++ USER ROUTES +++++ */}
 
-        {!!user && user.role === "User" && (
-          <>
-            <Route path="/employees/:id" element={<EmployeesUser />} />
-            <Route path="/myprofile/:id" element={<MyProfileUser />} />
-            <Route path="/calendar" element={<CalendarUser />} />
-          </>
-        )}
+        <Route
+          element={
+            <ProtectedRoute
+              isAllowed={user.role === "User"}
+              redirectTo="/home"
+            />
+          }
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/employees/:id" element={<EmployeesUser />} />
+          <Route path="/myprofile/:id" element={<MyProfileUser />} />
+          <Route path="/calendar" element={<CalendarUser />} />
+        </Route>
 
-        {/* +++++ COMMON ROUTES +++++ */}
-        <Route path="/dashboard" element={<Dashboard />} />
-
-        <Route path="*" element={<h1>Ruta equivocada</h1>} />
+        <Route
+          path="*"
+          element={<h1 className="h-screen w-screen">Ruta equivocada</h1>}
+        />
       </Routes>
-      {/* </div> */}
     </div>
   );
 }

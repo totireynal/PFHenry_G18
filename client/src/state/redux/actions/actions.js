@@ -34,6 +34,9 @@ import {
   DELETE_CRUD_POSITION,
   UPDATE_CRUD_AREA,
   UPDATE_CRUD_POSITION,
+  GET_DELETED_EMPLOYEES,
+  UPDATE_DELETED_EMPLOYEE,
+  GET_RATING,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -82,41 +85,27 @@ export const createEmployee = (info, showAnswer) => {
 };
 
 export const getEmployees = (filters, showAnswer, idCompany) => {
-  console.log("llega", idCompany);
+  console.log('llega',idCompany);
   return function(dispatch) {
     let url = `http://localhost:3001/users/${idCompany}`;
-    console.log("filtrosget", url);
-
-    // if (name) {
-    //   url += `?name=${name}`;
-    // }
-
-    // const all = [role, area, position, sort];
-    // console.log(all);
-
-    // const allDefined = all.flatMap(el => el === undefined ? [] : el)
-    // // console.log(allDefined);
-    // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
-    // console.log(url);
 
     if (idCompany !== undefined) {
       axios.get(addUrlQueries(filters, url)).then(
         (response) => {
-          console.log(response.data, "LOG NUEVO LPM");
           showAnswer("");
           console.log("resp-->", response.data);
           return dispatch({ type: GET_EMPLOYEES, payload: response.data });
         },
         (error) => {
-          showAnswer(error.response.data);
-          // console.log("resp-err->",error.response.data.error);
+          showAnswer(error.response.data.error.error);
+          console.log("resp-err->", error.response.data.error.error);
         }
       );
     }
   };
 };
 
-export const getFilter = (filters, idCompany) => {
+export const getFilter = (filters, idCompany, showAnswer) => {
   return async function(dispatch) {
     try {
       let url = `http://localhost:3001/users/${idCompany}`;
@@ -126,13 +115,14 @@ export const getFilter = (filters, idCompany) => {
       const response = await axios(addUrlQueries(filters, url));
       const result = response.data;
 
-      console.log(result);
+      showAnswer("");
       return dispatch({
         type: GET_FILTER,
         payload: result,
       });
     } catch (error) {
-      // console.log(error.response.data);
+      showAnswer(error.response.data.error);
+      console.log(error.response.data);
     }
   };
 };
@@ -358,7 +348,7 @@ export const getCurrentEmployee = (idCompany, id) => {
   return function(dispatch) {
     return axios.get(`http://localhost:3001/users/${idCompany}/${id}`).then(
       (response) => {
-        console.log(response.data);
+        console.log("FRANN",response.data);
         dispatch({ type: CURRENT_EMPLOYEE, payload: response.data });
       },
       (error) => {
@@ -397,18 +387,30 @@ export const getCompaniesCuit = (cuit) => {
   };
 };
 
-export const addRating = (rating, commentary) => {
+export const addRating = (rating, commentary, CompanyId) => {
   return async (dispatch) => {
-    const opinion = { rating, commentary };
+    const opinion = { score: rating, comment: commentary, CompanyId };
     try {
-      const response = await axios("", opinion);
+      await axios.post(
+        "http://localhost:3001/reviews",
+        opinion
+      );
+    } catch (err) {}
+  };
+};
+
+export const getRating = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios("http://localhost:3001/reviews");
       const result = response.data;
+      console.log(result, 'primero');
 
       return dispatch({
-        type: ADD_RATING,
+        type: GET_RATING,
         payload: result,
       });
-    } catch (err) {}
+    } catch (error) {}
   };
 };
 
@@ -456,9 +458,21 @@ export const getCompaniesTel = (tel) => {
   };
 };
 
+
 export const getCompaniesEmail = (email) => {
   return async function(dispatch) {
     try {
+      const response = await axios.get(
+        `http://localhost:3001/companies?email=${email}`
+      );
+      const result = response.data;
+      console.log("Respuesta: ", result);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
       const response = await axios.get(
         `http://localhost:3001/companies?email=${email}`
       );
@@ -490,6 +504,26 @@ export function getAreasCrud() {
   };
 }
 
+  export const getDeletedEmployees = (filters, showAnswer, idCompany) => {
+  console.log('c',idCompany);
+  return function(dispatch) {
+    let url = `http://localhost:3001/users/${idCompany}/deleted`;
+    console.log("filtrosget", url);
+ 
+    if(idCompany !== undefined) { 
+    axios.get(addUrlQueries(filters, url)).then(
+      (response) => {
+        showAnswer("");
+        console.log("primera-->",response.data);
+        return dispatch({ type: GET_DELETED_EMPLOYEES, payload: response.data });
+      },
+      (error) => {
+        showAnswer(error.response.data);
+        // console.log("resp-err->",error.response.data.error);
+      }
+    );
+  }};
+  };
 export const deleteAreaCrud = (id) => {
   return async (dispatch) => {
     await axios
