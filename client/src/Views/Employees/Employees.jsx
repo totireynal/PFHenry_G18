@@ -107,8 +107,7 @@ const Employees = () => {
   };
   
 
-  const handlerClick = (event) => {
-  }
+ 
 
   return (
     <div className=" relative w-full mr-10 h-screen overflow-auto  xl:pl-72 sm:pl-36 ssm:pl-12 z-0">
@@ -121,7 +120,6 @@ const Employees = () => {
             <Link to={"/deletedemployees/:id"}>
               <button 
                 className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
-                onClick={handlerClick}
               >
                 Borrados
               </button>
