@@ -540,6 +540,7 @@ export const updateAreaCrud = (id, area) => {
         `http://localhost:3001/areas/${id}`,
         area
       );
+      console.log(response, "<--- Log Response");
       dispatch({ type: UPDATE_CRUD_AREA, payload: response.data });
     } catch (error) {
       console.log(error.message);
@@ -551,7 +552,7 @@ export const updatePositionCrud = (id, position) => {
   return async (dispatch) => {
     try {
       const response = await axios.put(
-        `http://localhost:3001/position/${id}`,
+        `http://localhost:3001/positions/${id}`,
         position
       );
       dispatch({ type: UPDATE_CRUD_POSITION, payload: response.data });

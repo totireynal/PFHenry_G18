@@ -18,6 +18,8 @@ const PositionForm = () => {
     position: "",
   });
 
+  const [editPosition, setEditPosition] = useState(null);
+
   const [showList, setShowList] = useState(false);
 
   const handleChange = (event) => {
@@ -29,10 +31,12 @@ const PositionForm = () => {
 
   const handleSubmitPost = (event) => {
     event.preventDefault();
-    dispatch(postPositionCrud(position));
-    setPosition({
-      position: "",
-    });
+    if (editPosition) {
+      handleUpdate(event);
+    } else {
+      dispatch(postPositionCrud(position));
+      setPosition({ position: "" });
+    }
   };
 
   const handleSubmitGet = (event) => {
@@ -41,9 +45,16 @@ const PositionForm = () => {
     setShowList(!showList);
   };
 
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    dispatch(updatePositionCrud(editPosition.id, position));
+    setEditPosition(null);
+    setPosition({ position: "" });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-2">
-      <form onClick={handleSubmitPost} className="flex flex-col gap-2 w-80">
+      <form onSubmit={handleSubmitPost} className="flex flex-col gap-2 w-80">
         <input
           placeholder="Insert Position"
           name="position"
@@ -56,7 +67,7 @@ const PositionForm = () => {
           type="submit"
           className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
         >
-          CREATE POSITION
+          {editPosition ? "UPDATE POSITION" : "CREATE POSITION"}
         </button>
       </form>
       <form onClick={handleSubmitGet} className="flex flex-col gap-2 w-80">
@@ -78,19 +89,25 @@ const PositionForm = () => {
                     >
                       {position?.position}
                     </p>
-                    <button className="absolute top-2 right-10">
+                    <button
+                      onClick={() => {
+                        setEditPosition(position);
+                        setPosition({ position: position.position });
+                      }}
+                      className="absolute top-2 right-10"
+                    >
                       <GrFormEdit className="bg-sky-400 rounded-full" />
                     </button>
                     <button
                       onClick={() => dispatch(deletePositionCrud(position?.id))}
-                      className="absolute top-2 right-4 font-semibold text-red-600"
+                      className="absolute top-2 right-4"
                     >
                       <GrFormClose className="bg-sky-400 rounded-full" />
                     </button>
                   </div>
                 ))
               ) : (
-                <p className="flex justify-center items-center  rounded h-8 font-semibold">
+                <p className="flex justify-center items-center rounded h-8 font-semibold">
                   No positions found
                 </p>
               )}
