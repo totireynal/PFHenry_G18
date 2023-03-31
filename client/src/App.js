@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Calendar from "./Views/Calendar/Calendar";
 import Dashboard from "./Views/Dashboard";
+import RestoreEmployees from "./Views/Employees/RestoreEmployee/RestoreEmployees";
 import Employees from "./Views/Employees";
 import EmployeesUser from "./Views/Employees/EmployeesUser";
 import EmployeeDetail from "./Views/EmployeeDetail/EmployeeDetail";
@@ -104,6 +105,7 @@ function App() {
         >
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees/:id" element={<Employees />} />
+          <Route path="/deletedemployees/:id" element={<RestoreEmployees />} />
           <Route path="/employee/:id" element={<EmployeeDetail />} />
           <Route path="/addemployee" element={<AddEmployee />} />
           <Route path="/editemployee/:id" element={<EditEmployee />} />
