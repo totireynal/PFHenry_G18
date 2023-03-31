@@ -16,7 +16,7 @@ const CalendarAPI = () => {
 
   return (
     <React.Fragment>
-      <div className=" xl:w-full xl:pl-72 ssm:pl-36 ssm:pl-16 pr-16 ssm:overflow-auto ssm:overflow-x-hidden">
+      <div className=" xl:w-full xl:pl-72 ssm:pl-16 pr-16 ssm:overflow-auto ssm:overflow-x-hidden">
         {showEventModal && <EventModal />}
 
         <div className="h-[680px] flex flex-col ">
