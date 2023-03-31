@@ -28,7 +28,9 @@ const DeletedEmployee = (props) => {
 
   const handleClick = (event) => {
     dispatch(updateDeletedEmployee(props.id))
-    props.fn(props.id)  }
+    dispatch(getDeletedEmployees(undefined, undefined, CompanyId));
+    props.fn(props.id)
+  }
 
 
   return (
