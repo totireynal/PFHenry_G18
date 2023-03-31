@@ -32,6 +32,8 @@ import {
   POST_CRUD_POSITION,
   GET_CRUD_POSITION,
   DELETE_CRUD_POSITION,
+  UPDATE_CRUD_AREA,
+  UPDATE_CRUD_POSITION,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -528,5 +530,33 @@ export const deletePositionCrud = (id) => {
         return dispatch({ type: DELETE_CRUD_POSITION, payload: id });
       })
       .catch((error) => console.log(error.message));
+  };
+};
+
+export const updateAreaCrud = (id, area) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/areas/${id}`,
+        area
+      );
+      dispatch({ type: UPDATE_CRUD_AREA, payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const updatePositionCrud = (id, position) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/position/${id}`,
+        position
+      );
+      dispatch({ type: UPDATE_CRUD_POSITION, payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };

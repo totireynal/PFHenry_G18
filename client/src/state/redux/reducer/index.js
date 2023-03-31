@@ -28,6 +28,8 @@ import {
   GET_CRUD_AREAS,
   POST_CRUD_POSITION,
   GET_CRUD_POSITION,
+  UPDATE_CRUD_AREA,
+  UPDATE_CRUD_POSITION,
 } from "../action-types/index";
 
 const initialState = {
@@ -191,6 +193,16 @@ function rootReducer(state = initialState, action) {
         areasCrud: action.payload,
       };
     case GET_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case UPDATE_CRUD_AREA:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case UPDATE_CRUD_POSITION:
       return {
         ...state,
         positionsCrud: action.payload,

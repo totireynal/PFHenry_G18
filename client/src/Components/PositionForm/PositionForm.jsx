@@ -4,7 +4,9 @@ import {
   postPositionCrud,
   getPositionsCrud,
   deletePositionCrud,
+  updatePositionCrud,
 } from "../../state/redux/actions/actions";
+import { GrFormEdit } from "react-icons/gr";
 import { GrFormClose } from "react-icons/gr";
 
 const PositionForm = () => {
@@ -76,6 +78,9 @@ const PositionForm = () => {
                     >
                       {position?.position}
                     </p>
+                    <button className="absolute top-2 right-10">
+                      <GrFormEdit className="bg-sky-400 rounded-full" />
+                    </button>
                     <button
                       onClick={() => dispatch(deletePositionCrud(position?.id))}
                       className="absolute top-2 right-4 font-semibold text-red-600"

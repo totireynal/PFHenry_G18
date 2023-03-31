@@ -5,7 +5,9 @@ import {
   postAreaCrud,
   getAreasCrud,
   deleteAreaCrud,
+  updateAreaCrud,
 } from "../../state/redux/actions/actions";
+import { GrFormEdit } from "react-icons/gr";
 import { GrFormClose } from "react-icons/gr";
 
 const AreaForm = () => {
@@ -16,6 +18,8 @@ const AreaForm = () => {
   const [area, setArea] = useState({
     area: "",
   });
+
+  const [editArea, setEditArea] = useState(null);
 
   const [showList, setShowList] = useState(false);
 
@@ -28,10 +32,12 @@ const AreaForm = () => {
 
   const handleSubmitPost = (event) => {
     event.preventDefault();
-    dispatch(postAreaCrud(area));
-    setArea({
-      area: "",
-    });
+    if (editArea) {
+      handleUpdate(event);
+    } else {
+      dispatch(postAreaCrud(area));
+      setArea({ area: "" });
+    }
   };
 
   const handleSubmitGet = (event) => {
@@ -40,9 +46,16 @@ const AreaForm = () => {
     setShowList(!showList);
   };
 
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    dispatch(updateAreaCrud(editArea.id, area));
+    setEditArea(null);
+    setArea({ area: "" });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-2">
-      <form onClick={handleSubmitPost} className="flex flex-col gap-2 w-80">
+      <form onSubmit={handleSubmitPost} className="flex flex-col gap-2 w-80">
         <input
           placeholder="Insert Area"
           name="area"
@@ -55,7 +68,7 @@ const AreaForm = () => {
           type="submit"
           className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
         >
-          CREATE AREA
+          {editArea ? "UPDATE AREA" : "CREATE AREA"}
         </button>
       </form>
       <form onClick={handleSubmitGet} className="flex flex-col gap-2 w-80">
@@ -78,8 +91,17 @@ const AreaForm = () => {
                       {area?.area}
                     </p>
                     <button
+                      onClick={() => {
+                        setEditArea(area);
+                        setArea({ area: area.area });
+                      }}
+                      className="absolute top-2 right-10"
+                    >
+                      <GrFormEdit className="bg-sky-400 rounded-full" />
+                    </button>
+                    <button
                       onClick={() => dispatch(deleteAreaCrud(area?.id))}
-                      className="absolute top-2 right-4 font-semibold text-red-600"
+                      className="absolute top-2 right-4"
                     >
                       <GrFormClose className="bg-sky-400 rounded-full" />
                     </button>
