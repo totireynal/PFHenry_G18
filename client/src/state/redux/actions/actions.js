@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -26,6 +26,7 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  GET_RATING,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -74,39 +75,26 @@ export const createEmployee = (info, showAnswer) => {
 };
 
 export const getEmployees = (filters, showAnswer, idCompany) => {
-  console.log('llega',idCompany);
   return function(dispatch) {
     let url = `http://localhost:3001/users/${idCompany}`;
-    console.log("filtrosget", url);
 
-    // if (name) {
-    //   url += `?name=${name}`;
-    // }
-
-    // const all = [role, area, position, sort];
-    // console.log(all);
-
-    // const allDefined = all.flatMap(el => el === undefined ? [] : el)
-    // // console.log(allDefined);
-    // allDefined.forEach((el, i) => console.log( url+=`&${allDefined[i]}=${el}`))
-    // console.log(url);
-    
-    if(idCompany !== undefined) { 
-    axios.get(addUrlQueries(filters, url)).then(
-      (response) => {
-        showAnswer("");
-        console.log("resp-->",response.data);
-        return dispatch({ type: GET_EMPLOYEES, payload: response.data });
-      },
-      (error) => {
-        showAnswer(error.response.data);
-        // console.log("resp-err->",error.response.data.error);
-      }
-    );
-  }};
+    if (idCompany !== undefined) {
+      axios.get(addUrlQueries(filters, url)).then(
+        (response) => {
+          showAnswer("");
+          console.log("resp-->", response.data);
+          return dispatch({ type: GET_EMPLOYEES, payload: response.data });
+        },
+        (error) => {
+          showAnswer(error.response.data.error.error);
+          console.log("resp-err->", error.response.data.error.error);
+        }
+      );
+    }
+  };
 };
 
-export const getFilter = (filters, idCompany) => {
+export const getFilter = (filters, idCompany, showAnswer) => {
   return async function(dispatch) {
     try {
       let url = `http://localhost:3001/users/${idCompany}`;
@@ -116,13 +104,14 @@ export const getFilter = (filters, idCompany) => {
       const response = await axios(addUrlQueries(filters, url));
       const result = response.data;
 
-      console.log(result);
+      showAnswer("");
       return dispatch({
         type: GET_FILTER,
         payload: result,
       });
     } catch (error) {
-      // console.log(error.response.data);
+      showAnswer(error.response.data.error);
+      console.log(error.response.data);
     }
   };
 };
@@ -373,30 +362,44 @@ export const cleanUrl = () => {
 };
 
 export const getCompaniesCuit = (cuit) => {
-  return async function(dispatch){
+  return async function(dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/companies?cuit=${cuit}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return result
-     } catch(error){
-       console.log(error.message)
-     }
-   }
- }
-
-export const addRating = (rating, commentary) => {
-  return async (dispatch) => {
-    const opinion = { rating, commentary };
-    try {
-      const response = await axios("", opinion);
+      const response = await axios.get(
+        `http://localhost:3001/companies?cuit=${cuit}`
+      );
       const result = response.data;
+      console.log("Respuesta: ", result);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const addRating = (rating, commentary, CompanyId) => {
+  return async (dispatch) => {
+    const opinion = { score: rating, comment: commentary, CompanyId };
+    try {
+      await axios.post(
+        "http://localhost:3001/reviews",
+        opinion
+      );
+    } catch (err) {}
+  };
+};
+
+export const getRating = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios("http://localhost:3001/reviews");
+      const result = response.data;
+      console.log(result, 'primero');
 
       return dispatch({
-        type: ADD_RATING,
+        type: GET_RATING,
         payload: result,
       });
-    } catch (err) {}
+    } catch (error) {}
   };
 };
 
@@ -414,46 +417,47 @@ export const cleanArrayEmails = () => {
   };
 };
 
- export const getCompaniesName = (name) => {
-  return async function(dispatch){
+export const getCompaniesName = (name) => {
+  return async function(dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/companies?name=${name}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return result
-     } catch(error){
-       console.log(error.message)
-     }
-   }
- }
+      const response = await axios.get(
+        `http://localhost:3001/companies?name=${name}`
+      );
+      const result = response.data;
+      console.log("Respuesta: ", result);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
- export const getCompaniesTel = (tel) => {
-  return async function(dispatch){
+export const getCompaniesTel = (tel) => {
+  return async function(dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/companies?tel=${tel}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return result
-     } catch(error){
-       console.log(error.message)
-     }
-   }
- }
+      const response = await axios.get(
+        `http://localhost:3001/companies?tel=${tel}`
+      );
+      const result = response.data;
+      console.log("Respuesta: ", result);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
- export const getCompaniesEmail = (email) => {
-  return async function(dispatch){
+export const getCompaniesEmail = (email) => {
+  return async function(dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/companies?email=${email}`)
-       const result = response.data;
-       console.log("Respuesta: ", result)
-       return result
-     } catch(error){
-       console.log(error.message)
-     }
-   }
- }
-
-
-
-
-
+      const response = await axios.get(
+        `http://localhost:3001/companies?email=${email}`
+      );
+      const result = response.data;
+      console.log("Respuesta: ", result);
+      return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
