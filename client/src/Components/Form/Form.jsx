@@ -121,7 +121,7 @@ const Form = ({
             error={errors.role}
             optionQuantity={[
               { value: "User", html: "User", disable: false },
-              { value: "Admin", html: "Admin", disable: true },
+              { value: "Admin", html: "Admin", disable: false },
             ]}
           />
 

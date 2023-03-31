@@ -17,10 +17,7 @@ const MyProfileSuperAdmin = () => {
   let employeeDetail = useSelector((state) => state.currentEmployee);
     const currentEmployee = useSelector((state) => state.currentEmployee);
     const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
-    const ratings = useSelector((state) => state.ratings);
-  if (ratings) {
-    // refModal.current.style.display = 'none'
-  }
+
   let dispatch = useDispatch();
 
   const {
