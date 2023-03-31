@@ -85,7 +85,7 @@ export const createEmployee = (info, showAnswer) => {
 };
 
 export const getEmployees = (filters, showAnswer, idCompany) => {
-  console.log('llega',idCompany);
+  console.log("llega", idCompany);
   return function(dispatch) {
     let url = `http://localhost:3001/users/${idCompany}`;
 
@@ -348,7 +348,7 @@ export const getCurrentEmployee = (idCompany, id) => {
   return function(dispatch) {
     return axios.get(`http://localhost:3001/users/${idCompany}/${id}`).then(
       (response) => {
-        console.log("FRANN",response.data);
+        console.log("FRANN", response.data);
         dispatch({ type: CURRENT_EMPLOYEE, payload: response.data });
       },
       (error) => {
@@ -391,10 +391,7 @@ export const addRating = (rating, commentary, CompanyId) => {
   return async (dispatch) => {
     const opinion = { score: rating, comment: commentary, CompanyId };
     try {
-      await axios.post(
-        "http://localhost:3001/reviews",
-        opinion
-      );
+      await axios.post("http://localhost:3001/reviews", opinion);
     } catch (err) {}
   };
 };
@@ -404,7 +401,7 @@ export const getRating = () => {
     try {
       const response = await axios("http://localhost:3001/reviews");
       const result = response.data;
-      console.log(result, 'primero');
+      console.log(result, "primero");
 
       return dispatch({
         type: GET_RATING,
@@ -458,21 +455,9 @@ export const getCompaniesTel = (tel) => {
   };
 };
 
-
 export const getCompaniesEmail = (email) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/companies?email=${email}`
-      );
-      const result = response.data;
-      console.log("Respuesta: ", result);
-      return result;
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
       const response = await axios.get(
         `http://localhost:3001/companies?email=${email}`
       );
@@ -504,26 +489,30 @@ export function getAreasCrud() {
   };
 }
 
-  export const getDeletedEmployees = (filters, showAnswer, idCompany) => {
-  console.log('c',idCompany);
+export const getDeletedEmployees = (filters, showAnswer, idCompany) => {
+  console.log("c", idCompany);
   return function(dispatch) {
     let url = `http://localhost:3001/users/${idCompany}/deleted`;
     console.log("filtrosget", url);
- 
-    if(idCompany !== undefined) { 
-    axios.get(addUrlQueries(filters, url)).then(
-      (response) => {
-        showAnswer("");
-        console.log("primera-->",response.data);
-        return dispatch({ type: GET_DELETED_EMPLOYEES, payload: response.data });
-      },
-      (error) => {
-        showAnswer(error.response.data);
-        // console.log("resp-err->",error.response.data.error);
-      }
-    );
-  }};
+
+    if (idCompany !== undefined) {
+      axios.get(addUrlQueries(filters, url)).then(
+        (response) => {
+          showAnswer("");
+          console.log("primera-->", response.data);
+          return dispatch({
+            type: GET_DELETED_EMPLOYEES,
+            payload: response.data,
+          });
+        },
+        (error) => {
+          showAnswer(error.response.data);
+          // console.log("resp-err->",error.response.data.error);
+        }
+      );
+    }
   };
+};
 export const deleteAreaCrud = (id) => {
   return async (dispatch) => {
     await axios
