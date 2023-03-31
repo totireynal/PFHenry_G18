@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { AiFillInstagram } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
-import ChatBot from "../../Components/ChatBot/ChatBot";
+// import ChatBot from "../../Components/ChatBot/ChatBot";
+import ButtonChatBot from "../../Components/ChatBot/ButtonChatBot/ButtonChatBot";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getRating } from "../../state/redux/actions/actions";
@@ -16,14 +17,14 @@ const Home = () => {
     "flex flex-col  justify-center items-center h-screen bg-white";
   const styleText = "text-center text-6xl font-black";
 
-  const clients = useSelector(state => state.ratings)
-  
-  const dispatch = useDispatch()
+  const clients = useSelector((state) => state.ratings);
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getRating())
-  }, [dispatch])
-  
-  console.log(clients, 'segundo');
+    dispatch(getRating());
+  }, [dispatch]);
+
+  console.log(clients, "segundo");
 
   // const clients = [
   //   {
@@ -219,8 +220,8 @@ const Home = () => {
       </section>
 
       <section>
-        <div className="flex items-center justify-center">
-          <ChatBot />
+        <div>
+          <ButtonChatBot />
         </div>
       </section>
 

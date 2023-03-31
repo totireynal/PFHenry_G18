@@ -26,6 +26,16 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  POST_CRUD_AREA,
+  GET_CRUD_AREAS,
+  DELETE_CRUD_AREAS,
+  POST_CRUD_POSITION,
+  GET_CRUD_POSITION,
+  DELETE_CRUD_POSITION,
+  UPDATE_CRUD_AREA,
+  UPDATE_CRUD_POSITION,
+  GET_DELETED_EMPLOYEES,
+  UPDATE_DELETED_EMPLOYEE,
   GET_RATING,
 } from "../action-types/index";
 
@@ -75,6 +85,7 @@ export const createEmployee = (info, showAnswer) => {
 };
 
 export const getEmployees = (filters, showAnswer, idCompany) => {
+  console.log("llega", idCompany);
   return function(dispatch) {
     let url = `http://localhost:3001/users/${idCompany}`;
 
@@ -337,7 +348,7 @@ export const getCurrentEmployee = (idCompany, id) => {
   return function(dispatch) {
     return axios.get(`http://localhost:3001/users/${idCompany}/${id}`).then(
       (response) => {
-        console.log(response.data);
+        console.log("FRANN", response.data);
         dispatch({ type: CURRENT_EMPLOYEE, payload: response.data });
       },
       (error) => {
@@ -380,10 +391,7 @@ export const addRating = (rating, commentary, CompanyId) => {
   return async (dispatch) => {
     const opinion = { score: rating, comment: commentary, CompanyId };
     try {
-      await axios.post(
-        "http://localhost:3001/reviews",
-        opinion
-      );
+      await axios.post("http://localhost:3001/reviews", opinion);
     } catch (err) {}
   };
 };
@@ -393,7 +401,7 @@ export const getRating = () => {
     try {
       const response = await axios("http://localhost:3001/reviews");
       const result = response.data;
-      console.log(result, 'primero');
+      console.log(result, "primero");
 
       return dispatch({
         type: GET_RATING,
@@ -456,6 +464,141 @@ export const getCompaniesEmail = (email) => {
       const result = response.data;
       console.log("Respuesta: ", result);
       return result;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export function postAreaCrud(area) {
+  return async function(dispatch) {
+    const response = await axios.post("http://localhost:3001/areas", area);
+    return dispatch({ type: POST_CRUD_AREA, payload: response.data });
+  };
+}
+
+export function getAreasCrud() {
+  return (dispatch) => {
+    axios
+      .get("http://localhost:3001/areas/ars")
+      .then((info) => {
+        console.log(info.data);
+        return dispatch({ type: GET_CRUD_AREAS, payload: info.data });
+      })
+      .catch((error) => console.log(error.message));
+  };
+}
+
+export const getDeletedEmployees = (filters, showAnswer, idCompany) => {
+  console.log("c", idCompany);
+  return function(dispatch) {
+    let url = `http://localhost:3001/users/${idCompany}/deleted`;
+    console.log("filtrosget", url);
+
+    if (idCompany !== undefined) {
+      axios.get(addUrlQueries(filters, url)).then(
+        (response) => {
+          showAnswer("");
+          console.log("primera-->", response.data);
+          return dispatch({
+            type: GET_DELETED_EMPLOYEES,
+            payload: response.data,
+          });
+        },
+        (error) => {
+          showAnswer(error.response.data);
+          // console.log("resp-err->",error.response.data.error);
+        }
+      );
+    }
+  };
+};
+
+export const updateDeletedEmployee = (id, user, showAnswer) => {
+  return async (dispatch) => {
+    try {
+      // console.log(user, 'user upppp');
+      const response = await axios.put(
+        `http://localhost:3001/users/restore/${id}`,
+        user
+      );
+      const result = response.data;
+      showAnswer(result);
+
+      return dispatch({
+        type: UPDATE_DELETED_EMPLOYEE,
+      });
+    } catch (error) {
+      showAnswer(error.response.data.error);
+    }
+  };
+};
+
+export const deleteAreaCrud = (id) => {
+  return async (dispatch) => {
+    await axios
+      .delete(`http://localhost:3001/areas/${id}`)
+      .then((info) => {
+        return dispatch({ type: DELETE_CRUD_AREAS, payload: id });
+      })
+      .catch((error) => console.log(error.message));
+  };
+};
+
+export function postPositionCrud(position) {
+  return async function(dispatch) {
+    const response = await axios.post(
+      "http://localhost:3001/positions",
+      position
+    );
+    return dispatch({ type: POST_CRUD_POSITION, payload: response.data });
+  };
+}
+
+export function getPositionsCrud() {
+  return (dispatch) => {
+    axios
+      .get("http://localhost:3001/positions/raw")
+      .then((info) => {
+        return dispatch({ type: GET_CRUD_POSITION, payload: info.data });
+      })
+      .catch((error) => console.log(error.message));
+  };
+}
+
+export const deletePositionCrud = (id) => {
+  return async (dispatch) => {
+    await axios
+      .delete(`http://localhost:3001/positions/${id}`)
+      .then((info) => {
+        return dispatch({ type: DELETE_CRUD_POSITION, payload: id });
+      })
+      .catch((error) => console.log(error.message));
+  };
+};
+
+export const updateAreaCrud = (id, area) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/areas/${id}`,
+        area
+      );
+      dispatch({ type: UPDATE_CRUD_AREA, payload: response.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const updatePositionCrud = (id, position) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/positions/${id}`,
+        position
+      );
+      dispatch({ type: UPDATE_CRUD_POSITION, payload: response.data });
     } catch (error) {
       console.log(error.message);
     }

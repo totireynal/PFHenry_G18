@@ -24,7 +24,15 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  POST_CRUD_AREA,
+  GET_CRUD_AREAS,
+  POST_CRUD_POSITION,
+  GET_CRUD_POSITION,
+  UPDATE_CRUD_AREA,
+  UPDATE_CRUD_POSITION,
   GET_RATING,
+  GET_DELETED_EMPLOYEES,
+  UPDATE_DELETED_EMPLOYEE,
 } from "../action-types/index";
 
 const initialState = {
@@ -43,6 +51,9 @@ const initialState = {
   arrContentFilters: {},
   ratings: [],
   emailsArray: [],
+  areasCrud: [],
+  positionsCrud: [],
+  deletedEmployees: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -169,6 +180,45 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         emailsArray: action.payload,
+      };
+    case POST_CRUD_AREA:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case POST_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case GET_CRUD_AREAS:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case GET_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case UPDATE_CRUD_AREA:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case UPDATE_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case GET_DELETED_EMPLOYEES:
+      return {
+        ...state,
+        deletedEmployees: action.payload,
+      };
+    case UPDATE_DELETED_EMPLOYEE:
+      return {
+        ...state,
       };
     default:
       return state;
