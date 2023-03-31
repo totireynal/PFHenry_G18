@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import Employee from "../Employee/Employee";
+import DeletedEmployee from "../Employee/DeletedEmployee";
 import SearchBar from "./../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -22,7 +22,9 @@ import { RiMailAddLine } from "react-icons/ri";
 import { SiMinutemailer } from "react-icons/si";
 
 const RestoreEmployees = () => {
+
   const users = useSelector((state) => state.deletedEmployees);
+  console.log("segunda", users);
 
   const currentEmployee = useSelector((state) => state.currentEmployee);
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
@@ -35,8 +37,12 @@ const RestoreEmployees = () => {
 
   const dispatch = useDispatch();
 
-//   const [emailsSelection, setEmailSelection] = useState([]);
+  const [deletes, setDeletes] = useState(users);
 
+  const fn = (id) => setDeletes(del => {
+    const filter = del?.filter(e => e.id !== id)
+      return filter
+  })
 //   const catchEmails = (email, checked) => {
 //     setEmailSelection((emails) => {
 //       if (checked) {
@@ -76,15 +82,15 @@ const RestoreEmployees = () => {
 
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
+
   useEffect(() => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId))
-    console.log("effect-->", CompanyId);
-  }, [CompanyId]);
+  }, [dispatch, CompanyId, deletes]);
   
   
   useEffect(() => {
     dispatch(getFilter(arrContentFilters, CompanyId))
-  }, [arrContentFilters, CompanyId]);
+  }, [dispatch, arrContentFilters, CompanyId]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
@@ -100,11 +106,11 @@ const RestoreEmployees = () => {
       <div className="flex sm:flex-col flex-wrap sticky h-auto pt-12 pb-5 top-0 z-10 bg-slate-100 mb-3 items-center justify-center gap-2.5">
         <div className="flex gap-2 ">
           <SearchBar />
-          <Link to={"/addemployee/"}>
+          {/* <Link to={"/addemployee/"}>
             <button className="bg-sky-400 text-white rounded  overflow-hidden h-full px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
               <AiOutlinePlus size={20} />
             </button>
-          </Link>
+          </Link> */}
           {/* <button
             onClick={() => setEmailsUnselect(!emailsUnselect)}
             className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
@@ -152,11 +158,11 @@ const RestoreEmployees = () => {
         />
       </div>
       <div className="flex flex-col gap-2 pb-8 pt-3 ">
-        {users ? (
-          users?.map((user, i) => {
+        {(
+          deletes?.map((user, i) => {
             return (
               // <Link key={i} to={`/employee/${user?.id}`} >
-              <Employee
+              <DeletedEmployee
                 key={i}
                 id={user?.id}
                 name={user?.name}
@@ -166,6 +172,7 @@ const RestoreEmployees = () => {
                 area={user?.area}
                 position={user?.position}
                 role={user?.role}
+                fn={fn}
                 // catchEmails={catchEmails}
                 // emailsSelection={emailsSelection}
                 // emailsUnselect={emailsUnselect}
@@ -173,8 +180,7 @@ const RestoreEmployees = () => {
               // </Link>
             );
           })
-        ) : (
-          <h3>{answer}</h3>
+         
         )}
       </div>
 

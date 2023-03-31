@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -465,16 +465,16 @@ export const getCompaniesEmail = (email) => {
 };
 
   export const getDeletedEmployees = (filters, showAnswer, idCompany) => {
-  console.log('llega',idCompany);
+  console.log('c',idCompany);
   return function(dispatch) {
-    let url = `http://localhost:3001/users/deleted/${idCompany}`;
+    let url = `http://localhost:3001/users/${idCompany}/deleted`;
     console.log("filtrosget", url);
  
     if(idCompany !== undefined) { 
     axios.get(addUrlQueries(filters, url)).then(
       (response) => {
         showAnswer("");
-        console.log("resp-->",response.data);
+        console.log("primera-->",response.data);
         return dispatch({ type: GET_DELETED_EMPLOYEES, payload: response.data });
       },
       (error) => {
