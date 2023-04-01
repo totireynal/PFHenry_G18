@@ -24,17 +24,16 @@ import {
 } from "../../../state/redux/actions/actions";
 
 const AddEmployee = () => {
-  const [cookies] = useCookies(['cookieBack']);
+  const [cookies] = useCookies(["cookieBack"]);
   const dispatch = useDispatch();
-  const decodedToken = cookies.cookieBack ? jwt_decode(cookies.cookieBack) : null;
+  const decodedToken = cookies.cookieBack
+    ? jwt_decode(cookies.cookieBack)
+    : null;
   const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
-  
-
 
   useEffect(() => {
     dispatch(getPositionsNum());
     dispatch(getAreasNum());
-
   }, [dispatch]);
 
   const positionsNum = useSelector((state) => state.positionsNum);
@@ -56,7 +55,7 @@ const AddEmployee = () => {
     cuil: "",
     cbu: "",
     dateOfAdmission: "",
-    CompanyId: ""
+    CompanyId: "",
   });
 
   const [errorButton, setErrorButton] = useState(true);
@@ -250,7 +249,6 @@ const AddEmployee = () => {
   };
 
   const handleSubmit = (event) => {
-    console.log(employee, "employeeeee");
     event.preventDefault();
     setSubmited(true);
     dispatch(createEmployee(employee, showAnswer));
@@ -274,7 +272,7 @@ const AddEmployee = () => {
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
-      CompanyId: ""
+      CompanyId: "",
     });
 
     setAllErrors({

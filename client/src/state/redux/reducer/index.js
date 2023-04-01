@@ -24,6 +24,12 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  POST_CRUD_AREA,
+  GET_CRUD_AREAS,
+  POST_CRUD_POSITION,
+  GET_CRUD_POSITION,
+  UPDATE_CRUD_AREA,
+  UPDATE_CRUD_POSITION,
   GET_RATING,
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
@@ -31,7 +37,7 @@ import {
 
 const initialState = {
   allCompanies: [],
-  companies: [],
+  newCompanyId: {},
   company: {},
   employeeCreated: [],
   allEmployees: [],
@@ -45,7 +51,9 @@ const initialState = {
   arrContentFilters: {},
   ratings: [],
   emailsArray: [],
-  deletedEmployees: []
+  areasCrud: [],
+  positionsCrud: [],
+  deletedEmployees: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -58,7 +66,7 @@ function rootReducer(state = initialState, action) {
     case ADD_COMPANY:
       return {
         ...state,
-        companies: action.payload,
+        newCompanyId: action.payload.CompanyId,
       };
     case CREATE_EMPLOYEE:
       return {
@@ -75,12 +83,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         allEmployees: action.payload,
       };
-      case UPDATE_EMPLOYEE:
-        return {
+    case UPDATE_EMPLOYEE:
+      return {
         ...state,
       };
-      case GET_EMPLOYEE_DETAIL:
-        return {
+    case GET_EMPLOYEE_DETAIL:
+      return {
         ...state,
         employeeDetail: action.payload,
       };
@@ -88,8 +96,8 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-      // case GET_AREAS_EMPLOYEES:
-      //   return {
+    // case GET_AREAS_EMPLOYEES:
+    //   return {
     //     ...state,
     //     allEmployees: action.payload,
     //   }
@@ -153,38 +161,68 @@ function rootReducer(state = initialState, action) {
         ...state,
         arrContentFilters: {},
       };
-      case GET_COMPANIES_CUIT:
-        return {
-          ...state,
-          company: action.payload,
-        };
-        case GET_RATING:
-          return {
-            ...state,
-            ratings: [...state.ratings, ...action.payload],
-          };
-          case GET_ARRAY_EMAILS:
-            return {
-              ...state,
-              emailsArray: action.payload,
-            };
-            case CLEAN_ARRAY_EMAILS:
-              return {
-                ...state,
-                emailsArray: action.payload,
-              };
-              case GET_DELETED_EMPLOYEES:
-                return {
-                  ...state,
-                  deletedEmployees: action.payload,
-                };
-                case UPDATE_DELETED_EMPLOYEE:
-                  return {
-                  ...state,
-                };
+    case GET_COMPANIES_CUIT:
+      return {
+        ...state,
+        company: action.payload,
+      };
+    case GET_RATING:
+      return {
+        ...state,
+        ratings: [...state.ratings, ...action.payload],
+      };
+    case GET_ARRAY_EMAILS:
+      return {
+        ...state,
+        emailsArray: action.payload,
+      };
+    case CLEAN_ARRAY_EMAILS:
+      return {
+        ...state,
+        emailsArray: action.payload,
+      };
+    case POST_CRUD_AREA:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case POST_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case GET_CRUD_AREAS:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case GET_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case UPDATE_CRUD_AREA:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case UPDATE_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case GET_DELETED_EMPLOYEES:
+      return {
+        ...state,
+        deletedEmployees: action.payload,
+      };
+    case UPDATE_DELETED_EMPLOYEE:
+      return {
+        ...state,
+      };
     default:
       return state;
   }
 }
-
-export default rootReducer;
+  
+  export default rootReducer;
