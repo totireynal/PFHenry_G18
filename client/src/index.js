@@ -6,11 +6,15 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from "./state/redux/store/store"
 import { CookiesProvider } from "react-cookie";
-
+import axios from "axios";
 import { Auth0Provider } from '@auth0/auth0-react'
 
 const domain = 'dev-a5lp6h1utxb70h27.us.auth0.com';
 const clientId = 'KzGcYaMK0yVq39wFL8WaAH8BjmQ7yqlj';
+
+// axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://pfbackend-production-f5f5.up.railway.app";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,7 +25,8 @@ root.render(
           domain={domain} 
           clientId={clientId} 
           authorizationParams={{
-            redirect_uri: "http://localhost:3000/authorization",
+            redirect_uri: "https://pfbackend-production-f5f5.up.railway.app/authorization",
+            // redirect_uri: "http://localhost:3000/authorization",
             //poner la ruta del callback de Auth0
             audience: 'staffsphere identifier',
             scope: 'openid profile email'
