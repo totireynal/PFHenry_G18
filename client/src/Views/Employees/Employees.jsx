@@ -86,7 +86,7 @@ const Employees = () => {
     dispatch(getEmployees(undefined, undefined, CompanyId));
     console.log("effect-->", CompanyId);
     // .then(() => setIsLoading(false));
-    return handleRefresh();
+    // return handleRefreshTwo();
   }, [CompanyId]);
 
   useEffect(() => {
