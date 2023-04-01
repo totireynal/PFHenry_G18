@@ -1,24 +1,26 @@
 // import Spinner from '../../Components/Spinner/Spinner'
-import { Link } from "react-router-dom";
-import { getCurrentEmployee } from '../../state/redux/actions/actions'
+// import { Link } from "react-router-dom";
+// import { getCurrentEmployee } from '../../state/redux/actions/actions'
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useState } from "react";
+// import { useDispatch } from "react-redux";
 import Loader from "../../Components/Loader/Loader";
 
 
 
 const Authorization = () => {
 
-    const [cookiesCurrent] = useCookies(['token']);
+    // const [cookiesCurrent] = useCookies(['token']);
   
     const navigate = useNavigate();
     
-    const [cookies, setCookie] = useCookies(['token']);
+    const [
+        // cookies,
+         setCookie] = useCookies(['token']);
     
     const { 
         getAccessTokenSilently,

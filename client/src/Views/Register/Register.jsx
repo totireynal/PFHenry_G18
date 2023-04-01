@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postCompany } from "../../state/redux/actions/actions";
 import {CardElement} from "@stripe/react-stripe-js";
@@ -47,7 +47,7 @@ function validate(input) {
   }
   if(!input.image){
     errors.image = "Campo necesario";
-  } else if (!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(input.email)) {errors.email = "Ingrese un email valido";
+  } else if (!/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(input.email)) {errors.email = "Ingrese un email valido";
   }
   return errors;
 }
@@ -68,7 +68,7 @@ export default function CreateCompany(props) {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const dispatch = useDispatch();
-  const history = useNavigate();
+  // const history = useNavigate();
   const [errors, setErrors] = useState({});
 
 
@@ -153,7 +153,7 @@ export default function CreateCompany(props) {
     }
 
     const response = await getCompaniesCuit(input.cuit);
-    if(response.data != "The company PruebaCUIT has been created correctly"){
+    if(response.data !== "The company PruebaCUIT has been created correctly"){
 
     };
     
@@ -412,6 +412,7 @@ export default function CreateCompany(props) {
                   </label>
                   <input
                     type="image"
+                    alt="image"
                     className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Image"
                     value={input.image}

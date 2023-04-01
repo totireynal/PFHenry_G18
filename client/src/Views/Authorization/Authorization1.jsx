@@ -27,7 +27,7 @@ const Authorizationone = () => {
       if (idCurrent) {
         dispatch(getCurrentEmployee(idCompany, idCurrent));
       }
-    }, [dispatch, idCurrent]);
+    }, [dispatch, idCurrent, idCompany]);
 
 
     return(

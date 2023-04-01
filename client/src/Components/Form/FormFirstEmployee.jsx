@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAreasNum,
-  getPositionsNum,
-} from "../../state/redux/actions/actions";
+// import { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import {
+//   getAreasNum,
+//   getPositionsNum,
+// } from "../../state/redux/actions/actions";
 import InputForm from "../InputForm";
-import SelectForm from "../SelectForm/SelectForm";
+// import SelectForm from "../SelectForm/SelectForm";
 import UploadImage from "../Upload/UploadImage";
-import { RiAlertFill } from "react-icons/ri";
-import SelectFormSec from "../SelectFormSec/SelectFormSec";
+// import { RiAlertFill } from "react-icons/ri";
+// import SelectFormSec from "../SelectFormSec/SelectFormSec";
 
 const FormFirstEmployee = ({
   handleInput,

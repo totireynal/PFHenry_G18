@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import { useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { contentFilters, getEmployees, getRoles } from '../../state/redux/actions/actions';
 
@@ -15,7 +15,7 @@ const Rol = ({ selectedOption, handleSelectChange, CompanyId }) => {
   useEffect(() => {
     dispatch(getEmployees(arrContentFilters, undefined, CompanyId));
     dispatch(getRoles(arrContentFilters));
-  }, [arrContentFilters, dispatch]);
+  }, [arrContentFilters, CompanyId, dispatch]);
 
   const handleChange = (event) => {
     const role = event.target.value;

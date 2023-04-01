@@ -38,7 +38,7 @@ const EmployeeDetail = () => {
 
   useEffect(() => {
     dispatch(getEmployeeDetail(CompanyId, id));
-  }, [id, dispatch]);
+  }, [id, dispatch, CompanyId]);
 
   const {
     name,
