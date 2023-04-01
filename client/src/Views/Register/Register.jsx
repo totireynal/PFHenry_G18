@@ -1,6 +1,6 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { postCompany } from "../../state/redux/actions/actions";
 import {CardElement} from "@stripe/react-stripe-js";
 import {useStripe, useElements} from "@stripe/react-stripe-js"
@@ -47,12 +47,7 @@ function validate(input) {
   }
   if(!input.image){
     errors.image = "Campo necesario";
-  } else if (
-    !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-      input.email
-    )
-  ) {
-    errors.email = "Ingrese un email valido";
+  } else if (!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(input.email)) {errors.email = "Ingrese un email valido";
   }
   return errors;
 }
