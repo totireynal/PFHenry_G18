@@ -15,20 +15,20 @@ const EditEmployeeMyProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-    useEffect(() => {
-      dispatch(getPositionsNum());
-      dispatch(getAreasNum());
-      return () => {
-        dispatch(getCurrentEmployee(id));
-      }
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getPositionsNum());
+    dispatch(getAreasNum());
+    return () => {
+      dispatch(getCurrentEmployee(id));
+    };
+  }, [dispatch]);
 
   const { errors, setAllErrors } = useErrors();
 
   const { answer, showAnswer } = useAnswer();
 
   const currentEmployee = useSelector((state) => state.employeeDetail);
-  console.log(currentEmployee, 'iiiiiii');
+  console.log(currentEmployee, "iiiiiii");
 
   const [touched, setTouched] = useState({
     name: false,
@@ -64,7 +64,6 @@ const EditEmployeeMyProfile = () => {
     cbu: `${currentEmployee.cbu}`,
     image: `${currentEmployee.image}`,
   });
-
 
   const handleInput = (e) => {
     const { value, name } = e.target;

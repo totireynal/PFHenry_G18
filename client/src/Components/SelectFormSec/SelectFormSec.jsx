@@ -8,10 +8,9 @@ const SelectFormSec = ({
   handler,
   error,
   optionQuantity,
-  userName,
-  userNum,
+  
 }) => {
-  console.log(userName, userNum);
+  
 
 const errorStyle =
   error && touched
