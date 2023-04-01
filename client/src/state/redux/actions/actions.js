@@ -26,6 +26,12 @@ import {
   ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  POST_CRUD_AREA,
+  GET_CRUD_AREAS,
+  DELETE_CRUD_AREAS,
+  POST_CRUD_POSITION,
+  GET_CRUD_POSITION,
+  DELETE_CRUD_POSITION,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -452,6 +458,68 @@ export const cleanArrayEmails = () => {
      }
    }
  }
+
+ export function postAreaCrud(area) {
+  return async function(dispatch) {
+    const response = await axios.post("http://localhost:3001/areas", area);
+    return dispatch({ type: POST_CRUD_AREA, payload: response.data });
+  };
+}
+
+export function getAreasCrud() {
+  return (dispatch) => {
+    axios
+      .get("http://localhost:3001/areas/ars")
+      .then((info) => {
+        console.log(info.data);
+        return dispatch({ type: GET_CRUD_AREAS, payload: info.data });
+      })
+      .catch((error) => console.log(error.message));
+  };
+}
+
+export const deleteAreaCrud = (id) => {
+  return async (dispatch) => {
+    await axios
+      .delete(`http://localhost:3001/areas/${id}`)
+      .then((info) => {
+        return dispatch({ type: DELETE_CRUD_AREAS, payload: id });
+      })
+      .catch((error) => console.log(error.message));
+  };
+};
+
+export function postPositionCrud(position) {
+  return async function(dispatch) {
+    const response = await axios.post(
+      "http://localhost:3001/positions",
+      position
+    );
+    return dispatch({ type: POST_CRUD_POSITION, payload: response.data });
+  };
+}
+
+export function getPositionsCrud() {
+  return (dispatch) => {
+    axios
+      .get("http://localhost:3001/positions/raw")
+      .then((info) => {
+        return dispatch({ type: GET_CRUD_POSITION, payload: info.data });
+      })
+      .catch((error) => console.log(error.message));
+  };
+}
+
+export const deletePositionCrud = (id) => {
+  return async (dispatch) => {
+    await axios
+      .delete(`http://localhost:3001/positions/${id}`)
+      .then((info) => {
+        return dispatch({ type: DELETE_CRUD_POSITION, payload: id });
+      })
+      .catch((error) => console.log(error.message));
+  };
+};
 
 
 

@@ -13,6 +13,7 @@ import SelectFormSec from "../SelectFormSec/SelectFormSec";
 const FormFirstEmployee = ({
   handleInput,
   handleSubmit,
+  // handleSelect,
   touched,
   errors,
   users,
@@ -98,7 +99,7 @@ const FormFirstEmployee = ({
           />
         </div>
         <div className="w-full">
-          <InputForm
+        <InputForm
             label="CBU"
             placeholder="CBU"
             type="number"
@@ -108,6 +109,29 @@ const FormFirstEmployee = ({
             handler={handleInput}
             id="cbu"
             error={errors.cbu}
+          />
+
+          <InputForm
+            label="Position"
+            placeholder="Position"
+            type="text"
+            name="PositionId"
+            touched={touched.PositionId}
+            value={users.position}
+            handler={handleInput}
+            id="PositionId"
+            error={errors.PositionId}
+          />
+          <InputForm
+            label="Area"
+            placeholder="Area"
+            type="text"
+            name="AreaId"
+            touched={touched.AreaId}
+            value={users.area}
+            handler={handleInput}
+            id="AreaId"
+            error={errors.AreaId}
           />
         </div>
         <div className="w-full">

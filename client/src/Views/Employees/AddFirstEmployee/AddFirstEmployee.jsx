@@ -2,7 +2,8 @@
 import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { createEmployee, getAreasNum, getPositionsNum } from "../../../state/redux/actions/actions";
+import { createEmployee, postAreaCrud,
+  postPositionCrud } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
 import validate from "../../../Utils/functions/validate";
 import { useErrors } from "../../../Utils/hooks/errors";
@@ -13,18 +14,26 @@ import { useNavigate } from "react-router-dom";
 const AddFirstEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [dispatchCompleted, setDispatchCompleted] = useState(false);
     useEffect(() => {
       
       // dispatch(getPositionsNum());
       // dispatch(getAreasNum());
     }, [dispatch]);
 
+    
+
     const companyId = useSelector((state) => state.newCompanyId);
     console.log("CompanyID: ", companyId)
     // const areasNum = useSelector((state) => state.areasNum);
+    const [area, setArea] = useState({
+      area: "",
+    });
+    const [position, setPosition] = useState({
+      position:"",
+    })
     
-  const [employee, setEmployee] = useState({
+  var [employee, setEmployee] = useState({
     name: "",
     lastName: "",
     birthDate: "",
@@ -34,8 +43,8 @@ const AddFirstEmployee = () => {
     address: "",
     role: "SuperAdmin",
     image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
-    PositionId: 3,
-    AreaId: 5,
+    PositionId: 0,
+    AreaId: 0,
     cuil: "",
     cbu: "",
     dateOfAdmission: "",
@@ -51,6 +60,11 @@ const AddFirstEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
+  useEffect(() => {
+    if (dispatchCompleted) {
+      dispatch(createEmployee(employee, showAnswer));
+    }
+  }, [dispatchCompleted, employee, dispatch, showAnswer]);
 
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
@@ -63,7 +77,7 @@ const AddFirstEmployee = () => {
   const handleInput = (event) => {
     setEmployee({
       ...employee,
-      CompanyId: companyId,
+      CompanyId: companyId,//aca va en realidad companyId
       [event.target.name]: event.target.value,
     });
 
@@ -94,34 +108,94 @@ const AddFirstEmployee = () => {
     });
   };
 
-  // const handleSelect = (e) => {
+  // const handleSelect = async (e) => {
   //   const { value, name } = e.target;
-  //   if (name === "role") {
-  //     setEmployee({
-  //       ...employee,
-  //       [name]: value,
-  //     });
-  //   }
+  //   console.log("")
   //   if (name === "AreaId") {
-  //     console.log(name, value, 'daleeeee');
+  //     const idArea = 0;
+  //     //aqui va el postArea
+  //     dispatch(postAreaCrud(value)).then(resultado=>{
+  //       idArea = resultado.id
+  //     })
+  //     console.log(name, value, idArea, "Datos de area");
   //     setEmployee({
   //       ...employee,
-  //       [name]: Number(value),
+  //       [name]:Number(idArea),
   //     });
-  //   }
-  //   if (name === "PositionId") {
-  //     setEmployee({
-  //       ...employee,
-  //       [name]: Number(value),
-  //     });
-  //   }
-  // };
+  //     // const idArea = await postAreaCrud(value)
+  //     // console.log(name, value, idArea,'Datos Area');
+  //     // setEmployee({
+  //     //   ...employee,
+  //     //   [name]: Number(idArea),
+  //     // });
+  //    }
+  //    if (name === "PositionId") {
+  //     const idPosition = 0;
+  //     dispatch(postPositionCrud(value)).then(resultado=>{
+  //       idPosition = resultado.id
+  //     })
+  //     console.log(name, value, idPosition,'Datos Position');
+  //      setEmployee({
+  //        ...employee,
+  //        [name]: Number(idPosition),
+  //      });
+  //    }
+  //  };
 
   const handleSubmit = (event) => {
-    console.log(employee, "employeeeee");
+
+    var idArea=0;
+    var idPosition = 0;
+    console.log(employee, "Datos SuperAdmin antes del set");
     event.preventDefault();
     setSubmited(true);
-    dispatch(createEmployee(employee, showAnswer));
+    area.area = employee.AreaId;
+    position.position = employee.PositionId;
+
+    Promise.all([
+      dispatch(postPositionCrud(position)),
+      dispatch(postAreaCrud(area))
+    ]).then(resultados => {
+      const idPosition = resultados[0].payload.id;
+      const idArea = resultados[1].payload.id;
+      console.log("idPosition: ", idPosition);
+      console.log("idArea: ", idArea);
+    
+      setEmployee({
+        ...employee,
+        PositionId: idPosition,
+        AreaId: idArea
+      });
+      console.log(employee)
+      setDispatchCompleted(true);
+    }).catch(error => {
+      console.log("Error al hacer las solicitudes POST: ", error);
+    });
+ 
+
+  
+
+
+
+
+
+
+    // dispatch(postPositionCrud(position)).then(resultado=>{
+    //   idPosition=resultado.payload.id
+
+    // })
+
+    // dispatch(postAreaCrud(area)).then(resultado=>{
+    //       idArea = resultado.payload.id;
+          
+    //     })
+    
+    // setEmployee({
+    //   ...employee,
+    //   PositionId:idPosition,
+    //   AreaId: idArea,
+    // })
+    // dispatch(createEmployee(employee, showAnswer));
     setTimeout(() => {
       setSubmited(false);
     }, 3000);
@@ -136,8 +210,8 @@ const AddFirstEmployee = () => {
       address: "",
       role: "SuperAdmin",
       image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
-      PositionId: 3,
-      AreaId: 5,
+      PositionId: 0,
+      AreaId: 0,
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
@@ -154,8 +228,8 @@ const AddFirstEmployee = () => {
       address: "",
       role: "",
       image: "",
-      PositionId: 3,
-      AreaId: 5,
+      PositionId: 0,
+      AreaId: 0,
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
@@ -184,6 +258,7 @@ const AddFirstEmployee = () => {
             <FormFirstEmployee
               handleInput={handleInput}
               handleSubmit={handleSubmit}
+              // handleSelect = {handleSelect}
               touched={touched}
               errors={errors}
               users={employee}
