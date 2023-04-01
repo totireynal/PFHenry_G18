@@ -2,18 +2,27 @@
 import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { createEmployee, postAreaCrud,
   postPositionCrud } from "../../../state/redux/actions/actions";
+=======
+import {
+  createEmployee,
+  getAreasNum,
+  getPositionsNum,
+} from "../../../state/redux/actions/actions";
+>>>>>>> develop
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
-import validate from "../../../Utils/functions/validate";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const AddFirstEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+<<<<<<< HEAD
   const [dispatchCompleted, setDispatchCompleted] = useState(false);
     useEffect(() => {
       
@@ -22,6 +31,16 @@ const AddFirstEmployee = () => {
     }, [dispatch]);
 
     
+=======
+
+  useEffect(() => {
+    dispatch(getPositionsNum());
+    dispatch(getAreasNum());
+  }, [dispatch]);
+
+  const positionsNum = useSelector((state) => state.positionsNum);
+  const areasNum = useSelector((state) => state.areasNum);
+>>>>>>> develop
 
     const companyId = useSelector((state) => state.newCompanyId);
     console.log("CompanyID: ", companyId)
@@ -66,12 +85,15 @@ const AddFirstEmployee = () => {
     }
   }, [dispatchCompleted, employee, dispatch, showAnswer]);
 
+<<<<<<< HEAD
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
       setErrorButton(false);
     }
   }, [errors]);
 
+=======
+>>>>>>> develop
   useEffect(() => {}, []);
 
   const handleInput = (event) => {
@@ -108,6 +130,7 @@ const AddFirstEmployee = () => {
     });
   };
 
+<<<<<<< HEAD
   // const handleSelect = async (e) => {
   //   const { value, name } = e.target;
   //   console.log("")
@@ -141,6 +164,30 @@ const AddFirstEmployee = () => {
   //      });
   //    }
   //  };
+=======
+  const handleSelect = (e) => {
+    const { value, name } = e.target;
+    if (name === "role") {
+      setEmployee({
+        ...employee,
+        [name]: value,
+      });
+    }
+    if (name === "AreaId") {
+      console.log(name, value, "daleeeee");
+      setEmployee({
+        ...employee,
+        [name]: Number(value),
+      });
+    }
+    if (name === "PositionId") {
+      setEmployee({
+        ...employee,
+        [name]: Number(value),
+      });
+    }
+  };
+>>>>>>> develop
 
   const handleSubmit = (event) => {
 
@@ -234,7 +281,11 @@ const AddFirstEmployee = () => {
       cbu: "",
       dateOfAdmission: "",
     });
+<<<<<<< HEAD
     navigate("/")
+=======
+    navigate("/dashbord");
+>>>>>>> develop
   };
   console.log(errors);
   return (

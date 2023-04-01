@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
-import {useRef, useState} from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { updateDeletedEmployee, getDeletedEmployees } from "../../../state/redux/actions/actions";
 
-const Employee = (props) => {
+const DeletedEmployee = (props) => {
+
+    const currentEmployee = useSelector((state) => state.currentEmployee);
+  const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+  
+    const dispatch = useDispatch();
 
   const [check, setCheck] = useState(false)
   // console.log(check);
@@ -19,6 +26,13 @@ const Employee = (props) => {
 
   // refDivCheck.current.style.display = 'none'
 
+  const handleClick = (event) => {
+    dispatch(updateDeletedEmployee(props.id))
+    dispatch(getDeletedEmployees(undefined, undefined, CompanyId));
+    props.fn(props.id)
+  }
+
+  
   return (
     <div
       className=" bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
@@ -37,7 +51,9 @@ const Employee = (props) => {
           checked={check}
         />
       </label>
-      <Link to={`/employee/${props.id}`}>
+      <button
+        onClick={handleClick}
+      >
         <span className="text-slate-300 absolute right-3 top-2 text-xs text-start font-medium ">
           {props.role}
         </span>
@@ -66,9 +82,9 @@ const Employee = (props) => {
             </span>
           </div>
         </div>
-      </Link>
+      </button>
     </div>
   );
 };
 
-export default Employee;
+export default DeletedEmployee;

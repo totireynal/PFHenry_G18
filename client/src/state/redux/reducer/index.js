@@ -28,6 +28,14 @@ import {
   GET_CRUD_AREAS,
   POST_CRUD_POSITION,
   GET_CRUD_POSITION,
+<<<<<<< HEAD
+=======
+  UPDATE_CRUD_AREA,
+  UPDATE_CRUD_POSITION,
+  GET_RATING,
+  GET_DELETED_EMPLOYEES,
+  UPDATE_DELETED_EMPLOYEE,
+>>>>>>> develop
 } from "../action-types/index";
 
 const initialState = {
@@ -48,6 +56,10 @@ const initialState = {
   emailsArray: [],
   areasCrud: [],
   positionsCrud: [],
+<<<<<<< HEAD
+=======
+  deletedEmployees: [],
+>>>>>>> develop
 };
 
 function rootReducer(state = initialState, action) {
@@ -160,10 +172,10 @@ function rootReducer(state = initialState, action) {
         ...state,
         company: action.payload,
       };
-    case ADD_RATING:
+    case GET_RATING:
       return {
         ...state,
-        ratings: [...state.ratings, action.payload],
+        ratings: [...state.ratings, ...action.payload],
       };
     case GET_ARRAY_EMAILS:
       return {
@@ -175,6 +187,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         emailsArray: action.payload,
       };
+<<<<<<< HEAD
       case POST_CRUD_AREA:
         return {
           ...state,
@@ -198,6 +211,49 @@ function rootReducer(state = initialState, action) {
       default:
         return state;
     }
+=======
+    case POST_CRUD_AREA:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case POST_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case GET_CRUD_AREAS:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case GET_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case UPDATE_CRUD_AREA:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case UPDATE_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case GET_DELETED_EMPLOYEES:
+      return {
+        ...state,
+        deletedEmployees: action.payload,
+      };
+    case UPDATE_DELETED_EMPLOYEE:
+      return {
+        ...state,
+      };
+    default:
+      return state;
+>>>>>>> develop
   }
   
   export default rootReducer;

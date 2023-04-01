@@ -10,6 +10,5 @@ export const addUrlQueries = (filters, url) => {
         url += `?${fil}=${filters[fil]}`;
       }
     }
-    console.log("addUrl",url);
   return url;
 };
