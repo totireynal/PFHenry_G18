@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Link, useNavigate, useParams } from "react-router-dom";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Employee from "./Employee/Employee";
 import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
-import SideBar from "../../Components/SideBar/SideBar";
+// import SideBar from "../../Components/SideBar/SideBar";
 import {
   cleanUrl,
-  getAreas,
+  // getAreas,
   getArrayEmails,
   getEmployees,
   getFilter,
-  getPositions,
-  getRoles,
+  // getPositions,
+  // getRoles,
   getDeletedEmployees,
 } from "../../state/redux/actions/actions";
 import Sort from "../../Components/Sort/Sort";

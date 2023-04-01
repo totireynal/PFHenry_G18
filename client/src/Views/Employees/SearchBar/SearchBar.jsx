@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { contentFilters, getEmployees } from "../../../state/redux/actions/actions";
-import { useAnswer } from "../../../Utils/hooks/answer";
+// import { useAnswer } from "../../../Utils/hooks/answer";
 
 const SearchBar = ({ answer, showAnswer }) => {
   const [input, setInput] = useState("");
   let dispatch = useDispatch();
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
-  const allEmployees = useSelector((state) => state.allEmployees);
+  // const allEmployees = useSelector((state) => state.allEmployees);
   // console.log(!!allEmployees, 'allll');
 
   // const { answer, showAnswer } = useAnswer();

@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAreasNum,
-  getPositionsNum,
-} from "../../state/redux/actions/actions";
+// import { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import {
+//   getAreasNum,
+//   getPositionsNum,
+// } from "../../state/redux/actions/actions";
 import InputForm from "../InputForm";
 import SelectForm from "../SelectForm/SelectForm";
 import UploadImage from "../Upload/UploadImage";
-import { RiAlertFill } from "react-icons/ri";
+// import { RiAlertFill } from "react-icons/ri";
 import SelectFormSec from "../SelectFormSec/SelectFormSec";
-import {
-  getUsersTel,
-  getUsersEmail,
-  getUsersCuil,
-  getUsersCbu,
-  getUsersDni
-} from "../../state/redux/actions/actions"
+// import {
+//   getUsersTel,
+//   getUsersEmail,
+//   getUsersCuil,
+//   getUsersCbu,
+//   getUsersDni
+// } from "../../state/redux/actions/actions"
 
 const Form = ({
   handleInput,

@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import SideBar from "../../../Components/SideBar/SideBar";
+// import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import {
@@ -12,7 +11,7 @@ import validate from "../../../Utils/functions/validate";
 import { useBack } from "../../../Utils/hooks/mensajeBack";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import jwt_decode from 'jwt-decode';
 import {
@@ -70,13 +69,13 @@ const AddEmployee = () => {
 
   const { back, setAllBack } = useBack();
 
-  const [mensajeEmail, setMensajeEmail] = useState({
-    email: "",
-    dni: "",
-    tel: "",
-    cuil: "",
-    cbu: "",
-  });
+  // const [mensajeEmail, setMensajeEmail] = useState({
+  //   email: "",
+  //   dni: "",
+  //   tel: "",
+  //   cuil: "",
+  //   cbu: "",
+  // });
   // const [mensajeCuil, setMensajeCuil] = useState(null);
   // const [mensajeCbu, setMensajeCbu] = useState(null);
   // const [mensajeDni, setMensajeDni] = useState(null);

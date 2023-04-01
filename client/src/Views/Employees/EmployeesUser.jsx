@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Employee from "./Employee";
 import SearchBar from "./SearchBar/SearchBar";
@@ -51,11 +51,11 @@ function EmployeesUser() {
 
   useEffect(() => {
     dispatch(getEmployees(undefined, showAnswer, CompanyId));
-  }, [CompanyId]);
+  }, [CompanyId, showAnswer, dispatch]);
 
   useEffect(() => {
     dispatch(getFilter(arrContentFilters, CompanyId));
-  }, [arrContentFilters, CompanyId]);
+  }, [arrContentFilters, CompanyId, dispatch]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
