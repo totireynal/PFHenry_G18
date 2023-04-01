@@ -10,6 +10,9 @@ const EmployeeDetail = () => {
   let { id } = useParams();
 
   let employeeDetail = useSelector((state) => state.employeeDetail);
+  let currentEmployee = useSelector((state) => state.currentEmployee);
+  const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+  
 
   let navigate = useNavigate();
 
@@ -34,7 +37,7 @@ const EmployeeDetail = () => {
   };
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id));
+    dispatch(getEmployeeDetail(CompanyId, id));
   }, [id, dispatch]);
 
   const {

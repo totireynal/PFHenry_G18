@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Loader from "../../Components/Loader/Loader";
 
 
 
@@ -52,8 +53,8 @@ const Authorization = () => {
     
     
     return(
-        <div>
-            <h1>Authenticating...</h1>
+        <div className="h-screen w-screen flex justify-center items-center">
+            <Loader />
         </div>
     )
 }

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { contentFilters, getEmployees, getRoles } from '../../state/redux/actions/actions';
 
 
-const Rol = ({ selectedOption, handleSelectChange }) => {
+const Rol = ({ selectedOption, handleSelectChange, CompanyId }) => {
   const dispatch = useDispatch();
   const roles = useSelector((state) => state.roles);
   // console.log(roles,'rollll');
@@ -13,7 +13,7 @@ const Rol = ({ selectedOption, handleSelectChange }) => {
 
   // useEffect(() => {}, [dispatch]);
   useEffect(() => {
-    dispatch(getEmployees(arrContentFilters));
+    dispatch(getEmployees(arrContentFilters, undefined, CompanyId));
     dispatch(getRoles(arrContentFilters));
   }, [arrContentFilters, dispatch]);
 
