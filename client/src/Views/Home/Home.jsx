@@ -241,7 +241,6 @@ const Home = () => {
           </div>
 
           <div className="flex flex-col items-center justify-center w-1/3 text-lg">
-            <h5 className="">Send us a review</h5>
             <p>Link a un form para cargar.</p>
 
             <span>

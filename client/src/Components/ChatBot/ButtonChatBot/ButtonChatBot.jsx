@@ -38,13 +38,6 @@ function ChatButton() {
                   {
                     id: "2",
                     user: true,
-                    validator: (value) => {
-                      if (/^[A-Z]{1}[a-z]{2,15}$/.test(value)) {
-                        return true;
-                      } else {
-                        return "Please enter a valid name.";
-                      }
-                    },
                     trigger: "3",
                   },
                   {
