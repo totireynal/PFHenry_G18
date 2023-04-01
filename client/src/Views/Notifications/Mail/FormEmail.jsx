@@ -80,7 +80,7 @@ const FormEmail = () => {
   return (
     <div class="flex justify-center items-center h-screen">
       <div className="flex flex-col justify-center items-center w-full gap-4">
-        <h2 className="text-4xl text-sky-400">SEND E-MAIL</h2>
+        <h2 className="text-4xl text-sky-400 font-bold">Send E-mail</h2>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center justify-center gap-4 w-full h-auto"
