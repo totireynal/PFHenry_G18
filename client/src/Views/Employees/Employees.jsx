@@ -84,7 +84,6 @@ const Employees = () => {
   useEffect(() => {
     // setIsLoading(true);  
     dispatch(getEmployees(undefined, undefined, CompanyId))
-    console.log("effect-->", CompanyId);
       // .then(() => setIsLoading(false));
     return handleRefresh()
   }, [CompanyId]);
@@ -101,9 +100,9 @@ const Employees = () => {
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
     dispatch(getEmployees());
-    dispatch(getAreas());
-    dispatch(getRoles());
-    dispatch(getPositions());
+    // dispatch(getAreas());
+    // dispatch(getRoles());
+    // dispatch(getPositions());
     handleReset();
   };
   

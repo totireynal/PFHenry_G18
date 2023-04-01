@@ -33,9 +33,7 @@ const SearchBar = ({ answer, showAnswer }) => {
       }, 3000);
     }
   }
-
-  console.log("Didi", answer);
-
+  
   return (
     <>
       <div className="flex flex-col relative pb-2">

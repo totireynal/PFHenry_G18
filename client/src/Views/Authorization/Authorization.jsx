@@ -32,12 +32,10 @@ const Authorization = () => {
                 headers: {
                     authorization: `Bearer ${token}`
                 }
-            })
-            console.log('respuestaBack-->', response.data);
-            
+            })            
             setCookie('cookieBack', response.data.token, { path: '/' }); // actualizar el valor de cookieBack con el nuevo token
-            console.log('res.data.token-->',response.data.token);
-            console.log('Response is a token, congrats!!!');
+            //MUESTRA EL TOKEN DEL BACK
+            // console.log('res.data.token-->',response.data.token);
             navigate(`/authorizationone`);
             
         } catch (error) {
@@ -60,24 +58,3 @@ const Authorization = () => {
 }
 
 export default Authorization;
-
-{/* {isAuthenticated && (
-    <pre style={{textAlign:'start' }}>
-    {JSON.stringify(user, null, 2)}
-    </pre>
-)} */}
-
-
-// useEffect(() => {
-        //   if (cookiesCurrent.token) {
-        //     const userData = JSON.parse(atob(cookies.token.split('.')[1]));
-        //     setUserCurrent(userData);
-        //     console.log("token desencriptado",userData);
-        //     dispatch(getCurrentEmployee(userData.id.toString()));
-        //   }
-        // }, [cookiesCurrent.token]);
-        
-        // useEffect(() => {
-        //     dispatch(getCurrentEmployee(userData.id.toString()));
-        //     console.log("state", user.id);
-        //   }, []);
