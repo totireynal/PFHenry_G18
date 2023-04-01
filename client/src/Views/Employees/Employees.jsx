@@ -19,7 +19,7 @@ import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
-import { useAnswer } from "../../Utils/hooks/answer";
+import { useAnswer } from "../../utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiMailAddLine } from "react-icons/ri";
 import { SiMinutemailer } from "react-icons/si";
@@ -29,7 +29,7 @@ const Employees = () => {
 
   const currentEmployee = useSelector((state) => state.currentEmployee);
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
-  
+
   // const { CompanyId } = useParams()
   // console.log('monta employees-->', CompanyId);
 
@@ -38,7 +38,7 @@ const Employees = () => {
 
   const dispatch = useDispatch();
 
-  const [emailMode, setEmailMode] = useState(false)
+  const [emailMode, setEmailMode] = useState(false);
 
   const [emailsSelection, setEmailSelection] = useState([]);
 
@@ -82,19 +82,18 @@ const Employees = () => {
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
   useEffect(() => {
-    // setIsLoading(true);  
-    dispatch(getEmployees(undefined, undefined, CompanyId))
+    // setIsLoading(true);
+    dispatch(getEmployees(undefined, undefined, CompanyId));
     console.log("effect-->", CompanyId);
-      // .then(() => setIsLoading(false));
-    return handleRefresh()
+    // .then(() => setIsLoading(false));
+    return handleRefresh();
   }, [CompanyId]);
-  
-  
+
   useEffect(() => {
-    // setIsLoading(true);  
-    dispatch(getFilter(arrContentFilters, CompanyId, showAnswer))
-    dispatch(getDeletedEmployees(undefined, showAnswer,CompanyId))
-    dispatch(getDeletedEmployees(undefined, showAnswer,CompanyId))
+    // setIsLoading(true);
+    dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
+    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
     // .then(() => setIsLoading(false));
   }, [arrContentFilters, CompanyId]);
 
@@ -106,16 +105,14 @@ const Employees = () => {
     dispatch(getPositions());
     handleReset();
   };
-  
+
   return (
     <div className=" relative w-full mr-10 h-screen overflow-auto  xl:pl-72 sm:pl-36 ssm:pl-12 z-0">
       <div className="sticky top-0 z-30 bg-slate-100 pb-2">
         <div className="flex sm:flex-col flex-wrap  h-auto pt-12    bg-slate-100 mb-3 items-center justify-center gap-2.5">
           <div className="flex gap-2 ">
             <Link to={"/deletedemployees/:id"}>
-              <button 
-                className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
-              >
+              <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
                 Borrados
               </button>
             </Link>
@@ -210,7 +207,7 @@ const Employees = () => {
         )}
       </div>
     </div>
-  )
+  );
 };
 
 export default Employees;

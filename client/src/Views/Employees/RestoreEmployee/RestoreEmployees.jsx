@@ -16,21 +16,20 @@ import Sort from "../../../Components/Sort/Sort";
 import Position from "../../../Components/Position/Position";
 import Area from "../../../Components/Area/Area";
 import Rol from "../../../Components/Rol/Rol";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import { useAnswer } from "../../../utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiMailAddLine } from "react-icons/ri";
 import { SiMinutemailer } from "react-icons/si";
 
 const RestoreEmployees = () => {
-
   const users = useSelector((state) => state.deletedEmployees);
   console.log("segunda", users);
 
   const currentEmployee = useSelector((state) => state.currentEmployee);
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
-  
+
   // const { CompanyId } = useParams()
-  console.log('monta employees-->', CompanyId);
+  console.log("monta employees-->", CompanyId);
 
   const navigate = useNavigate();
   const { answer, showAnswer } = useAnswer();
@@ -38,28 +37,29 @@ const RestoreEmployees = () => {
   const dispatch = useDispatch();
 
   const [deletes, setDeletes] = useState(users);
-  console.log(users, 'decimee');
+  console.log(users, "decimee");
 
-  const fn = (id) => setDeletes(del => {
-    const filter = del?.filter(e => e.id !== id)
-      return filter
-  })
-//   const catchEmails = (email, checked) => {
-//     setEmailSelection((emails) => {
-//       if (checked) {
-//         return [...emails, email];
-//       } else {
-//         return emails.filter((e) => e !== email);
-//       }
-//     });
-//   };
+  const fn = (id) =>
+    setDeletes((del) => {
+      const filter = del?.filter((e) => e.id !== id);
+      return filter;
+    });
+  //   const catchEmails = (email, checked) => {
+  //     setEmailSelection((emails) => {
+  //       if (checked) {
+  //         return [...emails, email];
+  //       } else {
+  //         return emails.filter((e) => e !== email);
+  //       }
+  //     });
+  //   };
 
-//   const [emailsUnselect, setEmailsUnselect] = useState(false);
+  //   const [emailsUnselect, setEmailsUnselect] = useState(false);
 
-//   const sendEmails = () => {
-//     dispatch(getArrayEmails(emailsSelection));
-//     navigate("/notifications");
-//   };
+  //   const sendEmails = () => {
+  //     dispatch(getArrayEmails(emailsSelection));
+  //     navigate("/notifications");
+  //   };
 
   const [selectedOption, setSelectedOption] = useState({
     area: "default",
@@ -83,14 +83,12 @@ const RestoreEmployees = () => {
 
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
+  useEffect(() => {
+    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+  }, [dispatch, CompanyId, deletes]);
 
   useEffect(() => {
-    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId))
-  }, [dispatch, CompanyId, deletes]);
-  
-  
-  useEffect(() => {
-    dispatch(getFilter(arrContentFilters, CompanyId))
+    dispatch(getFilter(arrContentFilters, CompanyId));
   }, [dispatch, arrContentFilters, CompanyId]);
 
   const handleRefresh = (event) => {
@@ -159,32 +157,28 @@ const RestoreEmployees = () => {
         />
       </div>
       <div className="flex flex-col gap-2 pb-8 pt-3 ">
-        {(
-          deletes?.map((user, i) => {
-            return (
-              // <Link key={i} to={`/employee/${user?.id}`} >
-              <DeletedEmployee
-                key={i}
-                id={user?.id}
-                name={user?.name}
-                lastName={user?.lastName}
-                email={user?.email}
-                image={user?.image}
-                area={user?.area}
-                position={user?.position}
-                role={user?.role}
-                fn={fn}
-                // catchEmails={catchEmails}
-                // emailsSelection={emailsSelection}
-                // emailsUnselect={emailsUnselect}
-              />
-              // </Link>
-            );
-          })
-         
-        )}
+        {deletes?.map((user, i) => {
+          return (
+            // <Link key={i} to={`/employee/${user?.id}`} >
+            <DeletedEmployee
+              key={i}
+              id={user?.id}
+              name={user?.name}
+              lastName={user?.lastName}
+              email={user?.email}
+              image={user?.image}
+              area={user?.area}
+              position={user?.position}
+              role={user?.role}
+              fn={fn}
+              // catchEmails={catchEmails}
+              // emailsSelection={emailsSelection}
+              // emailsUnselect={emailsUnselect}
+            />
+            // </Link>
+          );
+        })}
       </div>
-
     </div>
   );
 };
