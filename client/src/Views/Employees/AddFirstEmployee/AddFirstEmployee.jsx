@@ -2,36 +2,22 @@
 import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
-import { createEmployee, postAreaCrud,
-  postPositionCrud } from "../../../state/redux/actions/actions";
-=======
 import {
   createEmployee,
   getAreasNum,
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
->>>>>>> develop
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
-import validate from "../../../utils/functions/validate";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer";
+import validate from "../../../Utils/functions/validate";
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {postPositionCrud, postAreaCrud} from "../../../state/redux/actions/actions";
 
 const AddFirstEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const [dispatchCompleted, setDispatchCompleted] = useState(false);
-    useEffect(() => {
-      
-      // dispatch(getPositionsNum());
-      // dispatch(getAreasNum());
-    }, [dispatch]);
-
-    
-=======
 
   useEffect(() => {
     dispatch(getPositionsNum());
@@ -40,7 +26,11 @@ const AddFirstEmployee = () => {
 
   const positionsNum = useSelector((state) => state.positionsNum);
   const areasNum = useSelector((state) => state.areasNum);
->>>>>>> develop
+  
+  const positionAdmin = useSelector((state) => state.positionsCrud);
+  const areaAdmin = useSelector((state) => state.areasCrud);
+  console.log(positionAdmin, "POSICION")
+  console.log(areaAdmin, "AREA")
 
     const companyId = useSelector((state) => state.newCompanyId);
     console.log("CompanyID: ", companyId)
@@ -62,8 +52,8 @@ const AddFirstEmployee = () => {
     address: "",
     role: "SuperAdmin",
     image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
-    PositionId: 0,
-    AreaId: 0,
+    PositionId: positionAdmin.id,
+    AreaId: areaAdmin.id,
     cuil: "",
     cbu: "",
     dateOfAdmission: "",
@@ -79,21 +69,12 @@ const AddFirstEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
-  useEffect(() => {
-    if (dispatchCompleted) {
-      dispatch(createEmployee(employee, showAnswer));
-    }
-  }, [dispatchCompleted, employee, dispatch, showAnswer]);
+  // useEffect(() => {
+  //   if (dispatchCompleted) {
+  //     dispatch(createEmployee(employee, showAnswer));
+  //   }
+  // }, [dispatchCompleted, employee, dispatch, showAnswer]);
 
-<<<<<<< HEAD
-  useEffect(() => {
-    if (Object.keys(errors).length === 0) {
-      setErrorButton(false);
-    }
-  }, [errors]);
-
-=======
->>>>>>> develop
   useEffect(() => {}, []);
 
   const handleInput = (event) => {
@@ -130,119 +111,15 @@ const AddFirstEmployee = () => {
     });
   };
 
-<<<<<<< HEAD
-  // const handleSelect = async (e) => {
-  //   const { value, name } = e.target;
-  //   console.log("")
-  //   if (name === "AreaId") {
-  //     const idArea = 0;
-  //     //aqui va el postArea
-  //     dispatch(postAreaCrud(value)).then(resultado=>{
-  //       idArea = resultado.id
-  //     })
-  //     console.log(name, value, idArea, "Datos de area");
-  //     setEmployee({
-  //       ...employee,
-  //       [name]:Number(idArea),
-  //     });
-  //     // const idArea = await postAreaCrud(value)
-  //     // console.log(name, value, idArea,'Datos Area');
-  //     // setEmployee({
-  //     //   ...employee,
-  //     //   [name]: Number(idArea),
-  //     // });
-  //    }
-  //    if (name === "PositionId") {
-  //     const idPosition = 0;
-  //     dispatch(postPositionCrud(value)).then(resultado=>{
-  //       idPosition = resultado.id
-  //     })
-  //     console.log(name, value, idPosition,'Datos Position');
-  //      setEmployee({
-  //        ...employee,
-  //        [name]: Number(idPosition),
-  //      });
-  //    }
-  //  };
-=======
-  const handleSelect = (e) => {
-    const { value, name } = e.target;
-    if (name === "role") {
-      setEmployee({
-        ...employee,
-        [name]: value,
-      });
-    }
-    if (name === "AreaId") {
-      console.log(name, value, "daleeeee");
-      setEmployee({
-        ...employee,
-        [name]: Number(value),
-      });
-    }
-    if (name === "PositionId") {
-      setEmployee({
-        ...employee,
-        [name]: Number(value),
-      });
-    }
-  };
->>>>>>> develop
 
   const handleSubmit = (event) => {
 
-    var idArea=0;
-    var idPosition = 0;
     console.log(employee, "Datos SuperAdmin antes del set");
     event.preventDefault();
     setSubmited(true);
-    area.area = employee.AreaId;
-    position.position = employee.PositionId;
-
-    Promise.all([
-      dispatch(postPositionCrud(position)),
-      dispatch(postAreaCrud(area))
-    ]).then(resultados => {
-      const idPosition = resultados[0].payload.id;
-      const idArea = resultados[1].payload.id;
-      console.log("idPosition: ", idPosition);
-      console.log("idArea: ", idArea);
-    
-      setEmployee({
-        ...employee,
-        PositionId: idPosition,
-        AreaId: idArea
-      });
-      console.log(employee)
-      setDispatchCompleted(true);
-    }).catch(error => {
-      console.log("Error al hacer las solicitudes POST: ", error);
-    });
- 
-
-  
-
-
-
-
-
-
-    // dispatch(postPositionCrud(position)).then(resultado=>{
-    //   idPosition=resultado.payload.id
-
-    // })
-
-    // dispatch(postAreaCrud(area)).then(resultado=>{
-    //       idArea = resultado.payload.id;
-          
-    //     })
-    
-    // setEmployee({
-    //   ...employee,
-    //   PositionId:idPosition,
-    //   AreaId: idArea,
-    // })
-    // dispatch(createEmployee(employee, showAnswer));
+    dispatch(createEmployee(employee
+      // , showAnswer
+      ));
     setTimeout(() => {
       setSubmited(false);
     }, 3000);
@@ -281,11 +158,7 @@ const AddFirstEmployee = () => {
       cbu: "",
       dateOfAdmission: "",
     });
-<<<<<<< HEAD
     navigate("/")
-=======
-    navigate("/dashbord");
->>>>>>> develop
   };
   console.log(errors);
   return (

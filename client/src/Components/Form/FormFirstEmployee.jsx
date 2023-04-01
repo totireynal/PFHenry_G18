@@ -111,7 +111,7 @@ const FormFirstEmployee = ({
             error={errors.cbu}
           />
 
-          <InputForm
+          {/* <InputForm
             label="Position"
             placeholder="Position"
             type="text"
@@ -121,8 +121,8 @@ const FormFirstEmployee = ({
             handler={handleInput}
             id="PositionId"
             error={errors.PositionId}
-          />
-          <InputForm
+          /> */}
+          {/* <InputForm
             label="Area"
             placeholder="Area"
             type="text"
@@ -132,7 +132,7 @@ const FormFirstEmployee = ({
             handler={handleInput}
             id="AreaId"
             error={errors.AreaId}
-          />
+          /> */}
         </div>
         <div className="w-full">
           <InputForm

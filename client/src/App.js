@@ -30,6 +30,7 @@ import CalendarUser from "./Views/CalendarUser/CalendarUser";
 
 import { useCookies } from "react-cookie";
 import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
+import AreaPositionFirstEmployee from "./Views/Register/AreaPositionFirstEmployee";
 
 function App() {
   const [isOpen, setOpen] = useState(true);
@@ -72,6 +73,7 @@ function App() {
           pathname === "/home" ||
           pathname === "/home/login" ||
           pathname === "/home/login/register" ||
+          pathname === "/addAreaPositionSA" ||
           pathname === "/addFirstEmployee" ||
           pathname === "/authorizationone" ||
           pathname === "/authorization" ? (
@@ -89,6 +91,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         {/* <Route path="/home/login" element={<Login />} /> */}
         <Route path="/home/login/register" element={<Payment />} />
+        <Route path = "/addAreaPositionSA" element={<AreaPositionFirstEmployee/>}/>
         <Route path="/addFirstEmployee" element={<AddFisrtEmployee />} />
         {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
         <Route path="/authorization" element={<Authorization />} />

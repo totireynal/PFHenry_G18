@@ -452,7 +452,14 @@ export default function CreateCompany(props) {
                  {message && <div className="mb-4">{message}</div>}
               </div>
             </form>
-            <div>{formSubmitted && <button><Link to="/addFirstEmployee" className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Registre a su administrador</Link></button>}</div>
+            <div>{formSubmitted && <button>
+              {/* <Link to="/addFirstEmployee" className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Registre a su administrador
+                </Link> */}
+                <Link to="/addAreaPositionSA" className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Registre a su administrador
+                </Link>
+                </button>}</div>
           </div>
         </div>
       </div>

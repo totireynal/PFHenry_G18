@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -32,14 +32,11 @@ import {
   POST_CRUD_POSITION,
   GET_CRUD_POSITION,
   DELETE_CRUD_POSITION,
-<<<<<<< HEAD
-=======
   UPDATE_CRUD_AREA,
   UPDATE_CRUD_POSITION,
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
   GET_RATING,
->>>>>>> develop
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -473,75 +470,12 @@ export const getCompaniesEmail = (email) => {
   };
 };
 
-<<<<<<< HEAD
- export function postAreaCrud(area) {
-=======
 export function postAreaCrud(area) {
->>>>>>> develop
   return async function(dispatch) {
     const response = await axios.post("http://localhost:3001/areas", area);
     return dispatch({ type: POST_CRUD_AREA, payload: response.data });
   };
 }
-<<<<<<< HEAD
-
-export function getAreasCrud() {
-  return (dispatch) => {
-    axios
-      .get("http://localhost:3001/areas/ars")
-      .then((info) => {
-        console.log(info.data);
-        return dispatch({ type: GET_CRUD_AREAS, payload: info.data });
-      })
-      .catch((error) => console.log(error.message));
-  };
-}
-
-export const deleteAreaCrud = (id) => {
-  return async (dispatch) => {
-    await axios
-      .delete(`http://localhost:3001/areas/${id}`)
-      .then((info) => {
-        return dispatch({ type: DELETE_CRUD_AREAS, payload: id });
-      })
-      .catch((error) => console.log(error.message));
-  };
-};
-
-export function postPositionCrud(position) {
-  return async function(dispatch) {
-    const response = await axios.post(
-      "http://localhost:3001/positions",
-      position
-    );
-    return dispatch({ type: POST_CRUD_POSITION, payload: response.data });
-  };
-}
-
-export function getPositionsCrud() {
-  return (dispatch) => {
-    axios
-      .get("http://localhost:3001/positions/raw")
-      .then((info) => {
-        return dispatch({ type: GET_CRUD_POSITION, payload: info.data });
-      })
-      .catch((error) => console.log(error.message));
-  };
-}
-
-export const deletePositionCrud = (id) => {
-  return async (dispatch) => {
-    await axios
-      .delete(`http://localhost:3001/positions/${id}`)
-      .then((info) => {
-        return dispatch({ type: DELETE_CRUD_POSITION, payload: id });
-      })
-      .catch((error) => console.log(error.message));
-  };
-};
-
-=======
->>>>>>> develop
 
 export function getAreasCrud() {
   return (dispatch) => {
