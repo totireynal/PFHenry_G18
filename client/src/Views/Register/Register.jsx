@@ -411,7 +411,7 @@ export default function CreateCompany(props) {
                     htmlFor="Email"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    Email
+                    Image
                   </label>
                   <input
                     type="image"
