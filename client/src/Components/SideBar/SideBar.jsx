@@ -34,7 +34,6 @@ const SideBar = () => {
     });
   };
 
-  console.log(active, "vemoss");
 
   const current = useSelector((state) => state.currentEmployee);
   // const currentEmployee = useSelector((state) => state.employeeDetail);

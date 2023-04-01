@@ -145,7 +145,9 @@ const AddEmployee = () => {
           });
         } 
         else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
         console.log("Valor", valor);
         console.log("Mensaje: ", resultado?.message)
@@ -154,8 +156,6 @@ const AddEmployee = () => {
     if (event.target.name === "cuil") {
       const valor = event.target.value;
         dispatch(getUsersCuil(currentCompanyId, valor)).then(resultado => {
-          console.log("CUIL", valor);
-          console.log("company ID", currentCompanyId);
         if (resultado?.message) {
           setAllBack({
             ...employee,
@@ -163,17 +163,15 @@ const AddEmployee = () => {
           });
         } 
         else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message)
       });      
     }
     if (event.target.name === "cbu") {
       const valor = event.target.value;
         dispatch(getUsersCbu(currentCompanyId, valor)).then(resultado => {
-          console.log("CBU", valor);
-          console.log("company ID", currentCompanyId);
         if (resultado?.message) {
           setAllBack({
             ...employee,
@@ -181,17 +179,15 @@ const AddEmployee = () => {
           });
         } 
         else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message)
       });      
     }
     if (event.target.name === "dni") {
       const valor = event.target.value;
         dispatch(getUsersDni(currentCompanyId, valor)).then(resultado => {
-          console.log("CUIL", valor);
-          console.log("company ID", currentCompanyId);
         if (resultado?.message) {
           setAllBack({
             ...employee,
@@ -199,17 +195,15 @@ const AddEmployee = () => {
           });
         } 
         else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message)
       });      
     }
     if (event.target.name === "tel") {
       const valor = event.target.value;
         dispatch(getUsersTel(currentCompanyId, valor)).then(resultado => {
-          console.log("CUIL", valor);
-          console.log("company ID", currentCompanyId);
         if (resultado?.message) {
           setAllBack({
             ...employee,
@@ -217,10 +211,10 @@ const AddEmployee = () => {
           });
         } 
         else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message)
       });      
     }
   }

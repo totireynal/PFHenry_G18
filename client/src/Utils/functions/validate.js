@@ -41,9 +41,9 @@ const validate = (values) => {
   const yearAdmission = values.dateOfAdmission.split("-")[0];
   const admission = currentYear - yearAdmission;
   const age = currentYear - year;
-  console.log(year);
-  console.log(age);
-  console.log(admission);
+  // console.log(year);
+  // console.log(age);
+  // console.log(admission);
 
   if (age < 18) errors.birthDate = "Invalid age";
   if (age < admission) errors.dateOfAdmission = "";

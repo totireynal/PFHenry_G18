@@ -24,42 +24,12 @@ const Home = () => {
     dispatch(getRating());
   }, [dispatch]);
 
-  console.log(clients, "segundo");
-
-  // const clients = [
-  //   {
-  //     id: 4,
-  //     name: "Juan",
-  //     image:
-  //       "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
-  //     rating: 5,
-  //     commentary:
-  //       "estuvo bien sdgsgfssdfsdfdsfdsfsdf asdf sad fasfsad f fs fasf dsa  fsdf sdfsd fsda fsdf asf",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Juan",
-  //     image:
-  //       "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
-  //     rating: 5,
-  //     commentary: "estuvo bien",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Juan",
-  //     image:
-  //       "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
-  //     rating: 3,
-  //     commentary: "estuvo bien",
-  //   },
-  // ];
-
   const {
     loginWithRedirect,
-    loginWithPopup,
-    logout,
-    isAuthenticated,
-    getAccessTokenSilently,
+    // loginWithPopup,
+    // logout,
+    // isAuthenticated,
+    // getAccessTokenSilently,
   } = useAuth0();
 
   const handleLogin = async () => {
@@ -139,9 +109,11 @@ const Home = () => {
         <div className="max-w-[1200px] m-auto ">
           <div className="flex  justify-center items-start gap-10 h-auto flex-wrap">
             {clients !== undefined &&
-              clients?.map(({ name, image, score, comment }) => {
+              clients?.map(({ name, image, score, comment }, i) => {
                 return (
-                  <div className="flex flex-col justify-center items-center border-sky-400 p-5 bg-white w-[300px] border-2 rounded-md">
+                  <div
+                    key={i} 
+                    className="flex flex-col justify-center items-center border-sky-400 p-5 bg-white w-[300px] border-2 rounded-md">
                     <h3 className="text-2xl pb-1">{name}</h3>
 
                     <div className="relative flex flex-col justify-center items-center">
@@ -154,11 +126,11 @@ const Home = () => {
                         <div className="flex">
                           {[...Array(score).fill(0)].map((start, i) => {
                             return (
-                              <label className="">
+                              <label 
+                                key={i}>
                                 <AiFillStar
                                   size={30}
-                                  className={`text-yellow-200 transition-all duration-200
-                            `}
+                                  className={`text-yellow-200 transition-all duration-200`}
                                 />
                               </label>
                             );
