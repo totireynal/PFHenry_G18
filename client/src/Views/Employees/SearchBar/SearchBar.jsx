@@ -4,7 +4,7 @@ import {
   contentFilters,
   getEmployees,
 } from "../../../state/redux/actions/actions";
-import { useAnswer } from "../../../utils/hooks/answer";
+import { useAnswer } from "../../../Utils/hooks/answer";
 
 const SearchBar = ({ answer, showAnswer }) => {
   const [input, setInput] = useState("");
