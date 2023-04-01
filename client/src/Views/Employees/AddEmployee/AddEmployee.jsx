@@ -9,11 +9,19 @@ import {
 } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
 import validate from "../../../Utils/functions/validate";
+import { useBack } from "../../../Utils/hooks/mensajeBack";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
 import { Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import jwt_decode from 'jwt-decode';
+import {
+  getUsersTel,
+  getUsersEmail,
+  getUsersCuil,
+  getUsersCbu,
+  getUsersDni
+} from "../../../state/redux/actions/actions";
 
 const AddEmployee = () => {
   const [cookies] = useCookies(['cookieBack']);
@@ -61,6 +69,19 @@ const AddEmployee = () => {
 
   const [submited, setSubmited] = useState(false);
 
+  const { back, setAllBack } = useBack();
+
+  const [mensajeEmail, setMensajeEmail] = useState({
+    email: "",
+    dni: "",
+    tel: "",
+    cuil: "",
+    cbu: "",
+  });
+  // const [mensajeCuil, setMensajeCuil] = useState(null);
+  // const [mensajeCbu, setMensajeCbu] = useState(null);
+  // const [mensajeDni, setMensajeDni] = useState(null);
+
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
       setErrorButton(false);
@@ -68,6 +89,8 @@ const AddEmployee = () => {
   }, [errors]);
 
   useEffect(() => {}, []);
+
+
 
   const handleInput = (event) => {
     setEmployee({
@@ -102,6 +125,107 @@ const AddEmployee = () => {
       image: url,
     });
   };
+
+
+  const handleBlur = (event) => {
+    // const { value, name } = event.target;
+    // setAllBack({
+    //     ...employee,
+    //     [event.target.name]: event.target.value,
+    // });
+    
+    if (event.target.name === "email") {
+      const valor = event.target.value;
+        dispatch(getUsersEmail(currentCompanyId, valor)).then(resultado => {
+          console.log("CORREO", valor);
+          console.log("company ID", currentCompanyId);
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } 
+        else {
+          setAllBack(null);
+        }
+        console.log("Valor", valor);
+        console.log("Mensaje: ", resultado?.message)
+      });      
+    }
+    if (event.target.name === "cuil") {
+      const valor = event.target.value;
+        dispatch(getUsersCuil(currentCompanyId, valor)).then(resultado => {
+          console.log("CUIL", valor);
+          console.log("company ID", currentCompanyId);
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } 
+        else {
+          setAllBack(null);
+        }
+        console.log("Valor", valor);
+        console.log("Mensaje: ", resultado?.message)
+      });      
+    }
+    if (event.target.name === "cbu") {
+      const valor = event.target.value;
+        dispatch(getUsersCbu(currentCompanyId, valor)).then(resultado => {
+          console.log("CBU", valor);
+          console.log("company ID", currentCompanyId);
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } 
+        else {
+          setAllBack(null);
+        }
+        console.log("Valor", valor);
+        console.log("Mensaje: ", resultado?.message)
+      });      
+    }
+    if (event.target.name === "dni") {
+      const valor = event.target.value;
+        dispatch(getUsersDni(currentCompanyId, valor)).then(resultado => {
+          console.log("CUIL", valor);
+          console.log("company ID", currentCompanyId);
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } 
+        else {
+          setAllBack(null);
+        }
+        console.log("Valor", valor);
+        console.log("Mensaje: ", resultado?.message)
+      });      
+    }
+    if (event.target.name === "tel") {
+      const valor = event.target.value;
+        dispatch(getUsersTel(currentCompanyId, valor)).then(resultado => {
+          console.log("CUIL", valor);
+          console.log("company ID", currentCompanyId);
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } 
+        else {
+          setAllBack(null);
+        }
+        console.log("Valor", valor);
+        console.log("Mensaje: ", resultado?.message)
+      });      
+    }
+  }
+
 
   const handleSelect = (e) => {
     const { value, name } = e.target;
@@ -205,9 +329,13 @@ ssm:py-16"
               handleChangeImage={handleChangeImage}
               positionsNum={positionsNum}
               areasNum={areasNum}
-              
+              companiId={currentCompanyId}
+              handleBlur={handleBlur}
+              back={back}
             />
+            {/* {mensajeEmail && <p>{mensajeEmail.email}</p>} */}
           </div>
+            {/* <p>{back.email}</p> */}
         </div>
       </div>
     </div>
