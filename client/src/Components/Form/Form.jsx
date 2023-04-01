@@ -196,7 +196,6 @@ const Form = ({
             value={users.CompanyId}
             handler={handleInput}
             id="CompanyId"
-
           />
           <div className="flex flex-row w-60">
             <UploadImage handleChangeImage={handleChangeImage} />

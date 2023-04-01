@@ -44,6 +44,9 @@ function validate(input) {
   }
   if (!input.email) {
     errors.email = "Campo necesario";
+  }
+  if(!input.image){
+    errors.image = "Campo necesario";
   } else if (
     !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
       input.email
@@ -81,6 +84,7 @@ export default function CreateCompany(props) {
     numberEmployees: "",
     tel: "",
     email: "",
+    image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg"
   });
 
 
@@ -162,7 +166,8 @@ export default function CreateCompany(props) {
       !input.numberEmployees ||
       !input.email ||
       !input.tel ||
-      !input.location
+      !input.location ||
+      !input.image
     ) {
       return alert("Complete correctamente el formulario antes de enviarlo");
     }
@@ -195,8 +200,9 @@ export default function CreateCompany(props) {
       industry: "",
       numberEmployees: "",
       email: "",
-      location: "",
-      tel: "",
+      location:"",
+      tel:"",
+      image:"https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
     });
     setFormSubmitted(true);
     // history("/home")
@@ -400,8 +406,32 @@ export default function CreateCompany(props) {
                   {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
                    {console.log("Mensaje en section:", mensajeEmail)}
                 </div>
-              </div>
-              <div>
+                <div>
+                  <label
+                    htmlFor="Email"
+                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="image"
+                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Image"
+                    value={input.image}
+                    name="image"
+                    onChange={(e) => handleChange(e)}
+                    onBlur={(event)=> handleBlurEmail(event)}
+                  />
+                  {errors.image && (
+                    <section className="m-0  text-red-600">
+                      {errors.image}
+                    </section>
+                  )}
+                  {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
+                   {console.log("Mensaje en section:", mensajeEmail)}
+                </div>
+                </div>
+                <div>
                 <CardElement id="payment-element" />
               </div>
               <div>
@@ -419,19 +449,14 @@ export default function CreateCompany(props) {
                 {message && <div className="mb-4">{message}</div>}
               </div>
             </form>
-            <div>
-              {formSubmitted && (
-                <button>
-                  <Link
-                    to="/addFirstEmployee"
-                    className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  >
-                    {" "}
-                    Registre a su administrador
-                  </Link>
-                </button>
-              )}
-            </div>
+            <div>{formSubmitted && <button>
+              {/* <Link to="/addFirstEmployee" className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Registre a su administrador
+                </Link> */}
+                <Link to="/addAreaPositionSA" className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Registre a su administrador
+                </Link>
+                </button>}</div>
           </div>
         </div>
       </div>
