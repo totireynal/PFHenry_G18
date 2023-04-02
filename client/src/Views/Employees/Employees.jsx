@@ -101,9 +101,9 @@ const Employees = () => {
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
     dispatch(getEmployees());
-    dispatch(getAreas());
+    // dispatch(getAreas());
     dispatch(getRoles());
-    dispatch(getPositions());
+    // dispatch(getPositions());
     handleReset();
   };
   

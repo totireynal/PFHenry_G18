@@ -92,13 +92,12 @@ export const getEmployees = (filters, showAnswer, idCompany) => {
     if (idCompany !== undefined) {
       axios.get(addUrlQueries(filters, url)).then(
         (response) => {
-          showAnswer("");
+          // showAnswer("");
           console.log("resp-->", response.data);
           return dispatch({ type: GET_EMPLOYEES, payload: response.data });
         },
         (error) => {
-          showAnswer(error.response.data.error.error);
-          console.log("resp-err->", error.response.data.error.error);
+          console.error(error.response.data.error.error);
         }
       );
     }

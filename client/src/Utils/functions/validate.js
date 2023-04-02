@@ -8,15 +8,11 @@ const regex = {
 const validate = (values) => {
   const errors = {};
 
-  // if (!values.image.length) errors.image = 'No ha ingresado ningun caracter';
-  // if (!regex.image.test(values.image)) errors.image = "No es un url apropiado";
-  // console.log(values);
   if (values.role === "default") errors.role = "You must choose a role";
-  if (!values.name.length) errors.name = "No ha ingresado ningun caracter";
+  if (!values.name.length) errors.name = "You have not entered any characters";
   if (!values.lastName.length)
     errors.lastName = "Last name can't be empty";
   if (!values.cuil.length) errors.cuil = "Cuil can't be empty";
-  // if (!values.cuil.length) errors.cuil = "No ha ingresado ningun caracter";
   if (!values.cbu.length) errors.cbu = "Cbu can't be empty";
   if (!values.address.length)
     errors.address = "Address can't be empty";
@@ -31,8 +27,6 @@ const validate = (values) => {
   if (!values.dni.length) errors.dni = "Dni can't be empty";
   if (values.dni.length > 9) errors.dni = "Dni can't be greater than 9 characters";
   if (values.tel.length > 13) errors.tel = "Phone can't be greater than 13 characters";
-  // if (!regex.date.test(values.dateOfAdmission)) errors.dateOfAdmission = 'Esto no es una fecha'
-  // if (!regex.date.test(values.birthDate)) errors.birthDate = 'Esto no es una fecha'
   if (!values.email.length) errors.email = "Email can't be empy";
   if (!regex.email.test(values.email)) errors.email = "Email invalid, please try again";
 
