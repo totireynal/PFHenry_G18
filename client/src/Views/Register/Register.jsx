@@ -54,9 +54,13 @@ export default function CreateCompany(props) {
   const [mensajeName, setMensajeName] = useState(null);
   const [mensajeEmail, setMensajeEmail] = useState(null);
   const [mensajeTel, setMensajeTel] = useState(null);
+  
 
 
   const [message, setMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
   const [isProcessing, setIsProcessing] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
  
@@ -181,23 +185,20 @@ export default function CreateCompany(props) {
     },
   )
   if(error){
-    setMessage(error.message);
+    setErrorMessage("Your card was declined.");
+    setSuccessMessage(null);
     } else if(paymentIntent)
     {
       console.log(paymentIntent)
-    setMessage("Payment status: succeeded!")
-    
+      setSuccessMessage("Payment status: succeeded!")
+      setErrorMessage(null);
     } else {
     setMessage("Unexpected state");
     }
 
   setIsProcessing(false);
 
- 
-
-    console.log("Input pasado a post: ",input)
-    dispatch(postCompany(input));
-    console.log(input);
+    paymentIntent?dispatch(postCompany(input)):
     setInput({
       name: "",
       cuit: "",
@@ -386,7 +387,7 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                   {mensajeTel && <section className="m-0  text-red-600">{mensajeTel}</section>}
-                   {console.log("Mensaje en section:", mensajeTel)}
+                  {console.log("Mensaje en section:", mensajeTel)}
                 </div>
                 <div>
                   <label
@@ -410,7 +411,7 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                   {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
-                   {console.log("Mensaje en section:", mensajeEmail)}
+                  {console.log("Mensaje en section:", mensajeEmail)}
                 </div>
                 <div>
                   <div className="flex flex-row w-60">
@@ -421,29 +422,6 @@ export default function CreateCompany(props) {
                     className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
                     />
                 </div>
-                  {/* <label
-                    htmlFor="Email"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
-                    Image <span className="text-xs text-red-400">(*)</span>
-                  </label>
-                  <input
-                    type="image"
-                    alt="image"
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Image"
-                    value={input.image}
-                    name="image"
-                    onChange={(e) => handleChange(e)}
-                    onBlur={(event)=> handleBlurEmail(event)}
-                  />
-                  {errors.image && (
-                    <section className="m-0  text-red-600">
-                      {errors.image}
-                    </section>
-                  )}
-                  {/* {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
-                   {console.log("Mensaje en section:", mensajeEmail)} */} 
                 </div>
                 </div>
                 <div>
@@ -467,19 +445,30 @@ export default function CreateCompany(props) {
                     {isProcessing ? "Processing ... " : "Register and pay now"}
                     </span>
                 </button>
-                 {/* Show any error or success messages */}
-                 {/* {message && <div className="mb-4">{message}</div>} */}
               </div>
             </form>
             <div>
-              { message && formSubmitted &&
+              { successMessage  && formSubmitted &&
                <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
                <div className="bg-white p-8 rounded-lg">
-                 <h2 className="text-xl font-bold mb-4">{message} Thank you for trusting us  🎉</h2>
+                 <h2 className="text-xl font-bold mb-4">{successMessage} Thank you for trusting us  🎉</h2>
                  <p className="mb-4">We need some additional data to complete the process</p>
                  <div className="flex justify-end">
                    
                    <Link to="/addAreaPositionSA" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
+                 </div>
+               </div>
+             </div>
+          }
+          {
+            errorMessage &&
+            <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+               <div className="bg-white p-8 rounded-lg">
+                 <h2 className="text-xl font-bold mb-4">{errorMessage}</h2>
+                 <p className="mb-4">Please try again</p>
+                 <div className="flex justify-end">
+                   
+                   <Link to="/" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
                  </div>
                </div>
              </div>

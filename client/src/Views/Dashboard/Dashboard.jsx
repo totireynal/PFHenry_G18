@@ -1,7 +1,9 @@
+import EmployeeList from "../../Components/Birthday/Birthday.js"
+
 const Dashboarts = () => {
   return (
     <div className="w-full h-screen ml-72">
-      <span>View Dashboard</span>
+      <EmployeeList/>
     </div>
   );
 };

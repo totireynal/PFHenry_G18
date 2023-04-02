@@ -1,6 +1,5 @@
 import axios from "axios";
-import { LOG10E } from "mathjs";
-import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -41,6 +40,7 @@ import {
   POST_EVENTS,
   GET_EVENTS,
   PUT_EVENTS,
+  GET_BIRTHDAY,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -352,7 +352,7 @@ export const cleanUrl = () => {
 export const getCompaniesCuit = (cuit) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies?cuit=${cuit}`);
+      const response = await axios.get(`/companies/validate?cuit=${cuit}`);
       const result = response.data;
       return result;
     } catch (error) {
@@ -401,7 +401,7 @@ export const cleanArrayEmails = () => {
 export const getCompaniesName = (name) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies?name=${name}`);
+      const response = await axios.get(`/companies/validate?name=${name}`);
       const result = response.data;
       return result;
     } catch (error) {
@@ -413,7 +413,7 @@ export const getCompaniesName = (name) => {
 export const getCompaniesTel = (tel) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies?tel=${tel}`);
+      const response = await axios.get(`/companies/validate?tel=${tel}`);
       const result = response.data;
       return result;
     } catch (error) {
@@ -425,7 +425,7 @@ export const getCompaniesTel = (tel) => {
 export const getCompaniesEmail = (email) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies?email=${email}`);
+      const response = await axios.get(`/companies/validate?email=${email}`);
       const result = response.data;
       return result;
     } catch (error) {
@@ -677,4 +677,21 @@ export const putEvents = ( calendarEvent) => {
             }
           };
         };
+
+export const getBirthday = (CompanyId) => {
+  return async (dispatch) => {
+    try{
+      const response = await axios(
+        `http://localhost:3001/users/${CompanyId}/birthday`
+      );
+      const result = response.data;
+      return dispatch({
+        type: GET_BIRTHDAY,
+        payload: result,
+      });
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
 

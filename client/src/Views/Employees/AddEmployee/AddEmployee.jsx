@@ -7,10 +7,10 @@ import {
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
-import validate from "../../../utils/functions/validate";
-import { useBack } from "../../../utils/hooks/mensajeBack";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer";
+import validate from "../../../Utils/functions/validate";
+import { useBack } from "../../../Utils/hooks/mensajeBack";
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer";
 // import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
@@ -123,11 +123,6 @@ const AddEmployee = () => {
   };
 
   const handleBlur = (event) => {
-    // const { value, name } = event.target;
-    // setAllBack({
-    //     ...employee,
-    //     [event.target.name]: event.target.value,
-    // });
 
     if (event.target.name === "email") {
       const valor = event.target.value;
@@ -287,14 +282,6 @@ ssm:py-16"
           <span className="text-4xl text-sky-400">Add Employe</span>
         </div>
 
-        {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
-        {/* <Link to="/employees">
-            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  ">
-            BACK
-            </button>
-          </Link> */}
-        {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
-
         <div className="flex gap-16">
           <div className="">
             <Form
@@ -315,9 +302,7 @@ ssm:py-16"
               handleBlur={handleBlur}
               back={back}
             />
-            {/* {mensajeEmail && <p>{mensajeEmail.email}</p>} */}
           </div>
-          {/* <p>{back.email}</p> */}
         </div>
       </div>
     </div>

@@ -35,6 +35,7 @@ import {
   UPDATE_DELETED_EMPLOYEE,
   GET_EVENTS,
   PUT_EVENTS,
+  GET_BIRTHDAY
 } from "../action-types/index";
 
 const initialState = {
@@ -56,7 +57,8 @@ const initialState = {
   areasCrud: [],
   positionsCrud: [],
   deletedEmployees: [],
-  events: []
+  events: [],
+  birthday: []
 };
 console.log(initialState.ratings);
 
@@ -231,6 +233,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         positionsCrud: action.payload,
       };
+      case GET_BIRTHDAY:
+        return{
+          ...state,
+          birthday: action.payload
+        }
     default:
       return state;
   }

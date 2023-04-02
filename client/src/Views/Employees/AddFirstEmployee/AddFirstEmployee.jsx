@@ -21,7 +21,7 @@ const AddFirstEmployee = () => {
     
   }, [dispatch]);
 
-
+ 
   
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
@@ -57,7 +57,7 @@ const AddFirstEmployee = () => {
 
   const {
     answer,
-    //  showAnswer
+    showAnswer
   } = useAnswer();
 
   const [touched, setTouched] = useState({});
@@ -65,6 +65,12 @@ const AddFirstEmployee = () => {
   const [submited, setSubmited] = useState(false);
 
 
+  useEffect(() => {
+    if (Object.keys(errors).length === 0) {
+      setErrorButton(false);
+    }
+  }, [errors]);
+  
   useEffect(() => {}, []);
 
   const handleInput = (event) => {
@@ -107,13 +113,15 @@ const AddFirstEmployee = () => {
     setSubmited(true);
     dispatch(
       createEmployee(
-        employee
-        // , showAnswer
+        employee, 
+        showAnswer
       )
     );
-    setTimeout(() => {
+      setTimeout(() => {
       setSubmited(false);
-    }, 3000);
+      navigate("/")
+      }, 3000);
+     
     setErrorButton(true);
     setEmployee({
       name: "",
@@ -150,7 +158,7 @@ const AddFirstEmployee = () => {
       cbu: "",
       dateOfAdmission: "",
     });
-    navigate("/");
+    // navigate("/");
   };
   console.log(errors);
   return (
@@ -162,15 +170,6 @@ const AddFirstEmployee = () => {
         <div className="w-full text-center mb-14 font-bold">
           <span className="text-4xl text-sky-400">Add Employee</span>
         </div>
-
-        {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
-        {/* <Link to="/employees">
-            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  ">
-            BACK
-            </button>
-          </Link> */}
-        {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
-
         <div className="flex gap-16">
           <div>
             <FormFirstEmployee
