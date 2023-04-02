@@ -8,51 +8,38 @@ import { getCompaniesCuit } from "../../state/redux/actions/actions";
 import { getCompaniesEmail } from "../../state/redux/actions/actions";
 import { getCompaniesName } from "../../state/redux/actions/actions";
 import { getCompaniesTel } from "../../state/redux/actions/actions";
+import UploadImage from  "../../Components/Upload/UploadImage"
 
 
 
 function validate(input) {
   let errors = {};
-
-  if (!input.name) {
-    errors.name = "Campo necesario";
-  } else if (/[^A-Za-z0-9 ]+/g.test(input.name)) {
-    errors.name = "Nombre no puede tener caracteres especiales o tildes";
+  if(input.name === "name"){
+    if (/[^A-Za-z0-9 ]+/g.test(input.name)) {
+      errors.name = "Nombre no puede tener caracteres especiales o tildes";
+    }
   }
-  if (!input.cuit) {
-    errors.cuit = "Campo necesario";
-  } else if (
-    !/^(20|23|27|30|33)([0-9]{9}|-[0-9]{8}-[0-9]{1})$/g.test(input.cuit)
-  ) {
-    errors.cuit = "Ingrese un formato valido de CUIT";
+  if (input.cuit) {
+    if (
+      !/^(20|23|27|30|33)([0-9]{9}|-[0-9]{8}-[0-9]{1})$/g.test(input.cuit)
+    ) {
+      errors.cuit = "Ingrese un formato valido de CUIT";
+    }
   }
-  if (!input.industry) {
-    errors.industry = "Campo necesario";
-  } else if (/[^A-Za-z0-9 ]+/g.test(input.industry)) {
-    errors.industry = "Nombre no puede tener caracteres especiales o tildes";
+  if (input.industry) {
+    if (/[^A-Za-z0-9 ]+/g.test(input.industry)) {
+      errors.industry = "Nombre no puede tener caracteres especiales o tildes";
+    }
   }
-  if (!input.location) {
-    errors.location = "Campo necesario";
+  if (input.numberEmployees) {
+    if (!/^[0-9]+$/.test(input.numberEmployees)) {
+      errors.numberEmployees = "Ingrese formato numero";
+    }
   }
-  if (!input.numberEmployees) {
-    errors.numberEmployees = "Campo necesario";
-  } else if (!/^[0-9]+$/.test(input.numberEmployees)) {
-    errors.numberEmployees = "Ingrese formato numero";
-  }
-  if (!input.tel) {
-    errors.tel = "Campo necesario";
-  }
-  if (!input.email) {
-    errors.email = "Campo necesario";
-  }
-  if(!input.image){
-    errors.image = "Campo necesario";
-  } else if (
-    !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-      input.email
-    )
-  ) {
-    errors.email = "Ingrese un email valido";
+  if (input.email) {
+    if(!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(input.email)){
+      errors.email = "Ingrese un email valido";
+    }
   }
   return errors;
 }
@@ -61,7 +48,8 @@ export default function CreateCompany(props) {
   let clientSecret = props.options;
   const stripe = useStripe();
   const elements = useElements();
-
+  const [isCardComplete, setIsCardComplete] = useState(false);
+ 
   const [mensajeCuit, setMensajeCuit] = useState(null);
   const [mensajeName, setMensajeName] = useState(null);
   const [mensajeEmail, setMensajeEmail] = useState(null);
@@ -71,13 +59,13 @@ export default function CreateCompany(props) {
   const [message, setMessage] = useState(null)
   const [isProcessing, setIsProcessing] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+ 
 
   const dispatch = useDispatch();
-  const history = useNavigate();
+  
+
+
   const [errors, setErrors] = useState({});
-
-
-
   const [input, setInput] = useState({
     name: "",
     cuit: "",
@@ -147,6 +135,15 @@ export default function CreateCompany(props) {
       console.log("Mensaje: ", resultado?.message)
     });
   }
+
+  const handleChangeImage = (url) => {
+    setInput({
+      ...input,
+      image: url,
+    });
+    console.log(input.image)
+  };
+
   
   const handleSubmit = async (e)=> {
     e.preventDefault();
@@ -188,13 +185,16 @@ export default function CreateCompany(props) {
     } else if(paymentIntent)
     {
       console.log(paymentIntent)
-    setMessage("Payment status: succeeded Thank you! 🎉")
+    setMessage("Payment status: succeeded!")
     
     } else {
     setMessage("Unexpected state");
     }
 
   setIsProcessing(false);
+
+ 
+
     console.log("Input pasado a post: ",input)
     dispatch(postCompany(input));
     console.log(input);
@@ -209,21 +209,24 @@ export default function CreateCompany(props) {
       image:"https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
     });
     setFormSubmitted(true);
-    // history("/home")
   }
 
+  const handleCardChange = (event) => {
+    setIsCardComplete(event.complete);
+  };
   function handleChange(e) {
+    const {name, value} = e.target;
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [name]: value,
       InformationId:1
     });
     setErrors(
       validate({
         ...input,
-        [e.target.name]: e.target.value,
+        [name]: value,
       })
-    );
+     );
   }
 
   return (
@@ -235,9 +238,10 @@ export default function CreateCompany(props) {
       <div className="flex-1 flex flex-col py-14 px-4 sm:pax-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
           <div className="text-center lg:text-left">
-            <h2 className="mt-1 text-3x1 font-extrabold text-gray-900">
+            <h2 className="mt-1 text-3x1 font-extrabold text-gray-900 my-2">
               Register your company
             </h2>
+            <h6 className="text-xs text-red-400">(*) Campos necesarios</h6>
           </div>
           <div className="mt-6">
             <form
@@ -252,7 +256,7 @@ export default function CreateCompany(props) {
                     htmlFor="Name"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    Name
+                    Name <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="text"
@@ -276,7 +280,7 @@ export default function CreateCompany(props) {
                     htmlFor="ID"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    CUIT
+                    CUIT <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -302,7 +306,7 @@ export default function CreateCompany(props) {
                     htmlFor="Industry"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    Industry
+                    Industry <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                   className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -323,7 +327,7 @@ export default function CreateCompany(props) {
                     htmlFor="Location"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    Location
+                    Location <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="text"
@@ -344,7 +348,7 @@ export default function CreateCompany(props) {
                     htmlFor="numberEmployees"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    Number of employees
+                    Number of employees <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="number"
@@ -365,7 +369,7 @@ export default function CreateCompany(props) {
                     htmlFor="Tel"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    Phone
+                    Phone <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="number"
@@ -389,7 +393,7 @@ export default function CreateCompany(props) {
                     htmlFor="Email"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    Email
+                    Email <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="email"
@@ -409,11 +413,19 @@ export default function CreateCompany(props) {
                    {console.log("Mensaje en section:", mensajeEmail)}
                 </div>
                 <div>
-                  <label
+                  <div className="flex flex-row w-60">
+                    <UploadImage handleChangeImage={handleChangeImage} />
+                    <img
+                    src={input.image}
+                    alt="profilepic"
+                    className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
+                    />
+                </div>
+                  {/* <label
                     htmlFor="Email"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
                   >
-                    Email
+                    Image <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="image"
@@ -429,18 +441,24 @@ export default function CreateCompany(props) {
                       {errors.image}
                     </section>
                   )}
-                  {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
-                   {console.log("Mensaje en section:", mensajeEmail)}
+                  {/* {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
+                   {console.log("Mensaje en section:", mensajeEmail)} */} 
                 </div>
                 </div>
                 <div>
-                <CardElement id="payment-element" />
+                  <label
+                    htmlFor="Payment"
+                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
+                  >
+                    Payment <span className="text-xs text-red-400">(*)</span>
+                  </label>
+                  <CardElement id="payment-element"  onChange={handleCardChange}/>
                 </div>
               <div>
                 <button
                   type="submit"
                   className="m2-2 w-full py-3 bg-sky-700 text-white"
-                  disabled={isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees || mensajeCuit || mensajeName || mensajeEmail|| mensajeTel}
+                  disabled={!isCardComplete || isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees || mensajeCuit || mensajeName || mensajeEmail|| mensajeTel}
                 >
                   {" "}
                   
@@ -449,17 +467,26 @@ export default function CreateCompany(props) {
                     </span>
                 </button>
                  {/* Show any error or success messages */}
-                 {message && <div className="mb-4">{message}</div>}
+                 {/* {message && <div className="mb-4">{message}</div>} */}
               </div>
             </form>
-            <div>{formSubmitted && <button>
-              {/* <Link to="/addFirstEmployee" className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Registre a su administrador
-                </Link> */}
-                <Link to="/addAreaPositionSA" className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Registre a su administrador
-                </Link>
-                </button>}</div>
+            <div>
+              { message && formSubmitted &&
+               <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+               <div className="bg-white p-8 rounded-lg">
+                 <h2 className="text-xl font-bold mb-4">{message} Thank you for trusting us  🎉</h2>
+                 <p className="mb-4">We need some additional data to complete the process</p>
+                 <div className="flex justify-end">
+                   
+                   <Link to="/addAreaPositionSA" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
+                 </div>
+               </div>
+             </div>
+          }
+            
+            
+          
+                </div>
           </div>
         </div>
       </div>

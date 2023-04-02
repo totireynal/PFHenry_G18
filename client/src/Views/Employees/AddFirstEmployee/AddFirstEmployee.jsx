@@ -11,7 +11,7 @@ import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
 import validate from "../../../Utils/functions/validate";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
-import { Link } from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
 import {postPositionCrud, postAreaCrud} from "../../../state/redux/actions/actions";
 
@@ -20,8 +20,7 @@ const AddFirstEmployee = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getPositionsNum());
-    dispatch(getAreasNum());
+    
   }, [dispatch]);
 
   const positionsNum = useSelector((state) => state.positionsNum);
@@ -34,7 +33,8 @@ const AddFirstEmployee = () => {
 
     const companyId = useSelector((state) => state.newCompanyId);
     console.log("CompanyID: ", companyId)
-    // const areasNum = useSelector((state) => state.areasNum);
+  
+
     const [area, setArea] = useState({
       area: "",
     });
@@ -69,18 +69,14 @@ const AddFirstEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
-  // useEffect(() => {
-  //   if (dispatchCompleted) {
-  //     dispatch(createEmployee(employee, showAnswer));
-  //   }
-  // }, [dispatchCompleted, employee, dispatch, showAnswer]);
+
 
   useEffect(() => {}, []);
 
   const handleInput = (event) => {
     setEmployee({
       ...employee,
-      CompanyId: companyId,//aca va en realidad companyId
+      CompanyId: companyId,
       [event.target.name]: event.target.value,
     });
 
@@ -182,7 +178,6 @@ const AddFirstEmployee = () => {
             <FormFirstEmployee
               handleInput={handleInput}
               handleSubmit={handleSubmit}
-              // handleSelect = {handleSelect}
               touched={touched}
               errors={errors}
               users={employee}
