@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useState } from "react";
+
 import {
   postAreaCrud,
   postPositionCrud
@@ -10,12 +11,16 @@ import {
 
 const AreaPositionFirstEmployee = () => {
   const dispatch = useDispatch();
+
+  const companyId = useSelector((state) => state.newCompanyId);
   
   const [area, setArea] = useState({
     area: "",
+    CompanyId: ""
   });
   const [position, setPosition] = useState({
     position: "",
+    CompanyId: ""
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -23,6 +28,7 @@ const AreaPositionFirstEmployee = () => {
   const handleChangeArea = (event) => {
     setArea({
       ...area,
+      CompanyId: companyId,
       [event.target.name]: event.target.value,
     });
   };
@@ -30,6 +36,7 @@ const AreaPositionFirstEmployee = () => {
   const handleChangePosition = (event) => {
     setPosition({
       ...position,
+      CompanyId: companyId,
       [event.target.name]: event.target.value,
     });
   };
