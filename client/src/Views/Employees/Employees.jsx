@@ -4,15 +4,15 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import Employee from "./Employee/Employee";
 import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
-import SideBar from "../../Components/SideBar/SideBar";
+// import SideBar from "../../Components/SideBar/SideBar";
 import {
   cleanUrl,
-  getAreas,
+  // getAreas,
   getArrayEmails,
   getEmployees,
   getFilter,
-  getPositions,
-  getRoles,
+  // getPositions,
+  // getRoles,
   getDeletedEmployees,
 } from "../../state/redux/actions/actions";
 import Sort from "../../Components/Sort/Sort";
@@ -21,6 +21,7 @@ import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
 import { useAnswer } from "../../utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
 import { RiMailAddLine } from "react-icons/ri";
 import { SiMinutemailer } from "react-icons/si";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -31,7 +32,7 @@ const Employees = () => {
 
   const currentEmployee = useSelector((state) => state.currentEmployee);
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
-  
+
   // const { CompanyId } = useParams()
   // console.log('monta employees-->', CompanyId);
 
@@ -40,7 +41,7 @@ const Employees = () => {
 
   const dispatch = useDispatch();
 
-  const [emailMode, setEmailMode] = useState(false)
+  const [emailMode, setEmailMode] = useState(false);
 
   const [emailsSelection, setEmailSelection] = useState([]);
 
@@ -84,27 +85,26 @@ const Employees = () => {
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
   useEffect(() => {
-    // setIsLoading(true);  
-    dispatch(getEmployees(undefined, undefined, CompanyId))
-    console.log("effect-->", CompanyId);
-      // .then(() => setIsLoading(false));
-    return handleRefresh()
+    // setIsLoading(true);
+    dispatch(getEmployees(undefined, undefined, CompanyId));
+    // .then(() => setIsLoading(false));
+    // return handleRefreshTwo();
   }, [CompanyId]);
-  
-  
+
   useEffect(() => {
-    // setIsLoading(true);  
-    dispatch(getFilter(arrContentFilters, CompanyId, showAnswer))
-    dispatch(getDeletedEmployees(undefined, showAnswer,CompanyId))
+    // setIsLoading(true);
+    dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
+    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
     // .then(() => setIsLoading(false));
   }, [arrContentFilters, CompanyId]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
     dispatch(getEmployees());
-    dispatch(getAreas());
-    dispatch(getRoles());
-    dispatch(getPositions());
+    // dispatch(getAreas());
+    // dispatch(getRoles());
+    // dispatch(getPositions());
     handleReset();
     setEmailSelection([])
   };
@@ -159,6 +159,11 @@ const Employees = () => {
                   <AiOutlinePlus size={20} />
                 </button>
               </Link>
+              <Link to={"/addareaposition/"}>
+                <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+                  <AiOutlineEdit size={20} />
+                </button>
+              </Link>
               <button
                 onClick={() => {
                   setEmailsUnselect(!emailsUnselect);
@@ -195,6 +200,11 @@ const Employees = () => {
               <Link to={"/addemployee/"}>
                 <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden">
                   <AiOutlinePlus size={20} />
+                </button>
+              </Link>
+              <Link to={"/addareaposition/"}>
+                <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+                  <AiOutlineEdit size={20} />
                 </button>
               </Link>
               <button

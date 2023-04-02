@@ -1,4 +1,4 @@
-import { contentFilters, sortEmployeeName} from '../../state/redux/actions/actions'
+import { contentFilters } from '../../state/redux/actions/actions'
 import { useDispatch } from "react-redux";
 
 

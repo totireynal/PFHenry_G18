@@ -1,7 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-
 import { GrFormClose } from "react-icons/gr";
 import { AiFillStar } from "react-icons/ai";
 import { useRef, useState } from "react";
@@ -123,9 +122,9 @@ const MyProfileSuperAdmin = () => {
           ref={refQualify}
           className="absolute bg-white h-1/4 flex-1 m-2 rounded-md flex flex-col justify-between items-center p-5 transition-all duration-500 opacity-1 w-[90%]"
         >
-          Nos encantaria que pudieras calificar nuestra app, y asi poder ofrecer
-          un mejor servicio para nuestros clientes, tu opinion y cada critica
-          constructiva, valen mucho.
+          We would love for you to rate our app, so that we can provide a better
+          service for our customers. Your opinion and every constructive
+          critique are very valuable to us
           <button
             onClick={qualifying}
             className="py-2 px-5 bg-sky-400 hover:bg-sky-300 active:shadow-lg active:translate-y-1 rounded "

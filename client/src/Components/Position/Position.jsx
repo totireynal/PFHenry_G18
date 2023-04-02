@@ -1,7 +1,11 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import { useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { contentFilters, getAreas, getAreasEmployees, getEmployees, getPositions, getPositionsEmployees } from '../../state/redux/actions/actions';
+import { contentFilters, 
+  // getAreas, getAreasEmployees, 
+  getEmployees, getPositions, 
+  // getPositionsEmployees 
+} from '../../state/redux/actions/actions';
 
 
 
@@ -13,7 +17,7 @@ const Position = ({ selectedOption, handleSelectChange, CompanyId }) => {
   useEffect(() => {
     dispatch(getEmployees(arrContentFilters, undefined, CompanyId));
     dispatch(getPositions(arrContentFilters, CompanyId));
-  }, [arrContentFilters, dispatch]);
+  }, [arrContentFilters, dispatch, CompanyId]);
 
   const handleChange = (event) => {
     const position = event.target.value;

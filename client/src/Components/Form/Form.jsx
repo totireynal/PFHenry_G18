@@ -1,14 +1,21 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAreasNum,
-  getPositionsNum,
-} from "../../state/redux/actions/actions";
+// import { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import {
+//   getAreasNum,
+//   getPositionsNum,
+// } from "../../state/redux/actions/actions";
 import InputForm from "../InputForm";
 import SelectForm from "../SelectForm/SelectForm";
 import UploadImage from "../Upload/UploadImage";
-import { RiAlertFill } from "react-icons/ri";
+// import { RiAlertFill } from "react-icons/ri";
 import SelectFormSec from "../SelectFormSec/SelectFormSec";
+// import {
+//   getUsersTel,
+//   getUsersEmail,
+//   getUsersCuil,
+//   getUsersCbu,
+//   getUsersDni
+// } from "../../state/redux/actions/actions"
 
 const Form = ({
   handleInput,
@@ -23,7 +30,9 @@ const Form = ({
   answer,
   handleChangeImage,
   positionsNum,
-  areasNum
+  areasNum,
+  handleBlur,
+  back,
 }) => {
   //   const dispatch = useDispatch();
 
@@ -31,6 +40,80 @@ const Form = ({
   // dispatch(getPositionsNum())
   // dispatch(getAreasNum())
   //   }, [dispatch])
+
+  // const dispatch = useDispatch();
+  // const [mensajeTel, setMensajeTel] = useState(null);
+  // const [mensajeEmail, setMensajeEmail] = useState(null);
+  // const [mensajeCuil, setMensajeCuil] = useState(null);
+  // const [mensajeCbu, setMensajeCbu] = useState(null);
+  // const [mensajeDni, setMensajeDni] = useState(null);
+
+  // const handleBlurTel = (event) => {
+  //   const valor = event.target.value;
+  //     dispatch(getUsersTel(valor)).then(resultado => {
+  //     if (resultado?.message) {
+  //       setMensajeTel(resultado?.message);
+  //     } else {
+  //       setMensajeTel(null);
+  //     }
+  //     console.log("Valor", valor);
+  //     console.log("Mensaje: ", resultado?.message)
+  //   });
+  // }
+
+  // const handleBlurEmail = (event) => {
+  //   const valor = event.target.value;
+  //     dispatch(getUsersEmail(currentCompanyId, valor)).then(resultado => {
+  //       console.log("CORREO", valor);
+  //       console.log("company ID", currentCompanyId);
+  //     if (resultado?.message) {
+  //       setMensajeEmail(resultado?.message);
+  //     } else {
+  //       setMensajeEmail(null);
+  //     }
+  //     console.log("Valor", valor);
+  //     console.log("Mensaje: ", resultado?.message)
+  //   });
+  // }
+
+  // const handleBlurCuil = (event) => {
+  //   const valor = event.target.value;
+  //   dispatch(getUsersCuil(valor)).then(resultado => {
+  //     if (resultado?.message) {
+  //       setMensajeCuil(resultado?.message);
+  //     } else {
+  //       setMensajeCuil(null);
+  //     }
+  //     console.log("Valor", valor);
+  //     console.log("Mensaje: ", resultado?.message)
+  //   });
+  // }
+
+  // const handleBlurCbu = (event) => {
+  //   const valor = event.target.value;
+  //   dispatch(getUsersCbu(valor)).then(resultado => {
+  //     if (resultado?.message) {
+  //       setMensajeCbu(resultado?.message);
+  //     } else {
+  //       setMensajeCbu(null);
+  //     }
+  //     console.log("Valor", valor);
+  //     console.log("Mensaje: ", resultado?.message)
+  //   });
+  // }
+
+  // const handleBlurDni = (event) => {
+  //   const valor = event.target.value;
+  //     dispatch(getUsersDni(valor)).then(resultado => {
+  //     if (resultado?.message) {
+  //       setMensajeDni(resultado?.message);
+  //     } else {
+  //       setMensajeDni(null);
+  //     }
+  //     console.log("Valor", valor);
+  //     console.log("Mensaje: ", resultado?.message)
+  //   });
+  // }
 
   return (
     <form
@@ -75,6 +158,7 @@ const Form = ({
             error={errors.birthDate}
           />
 
+          {/* {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>} */}
           <InputForm
             label="Email"
             placeholder="Email"
@@ -85,8 +169,11 @@ const Form = ({
             handler={handleInput}
             id="email"
             error={errors.email}
+            onBlur={handleBlur}
+            back={back.email}
           />
 
+          {/* {mensajeCuil && <section className="m-0  text-red-600">{mensajeCuil}</section>} */}
           <InputForm
             label="Cuil"
             placeholder="Cuil"
@@ -97,9 +184,12 @@ const Form = ({
             handler={handleInput}
             id="cuil"
             error={errors.cuil}
+            onBlur={handleBlur}
+            back={back.cuil}
           />
         </div>
         <div className="w-full">
+          {/* {mensajeCbu && <section className="m-0  text-red-600">{mensajeCbu}</section>} */}
           <InputForm
             label="CBU"
             placeholder="CBU"
@@ -110,6 +200,8 @@ const Form = ({
             handler={handleInput}
             id="cbu"
             error={errors.cbu}
+            onBlur={handleBlur}
+            back={back.cbu}
           />
 
           <SelectForm
@@ -145,6 +237,7 @@ const Form = ({
           />
         </div>
         <div className="w-full">
+          {/* {mensajeDni && <section className="m-0  text-red-600">{mensajeDni}</section>} */}
           <InputForm
             label="DNI"
             placeholder="DNI"
@@ -155,7 +248,11 @@ const Form = ({
             handler={handleInput}
             id="dni"
             error={errors.dni}
+            onBlur={handleBlur}
+            back={back.dni}
           />
+
+          {/* {mensajeTel && <section className="m-0  text-red-600">{mensajeTel}</section>} */}
           <InputForm
             label="Phone"
             placeholder="Phone"
@@ -166,6 +263,8 @@ const Form = ({
             handler={handleInput}
             id="tel"
             error={errors.tel}
+            onBlur={handleBlur}
+            back={back.tel}
           />
 
           <InputForm
@@ -190,13 +289,12 @@ const Form = ({
             id="dateOfAdmission"
             error={errors.dateOfAdmission}
           />
-           <InputForm
+          <InputForm
             type="hidden"
             name="CompanyId"
             value={users.CompanyId}
             handler={handleInput}
             id="CompanyId"
-
           />
           <div className="flex flex-row w-60">
             <UploadImage handleChangeImage={handleChangeImage} />

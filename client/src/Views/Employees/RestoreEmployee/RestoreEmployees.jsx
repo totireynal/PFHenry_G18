@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import DeletedEmployee from "../Employee/DeletedEmployee";
 import SearchBar from "./../SearchBar/SearchBar";
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   cleanUrl,
   getAreas,
-  getArrayEmails,
+  // getArrayEmails,
   getDeletedEmployees,
   getFilter,
   getPositions,
@@ -24,44 +24,47 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { FaEllipsisH } from "react-icons/fa";
 
 const RestoreEmployees = () => {
-
   const users = useSelector((state) => state.deletedEmployees);
   console.log("segunda", users);
 
   const currentEmployee = useSelector((state) => state.currentEmployee);
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
-  
-  // const { CompanyId } = useParams()
-  console.log('monta employees-->', CompanyId);
 
-  const navigate = useNavigate();
-  const { answer, showAnswer } = useAnswer();
+  // const { CompanyId } = useParams()
+  console.log("monta employees-->", CompanyId);
+
+  // const navigate = useNavigate();
+  const {
+    answer,
+    showAnswer,
+  } = useAnswer();
 
   const dispatch = useDispatch();
 
   const [deletes, setDeletes] = useState(users);
-  console.log(users, 'decimee');
+  console.log(users, "decimee");
 
-  const fn = (id) => setDeletes(del => {
-    const filter = del?.filter(e => e.id !== id)
-      return filter
-  })
-//   const catchEmails = (email, checked) => {
-//     setEmailSelection((emails) => {
-//       if (checked) {
-//         return [...emails, email];
-//       } else {
-//         return emails.filter((e) => e !== email);
-//       }
-//     });
-//   };
+  const fn = (id) =>
+    setDeletes((del) => {
+      const filter = del?.filter((e) => e.id !== id);
+      return filter;
+    });
+  //   const catchEmails = (email, checked) => {
+  //     setEmailSelection((emails) => {
+  //       if (checked) {
+  //         return [...emails, email];
+  //       } else {
+  //         return emails.filter((e) => e !== email);
+  //       }
+  //     });
+  //   };
 
-//   const [emailsUnselect, setEmailsUnselect] = useState(false);
+  //   const [emailsUnselect, setEmailsUnselect] = useState(false);
 
-//   const sendEmails = () => {
-//     dispatch(getArrayEmails(emailsSelection));
-//     navigate("/notifications");
-//   };
+  //   const sendEmails = () => {
+  //     dispatch(getArrayEmails(emailsSelection));
+  //     navigate("/notifications");
+  //   };
 
   const [selectedOption, setSelectedOption] = useState({
     area: "default",
@@ -85,14 +88,12 @@ const RestoreEmployees = () => {
 
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
+  useEffect(() => {
+    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+  }, [dispatch, CompanyId, deletes, showAnswer]);
 
   useEffect(() => {
-    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId))
-  }, [dispatch, CompanyId, deletes]);
-  
-  
-  useEffect(() => {
-    dispatch(getFilter(arrContentFilters, CompanyId))
+    dispatch(getFilter(arrContentFilters, CompanyId));
   }, [dispatch, arrContentFilters, CompanyId]);
 
   const handleRefresh = (event) => {
@@ -221,7 +222,7 @@ const RestoreEmployees = () => {
               );
             })
           ) : (
-            <h3>{answer}</h3>
+            <h3>{answer ? answer : ''}</h3>
           )}
         </div>
       </div>

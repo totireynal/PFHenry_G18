@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { contentFilters, getEmployees } from "../../../state/redux/actions/actions";
-import { useAnswer } from "../../../utils/hooks/answer";
+import {
+  contentFilters,
+  getEmployees,
+} from "../../../state/redux/actions/actions";
+// import { useAnswer } from "../../../Utils/hooks/answer";
 
 const SearchBar = ({ answer, showAnswer, handleRefresh }) => {
   const [input, setInput] = useState("");
   let dispatch = useDispatch();
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
-  const allEmployees = useSelector((state) => state.allEmployees);
+  // const allEmployees = useSelector((state) => state.allEmployees);
   // console.log(!!allEmployees, 'allll');
 
   // const { answer, showAnswer } = useAnswer();
@@ -34,17 +37,15 @@ const SearchBar = ({ answer, showAnswer, handleRefresh }) => {
     }
   }
 
-  console.log("Didi", answer);
-
   return (
     <>
       <div className="flex flex-col relative pb-2">
         <form
           onSubmit={onSubmit}
-          className="flex md:flex-row ssm:flex-col relative pl-2 justify-center items-center rounded-md md:border ssm:border-transparent md:border-sky-400 z-10  ssm:w-fit"
+          className="flex sm:flex-row ssm:flex-col relative pl-2 justify-center items-center rounded-md sm:border ssm:border-transparent sm:border-sky-400 z-10  ssm:w-fit"
         >
           <input
-            className="border-none w-30 md:w-30 ssm:bg-white p-1 md:text-start ssm:text-center outline-none text-base md:bg-slate-100"
+            className="border-none w-30 sm:w-30 ssm:bg-white p-1 sm:text-start ssm:text-center outline-none text-base sm:bg-slate-100"
             value={input}
             onChange={onChange}
             name="game"
@@ -53,14 +54,16 @@ const SearchBar = ({ answer, showAnswer, handleRefresh }) => {
           ></input>
           <button
             className="bg-sky-400
-shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden md:px-16 md:py-3 1 active:translate-y-1 active:shadow-2xl ssm:px-8 ssm:py-1"
+shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden sm:px-16 sm:py-3 1 active:translate-y-1 active:shadow-2xl ssm:px-8 ssm:py-1"
             type="submit"
           >
             Search
           </button>
         </form>
         <div>
-          <p className="text-xs text-red-400 absolute -bottom-2">{answer}</p>
+          <p className="text-xs text-red-400 absolute -bottom-2">
+            {answer ? answer : ""}
+          </p>
         </div>
       </div>
     </>

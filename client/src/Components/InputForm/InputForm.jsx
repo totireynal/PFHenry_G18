@@ -9,7 +9,9 @@ const InputeForm = ({
   placeholder,
   id,
   error,
-  touched
+  touched,
+  onBlur,
+  back
 }) => {
   
 const errorStyle = error && touched
@@ -23,6 +25,7 @@ const errorStyle = error && touched
           className={`${error && touched ? "text-red-400" : ''} text-base`}
           htmlFor={id}
           valid={error}
+          valide={back}
         >
           {label}
         </label>
@@ -37,6 +40,8 @@ const errorStyle = error && touched
           placeholder={placeholder}
           id={id}
           valid={error}
+          onBlur={onBlur}
+          valide={back}
         />
       </div>
       <div className="text-end">
@@ -46,6 +51,7 @@ const errorStyle = error && touched
           </i>
           {error}
         </p>
+        <p> {back}</p>
       </div>
     </div>
   );

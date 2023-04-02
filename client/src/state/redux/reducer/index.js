@@ -7,13 +7,13 @@ import {
   UPDATE_EMPLOYEE,
   GET_EMPLOYEE_DETAIL,
   DELETE_EMPLOYEE,
-  GET_AREAS_EMPLOYEES,
+  // GET_AREAS_EMPLOYEES,
   GET_AREAS,
-  GET_POSITIONS_EMPLOYEES,
+  // GET_POSITIONS_EMPLOYEES,
   GET_POSITIONS,
   GET_ROLES,
-  GET_ROL_EMPLOYEES,
-  SORT_EMPLOYEE_NAME,
+  // GET_ROL_EMPLOYEES,
+  // SORT_EMPLOYEE_NAME,
   CURRENT_EMPLOYEE,
   GET_FILTER,
   CONTENT_FILTERS,
@@ -21,9 +21,15 @@ import {
   GET_POSITIONS_NUM,
   GET_AREAS_NUM,
   GET_COMPANIES_CUIT,
-  ADD_RATING,
+  // ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
+  POST_CRUD_AREA,
+  GET_CRUD_AREAS,
+  POST_CRUD_POSITION,
+  GET_CRUD_POSITION,
+  UPDATE_CRUD_AREA,
+  UPDATE_CRUD_POSITION,
   GET_RATING,
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
@@ -33,7 +39,7 @@ import {
 
 const initialState = {
   allCompanies: [],
-  companies: [],
+  newCompanyId: {},
   company: {},
   employeeCreated: [],
   allEmployees: [],
@@ -47,6 +53,8 @@ const initialState = {
   arrContentFilters: {},
   ratings: [],
   emailsArray: [],
+  areasCrud: [],
+  positionsCrud: [],
   deletedEmployees: [],
   events: []
 };
@@ -62,7 +70,7 @@ function rootReducer(state = initialState, action) {
     case ADD_COMPANY:
       return {
         ...state,
-        companies: action.payload,
+        newCompanyId: action.payload.CompanyId,
       };
     case CREATE_EMPLOYEE:
       return {
@@ -192,9 +200,40 @@ function rootReducer(state = initialState, action) {
         ...state,
         events: action.payload
       }
+
+    case POST_CRUD_AREA:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case POST_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case GET_CRUD_AREAS:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case GET_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
+    case UPDATE_CRUD_AREA:
+      return {
+        ...state,
+        areasCrud: action.payload,
+      };
+    case UPDATE_CRUD_POSITION:
+      return {
+        ...state,
+        positionsCrud: action.payload,
+      };
     default:
       return state;
   }
 }
-
-export default rootReducer;
+  
+  export default rootReducer;

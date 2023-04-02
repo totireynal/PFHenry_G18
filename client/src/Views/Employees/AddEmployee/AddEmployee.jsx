@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import SideBar from "../../../Components/SideBar/SideBar";
+// import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import {
@@ -9,24 +8,31 @@ import {
 } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
 import validate from "../../../utils/functions/validate";
+import { useBack } from "../../../utils/hooks/mensajeBack";
 import { useErrors } from "../../../utils/hooks/errors";
 import { useAnswer } from "../../../utils/hooks/answer";
-import { Link } from "react-router-dom";
-import { useCookies } from 'react-cookie';
-import jwt_decode from 'jwt-decode';
+// import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import jwt_decode from "jwt-decode";
+import {
+  getUsersTel,
+  getUsersEmail,
+  getUsersCuil,
+  getUsersCbu,
+  getUsersDni,
+} from "../../../state/redux/actions/actions";
 
 const AddEmployee = () => {
-  const [cookies] = useCookies(['cookieBack']);
+  const [cookies] = useCookies(["cookieBack"]);
   const dispatch = useDispatch();
-  const decodedToken = cookies.cookieBack ? jwt_decode(cookies.cookieBack) : null;
+  const decodedToken = cookies.cookieBack
+    ? jwt_decode(cookies.cookieBack)
+    : null;
   const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
-  
-
 
   useEffect(() => {
     dispatch(getPositionsNum());
     dispatch(getAreasNum());
-
   }, [dispatch]);
 
   const positionsNum = useSelector((state) => state.positionsNum);
@@ -48,7 +54,7 @@ const AddEmployee = () => {
     cuil: "",
     cbu: "",
     dateOfAdmission: "",
-    CompanyId: ""
+    CompanyId: "",
   });
 
   const [errorButton, setErrorButton] = useState(true);
@@ -60,6 +66,19 @@ const AddEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
+
+  const { back, setAllBack } = useBack();
+
+  // const [mensajeEmail, setMensajeEmail] = useState({
+  //   email: "",
+  //   dni: "",
+  //   tel: "",
+  //   cuil: "",
+  //   cbu: "",
+  // });
+  // const [mensajeCuil, setMensajeCuil] = useState(null);
+  // const [mensajeCbu, setMensajeCbu] = useState(null);
+  // const [mensajeDni, setMensajeDni] = useState(null);
 
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
@@ -103,6 +122,94 @@ const AddEmployee = () => {
     });
   };
 
+  const handleBlur = (event) => {
+    // const { value, name } = event.target;
+    // setAllBack({
+    //     ...employee,
+    //     [event.target.name]: event.target.value,
+    // });
+
+    if (event.target.name === "email") {
+      const valor = event.target.value;
+      dispatch(getUsersEmail(currentCompanyId, valor)).then((resultado) => {
+        console.log("CORREO", valor);
+        console.log("company ID", currentCompanyId);
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+        console.log("Valor", valor);
+        console.log("Mensaje: ", resultado?.message);
+      });
+    }
+    if (event.target.name === "cuil") {
+      const valor = event.target.value;
+      dispatch(getUsersCuil(currentCompanyId, valor)).then((resultado) => {
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+      });
+    }
+    if (event.target.name === "cbu") {
+      const valor = event.target.value;
+      dispatch(getUsersCbu(currentCompanyId, valor)).then((resultado) => {
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+      });
+    }
+    if (event.target.name === "dni") {
+      const valor = event.target.value;
+      dispatch(getUsersDni(currentCompanyId, valor)).then((resultado) => {
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+      });
+    }
+    if (event.target.name === "tel") {
+      const valor = event.target.value;
+      dispatch(getUsersTel(currentCompanyId, valor)).then((resultado) => {
+        if (resultado?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: resultado.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+      });
+    }
+  };
+
   const handleSelect = (e) => {
     const { value, name } = e.target;
     if (name === "role") {
@@ -126,7 +233,6 @@ const AddEmployee = () => {
   };
 
   const handleSubmit = (event) => {
-    console.log(employee, "employeeeee");
     event.preventDefault();
     setSubmited(true);
     dispatch(createEmployee(employee, showAnswer));
@@ -150,7 +256,7 @@ const AddEmployee = () => {
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
-      CompanyId: ""
+      CompanyId: "",
     });
 
     setAllErrors({
@@ -205,9 +311,13 @@ ssm:py-16"
               handleChangeImage={handleChangeImage}
               positionsNum={positionsNum}
               areasNum={areasNum}
-              
+              companiId={currentCompanyId}
+              handleBlur={handleBlur}
+              back={back}
             />
+            {/* {mensajeEmail && <p>{mensajeEmail.email}</p>} */}
           </div>
+          {/* <p>{back.email}</p> */}
         </div>
       </div>
     </div>

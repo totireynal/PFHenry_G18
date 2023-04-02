@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { AiFillInstagram } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
-import ChatBot from "../../Components/ChatBot/ChatBot";
+// import ChatBot from "../../Components/ChatBot/ChatBot";
+import ButtonChatBot from "../../Components/ChatBot/ButtonChatBot/ButtonChatBot";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getRating } from "../../state/redux/actions/actions";
@@ -16,49 +17,19 @@ const Home = () => {
     "flex flex-col  justify-center items-center bg-white lg:h-screen ssm:h-auto ssm:py-10";
   const styleText = "text-center text-6xl font-black";
 
-    
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getRating())
-  }, [])   
-  
-  const clients = useSelector(state => state.ratings)
-  
+  const clients = useSelector((state) => state.ratings);
 
-  // const clients = [ 
-  //   {
-  //     id: 4,
-  //     name: "Juan",
-  //     image:
-  //       "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
-  //     rating: 5,
-  //     commentary:
-  //       "estuvo bien sdgsgfssdfsdfdsfdsfsdf asdf sad fasfsad f fs fasf dsa  fsdf sdfsd fsda fsdf asf",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Juan",
-  //     image:
-  //       "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
-  //     rating: 5,
-  //     commentary: "estuvo bien",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Juan",
-  //     image:
-  //       "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg?w=2000",
-  //     rating: 3,
-  //     commentary: "estuvo bien",
-  //   },
-  // ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getRating());
+  }, [dispatch]);
 
   const {
     loginWithRedirect,
-    loginWithPopup,
-    logout,
-    isAuthenticated,
-    getAccessTokenSilently,
+    // loginWithPopup,
+    // logout,
+    // isAuthenticated,
+    // getAccessTokenSilently,
   } = useAuth0();
 
   const handleLogin = async () => {
@@ -140,10 +111,12 @@ const Home = () => {
         <h2 className={`${styleText} py-10`}>Some of our clients</h2>
         <div className="max-w-[1200px] m-auto ">
           <div className="flex  justify-center items-start gap-10 h-auto flex-wrap">
-            { 
-              clients?.map(({ name, image, score, comment }) => {
+            {
+              clients?.map(({ name, image, score, comment }, i) => {
                 return (
-                  <div className="flex flex-col justify-center items-center border-sky-400 p-5 bg-white w-[300px] border-2 rounded-md">
+                  <div
+                    key={i} 
+                    className="flex flex-col justify-center items-center border-sky-400 p-5 bg-white w-[300px] border-2 rounded-md">
                     <h3 className="text-2xl pb-1">{name}</h3>
 
                     <div className="relative flex flex-col justify-center items-center">
@@ -156,11 +129,11 @@ const Home = () => {
                         <div className="flex">
                           {[...Array(score).fill(0)].map((start, i) => {
                             return (
-                              <label>
+                              <label 
+                                key={i}>
                                 <AiFillStar
                                   size={30}
-                                  className={`text-yellow-200 transition-all duration-200
-                            `}
+                                  className={`text-yellow-200 transition-all duration-200`}
                                 />
                               </label>
                             );
@@ -222,8 +195,8 @@ const Home = () => {
       </section>
 
       <section>
-        <div className="flex items-center justify-center">
-          <ChatBot />
+        <div>
+          <ButtonChatBot />
         </div>
       </section>
 
@@ -243,7 +216,6 @@ const Home = () => {
           </div>
 
           <div className="flex flex-col items-center justify-center w-1/3 text-lg">
-            <h5 className="">Send us a review</h5>
             <p>Link a un form para cargar.</p>
 
             <span>

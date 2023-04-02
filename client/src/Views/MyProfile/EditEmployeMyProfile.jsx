@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAreasNum, getPositionsNum, updateEmployee, getCurrentEmployee } from "../../state/redux/actions/actions";
+import {
+  getAreasNum,
+  getPositionsNum,
+  updateEmployee,
+  getCurrentEmployee,
+} from "../../state/redux/actions/actions";
 import validate from "../../utils/functions/validate";
-import Form from "../../Components/Form/Form";
+// import Form from "../../Components/Form/Form";
 import { useErrors } from "../../utils/hooks/errors";
-import { useAnswer } from "../../utils/hooks/answer"; 
-import { Link } from "react-router-dom";
-import SelectFormEdit from "../../Components/SelectFormEdit/SelectFormEdit";
+import { useAnswer } from "../../utils/hooks/answer";
+// import { Link } from "react-router-dom";
+// import SelectFormEdit from "../../Components/SelectFormEdit/SelectFormEdit";
 import FormEdit from "../../Components/FormEdit/FormEdit";
 
 const EditEmployeeMyProfile = () => {
@@ -15,20 +20,20 @@ const EditEmployeeMyProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-    useEffect(() => {
-      dispatch(getPositionsNum());
-      dispatch(getAreasNum());
-      return () => {
-        dispatch(getCurrentEmployee(id));
-      }
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getPositionsNum());
+    dispatch(getAreasNum());
+    return () => {
+      dispatch(getCurrentEmployee(id));
+    };
+  }, [dispatch, id]);
 
   const { errors, setAllErrors } = useErrors();
 
   const { answer, showAnswer } = useAnswer();
 
   const currentEmployee = useSelector((state) => state.employeeDetail);
-  console.log(currentEmployee, 'iiiiiii');
+  console.log(currentEmployee, "iiiiiii");
 
   const [touched, setTouched] = useState({
     name: false,
@@ -64,7 +69,6 @@ const EditEmployeeMyProfile = () => {
     cbu: `${currentEmployee.cbu}`,
     image: `${currentEmployee.image}`,
   });
-
 
   const handleInput = (e) => {
     const { value, name } = e.target;

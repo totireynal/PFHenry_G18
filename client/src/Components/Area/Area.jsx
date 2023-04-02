@@ -1,9 +1,11 @@
-import React from 'react';
-import {useState, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import { contentFilters, getAreas, getAreasEmployees, getEmployees, getPositions, getPositionsEmployees } from '../../state/redux/actions/actions';
-
-
+import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  contentFilters,
+  getAreas,
+  getEmployees,
+} from "../../state/redux/actions/actions";
 
 const Area = ({ selectedOption, handleSelectChange, CompanyId }) => {
   const dispatch = useDispatch();
@@ -13,12 +15,12 @@ const Area = ({ selectedOption, handleSelectChange, CompanyId }) => {
   useEffect(() => {
     dispatch(getEmployees(arrContentFilters, undefined, CompanyId));
     dispatch(getAreas(arrContentFilters, CompanyId));
-  }, [arrContentFilters, dispatch]);
+  }, [arrContentFilters, dispatch, CompanyId]);
 
   const handleChange = (event) => {
     const area = event.target.value;
     dispatch(contentFilters({ area: area }));
-    handleSelectChange({...selectedOption, area: area});
+    handleSelectChange({ ...selectedOption, area: area });
   };
 
   return (
@@ -29,7 +31,6 @@ const Area = ({ selectedOption, handleSelectChange, CompanyId }) => {
         className="border-2 border-gray-200 ml-2"
         name=""
         onChange={handleChange}
-        // defaultValue="default"
       >
         <option value="default" hidden>
           Select
