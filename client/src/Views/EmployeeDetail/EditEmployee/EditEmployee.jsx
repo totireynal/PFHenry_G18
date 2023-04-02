@@ -7,7 +7,7 @@ import {
   getPositionsNum,
   updateEmployee,
 } from "../../../state/redux/actions/actions";
-import validate from "../../../utils/functions/validate";
+import validate from "../../../Utils/functions/validate";
 import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../utils/hooks/errors";
 import { useAnswer } from "../../../utils/hooks/answer";
