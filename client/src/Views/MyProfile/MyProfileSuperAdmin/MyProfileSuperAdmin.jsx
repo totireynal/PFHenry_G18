@@ -1,7 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-
 import { GrFormClose } from "react-icons/gr";
 import { AiFillStar } from "react-icons/ai";
 import { useRef, useState } from "react";

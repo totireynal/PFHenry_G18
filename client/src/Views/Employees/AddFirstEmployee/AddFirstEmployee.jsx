@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import SideBar from "../../../Components/SideBar/SideBar";
+// import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import {
@@ -8,15 +8,12 @@ import {
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
-import validate from "../../../utils/functions/validate";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer";
-import { Link } from "react-router-dom";
+import validate from "../../../Utils/functions/validate";
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer";
+// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {
-  postPositionCrud,
-  postAreaCrud,
-} from "../../../state/redux/actions/actions";
+// import {postPositionCrud, postAreaCrud} from "../../../state/redux/actions/actions";
 
 const AddFirstEmployee = () => {
   const dispatch = useDispatch();
@@ -27,8 +24,8 @@ const AddFirstEmployee = () => {
     dispatch(getAreasNum());
   }, [dispatch]);
 
-  const positionsNum = useSelector((state) => state.positionsNum);
-  const areasNum = useSelector((state) => state.areasNum);
+  // const positionsNum = useSelector((state) => state.positionsNum);
+  // const areasNum = useSelector((state) => state.areasNum);
 
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
@@ -38,12 +35,12 @@ const AddFirstEmployee = () => {
   const companyId = useSelector((state) => state.newCompanyId);
   console.log("CompanyID: ", companyId);
   // const areasNum = useSelector((state) => state.areasNum);
-  const [area, setArea] = useState({
-    area: "",
-  });
-  const [position, setPosition] = useState({
-    position: "",
-  });
+  // const [area, setArea] = useState({
+  //   area: "",
+  // });
+  // const [position, setPosition] = useState({
+  //   position:"",
+  // })
 
   var [employee, setEmployee] = useState({
     name: "",
@@ -68,7 +65,10 @@ const AddFirstEmployee = () => {
 
   const { errors, setAllErrors } = useErrors();
 
-  const { answer, showAnswer } = useAnswer();
+  const {
+    answer,
+    //  showAnswer
+  } = useAnswer();
 
   const [touched, setTouched] = useState({});
 

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateDeletedEmployee,
@@ -16,7 +16,7 @@ const DeletedEmployee = (props) => {
   // console.log(check);
 
   const handleCheck = (e) => {
-    const { checked } = e.target;
+    // const { checked } = e.target;
     setCheck((ck) => !ck);
 
     props.catchEmails(props.email, check);

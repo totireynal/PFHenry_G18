@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import DeletedEmployee from "../Employee/DeletedEmployee";
 import SearchBar from "./../SearchBar/SearchBar";
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   cleanUrl,
   getAreas,
-  getArrayEmails,
+  // getArrayEmails,
   getDeletedEmployees,
   getFilter,
   getPositions,
@@ -16,10 +16,10 @@ import Sort from "../../../Components/Sort/Sort";
 import Position from "../../../Components/Position/Position";
 import Area from "../../../Components/Area/Area";
 import Rol from "../../../Components/Rol/Rol";
-import { useAnswer } from "../../../utils/hooks/answer";
-import { AiOutlinePlus } from "react-icons/ai";
-import { RiMailAddLine } from "react-icons/ri";
-import { SiMinutemailer } from "react-icons/si";
+import { useAnswer } from "../../../Utils/hooks/answer";
+// import { AiOutlinePlus } from "react-icons/ai";
+// import { RiMailAddLine } from "react-icons/ri";
+// import { SiMinutemailer } from "react-icons/si";
 
 const RestoreEmployees = () => {
   const users = useSelector((state) => state.deletedEmployees);
@@ -31,8 +31,11 @@ const RestoreEmployees = () => {
   // const { CompanyId } = useParams()
   console.log("monta employees-->", CompanyId);
 
-  const navigate = useNavigate();
-  const { answer, showAnswer } = useAnswer();
+  // const navigate = useNavigate();
+  const {
+    // answer,
+    showAnswer,
+  } = useAnswer();
 
   const dispatch = useDispatch();
 
@@ -85,7 +88,7 @@ const RestoreEmployees = () => {
 
   useEffect(() => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-  }, [dispatch, CompanyId, deletes]);
+  }, [dispatch, CompanyId, deletes, showAnswer]);
 
   useEffect(() => {
     dispatch(getFilter(arrContentFilters, CompanyId));

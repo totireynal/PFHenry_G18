@@ -36,8 +36,8 @@ const SelectFormEdit = ({
         <option value={userNum}>
           {userName}
         </option>
-        {optionQuantity?.map((pos) => (
-          <option value={pos.id}>{pos?.position || pos?.area}</option>
+        {optionQuantity?.map((pos, i) => (
+          <option key= {i} value={pos.id}>{pos?.position || pos?.area}</option>
         ))}
       </select>
       <div className="text-end">

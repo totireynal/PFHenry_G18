@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, 
+  // useSelector 
+} from "react-redux";
 import {
   postPositionCrud,
-  getPositionsCrud,
-  deletePositionCrud,
-  updatePositionCrud,
+  // getPositionsCrud,
+  // deletePositionCrud,
+  // updatePositionCrud,
 } from "../../../state/redux/actions/actions";
-import { GrFormEdit } from "react-icons/gr";
-import { GrFormClose } from "react-icons/gr";
+// import { GrFormEdit } from "react-icons/gr";
+// import { GrFormClose } from "react-icons/gr";
 
 const PositionFormFirstEmployee = () => {
   const dispatch = useDispatch();
 
-  const allPositions = useSelector((state) => state.positionsCrud);
+  // const allPositions = useSelector((state) => state.positionsCrud);
 
   const [position, setPosition] = useState({
     position: "",
