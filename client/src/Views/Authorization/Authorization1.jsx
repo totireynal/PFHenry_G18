@@ -1,8 +1,12 @@
 import { useCookies } from 'react-cookie';
-import { getCurrentEmployee } from '../../state/redux/actions/actions';
+import { getCurrentEmployee, 
+  // getEmployees 
+} from '../../state/redux/actions/actions';
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { 
+  // Link,
+   useNavigate } from 'react-router-dom';
 // import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 
@@ -27,6 +31,10 @@ const Authorizationone = () => {
       if (idCurrent) {
         dispatch(getCurrentEmployee(idCompany, idCurrent));
       }
+      // if (idCompanyCurrent) {
+      //   dispatch(getEmployees(undefined, undefined, idCompanyCurrent))
+      // }
+
     }, [dispatch, idCurrent, idCompany]);
 
 
