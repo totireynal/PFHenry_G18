@@ -1,5 +1,4 @@
 import axios from "axios";
-import { LOG10E } from "mathjs";
 import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
