@@ -604,3 +604,78 @@ export const updatePositionCrud = (id, position) => {
     }
   };
 };
+
+  export const getUsersTel = (companyId, tel) => {
+    return async function(dispatch) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/users/${companyId}/validate?tel=${tel}`
+        );
+        const result = response.data;
+        console.log("Respuesta: ", result);
+        return result;
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+  export const getUsersEmail = (companyId, email) => {
+    return async function(dispatch) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/users/${companyId}/validate?email=${email}`
+        );
+        const result = response.data;
+        console.log("RESP: ", result);
+        return result;
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+  export const getUsersCuil = (companyId, cuil) => {
+    return async function(dispatch) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/users/${companyId}/validate?cuil=${cuil}`
+        );
+        const result = response.data;
+        console.log("Respuesta: ", result);
+        return result;
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+  export const getUsersCbu = (companyId, cbu) => {
+    return async function(dispatch) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/users/${companyId}/validate?cbu=${cbu}`
+        );
+        const result = response.data;
+        console.log("Respuesta: ", result);
+        return result;
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
+
+  export const getUsersDni = (companyId, dni) => {
+    return async function(dispatch) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/users/${companyId}/validate?dni=${dni}`
+        );
+        const result = response.data;
+        console.log("Respuesta: ", result);
+        return result;
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
