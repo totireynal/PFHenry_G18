@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Link, useNavigate, useParams } from "react-router-dom";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Employee from "./Employee/Employee";
 import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +18,7 @@ import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
-import { useAnswer } from "../../utils/hooks/answer";
+import { useAnswer } from "../../Utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { RiMailAddLine } from "react-icons/ri";
@@ -89,7 +88,7 @@ const Employees = () => {
     dispatch(getEmployees(undefined, undefined, CompanyId));
     // .then(() => setIsLoading(false));
     // return handleRefreshTwo();
-  }, [CompanyId]);
+  }, [CompanyId, dispatch]);
 
   useEffect(() => {
     // setIsLoading(true);
@@ -97,7 +96,7 @@ const Employees = () => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
     // .then(() => setIsLoading(false));
-  }, [arrContentFilters, CompanyId]);
+  }, [arrContentFilters, CompanyId, showAnswer, dispatch]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
@@ -314,6 +313,8 @@ const Employees = () => {
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
           {users ? (
             users?.map((user, i) => {
+              console.log("USER-->",user);
+              if (user.role==="SuperAdmin") return ""
               return (
                 <Employee
                   key={i}

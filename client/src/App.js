@@ -37,7 +37,7 @@ import AreaPosition from "./Views/AreaPosition/AreaPosition";
 
 function App() {
 
-  const [theme, setTheme] = useState(false);
+  // const [theme, setTheme] = useState(false);
 
 
 
