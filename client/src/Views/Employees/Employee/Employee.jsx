@@ -7,7 +7,7 @@ const Employee = (props) => {
   // console.log(check);
 
   const handleCheck = (e) => {
-    const { checked } = e.target;
+    // const { checked } = e.target;
     setCheck(ck => !ck)
 
     props.catchEmails(props.email, check);

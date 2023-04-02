@@ -7,13 +7,13 @@ import {
   UPDATE_EMPLOYEE,
   GET_EMPLOYEE_DETAIL,
   DELETE_EMPLOYEE,
-  GET_AREAS_EMPLOYEES,
+  // GET_AREAS_EMPLOYEES,
   GET_AREAS,
-  GET_POSITIONS_EMPLOYEES,
+  // GET_POSITIONS_EMPLOYEES,
   GET_POSITIONS,
   GET_ROLES,
-  GET_ROL_EMPLOYEES,
-  SORT_EMPLOYEE_NAME,
+  // GET_ROL_EMPLOYEES,
+  // SORT_EMPLOYEE_NAME,
   CURRENT_EMPLOYEE,
   GET_FILTER,
   CONTENT_FILTERS,
@@ -21,7 +21,7 @@ import {
   GET_POSITIONS_NUM,
   GET_AREAS_NUM,
   GET_COMPANIES_CUIT,
-  ADD_RATING,
+  // ADD_RATING,
   GET_ARRAY_EMAILS,
   CLEAN_ARRAY_EMAILS,
   POST_CRUD_AREA,
@@ -33,6 +33,8 @@ import {
   GET_RATING,
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
+  GET_EVENTS,
+  PUT_EVENTS,
 } from "../action-types/index";
 
 const initialState = {
@@ -54,7 +56,9 @@ const initialState = {
   areasCrud: [],
   positionsCrud: [],
   deletedEmployees: [],
+  events: []
 };
+console.log(initialState.ratings);
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -169,7 +173,7 @@ function rootReducer(state = initialState, action) {
     case GET_RATING:
       return {
         ...state,
-        ratings: [...state.ratings, ...action.payload],
+        ratings: action.payload,
       };
     case GET_ARRAY_EMAILS:
       return {
@@ -181,6 +185,22 @@ function rootReducer(state = initialState, action) {
         ...state,
         emailsArray: action.payload,
       };
+    case GET_DELETED_EMPLOYEES:
+      return {
+        ...state,
+        deletedEmployees: action.payload,
+      };
+    case UPDATE_DELETED_EMPLOYEE:
+      return {
+        ...state,
+      };
+    case GET_EVENTS:
+      
+      return {
+        ...state,
+        events: action.payload
+      }
+
     case POST_CRUD_AREA:
       return {
         ...state,
@@ -210,15 +230,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         positionsCrud: action.payload,
-      };
-    case GET_DELETED_EMPLOYEES:
-      return {
-        ...state,
-        deletedEmployees: action.payload,
-      };
-    case UPDATE_DELETED_EMPLOYEE:
-      return {
-        ...state,
       };
     default:
       return state;

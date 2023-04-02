@@ -1,46 +1,37 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import SideBar from "../../../Components/SideBar/SideBar";
+// import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import {
   createEmployee,
-  getAreasNum,
-  getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
 import validate from "../../../Utils/functions/validate";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
-import { Link } from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
-import {postPositionCrud, postAreaCrud} from "../../../state/redux/actions/actions";
+
 
 const AddFirstEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getPositionsNum());
-    dispatch(getAreasNum());
+    
   }, [dispatch]);
 
-  const positionsNum = useSelector((state) => state.positionsNum);
-  const areasNum = useSelector((state) => state.areasNum);
+
   
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
-  console.log(positionAdmin, "POSICION")
-  console.log(areaAdmin, "AREA")
+  console.log(positionAdmin, "POSICION");
+  console.log(areaAdmin, "AREA");
 
     const companyId = useSelector((state) => state.newCompanyId);
     console.log("CompanyID: ", companyId)
-    // const areasNum = useSelector((state) => state.areasNum);
-    const [area, setArea] = useState({
-      area: "",
-    });
-    const [position, setPosition] = useState({
-      position:"",
-    })
+  
+
     
   var [employee, setEmployee] = useState({
     name: "",
@@ -52,35 +43,34 @@ const AddFirstEmployee = () => {
     address: "",
     role: "SuperAdmin",
     image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
-    PositionId: positionAdmin.id,
-    AreaId: areaAdmin.id,
+    PositionId: positionAdmin[0].id,
+    AreaId: areaAdmin[0].id,
     cuil: "",
     cbu: "",
     dateOfAdmission: "",
-    CompanyId: ""
+    CompanyId: "",
   });
 
   const [errorButton, setErrorButton] = useState(false);
 
   const { errors, setAllErrors } = useErrors();
 
-  const { answer, showAnswer } = useAnswer();
+  const {
+    answer,
+    //  showAnswer
+  } = useAnswer();
 
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
-  // useEffect(() => {
-  //   if (dispatchCompleted) {
-  //     dispatch(createEmployee(employee, showAnswer));
-  //   }
-  // }, [dispatchCompleted, employee, dispatch, showAnswer]);
+
 
   useEffect(() => {}, []);
 
   const handleInput = (event) => {
     setEmployee({
       ...employee,
-      CompanyId: companyId,//aca va en realidad companyId
+      CompanyId: companyId,
       [event.target.name]: event.target.value,
     });
 
@@ -111,15 +101,16 @@ const AddFirstEmployee = () => {
     });
   };
 
-
   const handleSubmit = (event) => {
-
     console.log(employee, "Datos SuperAdmin antes del set");
     event.preventDefault();
     setSubmited(true);
-    dispatch(createEmployee(employee
-      // , showAnswer
-      ));
+    dispatch(
+      createEmployee(
+        employee
+        // , showAnswer
+      )
+    );
     setTimeout(() => {
       setSubmited(false);
     }, 3000);
@@ -133,13 +124,14 @@ const AddFirstEmployee = () => {
       tel: "",
       address: "",
       role: "SuperAdmin",
-      image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
+      image:
+        "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
       PositionId: 0,
       AreaId: 0,
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
-      CompanyId: ""
+      CompanyId: "",
     });
 
     setAllErrors({
@@ -158,12 +150,14 @@ const AddFirstEmployee = () => {
       cbu: "",
       dateOfAdmission: "",
     });
-    navigate("/")
+    navigate("/");
   };
   console.log(errors);
   return (
-    <div className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0
-    ssm:py-16">
+    <div
+      className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0
+    ssm:py-16"
+    >
       <div>
         <div className="w-full text-center mb-14 font-bold">
           <span className="text-4xl text-sky-400">Add Employee</span>
@@ -182,7 +176,6 @@ const AddFirstEmployee = () => {
             <FormFirstEmployee
               handleInput={handleInput}
               handleSubmit={handleSubmit}
-              // handleSelect = {handleSelect}
               touched={touched}
               errors={errors}
               users={employee}

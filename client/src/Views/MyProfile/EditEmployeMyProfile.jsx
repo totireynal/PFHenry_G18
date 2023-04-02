@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAreasNum, getPositionsNum, updateEmployee, getCurrentEmployee } from "../../state/redux/actions/actions";
-import validate from "../../Utils/functions/validate";
-import Form from "../../Components/Form/Form";
-import { useErrors } from "../../Utils/hooks/errors";
-import { useAnswer } from "../../Utils/hooks/answer"; 
-import { Link } from "react-router-dom";
-import SelectFormEdit from "../../Components/SelectFormEdit/SelectFormEdit";
+import {
+  getAreasNum,
+  getPositionsNum,
+  updateEmployee,
+  getCurrentEmployee,
+} from "../../state/redux/actions/actions";
+import validate from "../../utils/functions/validate";
+// import Form from "../../Components/Form/Form";
+import { useErrors } from "../../utils/hooks/errors";
+import { useAnswer } from "../../utils/hooks/answer";
+// import { Link } from "react-router-dom";
+// import SelectFormEdit from "../../Components/SelectFormEdit/SelectFormEdit";
 import FormEdit from "../../Components/FormEdit/FormEdit";
 
 const EditEmployeeMyProfile = () => {
@@ -21,7 +26,7 @@ const EditEmployeeMyProfile = () => {
     return () => {
       dispatch(getCurrentEmployee(id));
     };
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   const { errors, setAllErrors } = useErrors();
 
