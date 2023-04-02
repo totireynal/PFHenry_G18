@@ -33,8 +33,8 @@ const SelectFormThree = ({
         <option value="default" hidden>
           Position:
         </option>
-        {optionQuantity.map((pos) => (
-          <option value={pos.id}>{pos?.area}</option>
+        {optionQuantity.map((pos, i) => (
+          <option key={i} value={pos.id}>{pos?.area}</option>
         ))}
       </select>
       <div className="text-end">

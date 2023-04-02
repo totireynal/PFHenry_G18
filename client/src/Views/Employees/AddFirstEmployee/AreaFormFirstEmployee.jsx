@@ -1,19 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   postAreaCrud,
-  getAreasCrud,
-  deleteAreaCrud,
-  updateAreaCrud,
+  // getAreasCrud,
+  // deleteAreaCrud,
+  // updateAreaCrud,
 } from "../../../state/redux/actions/actions";
-import { GrFormEdit } from "react-icons/gr";
-import { GrFormClose } from "react-icons/gr";
+// import { GrFormEdit } from "react-icons/gr";
+// import { GrFormClose } from "react-icons/gr";
 
 const AreaFormFirstEmployee = () => {
   const dispatch = useDispatch();
 
-  const allAreas = useSelector((state) => state.areasCrud);
+  // const allAreas = useSelector((state) => state.areasCrud);
 
   const [area, setArea] = useState({
     area: "",
@@ -37,9 +36,9 @@ const AreaFormFirstEmployee = () => {
     
   };
 
-  const handleSubmitGet = (event) => {
-    event.preventDefault();
-  };
+  // const handleSubmitGet = (event) => {
+  //   event.preventDefault();
+  // };
 
 
   return (

@@ -15,7 +15,7 @@ const Area = ({ selectedOption, handleSelectChange, CompanyId }) => {
   useEffect(() => {
     dispatch(getEmployees(arrContentFilters, undefined, CompanyId));
     dispatch(getAreas(arrContentFilters, CompanyId));
-  }, [arrContentFilters, dispatch]);
+  }, [arrContentFilters, dispatch, CompanyId]);
 
   const handleChange = (event) => {
     const area = event.target.value;
@@ -25,7 +25,7 @@ const Area = ({ selectedOption, handleSelectChange, CompanyId }) => {
 
   return (
     <div className="flex justify-center items-center mr-2">
-      <h3>Area: </h3>
+      <h3 className="sm:text-gray-800 text-white">Area: </h3>
       <select
         value={selectedOption.area}
         className="border-2 border-gray-200 ml-2"

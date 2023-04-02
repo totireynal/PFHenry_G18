@@ -4,11 +4,13 @@ import CalendarHeader from "./components/CalendarHeader";
 import Sidebar from "./components/Sidebar";
 import Month from "./components/Month";
 import GlobalContext from "./context/GlobalContext";
-import EventModal from "./components/EventModal";
+// import EventModal from "./components/EventModal";
 
 const CalendarAPI = () => {
   const [currenMonth, setCurrentMonth] = useState(getMonth());
-  const { monthIndex, showEventModal } = useContext(GlobalContext);
+  const { monthIndex, 
+    // showEventModal
+   } = useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
@@ -16,7 +18,9 @@ const CalendarAPI = () => {
 
   return (
     <React.Fragment>
-      <div className=" xl:w-full xl:pl-72 ssm:pl-36 ssm:pl-16 pr-16 ssm:overflow-auto ssm:overflow-x-hidden">
+      <div className=" xl:w-full xl:pl-72 
+      
+      pr-16 ssm:overflow-auto ssm:overflow-x-hidden">
         {/* {showEventModal && <EventModal />} */}
 
         <div className="h-[680px] flex flex-col ">

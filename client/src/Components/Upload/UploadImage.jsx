@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 const UploadImage = ({ handleChangeImage, user }) => {
-  const [image, setImage] = useState("");
+  const [
+    // image, 
+    setImage] = useState("");
 
   const upload = async (e) => {
     const files = e.target.files;

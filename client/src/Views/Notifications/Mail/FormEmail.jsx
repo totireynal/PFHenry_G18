@@ -51,7 +51,9 @@ const FormEmail = () => {
 
       try {
         for (const email of checkEmails) {
+          //SWITCH FOR LOCAL OR DEPLOYMENT
           await axios.post("http://localhost:3001/notifications", {
+          // await axios.post("/notifications", {
             to: email,
             subject,
             text,
@@ -80,43 +82,46 @@ const FormEmail = () => {
   return (
     <div class="flex justify-center items-center h-screen">
       <div className="flex flex-col justify-center items-center w-full gap-4">
-        <h2 className="text-3xl font-semibold text-sky-700">SEND E-MAIL</h2>
+        <h2 className="text-4xl text-sky-400 font-bold">Send E-mail</h2>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center justify-center gap-4 w-full h-auto"
         >
           <div className="flex flex-col w-2/3 gap-2">
-            <label className="font-semibold text-xl">To</label>
+            <label className="font-semibold text-base">To</label>
             <input
+              placeholder="Insert e-mail"
               type="text"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              className={`rounded-md border-2 border-gray-800 block px-2 h-12 pl-4 outline-none focus:border-blue-400 ${
+              className={`rounded-md block h-10 px-2 outline-none focus:border-blue-400 ${
                 error.to ? "border-red-500" : ""
               }`}
             />
             {error.to && <p className="text-red-500">{error.to}</p>}
           </div>
           <div className="flex flex-col w-2/3 gap-2">
-            <label className="font-semibold text-xl">Subject</label>
+            <label className="font-semibold text-base">Subject</label>
             <input
+              placeholder="Insert subject"
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className={`rounded-md border-2 border-gray-800 block px-2 h-12 pl-4 outline-none focus:border-blue-400 ${
+              className={`rounded-md block h-10 px-2 outline-none focus:border-blue-400 ${
                 error.subject ? "border-red-500" : ""
               }`}
             />
             {error.subject && <p className="text-red-500">{error.subject}</p>}
           </div>
           <div className="flex flex-col w-2/3 gap-2">
-            <label className="font-semibold text-xl">Message</label>
+            <label className="font-semibold text-base">Message</label>
             <textarea
+              placeholder="Insert message"
               value={text}
               onChange={(e) => setText(e.target.value)}
               cols="10"
               rows="10"
-              className={`rounded-md border-2 border-gray-800 block px-2 h-30 pl-4 outline-none focus:border-blue-400 resize-none ${
+              className={`rounded-md block h-30 px-2 pt-2 outline-none focus:border-blue-400 resize-none ${
                 error.text ? "border-red-500" : ""
               }`}
             />
@@ -124,7 +129,7 @@ const FormEmail = () => {
           </div>
           <button
             type="submit"
-            className="bg-sky-700 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-600 hover:bg-sky-600"
+            className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
           >
             SEND
           </button>
