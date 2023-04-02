@@ -38,7 +38,7 @@ const EmployeeDetail = () => {
 
   useEffect(() => {
     dispatch(getEmployeeDetail(CompanyId, id));
-  }, [id, dispatch]);
+  }, [id, dispatch, CompanyId]);
 
   const {
     name,
@@ -68,14 +68,14 @@ const EmployeeDetail = () => {
       >
         <div
           ref={refDivModal}
-          className="flex flex-col justify-between w-[600px] h-[200px] bg-white rounded p-6 text-xl transition-all duration-100"
+          className="flex flex-col justify-between lg:w-[600px] lg:h-[200px] ssm:h-[20%] ssm:w-[95%] bg-white rounded p-6 text-xl transition-all duration-100"
         >
           <h3>Are you sure you want to delete this employee?</h3>
-          <div className="text-end text-base flex justify-between">
+          <div className="md:text-end ssm:text-center text-base flex justify-between">
             <div className="flex justify-center items-center text-base  bg-green-400 rounded w-60 opacity-0">
-              <p className="pr-42 pl-2 py-1">Se deleteo</p>
+              {/* <p className="pr-42 pl-2 py-1">Se deleteo</p> */}
             </div>
-            <div>
+            <div className="flex">
               <button
                 className="mr-6 px-6 py-2 bg-blue-400 rounded text-white"
                 onClick={deletedEmplote}

@@ -4,13 +4,13 @@ import {
   contentFilters,
   getEmployees,
 } from "../../../state/redux/actions/actions";
-import { useAnswer } from "../../../Utils/hooks/answer";
+// import { useAnswer } from "../../../Utils/hooks/answer";
 
-const SearchBar = ({ answer, showAnswer }) => {
+const SearchBar = ({ answer, showAnswer, handleRefresh }) => {
   const [input, setInput] = useState("");
   let dispatch = useDispatch();
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
-  const allEmployees = useSelector((state) => state.allEmployees);
+  // const allEmployees = useSelector((state) => state.allEmployees);
   // console.log(!!allEmployees, 'allll');
 
   // const { answer, showAnswer } = useAnswer();
@@ -25,8 +25,8 @@ const SearchBar = ({ answer, showAnswer }) => {
 
   function onSubmit(e) {
     e.preventDefault();
-
     if (input.trim().length > 0) {
+      handleRefresh()
       // dispatch(getEmployees(input));
       dispatch(contentFilters({ name: input }));
       setInput("");
@@ -36,8 +36,6 @@ const SearchBar = ({ answer, showAnswer }) => {
       }, 3000);
     }
   }
-
-  console.log("Didi", answer);
 
   return (
     <>

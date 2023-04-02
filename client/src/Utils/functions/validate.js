@@ -12,7 +12,7 @@ const validate = (values) => {
   // if (!regex.image.test(values.image)) errors.image = "No es un url apropiado";
   // console.log(values);
   if (values.role === "default") errors.role = "You must choose a role";
-  if (!values.name.length) errors.name = "No ha ingresado ningun caracter";
+  if (!values.name.length) errors.name = "Name can't be empty";
   if (!values.lastName.length)
     errors.lastName = "Last name can't be empty";
   if (!values.cuil.length) errors.cuil = "Cuil can't be empty";
@@ -41,9 +41,9 @@ const validate = (values) => {
   const yearAdmission = values.dateOfAdmission.split("-")[0];
   const admission = currentYear - yearAdmission;
   const age = currentYear - year;
-  console.log(year);
-  console.log(age);
-  console.log(admission);
+  // console.log(year);
+  // console.log(age);
+  // console.log(admission);
 
   if (age < 18) errors.birthDate = "Invalid age";
   if (age < admission) errors.dateOfAdmission = "";

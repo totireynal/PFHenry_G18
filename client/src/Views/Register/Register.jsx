@@ -1,6 +1,6 @@
-import { React, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { React, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { postCompany } from "../../state/redux/actions/actions";
 import {CardElement} from "@stripe/react-stripe-js";
 import {useStripe, useElements} from "@stripe/react-stripe-js"
@@ -155,7 +155,7 @@ export default function CreateCompany(props) {
     }
 
     const response = await getCompaniesCuit(input.cuit);
-    if(response.data != "The company PruebaCUIT has been created correctly"){
+    if(response.data !== "The company PruebaCUIT has been created correctly"){
 
     };
     
@@ -429,6 +429,7 @@ export default function CreateCompany(props) {
                   </label>
                   <input
                     type="image"
+                    alt="image"
                     className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Image"
                     value={input.image}
