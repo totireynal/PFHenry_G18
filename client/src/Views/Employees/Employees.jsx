@@ -252,9 +252,10 @@ const Employees = () => {
                   : "opacity-0 pointer-events-none -translate-y-3 transition-all duration-300 w-[50px]"
               } relative flex flex-col justify-center items-start   p-2  bg-black bg-opacity-50 rounded gap-1 mt-2 `}
             >
-              <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden">
+              <button
+                className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden"
                 onClick={handleRefresh}
-                >
+              >
                 <MdOutlineRefresh />
               </button>
               <Sort
