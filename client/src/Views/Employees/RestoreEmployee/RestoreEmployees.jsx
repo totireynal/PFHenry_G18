@@ -105,27 +105,6 @@ const RestoreEmployees = () => {
       <div className="flex sm:flex-col flex-wrap sticky h-auto pt-12 pb-5 top-0 z-10 bg-slate-100 mb-3 items-center justify-center gap-2.5">
         <div className="flex gap-2 ">
           <SearchBar />
-          {/* <Link to={"/addemployee/"}>
-            <button className="bg-sky-400 text-white rounded  overflow-hidden h-full px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
-              <AiOutlinePlus size={20} />
-            </button>
-          </Link> */}
-          {/* <button
-            onClick={() => setEmailsUnselect(!emailsUnselect)}
-            className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
-          >
-            <RiMailAddLine size={20} />
-          </button>
-          {emailsSelection.length ? (
-            <button
-              onClick={sendEmails}
-              className="bg-sky-400 text-white rounded  overflow-hidden  px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
-            >
-              <SiMinutemailer />
-            </button>
-          ) : (
-            ""
-          )} */}
         </div>
       </div>
       <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8">
@@ -159,7 +138,6 @@ const RestoreEmployees = () => {
       <div className="flex flex-col gap-2 pb-8 pt-3 ">
         {deletes?.map((user, i) => {
           return (
-            // <Link key={i} to={`/employee/${user?.id}`} >
             <DeletedEmployee
               key={i}
               id={user?.id}
@@ -171,11 +149,7 @@ const RestoreEmployees = () => {
               position={user?.position}
               role={user?.role}
               fn={fn}
-              // catchEmails={catchEmails}
-              // emailsSelection={emailsSelection}
-              // emailsUnselect={emailsUnselect}
             />
-            // </Link>
           );
         })}
       </div>

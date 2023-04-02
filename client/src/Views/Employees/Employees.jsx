@@ -21,6 +21,7 @@ import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
 import { useAnswer } from "../../utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
 import { RiMailAddLine } from "react-icons/ri";
 import { SiMinutemailer } from "react-icons/si";
 
@@ -120,6 +121,11 @@ const Employees = () => {
             <Link to={"/addemployee/"}>
               <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
                 <AiOutlinePlus size={20} />
+              </button>
+            </Link>
+            <Link to={"/addareaposition/"}>
+              <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+                <AiOutlineEdit size={20} />
               </button>
             </Link>
             <button

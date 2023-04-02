@@ -31,6 +31,7 @@ import CalendarUser from "./Views/CalendarUser/CalendarUser";
 import { useCookies } from "react-cookie";
 import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
 import AreaPositionFirstEmployee from "./Views/Register/AreaPositionFirstEmployee";
+import AreaPosition from "./Views/AreaPosition/AreaPosition";
 
 function App() {
   const [isOpen, setOpen] = useState(true);
@@ -91,7 +92,10 @@ function App() {
         <Route path="/home" element={<Home />} />
         {/* <Route path="/home/login" element={<Login />} /> */}
         <Route path="/home/login/register" element={<Payment />} />
-        <Route path = "/addAreaPositionSA" element={<AreaPositionFirstEmployee/>}/>
+        <Route
+          path="/addAreaPositionSA"
+          element={<AreaPositionFirstEmployee />}
+        />
         <Route path="/addFirstEmployee" element={<AddFisrtEmployee />} />
         {/* <Route path="/home/login/register/payment" element={<Payment />} /> */}
         <Route path="/authorization" element={<Authorization />} />
@@ -112,6 +116,7 @@ function App() {
           <Route path="/deletedemployees/:id" element={<RestoreEmployees />} />
           <Route path="/employee/:id" element={<EmployeeDetail />} />
           <Route path="/addemployee" element={<AddEmployee />} />
+          <Route path="/addareaposition" element={<AreaPosition />} />
           <Route path="/editemployee/:id" element={<EditEmployee />} />
           <Route
             path="/editemployeemyprofile/:id"
@@ -137,6 +142,7 @@ function App() {
           <Route path="/employees/:id" element={<Employees />} />
           <Route path="/employee/:id" element={<EmployeeDetail />} />
           <Route path="/addemployee" element={<AddEmployee />} />
+          <Route path="/addareaposition" element={<AreaPosition />} />
           <Route path="/editemployee/:id" element={<EditEmployee />} />
           <Route
             path="/editemployeemyprofile/:id"
