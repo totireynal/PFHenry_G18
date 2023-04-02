@@ -1,5 +1,5 @@
-import { Link, useParams } from "react-router-dom";
-import SideBar from "../../Components/SideBar/SideBar";
+import { Link } from "react-router-dom";
+// import SideBar from "../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getEmployeeDetail } from "../../state/redux/actions/actions";

@@ -8,13 +8,13 @@ import EmployeesUser from "./Views/Employees/EmployeesUser";
 import EmployeeDetail from "./Views/EmployeeDetail/EmployeeDetail";
 import Home from "./Views/Home";
 // import Register from "./Components/Register/Register.jsx"
-import Register from "./Views/Register";
+// import Register from "./Views/Register";
 import EditEmployeeMyProfile from "./Views/MyProfile/EditEmployeMyProfile";
-import MyProfile from "./Views/MyProfile/MyProfile";
+// import MyProfile from "./Views/MyProfile/MyProfile";
 import MyProfileAdmin from "./Views/MyProfile/MyProfileAdmin";
 import MyProfileUser from "./Views/MyProfile/MyProfileUser";
 import Notifications from "./Views/Notifications/Notifications";
-import Organization from "./Views/Organization";
+// import Organization from "./Views/Organization";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
@@ -25,10 +25,10 @@ import Authorization from "./Views/Authorization/Authorization";
 import Authorizationone from "./Views/Authorization/Authorization1";
 import { useSelector } from "react-redux";
 import { Squash as Hamburger } from "hamburger-react";
-import Form from "./Components/Form/Form";
+// import Form from "./Components/Form/Form";
 import CalendarUser from "./Views/CalendarUser/CalendarUser";
 
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
 import AreaPositionFirstEmployee from "./Views/Register/AreaPositionFirstEmployee";
 
@@ -38,7 +38,8 @@ function App() {
 
   const user = useSelector((state) => state.currentEmployee);
 
-  console.log(user);
+  //PARA SABER QUÉ USUARIO ENTRÓ POR AUTH0
+  // console.log(user);
 
   const refSideBar = useRef();
 
@@ -189,9 +190,9 @@ export default App;
 // >
 
 /*----------------------------- Calendario User -----------------------------*/
-{
-  /* <Route path="/calendar" element={<CalendarUser />} /> */
-}
+// {
+//   <Route path="/calendar" element={<CalendarUser />} />
+// }
 
 /*----------------------------- MyProfile superadmin -----------------------------*/
 /* <Route path="/myprofile/:id" element={<MyProfile />} /> */

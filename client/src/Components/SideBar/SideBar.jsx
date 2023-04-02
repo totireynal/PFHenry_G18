@@ -1,15 +1,15 @@
 import ButtonSideBar from "./ButtonSideBar/ButtonSideBar";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { resetCurrentEmployee } from "../../state/redux/actions/actions";
-import { useCookies } from "react-cookie";
+// import { resetCurrentEmployee } from "../../state/redux/actions/actions";
+// import { useCookies } from "react-cookie";
 import { useState } from "react";
 
 const SideBar = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const [cookies, removeCookie] = useCookies(["token"]);
+  // const [cookies, removeCookie] = useCookies(["token"]);
   const [active, setActive] = useState({
     dashboard: false,
     employees: false,
@@ -34,7 +34,6 @@ const SideBar = () => {
     });
   };
 
-  console.log(active, "vemoss");
 
   const current = useSelector((state) => state.currentEmployee);
   // const currentEmployee = useSelector((state) => state.employeeDetail);

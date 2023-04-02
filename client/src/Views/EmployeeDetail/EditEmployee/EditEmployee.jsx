@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import SideBar from "../../../Components/SideBar/SideBar";
+// import SideBar from "../../../Components/SideBar/SideBar";
 import {
   getAreasNum,
   getPositionsNum,
   updateEmployee,
 } from "../../../state/redux/actions/actions";
 import validate from "../../../Utils/functions/validate";
-import Form from "../../../Components/Form/Form";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer";
+// import Form from "../../../Components/Form/Form";
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer";
 import { Link } from "react-router-dom";
-import SelectFormEdit from "../../../Components/SelectFormEdit/SelectFormEdit";
+// import SelectFormEdit from "../../../Components/SelectFormEdit/SelectFormEdit";
 import FormEdit from "../../../Components/FormEdit/FormEdit";
 
 const EditEmployee = () => {
@@ -30,7 +30,6 @@ const EditEmployee = () => {
   const { answer, showAnswer } = useAnswer();
 
   const currentEmployee = useSelector((state) => state.employeeDetail);
-  console.log(currentEmployee, "iiiiiii");
 
   const [touched, setTouched] = useState({
     name: false,

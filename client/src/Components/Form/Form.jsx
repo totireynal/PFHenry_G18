@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAreasNum,
-  getPositionsNum,
-} from "../../state/redux/actions/actions";
+// import { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import {
+//   getAreasNum,
+//   getPositionsNum,
+// } from "../../state/redux/actions/actions";
 import InputForm from "../InputForm";
 import SelectForm from "../SelectForm/SelectForm";
 import UploadImage from "../Upload/UploadImage";
-import { RiAlertFill } from "react-icons/ri";
+// import { RiAlertFill } from "react-icons/ri";
 import SelectFormSec from "../SelectFormSec/SelectFormSec";
-import {
-  getUsersTel,
-  getUsersEmail,
-  getUsersCuil,
-  getUsersCbu,
-  getUsersDni
-} from "../../state/redux/actions/actions"
+// import {
+//   getUsersTel,
+//   getUsersEmail,
+//   getUsersCuil,
+//   getUsersCbu,
+//   getUsersDni
+// } from "../../state/redux/actions/actions"
 
 const Form = ({
   handleInput,
@@ -32,7 +32,7 @@ const Form = ({
   positionsNum,
   areasNum,
   handleBlur,
-  back
+  back,
 }) => {
   //   const dispatch = useDispatch();
 
@@ -47,7 +47,6 @@ const Form = ({
   // const [mensajeCuil, setMensajeCuil] = useState(null);
   // const [mensajeCbu, setMensajeCbu] = useState(null);
   // const [mensajeDni, setMensajeDni] = useState(null);
-
 
   // const handleBlurTel = (event) => {
   //   const valor = event.target.value;
@@ -76,7 +75,7 @@ const Form = ({
   //     console.log("Mensaje: ", resultado?.message)
   //   });
   // }
-  
+
   // const handleBlurCuil = (event) => {
   //   const valor = event.target.value;
   //   dispatch(getUsersCuil(valor)).then(resultado => {
@@ -89,7 +88,7 @@ const Form = ({
   //     console.log("Mensaje: ", resultado?.message)
   //   });
   // }
-  
+
   // const handleBlurCbu = (event) => {
   //   const valor = event.target.value;
   //   dispatch(getUsersCbu(valor)).then(resultado => {
@@ -102,7 +101,7 @@ const Form = ({
   //     console.log("Mensaje: ", resultado?.message)
   //   });
   // }
-  
+
   // const handleBlurDni = (event) => {
   //   const valor = event.target.value;
   //     dispatch(getUsersDni(valor)).then(resultado => {
@@ -172,7 +171,7 @@ const Form = ({
             error={errors.email}
             onBlur={handleBlur}
             back={back.email}
-            />
+          />
 
           {/* {mensajeCuil && <section className="m-0  text-red-600">{mensajeCuil}</section>} */}
           <InputForm
@@ -187,10 +186,9 @@ const Form = ({
             error={errors.cuil}
             onBlur={handleBlur}
             back={back.cuil}
-            />
+          />
         </div>
         <div className="w-full">
-
           {/* {mensajeCbu && <section className="m-0  text-red-600">{mensajeCbu}</section>} */}
           <InputForm
             label="CBU"
@@ -204,7 +202,7 @@ const Form = ({
             error={errors.cbu}
             onBlur={handleBlur}
             back={back.cbu}
-            />
+          />
 
           <SelectForm
             label="Role"
@@ -236,11 +234,10 @@ const Form = ({
             handler={handleSelect}
             error={errors.AreaId}
             optionQuantity={areasNum}
-            />
+          />
         </div>
         <div className="w-full">
-            
-            {/* {mensajeDni && <section className="m-0  text-red-600">{mensajeDni}</section>} */}
+          {/* {mensajeDni && <section className="m-0  text-red-600">{mensajeDni}</section>} */}
           <InputForm
             label="DNI"
             placeholder="DNI"
@@ -253,9 +250,9 @@ const Form = ({
             error={errors.dni}
             onBlur={handleBlur}
             back={back.dni}
-            />
+          />
 
-            {/* {mensajeTel && <section className="m-0  text-red-600">{mensajeTel}</section>} */}
+          {/* {mensajeTel && <section className="m-0  text-red-600">{mensajeTel}</section>} */}
           <InputForm
             label="Phone"
             placeholder="Phone"
@@ -292,7 +289,7 @@ const Form = ({
             id="dateOfAdmission"
             error={errors.dateOfAdmission}
           />
-           <InputForm
+          <InputForm
             type="hidden"
             name="CompanyId"
             value={users.CompanyId}

@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import SideBar from "../../../Components/SideBar/SideBar";
+// import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import {
@@ -12,7 +11,7 @@ import validate from "../../../Utils/functions/validate";
 import { useBack } from "../../../Utils/hooks/mensajeBack";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
 import {
@@ -70,13 +69,13 @@ const AddEmployee = () => {
 
   const { back, setAllBack } = useBack();
 
-  const [mensajeEmail, setMensajeEmail] = useState({
-    email: "",
-    dni: "",
-    tel: "",
-    cuil: "",
-    cbu: "",
-  });
+  // const [mensajeEmail, setMensajeEmail] = useState({
+  //   email: "",
+  //   dni: "",
+  //   tel: "",
+  //   cuil: "",
+  //   cbu: "",
+  // });
   // const [mensajeCuil, setMensajeCuil] = useState(null);
   // const [mensajeCbu, setMensajeCbu] = useState(null);
   // const [mensajeDni, setMensajeDni] = useState(null);
@@ -141,7 +140,9 @@ const AddEmployee = () => {
             [event.target.name]: resultado.message,
           });
         } else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
         console.log("Valor", valor);
         console.log("Mensaje: ", resultado?.message);
@@ -150,69 +151,61 @@ const AddEmployee = () => {
     if (event.target.name === "cuil") {
       const valor = event.target.value;
       dispatch(getUsersCuil(currentCompanyId, valor)).then((resultado) => {
-        console.log("CUIL", valor);
-        console.log("company ID", currentCompanyId);
         if (resultado?.message) {
           setAllBack({
             ...employee,
             [event.target.name]: resultado.message,
           });
         } else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message);
       });
     }
     if (event.target.name === "cbu") {
       const valor = event.target.value;
       dispatch(getUsersCbu(currentCompanyId, valor)).then((resultado) => {
-        console.log("CBU", valor);
-        console.log("company ID", currentCompanyId);
         if (resultado?.message) {
           setAllBack({
             ...employee,
             [event.target.name]: resultado.message,
           });
         } else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message);
       });
     }
     if (event.target.name === "dni") {
       const valor = event.target.value;
       dispatch(getUsersDni(currentCompanyId, valor)).then((resultado) => {
-        console.log("CUIL", valor);
-        console.log("company ID", currentCompanyId);
         if (resultado?.message) {
           setAllBack({
             ...employee,
             [event.target.name]: resultado.message,
           });
         } else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message);
       });
     }
     if (event.target.name === "tel") {
       const valor = event.target.value;
       dispatch(getUsersTel(currentCompanyId, valor)).then((resultado) => {
-        console.log("CUIL", valor);
-        console.log("company ID", currentCompanyId);
         if (resultado?.message) {
           setAllBack({
             ...employee,
             [event.target.name]: resultado.message,
           });
         } else {
-          setAllBack(null);
+          setAllBack({
+            [event.target.name]: "",
+          });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message);
       });
     }
   };
