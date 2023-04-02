@@ -2,37 +2,28 @@
 // import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import {
-  createEmployee,
-} from "../../../state/redux/actions/actions";
+import { createEmployee } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
-import validate from "../../../Utils/functions/validate";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 
 import { useNavigate } from "react-router-dom";
-
 
 const AddFirstEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
-
-  
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
   console.log(positionAdmin, "POSICION");
   console.log(areaAdmin, "AREA");
 
-    const companyId = useSelector((state) => state.newCompanyId);
-    console.log("CompanyID: ", companyId)
-  
+  const companyId = useSelector((state) => state.newCompanyId);
+  console.log("CompanyID: ", companyId);
 
-    
   var [employee, setEmployee] = useState({
     name: "",
     lastName: "",
@@ -42,7 +33,8 @@ const AddFirstEmployee = () => {
     tel: "",
     address: "",
     role: "SuperAdmin",
-    image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
+    image:
+      "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
     PositionId: positionAdmin[0].id,
     AreaId: areaAdmin[0].id,
     cuil: "",
@@ -63,7 +55,6 @@ const AddFirstEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
-
 
   useEffect(() => {}, []);
 

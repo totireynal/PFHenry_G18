@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
@@ -7,10 +8,10 @@ import {
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
-import validate from "../../../Utils/functions/validate";
-import { useBack } from "../../../Utils/hooks/mensajeBack";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useBack } from "../../../utils/hooks/mensajeBack";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 // import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
@@ -31,8 +32,8 @@ const AddEmployee = () => {
   const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
 
   useEffect(() => {
-    dispatch(getPositionsNum());
-    dispatch(getAreasNum());
+    dispatch(getPositionsNum(undefined, currentCompanyId));
+    dispatch(getAreasNum(undefined, currentCompanyId));
   }, [dispatch]);
 
   const positionsNum = useSelector((state) => state.positionsNum);

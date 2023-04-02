@@ -1,8 +1,11 @@
-import React from 'react';
-import { useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import { contentFilters, getEmployees, getRoles } from '../../state/redux/actions/actions';
-
+import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  contentFilters,
+  getEmployees,
+  getRoles,
+} from "../../state/redux/actions/actions";
 
 const Rol = ({ selectedOption, handleSelectChange, CompanyId }) => {
   const dispatch = useDispatch();
@@ -26,7 +29,7 @@ const Rol = ({ selectedOption, handleSelectChange, CompanyId }) => {
   return (
     <div className="flex">
       <h3 className="flex justify-center items-center mr-2 sm:text-gray-800 text-white">
-        Rols:{" "}
+        Roles:{" "}
       </h3>
       <select
         value={selectedOption.role}
@@ -38,11 +41,17 @@ const Rol = ({ selectedOption, handleSelectChange, CompanyId }) => {
         <option value="default" hidden>
           Select
         </option>
-        {roles.filter(rol => rol!=="SuperAdmin").map((e, i) => (
+        {/* {roles.map((e, i) => (
           <option key={i} value={e}>
             {e}
-          </option>
-        ))}
+          </option> */}
+        {roles
+          .filter((rol) => rol !== "SuperAdmin")
+          .map((e, i) => (
+            <option key={i} value={e}>
+              {e}
+            </option>
+          ))}
       </select>
     </div>
   );
