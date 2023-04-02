@@ -5,14 +5,24 @@ import Sidebar from "./components/Sidebar";
 import Month from "./components/Month";
 import GlobalContext from "./context/GlobalContext";
 import EventModal from "./components/EventModal";
+import { getEvents } from "../../state/redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const CalendarAPI = () => {
   const [currenMonth, setCurrentMonth] = useState(getMonth());
   const { monthIndex, showEventModal } = useContext(GlobalContext);
 
+  const dispatch = useDispatch()
+      const currentEmployee = useSelector((state) => state.currentEmployee);
+      const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
+
+    useEffect(() => {
+      dispatch(getEvents(CompanyId));
+    }, [dispatch, CompanyId]);
 
   return (
     <React.Fragment>

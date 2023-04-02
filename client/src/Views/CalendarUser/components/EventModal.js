@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addEvents } from "../../../state/redux/actions/actions";
 import GlobalContext from "../context/GlobalContext";
 
 const labelsClasses = [
@@ -30,6 +32,8 @@ export default function EventModal() {
       : labelsClasses[0]
   );
 
+  const dispatch = useDispatch()
+
   function handleSubmit(e) {
     e.preventDefault();
     const calendarEvent = {
@@ -37,9 +41,10 @@ export default function EventModal() {
       description,
       label: selectedLabel,
       day: daySelected.valueOf(),
-      id: selectedEvent ? selectedEvent.id : Date.now(),
+      eventId: selectedEvent ? selectedEvent.eventId : Date.now(),
     };
     if (selectedEvent) {
+      dispatch(addEvents(calendarEvent));
       dispatchCalEvent({ type: "update", payload: calendarEvent });
     } else {
       dispatchCalEvent({ type: "push", payload: calendarEvent });

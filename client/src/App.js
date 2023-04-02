@@ -31,7 +31,14 @@ import CalendarUser from "./Views/CalendarUser/CalendarUser";
 import { useCookies } from "react-cookie";
 import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
 
+
+
 function App() {
+
+  const [theme, setTheme] = useState(false);
+
+
+
   const [isOpen, setOpen] = useState(true);
   const { pathname } = useLocation();
 
@@ -56,12 +63,20 @@ function App() {
         onClick={fn}
         className=" ssm:fixed sm:hidden  ssm:left-4 ssm:top-1 z-20 "
       >
-        {/* <button onClick={e => setOpen(true)}>aca</button> */}
-        <Hamburger
-          toggled={isOpen}
-          toggle={() => setOpen(!isOpen)}
-          color="#0369a1"
-        />
+        {pathname === "/" ||
+        pathname === "/home" ||
+        pathname === "/home/login" ||
+        pathname === "/home/login/register" ||
+        pathname === "/authorizationone" ||
+        pathname === "/authorization" ? (
+          ""
+        ) : (
+          <Hamburger
+            toggled={isOpen}
+            toggle={() => setOpen(!isOpen)}
+            color="#0369a1"
+          />
+        )}
       </div>
       <div
         ref={refSideBar}
@@ -76,7 +91,7 @@ function App() {
           pathname === "/authorization" ? (
             ""
           ) : (
-            <div className="bg-white">
+            <div className='bg-white'>
               <SideBar isOpen={isOpen} />
             </div>
           )}

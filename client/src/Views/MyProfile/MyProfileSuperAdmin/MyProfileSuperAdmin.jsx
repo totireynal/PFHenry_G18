@@ -8,17 +8,32 @@ import { useRef, useState } from "react";
 import {
   addRating,
   getEmployeeDetail,
+  getRating,
 } from "../../../state/redux/actions/actions";
 
 const MyProfileSuperAdmin = () => {
-    const refModal = useRef();
+  const refModal = useRef();
 
   // let { id } = useParams();
-  let employeeDetail = useSelector((state) => state.currentEmployee);
-    const currentEmployee = useSelector((state) => state.currentEmployee);
-    const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+  const dispatch = useDispatch();
 
-  let dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getRating());
+    const reviewDone = clients.some((client) => !!client);
+    if (reviewDone) {
+      setQualified(true);
+      console.log("entro");
+    } else {
+      console.log("no entro");
+    }
+  }, []);
+
+  let employeeDetail = useSelector((state) => state.currentEmployee);
+  const currentEmployee = useSelector((state) => state.currentEmployee);
+  const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+  const ratings = useSelector((state) => state.ratings);
+  const clients = ratings.map((client) => client.CompanyId === CompanyId);
+  const [qualified, setQualified] = useState(false);
 
   const {
     id,
@@ -59,7 +74,7 @@ const MyProfileSuperAdmin = () => {
     dispatch(addRating(rating, commentary, CompanyId));
     refModal.current.style.pointerEvents = "none";
     refModal.current.style.opacity = "0";
-    close()
+    close();
   };
 
   const [rating, setRating] = useState(0);
@@ -91,17 +106,18 @@ const MyProfileSuperAdmin = () => {
     refQualify.current.style.opacity = "1";
   };
   const userMode = () => {
-    
     refUserMode.current.style.display = "flex";
     refSuperAdminMode.current.style.display = "none";
-    close()
+    close();
   };
-
+  console.log(ratings);
   return (
     <>
       <div
         ref={refModal}
-        className="w-screen h-screen opacity-0 pointer-events-none transition-all duration-500 fixed bg-black bg-opacity-50 z-50 flex justify-center items-center text-center "
+        className={`${
+          qualified ? "hidden" : "flex"
+        } w-screen h-screen opacity-0 pointer-events-none transition-all duration-500 fixed bg-black bg-opacity-50 z-50  justify-center items-center text-center `}
       >
         <div
           ref={refQualify}
@@ -114,7 +130,7 @@ const MyProfileSuperAdmin = () => {
             onClick={qualifying}
             className="py-2 px-5 bg-sky-400 hover:bg-sky-300 active:shadow-lg active:translate-y-1 rounded "
           >
-            Calificar
+            Qualify
           </button>
           <button
             onClick={close}
@@ -221,19 +237,15 @@ const MyProfileSuperAdmin = () => {
               <p className="mb-5">
                 <span className="font-bold block">Numero de empleados:</span> 10
               </p>
+            </div>
+            <div className="flex flex-col justify-start w-full">
               <p className="mb-5">
                 <span className="font-bold block">Email:</span>{" "}
                 nosetodavaia@gmail.com
               </p>
-            </div>
-            <div className="flex flex-col justify-start w-full">
               <p className="mb-5">
                 <span className="font-bold block">Payment day:</span> 11 de
                 Marzo de 1620
-              </p>
-              <p className="mb-5">
-                <span className="font-bold block">Date of Admission:</span>{" "}
-                {dateOfAdmission}
               </p>
             </div>
           </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import SideBar from "../../../Components/SideBar/SideBar";
-import { getAreasNum, getPositionsNum, updateEmployee } from "../../../state/redux/actions/actions";
+import { getAreasNum, getEmployeeDetail, getPositionsNum, updateEmployee } from "../../../state/redux/actions/actions";
 import validate from "../../../utils/functions/validate";
 import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../utils/hooks/errors";
@@ -16,7 +16,13 @@ const EditEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const currentEmployeeCompany = useSelector((state) => state.currentEmployee);
+  const CompanyId = currentEmployeeCompany
+    ? currentEmployeeCompany.CompanyId
+    : null;
+
     useEffect(() => {
+      dispatch(getEmployeeDetail(CompanyId, id));
       dispatch(getPositionsNum());
       dispatch(getAreasNum());
     }, [dispatch]);
@@ -26,7 +32,6 @@ const EditEmployee = () => {
   const { answer, showAnswer } = useAnswer();
 
   const currentEmployee = useSelector((state) => state.employeeDetail);
-  console.log(currentEmployee, 'iiiiiii');
 
   const [touched, setTouched] = useState({
     name: false,
