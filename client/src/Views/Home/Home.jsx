@@ -10,11 +10,11 @@ import { getRating } from "../../state/redux/actions/actions";
 
 const Home = () => {
   const container =
-    "max-w-[1200px] m-auto flex flex-col justify-center items-center";
+    "max-w-[1200px]  flex flex-col justify-center items-center px-5 h-auto ";
   const styleSectionPrimary =
-    "flex flex-col bg-slate-100 justify-center items-center h-screen";
+    "flex flex-col bg-slate-100 justify-center items-center lg:h-screen ssm:h-auto ssm:py-10";
   const styleSectionSecondary =
-    "flex flex-col  justify-center items-center h-screen bg-white";
+    "flex flex-col  justify-center items-center bg-white lg:h-screen ssm:h-auto ssm:py-10";
   const styleText = "text-center text-6xl font-black";
 
   const clients = useSelector((state) => state.ratings);
@@ -43,13 +43,16 @@ const Home = () => {
     });
   };
 
+
+
+
   return (
     <div className="w-full">
       {/* <Link to={"/home/login"}> */}
       <button
         onClick={handleLogin}
         type="submit"
-        className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+        className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 z-50"
       >
         {" "}
         Login
@@ -104,11 +107,11 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="flex flex-col bg-slate-100 justify-center items-center h-screen">
+      <section className="flex flex-col bg-slate-100 justify-center items-center ssm:h-auto ssm:pb-10 px-5 lg:h-screen">
         <h2 className={`${styleText} py-10`}>Some of our clients</h2>
         <div className="max-w-[1200px] m-auto ">
           <div className="flex  justify-center items-start gap-10 h-auto flex-wrap">
-            {clients !== undefined &&
+            {
               clients?.map(({ name, image, score, comment }, i) => {
                 return (
                   <div
@@ -118,7 +121,7 @@ const Home = () => {
 
                     <div className="relative flex flex-col justify-center items-center">
                       <img
-                        className="object-cover rounded-md"
+                        className="object-cover rounded-md h-[180px]"
                         src={image}
                         alt=""
                       />
@@ -213,7 +216,6 @@ const Home = () => {
           </div>
 
           <div className="flex flex-col items-center justify-center w-1/3 text-lg">
-            <h5 className="">Send us a review</h5>
             <p>Link a un form para cargar.</p>
 
             <span>

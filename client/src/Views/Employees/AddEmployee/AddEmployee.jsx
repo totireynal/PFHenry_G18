@@ -12,14 +12,14 @@ import { useBack } from "../../../Utils/hooks/mensajeBack";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
 // import { Link } from "react-router-dom";
-import { useCookies } from 'react-cookie';
-import jwt_decode from 'jwt-decode';
+import { useCookies } from "react-cookie";
+import jwt_decode from "jwt-decode";
 import {
   getUsersTel,
   getUsersEmail,
   getUsersCuil,
   getUsersCbu,
-  getUsersDni
+  getUsersDni,
 } from "../../../state/redux/actions/actions";
 
 const AddEmployee = () => {
@@ -88,8 +88,6 @@ const AddEmployee = () => {
 
   useEffect(() => {}, []);
 
-
-
   const handleInput = (event) => {
     setEmployee({
       ...employee,
@@ -124,100 +122,93 @@ const AddEmployee = () => {
     });
   };
 
-
   const handleBlur = (event) => {
     // const { value, name } = event.target;
     // setAllBack({
     //     ...employee,
     //     [event.target.name]: event.target.value,
     // });
-    
+
     if (event.target.name === "email") {
       const valor = event.target.value;
-        dispatch(getUsersEmail(currentCompanyId, valor)).then(resultado => {
-          console.log("CORREO", valor);
-          console.log("company ID", currentCompanyId);
+      dispatch(getUsersEmail(currentCompanyId, valor)).then((resultado) => {
+        console.log("CORREO", valor);
+        console.log("company ID", currentCompanyId);
         if (resultado?.message) {
           setAllBack({
             ...employee,
             [event.target.name]: resultado.message,
           });
-        } 
-        else {
+        } else {
           setAllBack({
             [event.target.name]: "",
           });
         }
         console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message)
-      });      
+        console.log("Mensaje: ", resultado?.message);
+      });
     }
     if (event.target.name === "cuil") {
       const valor = event.target.value;
-        dispatch(getUsersCuil(currentCompanyId, valor)).then(resultado => {
+      dispatch(getUsersCuil(currentCompanyId, valor)).then((resultado) => {
         if (resultado?.message) {
           setAllBack({
             ...employee,
             [event.target.name]: resultado.message,
           });
-        } 
-        else {
+        } else {
           setAllBack({
             [event.target.name]: "",
           });
         }
-      });      
+      });
     }
     if (event.target.name === "cbu") {
       const valor = event.target.value;
-        dispatch(getUsersCbu(currentCompanyId, valor)).then(resultado => {
+      dispatch(getUsersCbu(currentCompanyId, valor)).then((resultado) => {
         if (resultado?.message) {
           setAllBack({
             ...employee,
             [event.target.name]: resultado.message,
           });
-        } 
-        else {
+        } else {
           setAllBack({
             [event.target.name]: "",
           });
         }
-      });      
+      });
     }
     if (event.target.name === "dni") {
       const valor = event.target.value;
-        dispatch(getUsersDni(currentCompanyId, valor)).then(resultado => {
+      dispatch(getUsersDni(currentCompanyId, valor)).then((resultado) => {
         if (resultado?.message) {
           setAllBack({
             ...employee,
             [event.target.name]: resultado.message,
           });
-        } 
-        else {
+        } else {
           setAllBack({
             [event.target.name]: "",
           });
         }
-      });      
+      });
     }
     if (event.target.name === "tel") {
       const valor = event.target.value;
-        dispatch(getUsersTel(currentCompanyId, valor)).then(resultado => {
+      dispatch(getUsersTel(currentCompanyId, valor)).then((resultado) => {
         if (resultado?.message) {
           setAllBack({
             ...employee,
             [event.target.name]: resultado.message,
           });
-        } 
-        else {
+        } else {
           setAllBack({
             [event.target.name]: "",
           });
         }
-      });      
+      });
     }
-  }
-
+  };
 
   const handleSelect = (e) => {
     const { value, name } = e.target;
@@ -326,7 +317,7 @@ ssm:py-16"
             />
             {/* {mensajeEmail && <p>{mensajeEmail.email}</p>} */}
           </div>
-            {/* <p>{back.email}</p> */}
+          {/* <p>{back.email}</p> */}
         </div>
       </div>
     </div>

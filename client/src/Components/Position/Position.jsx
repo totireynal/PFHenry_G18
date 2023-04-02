@@ -27,7 +27,7 @@ const Position = ({ selectedOption, handleSelectChange, CompanyId }) => {
 
   return (
     <div className="flex justify-center items-center mr-2">
-      <h3>Position: </h3>
+      <h3 className="sm:text-gray-800 text-white">Position: </h3>
       <select
         value={selectedOption.position}
         className="border-2 border-gray-200 ml-2"
@@ -41,11 +41,10 @@ const Position = ({ selectedOption, handleSelectChange, CompanyId }) => {
         {positions.map((e, i) => {
           return (
             <option key={i} value={e}>
-            {e}
-          </option>
-            )
-      }
-        )}
+              {e}
+            </option>
+          );
+        })}
       </select>
     </div>
   );

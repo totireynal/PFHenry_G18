@@ -1,19 +1,12 @@
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getAreasNum,
-//   getPositionsNum,
-// } from "../../state/redux/actions/actions";
+
 import InputForm from "../InputForm";
-// import SelectForm from "../SelectForm/SelectForm";
+
 import UploadImage from "../Upload/UploadImage";
-// import { RiAlertFill } from "react-icons/ri";
-// import SelectFormSec from "../SelectFormSec/SelectFormSec";
+
 
 const FormFirstEmployee = ({
   handleInput,
   handleSubmit,
-  // handleSelect,
   touched,
   errors,
   users,
@@ -49,7 +42,6 @@ const FormFirstEmployee = ({
             id="name"
             error={errors.name}
           />
-
           <InputForm
             label="Last Name"
             placeholder="Last Name"
@@ -61,7 +53,6 @@ const FormFirstEmployee = ({
             id="lastName"
             error={errors.lastName}
           />
-
           <InputForm
             label="Birth Date"
             placeholder="Birth Date"
@@ -73,7 +64,6 @@ const FormFirstEmployee = ({
             id="birthDate"
             error={errors.birthDate}
           />
-
           <InputForm
             label="Email"
             placeholder="Email"
@@ -84,9 +74,10 @@ const FormFirstEmployee = ({
             handler={handleInput}
             id="email"
             error={errors.email}
-          />
-
-          <InputForm
+          />  
+        </div>
+        <div className="w-full">
+        <InputForm
             label="Cuil"
             placeholder="Cuil"
             type="number"
@@ -97,8 +88,6 @@ const FormFirstEmployee = ({
             id="cuil"
             error={errors.cuil}
           />
-        </div>
-        <div className="w-full">
         <InputForm
             label="CBU"
             placeholder="CBU"
@@ -110,31 +99,6 @@ const FormFirstEmployee = ({
             id="cbu"
             error={errors.cbu}
           />
-
-          {/* <InputForm
-            label="Position"
-            placeholder="Position"
-            type="text"
-            name="PositionId"
-            touched={touched.PositionId}
-            value={users.position}
-            handler={handleInput}
-            id="PositionId"
-            error={errors.PositionId}
-          /> */}
-          {/* <InputForm
-            label="Area"
-            placeholder="Area"
-            type="text"
-            name="AreaId"
-            touched={touched.AreaId}
-            value={users.area}
-            handler={handleInput}
-            id="AreaId"
-            error={errors.AreaId}
-          /> */}
-        </div>
-        <div className="w-full">
           <InputForm
             label="DNI"
             placeholder="DNI"
@@ -157,7 +121,8 @@ const FormFirstEmployee = ({
             id="tel"
             error={errors.tel}
           />
-
+        </div>
+        <div className="w-full">
           <InputForm
             label="Address"
             placeholder="Address"
@@ -186,7 +151,6 @@ const FormFirstEmployee = ({
             value={users.CompanyId}
             handler={handleInput}
             id="CompanyId"
-
           />
           <div className="flex flex-row w-60">
             <UploadImage handleChangeImage={handleChangeImage} />

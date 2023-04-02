@@ -17,7 +17,9 @@ const Sort = ({ selectedOption, handleSelectChange }) => {
 
   return (
     <div className=" flex ">
-      <h2 className="flex justify-center items-center mr-2">Order: </h2>
+      <h2 className="flex justify-center items-center mr-2 sm:text-gray-800 text-white ">
+        Order:{" "}
+      </h2>
       <select
         value={selectedOption.sort}
         className="border-2 border-gray-200"
@@ -25,7 +27,7 @@ const Sort = ({ selectedOption, handleSelectChange }) => {
         onChange={handleChange}
         defaultValue="default"
       >
-        <option value='default' hidden>
+        <option value="default" hidden>
           Select
         </option>
         <option value={AtZ}>Ascendent</option>

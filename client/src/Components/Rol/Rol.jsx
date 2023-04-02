@@ -25,7 +25,9 @@ const Rol = ({ selectedOption, handleSelectChange, CompanyId }) => {
 
   return (
     <div className="flex">
-      <h3 className="flex justify-center items-center mr-2">Rols: </h3>
+      <h3 className="flex justify-center items-center mr-2 sm:text-gray-800 text-white">
+        Rols:{" "}
+      </h3>
       <select
         value={selectedOption.role}
         className="border-2 border-gray-200"

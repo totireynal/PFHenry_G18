@@ -33,6 +33,8 @@ import {
   GET_RATING,
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
+  GET_EVENTS,
+  // PUT_EVENTS,
 } from "../action-types/index";
 
 const initialState = {
@@ -54,7 +56,9 @@ const initialState = {
   areasCrud: [],
   positionsCrud: [],
   deletedEmployees: [],
+  events: []
 };
+console.log(initialState.ratings);
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -169,7 +173,7 @@ function rootReducer(state = initialState, action) {
     case GET_RATING:
       return {
         ...state,
-        ratings: [...state.ratings, ...action.payload],
+        ratings: action.payload,
       };
     case GET_ARRAY_EMAILS:
       return {
@@ -181,6 +185,22 @@ function rootReducer(state = initialState, action) {
         ...state,
         emailsArray: action.payload,
       };
+    case GET_DELETED_EMPLOYEES:
+      return {
+        ...state,
+        deletedEmployees: action.payload,
+      };
+    case UPDATE_DELETED_EMPLOYEE:
+      return {
+        ...state,
+      };
+    case GET_EVENTS:
+      
+      return {
+        ...state,
+        events: action.payload
+      }
+
     case POST_CRUD_AREA:
       return {
         ...state,
@@ -210,15 +230,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         positionsCrud: action.payload,
-      };
-    case GET_DELETED_EMPLOYEES:
-      return {
-        ...state,
-        deletedEmployees: action.payload,
-      };
-    case UPDATE_DELETED_EMPLOYEE:
-      return {
-        ...state,
       };
     default:
       return state;

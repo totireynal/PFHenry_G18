@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { contentFilters, getEmployees } from "../../../state/redux/actions/actions";
+import {
+  contentFilters,
+  getEmployees,
+} from "../../../state/redux/actions/actions";
 // import { useAnswer } from "../../../Utils/hooks/answer";
 
-const SearchBar = ({ answer, showAnswer }) => {
+const SearchBar = ({ answer, showAnswer, handleRefresh }) => {
   const [input, setInput] = useState("");
   let dispatch = useDispatch();
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
@@ -22,8 +25,8 @@ const SearchBar = ({ answer, showAnswer }) => {
 
   function onSubmit(e) {
     e.preventDefault();
-
     if (input.trim().length > 0) {
+      handleRefresh()
       // dispatch(getEmployees(input));
       dispatch(contentFilters({ name: input }));
       setInput("");
@@ -33,7 +36,7 @@ const SearchBar = ({ answer, showAnswer }) => {
       }, 3000);
     }
   }
-  
+
   return (
     <>
       <div className="flex flex-col relative pb-2">

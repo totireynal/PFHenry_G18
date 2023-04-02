@@ -12,16 +12,9 @@ const theme = {
   userFontColor: "#fff",
 };
 
-const chatBot = (props) => {
-  const handleClose = () => {
-    props.onClose();
-  };
-
+const chatBot = () => {
   return (
     <div className="fixed bottom-0 right-0 mb-4 mr-4">
-      <button onClick={handleClose} className="absolute top-0 right-0">
-        X
-      </button>
       <ThemeProvider theme={theme}>
         <ChatBot
           steps={[
