@@ -8,9 +8,9 @@ import {
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
-import validate from "../../../Utils/functions/validate";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 // import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 // import {postPositionCrud, postAreaCrud} from "../../../state/redux/actions/actions";
