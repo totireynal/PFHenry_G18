@@ -12,7 +12,10 @@ import { Auth0Provider } from '@auth0/auth0-react'
 const domain = 'dev-a5lp6h1utxb70h27.us.auth0.com';
 const clientId = 'KzGcYaMK0yVq39wFL8WaAH8BjmQ7yqlj';
 
+//--------FOR LOCAL USE UNCOMMENT THIS LINK----------------
 // axios.defaults.baseURL = "http://localhost:3001";
+
+//-------FOR DEPLOYMENT VERSION UNCOMMENT THIS LINK--------
 axios.defaults.baseURL = "https://pfbackend-production-f5f5.up.railway.app";
 
 
@@ -25,9 +28,13 @@ root.render(
           domain={domain} 
           clientId={clientId} 
           authorizationParams={{
-            redirect_uri: "https://pffrontend-production.up.railway.app/authorization",
+            //----FOR DEPLOYMENT--->
+            redirect_uri: "https://pf-front-end.vercel.app/authorization",
+            
+            //----FOR LOCAL--->
             // redirect_uri: "http://localhost:3000/authorization",
-            //poner la ruta del callback de Auth0
+
+            //set this route in callback at Auth0
             audience: 'staffsphere identifier',
             scope: 'openid profile email'
           }}
