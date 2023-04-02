@@ -2,8 +2,8 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postCompany } from "../../state/redux/actions/actions";
-import { CardElement } from "@stripe/react-stripe-js";
-import { useStripe, useElements } from "@stripe/react-stripe-js";
+import {CardElement} from "@stripe/react-stripe-js";
+import {useStripe, useElements} from "@stripe/react-stripe-js"
 import { getCompaniesCuit } from "../../state/redux/actions/actions";
 import { getCompaniesEmail } from "../../state/redux/actions/actions";
 import { getCompaniesName } from "../../state/redux/actions/actions";
@@ -173,12 +173,10 @@ export default function CreateCompany(props) {
     }
 
     setIsProcessing(true);
-    const { error, paymentIntent } = await stripe.confirmCardPayment(
-      clientSecret,
-      {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
+    const {error, paymentIntent} = await stripe.confirmCardPayment(
+      clientSecret,{
+      payment_method:{
+      card: elements.getElement(CardElement)
       }
     },
   )
@@ -190,7 +188,7 @@ export default function CreateCompany(props) {
     setMessage("Payment status: succeeded!")
     
     } else {
-      setMessage("Unexpected state");
+    setMessage("Unexpected state");
     }
 
   setIsProcessing(false);
@@ -234,10 +232,8 @@ export default function CreateCompany(props) {
   return (
     <div className="min-height-full flex h-screen">
       <div className="hidden lg:block relative h-full flex-1 text-6xl">
-        <h1>StaffSphere Register Company</h1>
-        <div className="text-2xl">
-          Simplify your team management for only U$S 2,000
-        </div>
+      <h1>StaffSphere Register Company</h1>
+      <div className="text-2xl">Simplify your team management for only U$S 2,000</div>
       </div>
       <div className="flex-1 flex flex-col py-14 px-4 sm:pax-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
@@ -313,12 +309,12 @@ export default function CreateCompany(props) {
                     Industry <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    name="industry"
-                    value={input.industry}
-                    onChange={(e) => handleChange(e)}
-                    placeholder="Industry"
+                  className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                   type ="text"
+                   name="industry"
+                   value={input.industry}
+                   onChange={(e) => handleChange(e)}
+                   placeholder="Industry"
                   />
                   {errors.industry && (
                     <section className="m-0  text-red-600">
@@ -368,7 +364,7 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                 </div>
-                <div>
+              <div>
                   <label
                     htmlFor="Tel"
                     className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
@@ -466,9 +462,10 @@ export default function CreateCompany(props) {
                   disabled={!isCardComplete || isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees || mensajeCuit || mensajeName || mensajeEmail|| mensajeTel}
                 >
                   {" "}
-                  <span>
+                  
+                    <span>
                     {isProcessing ? "Processing ... " : "Register and pay now"}
-                  </span>
+                    </span>
                 </button>
                  {/* Show any error or success messages */}
                  {/* {message && <div className="mb-4">{message}</div>} */}
@@ -494,6 +491,8 @@ export default function CreateCompany(props) {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
+
