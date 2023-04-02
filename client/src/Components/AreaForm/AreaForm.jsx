@@ -14,10 +14,16 @@ const AreaForm = () => {
   const dispatch = useDispatch();
 
   const allAreas = useSelector((state) => state.areasCrud);
+  const employee = useSelector((state) => state.currentEmployee);
 
   const [area, setArea] = useState({
     area: "",
+    CompanyId: employee.CompanyId,
   });
+
+  // const [companyId] = useState({
+  //   CompanyId: employee.CompanyId,
+  // });
 
   const [editArea, setEditArea] = useState(null);
 
@@ -36,13 +42,13 @@ const AreaForm = () => {
       handleUpdate(event);
     } else {
       dispatch(postAreaCrud(area));
-      setArea({ area: "" });
+      setArea({ area: "", CompanyId: employee.CompanyId });
     }
   };
 
   const handleSubmitGet = (event) => {
     event.preventDefault();
-    dispatch(getAreasCrud());
+    dispatch(getAreasCrud(employee.CompanyId));
     setShowList(!showList);
   };
 
@@ -50,7 +56,7 @@ const AreaForm = () => {
     event.preventDefault();
     dispatch(updateAreaCrud(editArea.id, area));
     setEditArea(null);
-    setArea({ area: "" });
+    setArea({ area: "", CompanyId: employee.CompanyId });
   };
 
   return (
