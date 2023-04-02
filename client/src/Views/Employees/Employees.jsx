@@ -1,6 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useNavigate, useParams } from "react-router-dom";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Employee from "./Employee/Employee";
 import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +32,7 @@ import { RiMailAddLine } from "react-icons/ri";
 import { SiMinutemailer } from "react-icons/si";
 import { BsFillTrashFill } from "react-icons/bs";
 import { FaEllipsisH } from "react-icons/fa";
+import { MdOutlineRefresh } from "react-icons/md";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
@@ -106,25 +113,23 @@ const Employees = () => {
     // dispatch(getRoles());
     // dispatch(getPositions());
     handleReset();
-    setEmailSelection([])
+    setEmailSelection([]);
   };
-  const [options, setOptions] = useState(false)
+  const [options, setOptions] = useState(false);
   const [optionFilters, setOptionFilters] = useState(false);
 
   const handleOptions = () => {
     // refOptions.current.style.opacity = '1'
     // refOptions.current.style.pointerEvent = 'auto'
     // refOptions.current.style.transform = 'translateY(-0.75rem)'
-    setOptions(!options)
-    
-  }
+    setOptions(!options);
+  };
   const handleOptionsFilters = () => {
     // refOptions.current.style.opacity = '1'
     // refOptions.current.style.pointerEvent = 'auto'
     // refOptions.current.style.transform = 'translateY(-0.75rem)'
     setOptionFilters(!optionFilters);
-    
-  }
+  };
 
   return (
     <>
@@ -243,12 +248,10 @@ const Employees = () => {
                   : "opacity-0 pointer-events-none -translate-y-3 transition-all duration-300 w-[50px]"
               } relative flex flex-col justify-center items-start   p-2  bg-black bg-opacity-50 rounded gap-1 mt-2 `}
             >
-              <button
-                className="flex relative bg-sky-400
-          shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2"
+              <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden">
                 onClick={handleRefresh}
-              >
-                Refresh
+                >
+                <MdOutlineRefresh />
               </button>
               <Sort
                 selectedOption={selectedOption}
@@ -274,11 +277,10 @@ const Employees = () => {
           </div>
           <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8 sm:flex ssm:hidden">
             <button
-              className="flex relative bg-sky-400
-          shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2"
+              className="bg-sky-400 text-white text-2xl rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden"
               onClick={handleRefresh}
             >
-              Refresh
+              <MdOutlineRefresh />
             </button>
             <Sort
               selectedOption={selectedOption}

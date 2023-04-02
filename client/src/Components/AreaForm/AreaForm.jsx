@@ -48,7 +48,7 @@ const AreaForm = () => {
 
   const handleSubmitGet = (event) => {
     event.preventDefault();
-    dispatch(getAreasCrud());
+    dispatch(getAreasCrud(employee.CompanyId));
     setShowList(!showList);
   };
 

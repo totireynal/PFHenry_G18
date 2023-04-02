@@ -43,7 +43,7 @@ const PositionForm = () => {
 
   const handleSubmitGet = (event) => {
     event.preventDefault();
-    dispatch(getPositionsCrud());
+    dispatch(getPositionsCrud(employee.CompanyId));
     setShowList(!showList);
   };
 

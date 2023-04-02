@@ -187,10 +187,10 @@ export const getPositions = (filters, CompanyId) => {
   };
 };
 
-export const getPositionsNum = (filters) => {
+export const getPositionsNum = (filters, CompanyId) => {
   return async function(dispatch) {
     try {
-      let url = "/positions/raw";
+      let url = `/positions/raw/${CompanyId}`;
 
       const response = await axios(url);
       const result = response.data;
@@ -245,10 +245,10 @@ export const getAreas = (filters, CompanyId) => {
   // }
 };
 
-export const getAreasNum = (filters) => {
+export const getAreasNum = (filters, CompanyId) => {
   return async function(dispatch) {
     try {
-      let url = "/areas/ars";
+      let url = `/areas/ars/${CompanyId}`;
 
       const response = await axios(url);
       const result = response.data;
@@ -440,10 +440,10 @@ export function postAreaCrud(area) {
   };
 }
 
-export function getAreasCrud() {
+export function getAreasCrud(CompanyId) {
   return (dispatch) => {
     axios
-      .get("/areas/ars")
+      .get(`/areas/ars/${CompanyId}`)
       .then((info) => {
         return dispatch({ type: GET_CRUD_AREAS, payload: info.data });
       })
@@ -506,10 +506,10 @@ export function postPositionCrud(position) {
   };
 }
 
-export function getPositionsCrud() {
+export function getPositionsCrud(CompanyId) {
   return (dispatch) => {
     axios
-      .get("/positions/raw")
+      .get(`/positions/raw/${CompanyId}`)
       .then((info) => {
         return dispatch({ type: GET_CRUD_POSITION, payload: info.data });
       })
