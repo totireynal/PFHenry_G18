@@ -1,12 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Link, useNavigate, useParams } from "react-router-dom";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Employee from "./Employee/Employee";
 import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +18,7 @@ import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
-import { useAnswer } from "../../utils/hooks/answer";
+import { useAnswer } from "../../Utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { RiMailAddLine } from "react-icons/ri";
@@ -92,19 +85,30 @@ const Employees = () => {
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
   useEffect(() => {
-    // setIsLoading(true);
     dispatch(getEmployees(undefined, undefined, CompanyId));
     // .then(() => setIsLoading(false));
     // return handleRefreshTwo();
-  }, [CompanyId]);
+  }, [CompanyId, dispatch]);
+
+  const del = useSelector((state) => state.deletedEmployees);
 
   useEffect(() => {
-    // setIsLoading(true);
-    dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
-    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-    // .then(() => setIsLoading(false));
-  }, [arrContentFilters, CompanyId]);
+    dispatch(getFilter(arrContentFilters, users.CompanyId, users.showAnswer));
+    dispatch(getDeletedEmployees(del.undefined, del.showAnswer, del.CompanyId));
+  }, [
+    arrContentFilters,
+    users.CompanyId,
+    users.showAnswer,
+    del.undefined,
+    del.showAnswer,
+    del.CompanyId,
+    dispatch,
+  ]);
+
+  // useEffect(() => {
+  //   dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
+  //   dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+  // }, [arrContentFilters, CompanyId, dispatch]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
@@ -316,6 +320,8 @@ const Employees = () => {
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
           {users ? (
             users?.map((user, i) => {
+              // console.log("USER-->",user);
+              if (user.role === "SuperAdmin") return "";
               return (
                 <Employee
                   key={i}

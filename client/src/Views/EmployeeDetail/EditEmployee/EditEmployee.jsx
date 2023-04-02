@@ -8,11 +8,11 @@ import {
   getPositionsNum,
   updateEmployee,
 } from "../../../state/redux/actions/actions";
-import validate from "../../../utils/functions/validate";
+import validate from "../../../Utils/functions/validate";
 // import Form from "../../../Components/Form/Form";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer";
-import { Link } from "react-router-dom";
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer";
+// import { Link } from "react-router-dom";
 // import SelectFormEdit from "../../../Components/SelectFormEdit/SelectFormEdit";
 import FormEdit from "../../../Components/FormEdit/FormEdit";
 
@@ -30,7 +30,7 @@ const EditEmployee = () => {
       dispatch(getEmployeeDetail(CompanyId, id));
       dispatch(getPositionsNum());
       dispatch(getAreasNum());
-    }, [dispatch]);
+    }, [dispatch, id, CompanyId]);
 
   const { errors, setAllErrors } = useErrors();
 
@@ -147,7 +147,7 @@ const EditEmployee = () => {
 
   return (
     <div className="w-full lg:h-screen lg:pt-0 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto ssm:pt-16">
-      {currentEmployee.role !== "SuperAdmin" ? (
+      {/* {currentEmployee.role !== "SuperAdmin" ? ( */}
         <>
           <div>
             <div className="w-full text-center mb-14 font-bold">
@@ -179,7 +179,7 @@ const EditEmployee = () => {
             </div>
           </div>
         </>
-      ) : (
+      {/* ) : (
         <>
           <h1>You cant edit a SuperAdmin!!!</h1>
           <br />
@@ -189,7 +189,7 @@ const EditEmployee = () => {
             </button>
           </Link>
         </>
-      )}
+      )} */}
     </div>
   );
 };

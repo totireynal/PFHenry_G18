@@ -37,9 +37,9 @@ import {
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
   GET_RATING,
-  POST_EVENTS,
+  // POST_EVENTS,
   GET_EVENTS,
-  PUT_EVENTS,
+  // PUT_EVENTS,
 } from "../action-types/index";
 
 export function postCompany(payload) {

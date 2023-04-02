@@ -34,7 +34,7 @@ import {
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
   GET_EVENTS,
-  PUT_EVENTS,
+  // PUT_EVENTS,
 } from "../action-types/index";
 
 const initialState = {
