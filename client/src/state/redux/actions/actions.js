@@ -1,6 +1,5 @@
 import axios from "axios";
-import { LOG10E } from "mathjs";
-import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -38,9 +37,9 @@ import {
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
   GET_RATING,
-  POST_EVENTS,
+  // POST_EVENTS,
   GET_EVENTS,
-  PUT_EVENTS,
+  // PUT_EVENTS,
 } from "../action-types/index";
 
 export function postCompany(payload) {
