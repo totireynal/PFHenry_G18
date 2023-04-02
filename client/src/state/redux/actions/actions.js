@@ -1,5 +1,4 @@
 import axios from "axios";
-import { LOG10E } from "mathjs";
 import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
@@ -621,60 +620,53 @@ export const getUsersDni = (companyId, dni) => {
   };
 };
 
-  
 export const addEvents = (savedEvents) => {
-  console.log(savedEvents, 'saved')
+  console.log(savedEvents, "saved");
   return async (dispatch) => {
     try {
       await axios.post(`http://localhost:3001/events`, savedEvents);
-
-
     } catch (error) {
-      console.log(error.error)
+      console.log(error.error);
     }
   };
 };
 
 export const getEvents = (CompanyId) => {
-         return async (dispatch) => {
-           try {
-             const response = await axios(
-               `http://localhost:3001/events/${CompanyId}`
-             );
-             const result = response.data;
-             console.log(result, 'resultt')
-             return dispatch({
-               type: GET_EVENTS,
-               payload: result,
-             });
-           } catch (error) {
-             console.log(error);
-           }
-         };
-       };
-export const putEvents = ( calendarEvent) => {
-  console.log(calendarEvent.id, 'lllllllllll');
-         return async (dispatch) => {
-           try {
-             let response = await axios.put(
-               `http://localhost:3001/events/${calendarEvent.id}`,
-               calendarEvent
-             );
-             console.log(response.data, "puttttt");
-           } catch (error) {
-             console.log(error);
-           }
-         };
-       };
-  export const deleteEvents = (id) => {
-          return async (dispatch) => {
-            try {
-              const response = await axios.delete(
-                `http://localhost:3001/events/${id}`);
-              console.log(response)
-            } catch (error) {
-              console.log(error);
-            }
-          };
-        };
-
+  return async (dispatch) => {
+    try {
+      const response = await axios(`http://localhost:3001/events/${CompanyId}`);
+      const result = response.data;
+      console.log(result, "resultt");
+      return dispatch({
+        type: GET_EVENTS,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const putEvents = (calendarEvent) => {
+  console.log(calendarEvent.id, "lllllllllll");
+  return async (dispatch) => {
+    try {
+      let response = await axios.put(
+        `http://localhost:3001/events/${calendarEvent.id}`,
+        calendarEvent
+      );
+      console.log(response.data, "puttttt");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const deleteEvents = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/events/${id}`);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
