@@ -84,19 +84,23 @@ const Employees = () => {
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
   useEffect(() => {
-    // setIsLoading(true);
     dispatch(getEmployees(undefined, undefined, CompanyId));
     // .then(() => setIsLoading(false));
     // return handleRefreshTwo();
   }, [CompanyId, dispatch]);
 
+
+  const del = useSelector(state => state.deletedEmployees)
+
   useEffect(() => {
-    // setIsLoading(true);
-    dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
-    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-    // .then(() => setIsLoading(false));
-  }, [arrContentFilters, CompanyId, showAnswer, dispatch]);
+    dispatch(getFilter(arrContentFilters, users.CompanyId, users.showAnswer));
+    dispatch(getDeletedEmployees(del.undefined, del.showAnswer, del.CompanyId));
+  }, [arrContentFilters, users.CompanyId, users.showAnswer, del.undefined, del.showAnswer, del.CompanyId, dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
+  //   dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+  // }, [arrContentFilters, CompanyId, dispatch]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
@@ -313,7 +317,7 @@ const Employees = () => {
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
           {users ? (
             users?.map((user, i) => {
-              console.log("USER-->",user);
+              // console.log("USER-->",user);
               if (user.role==="SuperAdmin") return ""
               return (
                 <Employee
