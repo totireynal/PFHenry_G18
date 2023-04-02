@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  contentFilters,
-  getEmployees,
-} from "../../../state/redux/actions/actions";
+import { contentFilters, getEmployees } from "../../../state/redux/actions/actions";
 import { useAnswer } from "../../../Utils/hooks/answer";
 
 const SearchBar = ({ answer, showAnswer }) => {
