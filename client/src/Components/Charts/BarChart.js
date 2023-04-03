@@ -60,9 +60,9 @@ const EmployeeRetention = () => {
   )
   console.log(indexArea)
 
-
+//CONTROLAR EL CASO DONDE NO HAY AREAS EN LAS COMPANIAS
 // Filtrar los objetos que tienen retentionIndex mayor a cero
-const filteredData = indexArea.filter(obj => obj.retentionIndex > 0);
+const filteredData = indexArea.filter(obj => obj.retentionIndex != null);
 
 // Obtener un array con los nombres de las áreas
 const areas = filteredData.map(obj => obj.area);
