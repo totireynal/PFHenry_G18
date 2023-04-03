@@ -44,6 +44,7 @@ import {
   INDEX_AREA,
   GET_COMPANY_INFO,
   // PUT_EVENTS,
+  GET_DOUGHNU
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -723,4 +724,28 @@ export const getIndexArea = (CompanyId) => {
     }
   }
 }
+
+
+
+export const getDoughnu = (CompanyId) => {
+  return async (dispatch) => {
+    try{
+      const response = await axios(
+        `http://localhost:3001/users/${CompanyId}`
+      );
+      const result = response.data;
+      return dispatch({
+        type: GET_DOUGHNU,
+        payload: result,
+      });
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
+
+
+
+
+
 
