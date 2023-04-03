@@ -59,7 +59,8 @@ const initialState = {
   areasCrud: [],
   positionsCrud: [],
   deletedEmployees: [],
-  events: []
+  events: [],
+  companyInfo: {}
 };
 
 function rootReducer(state = initialState, action) {
@@ -233,6 +234,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         positionsCrud: action.payload,
       };
+      case GET_COMPANY_INFO:
+      return {
+        ...state,
+        companyInfo: action.payload,
+      }
     default:
       return state;
   }
