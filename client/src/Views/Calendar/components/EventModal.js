@@ -42,7 +42,6 @@ export default function EventModal() {
   },[dispatch, CompanyId])
 
     const events = useSelector((state) => state.events);
-console.log(events, 'noseee');
   function handleSubmit(e) {
     e.preventDefault();
     //  selectedEvent ? selectedEvent.eventId : Number((Date.now()+'').split('').slice(-6).join(''))
@@ -56,7 +55,6 @@ console.log(events, 'noseee');
     };
     if (selectedEvent) {
       dispatch(putEvents(calendarEvent));
-      console.log(calendarEvent, 'calendarrr')
       dispatchCalEvent({ type: "update", payload: calendarEvent });
     } else {
       dispatch(addEvents(calendarEvent))

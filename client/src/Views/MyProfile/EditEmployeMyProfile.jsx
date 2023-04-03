@@ -33,7 +33,6 @@ const EditEmployeeMyProfile = () => {
   const { answer, showAnswer } = useAnswer();
 
   const currentEmployee = useSelector((state) => state.employeeDetail);
-  console.log(currentEmployee, "iiiiiii");
 
   const [touched, setTouched] = useState({
     name: false,
