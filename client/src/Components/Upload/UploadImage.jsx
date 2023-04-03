@@ -1,9 +1,7 @@
 import { useState } from "react";
 
-const UploadImage = ({ handleChangeImage, user }) => {
-  const [
-    // image, 
-    setImage] = useState("");
+const UploadImage = ({ handleChangeImage }) => {
+  const [image, setImage] = useState("");
 
   const upload = async (e) => {
     const files = e.target.files;
@@ -20,7 +18,7 @@ const UploadImage = ({ handleChangeImage, user }) => {
     );
     const file = await res.json();
     setImage(file.secure_url);
-
+    console.log(file.secure_url, "Prueba Imagen");
     handleChangeImage(file.secure_url);
   };
 
@@ -38,11 +36,6 @@ const UploadImage = ({ handleChangeImage, user }) => {
           id="image"
           onChange={upload}
         />
-        {/* <img
-          src={user}
-          alt="profilepic"
-          className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
-        /> */}
       </div>
     </div>
   );
