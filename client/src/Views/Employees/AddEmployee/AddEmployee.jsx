@@ -248,8 +248,8 @@ const AddEmployee = () => {
       role: "User",
       image:
         "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
-      PositionId: 0,
-      AreaId: 0,
+      PositionId: -1,
+      AreaId: -1,
       cuil: "",
       cbu: "",
       dateOfAdmission: "",

@@ -63,10 +63,6 @@ const MyProfileSuperAdmin = () => {
     dispatch(getEmployeeDetail(CompanyId,id));
   }, [id, dispatch]);
 
-  useEffect(() => {
-    dispatch(getEmployeeDetail(CompanyId,id));
-  }, [id, dispatch]);
-
   const refQualify = useRef();
   const refQualifying = useRef();
 
