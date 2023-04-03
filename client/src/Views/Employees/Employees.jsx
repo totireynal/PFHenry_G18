@@ -201,6 +201,11 @@ const Employees = () => {
                   <AiOutlinePlus size={20} />
                 </button>
               </Link>
+              <Link to={"/addareaposition/"}>
+                <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden">
+                  <AiOutlineEdit size={20} />
+                </button>
+              </Link>
 
               <button
                 onClick={() => {
@@ -307,7 +312,7 @@ const Employees = () => {
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
           {users ? (
             users?.map((user, i) => {
-              if (user.role==="SuperAdmin") return ""
+              if (user.role === "SuperAdmin") return "";
               return (
                 <Employee
                   key={i}
