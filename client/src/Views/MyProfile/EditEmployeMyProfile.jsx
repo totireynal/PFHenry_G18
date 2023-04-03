@@ -5,7 +5,7 @@ import {
   getAreasNum,
   getPositionsNum,
   updateEmployee,
-  getCurrentEmployee,
+  getEmployeeDetail,
 } from "../../state/redux/actions/actions";
 import validate from "../../Utils/functions/validate";
 // import Form from "../../Components/Form/Form";
@@ -20,13 +20,16 @@ const EditEmployeeMyProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const currentEmployeeCompany = useSelector((state) => state.currentEmployee);
+  const CompanyId = currentEmployeeCompany
+    ? currentEmployeeCompany.CompanyId
+    : null;
+
   useEffect(() => {
+    dispatch(getEmployeeDetail(CompanyId, id));
     dispatch(getPositionsNum());
     dispatch(getAreasNum());
-    return () => {
-      dispatch(getCurrentEmployee(id));
-    };
-  }, [dispatch, id]);
+  }, [dispatch, id, CompanyId]);
 
   const { errors, setAllErrors } = useErrors();
 
@@ -143,38 +146,42 @@ const EditEmployeeMyProfile = () => {
 
   return (
     <div className="w-full lg:h-screen lg:pt-0 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto ssm:pt-16">
-      <div>
-        <div className="w-full text-center mb-14 font-bold">
-          <span className="text-4xl text-sky-400">Edit Employee</span>
-        </div>
+      <>
+        <div>
+          <div className="w-full text-center mb-14 font-bold">
+            <span className="text-4xl text-sky-400">Edit Employee</span>
+          </div>
 
-        {/* ++++++++++++++BOTON BACK EditEmployee+++++++++++++++++++ */}
-        {/* <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
+          {/* ++++++++++++++BOTON BACK EditEmployee+++++++++++++++++++ */}
+          {/* <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  "
                     onClick={() => navigate(-1)}
             >BACK</button> */}
-        {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
+          {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 
-        <div className="flex gap-16">
-          <div>
-            {/* <h1>PRUEBA DE EDITH</h1> */}
-            <FormEdit
-              handleInput={handleInput}
-              handleSubmit={handleSubmit}
-              handleSelect={handleSelect}
-              touched={touched}
-              errors={errors}
-              users={updatedUser}
-              errorButton={errorButton}
-              submited={submited}
-              button="Edit Employee"
-              answer={answer}
-              handleChangeImage={handleChangeImage}
-            />
+          <div className="flex gap-16">
+            <div>
+              <FormEdit
+                handleInput={handleInput}
+                handleSubmit={handleSubmit}
+                handleSelect={handleSelect}
+                touched={touched}
+                errors={errors}
+                users={updatedUser}
+                errorButton={errorButton}
+                submited={submited}
+                button="Edit Employee"
+                answer={answer}
+                handleChangeImage={handleChangeImage}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </>
+
     </div>
+
   );
 };
+
 
 export default EditEmployeeMyProfile;
