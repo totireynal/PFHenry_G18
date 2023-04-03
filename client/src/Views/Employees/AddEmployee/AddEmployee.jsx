@@ -8,10 +8,10 @@ import {
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
-import validate from "../../../Utils/functions/validate";
-import { useBack } from "../../../Utils/hooks/mensajeBack";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useBack } from "../../../utils/hooks/mensajeBack";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 // import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
@@ -133,7 +133,6 @@ const AddEmployee = () => {
     if (event.target.name === "email") {
       const valor = event.target.value;
       dispatch(getUsersEmail(currentCompanyId, valor)).then((resultado) => {
-
         if (resultado?.message) {
           setAllErrors({
             ...employee,
@@ -144,7 +143,6 @@ const AddEmployee = () => {
             [event.target.name]: "",
           });
         }
-
       });
     }
     if (event.target.name === "cuil") {
