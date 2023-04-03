@@ -20,10 +20,11 @@ const EmployeeList = () => {
   console.log("Birthday", birthday)
     return (
       <div className="w-1/5 float-right overflow-x-hidden">
-        <h3 className="text-lg font-medium mb-4">Upcoming Birthdays</h3>
-        {birthday? (
+        <h3 className="text-lg font-medium mb-4 overflow-x-hidden">Upcoming Birthdays</h3>
+        {/* {birthday? ( */}
         <ul className="divide-y divide-gray-200">
-        {birthday.map(employee => (
+        {typeof birthday==="object"?
+        birthday?.map(employee => (
           <li key={employee.id} className="py-4 flex">
             <img className="h-10 w-10 rounded-full" src={employee.image}   alt={employee.name} />
             <div className="ml-3">
@@ -33,9 +34,10 @@ const EmployeeList = () => {
             <p className="text-sm text-gray-500">{obtenerNombreMes(employee.birthMonth)}{" "}{employee.birthDay}</p>
             </div>
         </li>
-        ))}
-        </ul>
-        ):<div>No upcoming birthdays found</div>}
+        )): <div className="overflow-x-hidden" style={{ overflowY: "hidden", scrollbarWidth: "none" }}>
+              No upcoming birthdays found
+            </div>}
+        </ul>         
     </div>
     );
   };
