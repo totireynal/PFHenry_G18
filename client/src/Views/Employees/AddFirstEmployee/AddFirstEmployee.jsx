@@ -2,11 +2,11 @@
 // import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { createEmployee } from "../../../state/redux/actions/actions";
+import { createEmployee, getAllEmployees } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
-import validate from "../../../utils/functions/validate";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer";
+import validate from "../../../Utils/functions/validate";
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer";
 
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,10 @@ const AddFirstEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {}, [dispatch]);
+ 
+
+  // const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
+  const getAlllEmployees = useSelector((state) => state.getAlllEmployees);
 
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
@@ -49,6 +52,10 @@ const AddFirstEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
+  
+  useEffect(() => {
+    dispatch(getAllEmployees());
+  }, [dispatch]);
 
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
@@ -69,7 +76,8 @@ const AddFirstEmployee = () => {
       validate({
         ...employee,
         [event.target.name]: event.target.value,
-      })
+
+      }, getAlllEmployees)
     );
 
     setTouched({
