@@ -46,7 +46,7 @@ const Rol = ({ selectedOption, handleSelectChange, CompanyId }) => {
             {e}
           </option> */}
         {roles
-          .filter((rol) => rol !== "SuperAdmin")
+          // .filter((rol) => rol !== "SuperAdmin")
           .map((e, i) => (
             <option key={i} value={e}>
               {e}
