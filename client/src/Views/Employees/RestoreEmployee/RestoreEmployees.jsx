@@ -1,7 +1,7 @@
 // import { useNavigate } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import DeletedEmployee from "../Employee/DeletedEmployee";
-import SearchBar from "./../SearchBar/SearchBar";
+// import SearchBar from "./../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cleanUrl,
@@ -86,6 +86,7 @@ const RestoreEmployees = () => {
 
   useEffect(() => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, CompanyId, deletes]);
 
   useEffect(() => {
@@ -115,6 +116,7 @@ const RestoreEmployees = () => {
     fn(searchId);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const refDivCheck = useRef();
 
   let refModal = useRef();
