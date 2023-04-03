@@ -73,7 +73,7 @@ const AreaForm = () => {
           {editArea ? "UPDATE AREA" : "CREATE AREA"}
         </button>
       </form>
-      <form onClick={handleSubmitGet} className="flex flex-col gap-2 w-80">
+      <div onClick={handleSubmitGet} className="flex flex-col gap-2 w-80">
         <button
           type="submit"
           className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
@@ -88,6 +88,7 @@ const AreaForm = () => {
                   <div className="relative mb-1">
                     <p
                       key={area?.id}
+                      onClick={(event) => event.stopPropagation()}
                       className="flex justify-center items-center border rounded h-8 font-semibold border-gray-400 bg-white"
                     >
                       {area?.area}
@@ -117,7 +118,7 @@ const AreaForm = () => {
             </ul>
           </div>
         )}
-      </form>
+      </div>
     </div>
   );
 };
