@@ -7,10 +7,10 @@ import {
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
-import validate from "../../../Utils/functions/validate";
-import { useBack } from "../../../Utils/hooks/mensajeBack";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useBack } from "../../../utils/hooks/mensajeBack";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 // import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
@@ -132,10 +132,9 @@ const AddEmployee = () => {
     if (event.target.name === "email") {
       const valor = event.target.value;
       dispatch(getUsersEmail(currentCompanyId, valor)).then((resultado) => {
-        console.log("CORREO", valor);
-        console.log("company ID", currentCompanyId);
+
         if (resultado?.message) {
-          setAllBack({
+          setAllErrors({
             ...employee,
             [event.target.name]: resultado.message,
           });
@@ -144,8 +143,7 @@ const AddEmployee = () => {
             [event.target.name]: "",
           });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message);
+
       });
     }
     if (event.target.name === "cuil") {
@@ -276,7 +274,6 @@ const AddEmployee = () => {
       dateOfAdmission: "",
     });
   };
-  console.log(errors);
   return (
     <div
       className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0

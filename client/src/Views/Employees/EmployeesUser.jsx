@@ -15,7 +15,7 @@ import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
-import { useAnswer } from "../../Utils/hooks/answer";
+import { useAnswer } from "../../utils/hooks/answer";
 
 function EmployeesUser() {
   const users = useSelector((state) => state.allEmployees);
@@ -24,7 +24,6 @@ function EmployeesUser() {
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
 
   const { answer, showAnswer } = useAnswer();
-  console.log(answer, "nnnnn");
 
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState({
