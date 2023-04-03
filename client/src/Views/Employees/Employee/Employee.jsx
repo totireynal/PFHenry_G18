@@ -55,7 +55,7 @@ const Employee = (props) => {
                 </p>
               </div>
             </div>
-            <span className="text-black text-base font-medium sm:inline ssm:hidden">
+            <span className="text-black text-base font-medium sm:inline ssm:hidden truncate ">
               {props.email}
             </span>
             <span className="lg:inline md:inline ssm:hidden text-black text-base font-medium ">
