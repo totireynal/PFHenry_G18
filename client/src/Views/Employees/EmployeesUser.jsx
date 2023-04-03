@@ -18,7 +18,7 @@ import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
-import { useAnswer } from "../../Utils/hooks/answer";
+import { useAnswer } from "../../utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 // import { RiMailAddLine } from "react-icons/ri";
@@ -310,7 +310,7 @@ const EmployeesUser = () => {
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
           {users ? (
             users?.map((user, i) => {
-              if (user.role==="SuperAdmin") return ""
+              if (user.role === "SuperAdmin") return "";
               return (
                 <EmployeeUser
                   key={i}
@@ -338,8 +338,6 @@ const EmployeesUser = () => {
 };
 
 export default EmployeesUser;
-
-
 
 // // import { Link } from "react-router-dom";
 // import { useEffect, useState } from "react";

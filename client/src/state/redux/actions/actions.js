@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -635,44 +635,41 @@ export const addEvents = (savedEvents) => {
 };
 
 export const getEvents = (CompanyId) => {
-         return async (dispatch) => {
-           try {
-             const response = await axios(
-               `http://localhost:3001/events/${CompanyId}`
-             );
-             const result = response.data;
-             return dispatch({
-               type: GET_EVENTS,
-               payload: result,
-             });
-           } catch (error) {
-             console.log(error);
-           }
-         };
-       };
-export const putEvents = ( calendarEvent) => {
-         return async (dispatch) => {
-           try {
-             let response = await axios.put(
-               `http://localhost:3001/events/${calendarEvent.id}`,
-               calendarEvent
-             );
-           } catch (error) {
-             console.log(error);
-           }
-         };
-       };
-  export const deleteEvents = (id) => {
-          return async (dispatch) => {
-            try {
-              const response = await axios.delete(
-                `http://localhost:3001/events/${id}`);
-            } catch (error) {
-              console.log(error);
-            }
-          };
+  return async (dispatch) => {
+    try {
+      const response = await axios(`http://localhost:3001/events/${CompanyId}`);
+      const result = response.data;
+      return dispatch({
+        type: GET_EVENTS,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
-        
+export const putEvents = (calendarEvent) => {
+  return async (dispatch) => {
+    try {
+      let response = await axios.put(
+        `http://localhost:3001/events/${calendarEvent.id}`,
+        calendarEvent
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const deleteEvents = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/events/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const getCompanyInfo = (CompanyId) => {
   return async (dispatch) => {
     try {
@@ -682,16 +679,14 @@ export const getCompanyInfo = (CompanyId) => {
       return dispatch({
         type: GET_COMPANY_INFO,
         payload: result,
-      })
-    } catch (error) {
-      
-    }
-  }
-} 
+      });
+    } catch (error) {}
+  };
+};
 
 export const getBirthday = (CompanyId) => {
   return async (dispatch) => {
-    try{
+    try {
       const response = await axios(
         `http://localhost:3001/users/${CompanyId}/birthday`
       );
@@ -700,16 +695,15 @@ export const getBirthday = (CompanyId) => {
         type: GET_BIRTHDAY,
         payload: result,
       });
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
-}
-
+  };
+};
 
 export const getIndexArea = (CompanyId) => {
   return async (dispatch) => {
-    try{
+    try {
       const response = await axios(
         `http://localhost:3001/areas/${CompanyId}/index`
       );
@@ -718,9 +712,8 @@ export const getIndexArea = (CompanyId) => {
         type: INDEX_AREA,
         payload: result,
       });
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
-}
-
+  };
+};
