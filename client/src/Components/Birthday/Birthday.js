@@ -1,11 +1,25 @@
 import React from "react";
+import {getBirthday} from "../../state/redux/actions/actions"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const EmployeeList = ({ employees }) => {
+
+const EmployeeList = () => {
+  const birthday = useSelector(state => state.birthday)
+  const currentEmployee = useSelector((state) => state.currentEmployee);
+  const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+  const dispatch = useDispatch();
+  useEffect(() => {
+     dispatch(getBirthday(CompanyId))
+      }, [dispatch]
+  )
+  console.log(birthday)
     return (
       <div className="flex flex-col justify-center items-center mt-4">
         <h1 className="text-xl font-semibold mb-2">Proximos cumpleaños</h1>
+        
         <ul className="grid grid-cols-1 gap-2">
-          {employees.map((employee) => (
+          {birthday.map((employee) => (
             <li key={employee.id} className="bg-white shadow-lg rounded-lg p-2 flex flex-col">
               <h2 className="text-base font-semibold mb-1">{employee.name} {employee.lastName}</h2>
               <p className="text-gray-500 text-xs mb-1">{employee.birthDay}-{employee.birthMonth}</p>
