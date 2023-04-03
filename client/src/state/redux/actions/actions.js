@@ -422,7 +422,7 @@ export const cleanArrayEmails = () => {
 export const getCompaniesName = (name) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies/validate?name=${name}`);
+      const response = await axios.get(`/companies?name=${name}`);
       const result = response.data;
       return result;
     } catch (error) {
@@ -434,7 +434,7 @@ export const getCompaniesName = (name) => {
 export const getCompaniesTel = (tel) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies/validate?tel=${tel}`);
+      const response = await axios.get(`/companies?tel=${tel}`);
       const result = response.data;
       return result;
     } catch (error) {
@@ -446,7 +446,7 @@ export const getCompaniesTel = (tel) => {
 export const getCompaniesEmail = (email) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies/validate?email=${email}`);
+      const response = await axios.get(`/companies?email=${email}`);
       const result = response.data;
       return result;
     } catch (error) {
