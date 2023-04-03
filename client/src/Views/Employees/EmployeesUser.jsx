@@ -24,7 +24,6 @@ function EmployeesUser() {
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
 
   const { answer, showAnswer } = useAnswer();
-  console.log(answer, "nnnnn");
 
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState({

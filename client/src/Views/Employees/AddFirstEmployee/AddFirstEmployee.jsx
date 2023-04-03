@@ -4,9 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { createEmployee } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
-import validate from "../../../Utils/functions/validate";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 
 import { useNavigate } from "react-router-dom";
 
@@ -18,12 +21,12 @@ const AddFirstEmployee = () => {
 
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
-  console.log(positionAdmin, "POSICION");
-  console.log(areaAdmin, "AREA");
 
-  const companyId = useSelector((state) => state.newCompanyId);
-  console.log("CompanyID: ", companyId);
 
+    const companyId = useSelector((state) => state.newCompanyId);
+  
+
+    
   var [employee, setEmployee] = useState({
     name: "",
     lastName: "",
@@ -93,7 +96,6 @@ const AddFirstEmployee = () => {
   };
 
   const handleSubmit = (event) => {
-    console.log(employee, "Datos SuperAdmin antes del set");
     event.preventDefault();
     setSubmited(true);
     dispatch(
@@ -143,7 +145,6 @@ const AddFirstEmployee = () => {
     });
     navigate("/");
   };
-  console.log(errors);
   return (
     <div
       className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0

@@ -87,10 +87,8 @@ export default function CreateCompany(props) {
       } else {
         setMensajeCuit(null);
       }
-      console.log("Valor", cuit);
-      console.log("Mensaje: ", resultado?.message)
+
     });
-    console.log("asdasdasd")
   }
 
   const handleBlurName = (event) => {
@@ -102,8 +100,7 @@ export default function CreateCompany(props) {
       } else {
         setMensajeName(null);
       }
-      console.log("Valor", name);
-      console.log("Mensaje: ", resultado?.message)
+
     });
   }
 
@@ -117,8 +114,7 @@ export default function CreateCompany(props) {
       } else {
         setMensajeEmail(null);
       }
-      console.log("Valor", email);
-      console.log("Mensaje: ", resultado?.message)
+
     });
   }
 
@@ -131,8 +127,7 @@ export default function CreateCompany(props) {
       } else {
         setMensajeTel(null);
       }
-      console.log("Valor", valor);
-      console.log("Mensaje: ", resultado?.message)
+
     });
   }
 
@@ -141,7 +136,6 @@ export default function CreateCompany(props) {
       ...input,
       image: url,
     });
-    console.log(input.image)
   };
 
   
@@ -184,7 +178,6 @@ export default function CreateCompany(props) {
     setMessage(error.message);
     } else if(paymentIntent)
     {
-      console.log(paymentIntent)
     setMessage("Payment status: succeeded!")
     
     } else {
@@ -195,9 +188,7 @@ export default function CreateCompany(props) {
 
  
 
-    console.log("Input pasado a post: ",input)
     dispatch(postCompany(input));
-    console.log(input);
     setInput({
       name: "",
       cuit: "",

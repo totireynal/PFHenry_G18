@@ -1,5 +1,6 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -39,6 +40,7 @@ import {
   GET_RATING,
   // POST_EVENTS,
   GET_EVENTS,
+  GET_COMPANY_INFO,
   // PUT_EVENTS,
 } from "../action-types/index";
 
@@ -621,7 +623,6 @@ export const getUsersDni = (companyId, dni) => {
 };
 
 export const addEvents = (savedEvents) => {
-  console.log(savedEvents, "saved");
   return async (dispatch) => {
     try {
       await axios.post(`http://localhost:3001/events`, savedEvents);
@@ -632,41 +633,57 @@ export const addEvents = (savedEvents) => {
 };
 
 export const getEvents = (CompanyId) => {
+         return async (dispatch) => {
+           try {
+             const response = await axios(
+               `http://localhost:3001/events/${CompanyId}`
+             );
+             const result = response.data;
+             return dispatch({
+               type: GET_EVENTS,
+               payload: result,
+             });
+           } catch (error) {
+             console.log(error);
+           }
+         };
+       };
+export const putEvents = ( calendarEvent) => {
+         return async (dispatch) => {
+           try {
+             let response = await axios.put(
+               `http://localhost:3001/events/${calendarEvent.id}`,
+               calendarEvent
+             );
+           } catch (error) {
+             console.log(error);
+           }
+         };
+       };
+  export const deleteEvents = (id) => {
+          return async (dispatch) => {
+            try {
+              const response = await axios.delete(
+                `http://localhost:3001/events/${id}`);
+            } catch (error) {
+              console.log(error);
+            }
+          };
+};
+        
+export const getCompanyInfo = (CompanyId) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`http://localhost:3001/events/${CompanyId}`);
-      const result = response.data;
-      console.log(result, "resultt");
+      const response = axios(`http://localhost:3001/companies/${CompanyId}`);
+      const result = (await response).data;
+
       return dispatch({
-        type: GET_EVENTS,
+        type: GET_COMPANY_INFO,
         payload: result,
-      });
+      })
     } catch (error) {
-      console.log(error);
+      
     }
-  };
-};
-export const putEvents = (calendarEvent) => {
-  console.log(calendarEvent.id, "lllllllllll");
-  return async (dispatch) => {
-    try {
-      let response = await axios.put(
-        `http://localhost:3001/events/${calendarEvent.id}`,
-        calendarEvent
-      );
-      console.log(response.data, "puttttt");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-export const deleteEvents = (id) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.delete(`http://localhost:3001/events/${id}`);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+  }
+} 
+
