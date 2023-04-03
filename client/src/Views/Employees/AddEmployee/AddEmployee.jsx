@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
@@ -31,8 +32,8 @@ const AddEmployee = () => {
   const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
 
   useEffect(() => {
-    dispatch(getPositionsNum());
-    dispatch(getAreasNum());
+    dispatch(getPositionsNum(undefined, currentCompanyId));
+    dispatch(getAreasNum(undefined, currentCompanyId));
   }, [dispatch]);
 
   const positionsNum = useSelector((state) => state.positionsNum);
