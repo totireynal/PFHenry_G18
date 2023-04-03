@@ -124,11 +124,6 @@ const AddEmployee = () => {
   };
 
   const handleBlur = (event) => {
-    // const { value, name } = event.target;
-    // setAllBack({
-    //     ...employee,
-    //     [event.target.name]: event.target.value,
-    // });
 
     if (event.target.name === "email") {
       const valor = event.target.value;
@@ -285,14 +280,6 @@ ssm:py-16"
           <span className="text-4xl text-sky-400">Add Employe</span>
         </div>
 
-        {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
-        {/* <Link to="/employees">
-            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  ">
-            BACK
-            </button>
-          </Link> */}
-        {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
-
         <div className="flex gap-16">
           <div className="">
             <Form
@@ -313,9 +300,7 @@ ssm:py-16"
               handleBlur={handleBlur}
               back={back}
             />
-            {/* {mensajeEmail && <p>{mensajeEmail.email}</p>} */}
           </div>
-          {/* <p>{back.email}</p> */}
         </div>
       </div>
     </div>
