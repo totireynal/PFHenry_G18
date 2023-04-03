@@ -1,32 +1,38 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { createEmployee } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
-import validate from "../../../utils/functions/validate";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer";
-import validate from "../../../utils/functions/validate";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer";
-
+import validate from "../../../Utils/functions/validate";
+import { useBack } from "../../../Utils/hooks/mensajeBack";
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import jwt_decode from "jwt-decode";
+import {
+  getUsersTel,
+  getUsersEmail,
+  getUsersCuil,
+  getUsersCbu,
+  getUsersDni,
+} from "../../../state/redux/actions/actions";
 
 const AddFirstEmployee = () => {
+  const [cookies] = useCookies(["cookieBack"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const decodedToken = cookies.cookieBack
+    ? jwt_decode(cookies.cookieBack)
+    : null;
+  const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
 
   useEffect(() => {}, [dispatch]);
 
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
 
+  const companyId = useSelector((state) => state.newCompanyId);
 
-    const companyId = useSelector((state) => state.newCompanyId);
-  
-
-    
   var [employee, setEmployee] = useState({
     name: "",
     lastName: "",
@@ -49,6 +55,8 @@ const AddFirstEmployee = () => {
   const [errorButton, setErrorButton] = useState(false);
 
   const { errors, setAllErrors } = useErrors();
+
+  const { back, setAllBack } = useBack();
 
   const {
     answer,
@@ -85,6 +93,85 @@ const AddFirstEmployee = () => {
       setErrorButton(false);
     } else {
       setErrorButton(true);
+    }
+  };
+
+  const handleBlur = (event) => {
+    if (event.target.name === "email") {
+      const valor = event.target.value;
+      dispatch(getUsersEmail(currentCompanyId, valor)).then((result) => {
+        console.log(result?.message);
+        if (result?.message) {
+          setAllErrors({
+            ...employee,
+            [event.target.name]: result.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+      });
+    }
+    if (event.target.name === "cuil") {
+      const valor = event.target.value;
+      dispatch(getUsersCuil(currentCompanyId, valor)).then((result) => {
+        if (result?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: result.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+      });
+    }
+    if (event.target.name === "cbu") {
+      const valor = event.target.value;
+      dispatch(getUsersCbu(currentCompanyId, valor)).then((result) => {
+        if (result?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: result.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+      });
+    }
+    if (event.target.name === "dni") {
+      const valor = event.target.value;
+      dispatch(getUsersDni(currentCompanyId, valor)).then((result) => {
+        if (result?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: result.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+      });
+    }
+    if (event.target.name === "tel") {
+      const valor = event.target.value;
+      dispatch(getUsersTel(currentCompanyId, valor)).then((result) => {
+        if (result?.message) {
+          setAllBack({
+            ...employee,
+            [event.target.name]: result.message,
+          });
+        } else {
+          setAllBack({
+            [event.target.name]: "",
+          });
+        }
+      });
     }
   };
 
@@ -175,6 +262,7 @@ const AddFirstEmployee = () => {
               submited={submited}
               button="Add Employee"
               answer={answer}
+              handleBlur={handleBlur}
               handleChangeImage={handleChangeImage}
             />
           </div>
