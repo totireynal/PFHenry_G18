@@ -60,7 +60,9 @@ const initialState = {
   positionsCrud: [],
   deletedEmployees: [],
   events: [],
-  companyInfo: {}
+  companyInfo: {},
+  birthday: [],
+  indexArea: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -198,11 +200,10 @@ function rootReducer(state = initialState, action) {
         ...state,
       };
     case GET_EVENTS:
-      
       return {
         ...state,
-        events: action.payload
-      }
+        events: action.payload,
+      };
 
     case POST_CRUD_AREA:
       return {
@@ -234,11 +235,21 @@ function rootReducer(state = initialState, action) {
         ...state,
         positionsCrud: action.payload,
       };
-      case GET_COMPANY_INFO:
+    case GET_COMPANY_INFO:
       return {
         ...state,
         companyInfo: action.payload,
-      }
+      };
+    case GET_BIRTHDAY:
+      return {
+        ...state,
+        birthday: action.payload,
+      };
+    case INDEX_AREA:
+      return {
+        ...state,
+        indexArea: action.payload,
+      };
     default:
       return state;
   }
