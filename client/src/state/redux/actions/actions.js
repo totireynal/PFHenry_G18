@@ -669,6 +669,7 @@ export const getEvents = (CompanyId) => {
 export const putEvents = (calendarEvent) => {
   return async (dispatch) => {
     try {
+      // eslint-disable-next-line no-unused-vars
       let response = await axios.put(
         `http://localhost:3001/events/${calendarEvent.id}`,
         calendarEvent
@@ -681,6 +682,7 @@ export const putEvents = (calendarEvent) => {
 export const deleteEvents = (id) => {
   return async (dispatch) => {
     try {
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.delete(`http://localhost:3001/events/${id}`);
     } catch (error) {
       console.log(error);

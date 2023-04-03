@@ -13,7 +13,7 @@ import {
   // getPositions,
   // getRoles,
   getDeletedEmployees,
-  getEvents,
+  // getEvents,
 } from "../../state/redux/actions/actions";
 import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
@@ -94,10 +94,9 @@ const Employees = () => {
   // const del = useSelector((state) => state.deletedEmployees);
 
   useEffect(() => {
-    // setIsLoading(true);
     dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-    // .then(() => setIsLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arrContentFilters, CompanyId, dispatch, emailsSelection]);
 
   const handleRefresh = (event) => {
@@ -312,7 +311,7 @@ const Employees = () => {
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
           {users ? (
             users?.map((user, i) => {
-              if (user.role === "SuperAdmin") return "";
+              // if (user.role === "SuperAdmin") return "";
               return (
                 <Employee
                   key={i}
