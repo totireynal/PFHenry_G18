@@ -1,9 +1,8 @@
 import { useState } from "react";
 
 const UploadImage = ({ handleChangeImage, user }) => {
-  const [
-    // image, 
-    setImage] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [image, setImage] = useState("");
 
   const upload = async (e) => {
     const files = e.target.files;
@@ -20,7 +19,7 @@ const UploadImage = ({ handleChangeImage, user }) => {
     );
     const file = await res.json();
     setImage(file.secure_url);
-
+    console.log(file.secure_url);
     handleChangeImage(file.secure_url);
   };
 

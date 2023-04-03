@@ -5,8 +5,21 @@ const regex = {
   image: /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)\??([%&a-z0-9=_-]+)?$/i,
 };
 
-const validate = (values) => {
+const validate = (values, getAlllEmployees) => {
+  // console.log(getAlllEmployees, "alllll");
   const errors = {};
+
+  const allEmails = getAlllEmployees.map(el => el.email)
+  const allCbus = getAlllEmployees.map(el => el.cbu)
+  const allCuils = getAlllEmployees.map(el => el.cuil)
+  const allTel = getAlllEmployees.map(el => el.tel)
+  const allDni = getAlllEmployees.map(el => el.dni)
+
+  if(allEmails.includes(`${values.email}`)) errors.email = 'Ya esta en la base de datos perrito salvaje'
+  if(allCbus.includes(`${values.cbu}`)) errors.cbu = 'Ya esta en la base de datos perrito salvaje'
+  if(allCuils.includes(`${values.cuil}`)) errors.cuil = 'Ya esta en la base de datos perrito salvaje'
+  if(allTel.includes(`${values.tel}`)) errors.tel = 'Ya esta en la base de datos perrito salvaje'
+  if(allDni.includes(`${values.dni}`)) errors.dni = 'Ya esta en la base de datos perrito salvaje'
 
   if (values.role === "default") errors.role = "You must choose a role";
   if (!values.name.length) errors.name = "Name can't be empty";

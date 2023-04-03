@@ -8,7 +8,7 @@ const SelectFormSec = ({
   handler,
   error,
   optionQuantity,
-  
+  users
 }) => {
   
 
@@ -34,11 +34,18 @@ const errorStyle =
         id={id}
         defaultValue="default"
       >
+        {users === -1 && (
+          <option value="default" hidden>
+            {label}
+          </option>
+        )}
         <option value="default" hidden>
           {label}
         </option>
         {optionQuantity.map((pos, i) => (
-          <option key= {i} value={pos.id}>{pos?.position || pos?.area}</option>
+          <option key={i} value={pos.id}>
+            {pos?.position || pos?.area}
+          </option>
         ))}
       </select>
       <div className="text-end">

@@ -20,13 +20,16 @@ const Employee = (props) => {
   // refDivCheck.current.style.display = 'none'
 
   return (
-    <div
-      className=" bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
+    <div className=" bg-white rounded-xl h-20  border z-0 hover:z-10 hover:shadow-2xl hover:shadow-sky-200 hover:-translate-y-1 transition duration-100 overflow-hidden relative">
       <label
-        id='check'
+        id="check"
         onClick={() => setCheck(!check)}
         ref={refDivCheck}
-        className={`${props.emailsUnselect ? 'inline-block' : 'hidden'} ${check ? 'bg-sky-400 bg-opacity-20' : 'bg-transparent'} absolute h-full w-full `}
+        className={`${props.emailsUnselect ? "inline-block" : "hidden"} ${
+          check && props.emailsSelection.includes(`${props.email}`)
+            ? "bg-sky-400 bg-opacity-20"
+            : "bg-transparent"
+        } absolute h-full w-full `}
       >
         <input
           className="absolute right-10 top-10 hidden"

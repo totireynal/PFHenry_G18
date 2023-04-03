@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import {
   createEmployee,
+  getAllEmployees,
   getAreasNum,
   getPositionsNum,
 } from "../../../state/redux/actions/actions";
 import Form from "../../../Components/Form/Form";
-import validate from "../../../Utils/functions/validate";
-import { useBack } from "../../../Utils/hooks/mensajeBack";
-import { useErrors } from "../../../Utils/hooks/errors";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import validate from "../../../utils/functions/validate";
+import { useBack } from "../../../utils/hooks/mensajeBack";
+import { useErrors } from "../../../utils/hooks/errors";
+import { useAnswer } from "../../../utils/hooks/answer";
 // import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
@@ -30,10 +31,11 @@ const AddEmployee = () => {
     ? jwt_decode(cookies.cookieBack)
     : null;
   const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
-
+  const getAlllEmployees = useSelector((state) => state.getAlllEmployees);
   useEffect(() => {
     dispatch(getPositionsNum(undefined, currentCompanyId));
     dispatch(getAreasNum(undefined, currentCompanyId));
+    dispatch(getAllEmployees());
   }, [dispatch]);
 
   const positionsNum = useSelector((state) => state.positionsNum);
@@ -97,10 +99,13 @@ const AddEmployee = () => {
     });
 
     setAllErrors(
-      validate({
-        ...employee,
-        [event.target.name]: event.target.value,
-      })
+      validate(
+        {
+          ...employee,
+          [event.target.name]: event.target.value,
+        },
+        getAlllEmployees
+      )
     );
 
     setTouched({
@@ -123,86 +128,86 @@ const AddEmployee = () => {
     });
   };
 
-  const handleBlur = (event) => {
+  // const handleBlur = (event) => {
 
-    if (event.target.name === "email") {
-      const valor = event.target.value;
-      dispatch(getUsersEmail(currentCompanyId, valor)).then((resultado) => {
+  //   if (event.target.name === "email") {
+  //     const valor = event.target.value;
+  //     dispatch(getUsersEmail(currentCompanyId, valor)).then((resultado) => {
 
-        if (resultado?.message) {
-          setAllErrors({
-            ...employee,
-            [event.target.name]: resultado.message,
-          });
-        } else {
-          setAllBack({
-            [event.target.name]: "",
-          });
-        }
+  //       if (resultado?.message) {
+  //         setAllErrors({
+  //           ...employee,
+  //           [event.target.name]: resultado.message,
+  //         });
+  //       } else {
+  //         setAllBack({
+  //           [event.target.name]: "",
+  //         });
+  //       }
 
-      });
-    }
-    if (event.target.name === "cuil") {
-      const valor = event.target.value;
-      dispatch(getUsersCuil(currentCompanyId, valor)).then((resultado) => {
-        if (resultado?.message) {
-          setAllBack({
-            ...employee,
-            [event.target.name]: resultado.message,
-          });
-        } else {
-          setAllBack({
-            [event.target.name]: "",
-          });
-        }
-      });
-    }
-    if (event.target.name === "cbu") {
-      const valor = event.target.value;
-      dispatch(getUsersCbu(currentCompanyId, valor)).then((resultado) => {
-        if (resultado?.message) {
-          setAllBack({
-            ...employee,
-            [event.target.name]: resultado.message,
-          });
-        } else {
-          setAllBack({
-            [event.target.name]: "",
-          });
-        }
-      });
-    }
-    if (event.target.name === "dni") {
-      const valor = event.target.value;
-      dispatch(getUsersDni(currentCompanyId, valor)).then((resultado) => {
-        if (resultado?.message) {
-          setAllBack({
-            ...employee,
-            [event.target.name]: resultado.message,
-          });
-        } else {
-          setAllBack({
-            [event.target.name]: "",
-          });
-        }
-      });
-    }
-    if (event.target.name === "tel") {
-      const valor = event.target.value;
-      dispatch(getUsersTel(currentCompanyId, valor)).then((resultado) => {
-        if (resultado?.message) {
-          setAllBack({
-            ...employee,
-            [event.target.name]: resultado.message,
-          });
-        } else {
-          setAllBack({
-            [event.target.name]: "",
-          });
-        }
-      });
-    }
-  };
+  //     });
+  //   }
+  //   if (event.target.name === "cuil") {
+  //     const valor = event.target.value;
+  //     dispatch(getUsersCuil(currentCompanyId, valor)).then((resultado) => {
+  //       if (resultado?.message) {
+  //         setAllBack({
+  //           ...employee,
+  //           [event.target.name]: resultado.message,
+  //         });
+  //       } else {
+  //         setAllBack({
+  //           [event.target.name]: "",
+  //         });
+  //       }
+  //     });
+  //   }
+  //   if (event.target.name === "cbu") {
+  //     const valor = event.target.value;
+  //     dispatch(getUsersCbu(currentCompanyId, valor)).then((resultado) => {
+  //       if (resultado?.message) {
+  //         setAllBack({
+  //           ...employee,
+  //           [event.target.name]: resultado.message,
+  //         });
+  //       } else {
+  //         setAllBack({
+  //           [event.target.name]: "",
+  //         });
+  //       }
+  //     });
+  //   }
+  //   if (event.target.name === "dni") {
+  //     const valor = event.target.value;
+  //     dispatch(getUsersDni(currentCompanyId, valor)).then((resultado) => {
+  //       if (resultado?.message) {
+  //         setAllBack({
+  //           ...employee,
+  //           [event.target.name]: resultado.message,
+  //         });
+  //       } else {
+  //         setAllBack({
+  //           [event.target.name]: "",
+  //         });
+  //       }
+  //     });
+  //   }
+  //   if (event.target.name === "tel") {
+  //     const valor = event.target.value;
+  //     dispatch(getUsersTel(currentCompanyId, valor)).then((resultado) => {
+  //       if (resultado?.message) {
+  //         setAllBack({
+  //           ...employee,
+  //           [event.target.name]: resultado.message,
+  //         });
+  //       } else {
+  //         setAllBack({
+  //           [event.target.name]: "",
+  //         });
+  //       }
+  //     });
+  //   }
+  // };
 
   const handleSelect = (e) => {
     const { value, name } = e.target;
@@ -245,8 +250,8 @@ const AddEmployee = () => {
       role: "User",
       image:
         "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
-      PositionId: 0,
-      AreaId: 0,
+      PositionId: -1,
+      AreaId: -1,
       cuil: "",
       cbu: "",
       dateOfAdmission: "",
@@ -297,7 +302,7 @@ ssm:py-16"
               positionsNum={positionsNum}
               areasNum={areasNum}
               companiId={currentCompanyId}
-              handleBlur={handleBlur}
+              // handleBlur={handleBlur}
               back={back}
             />
           </div>
