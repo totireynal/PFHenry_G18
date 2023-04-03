@@ -8,27 +8,19 @@ import validate from "../../../Utils/functions/validate";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
 
-
 import { useNavigate } from "react-router-dom";
 
 const AddFirstEmployee = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
- 
-  
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
 
+  const companyId = useSelector((state) => state.newCompanyId);
 
-    const companyId = useSelector((state) => state.newCompanyId);
-  
-
-    
   var [employee, setEmployee] = useState({
     name: "",
     lastName: "",
@@ -52,22 +44,18 @@ const AddFirstEmployee = () => {
 
   const { errors, setAllErrors } = useErrors();
 
-  const {
-    answer,
-    showAnswer
-  } = useAnswer();
+  const { answer, showAnswer } = useAnswer();
 
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
-
 
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
       setErrorButton(false);
     }
   }, [errors]);
-  
+
   useEffect(() => {}, []);
 
   const handleInput = (event) => {
@@ -107,17 +95,12 @@ const AddFirstEmployee = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmited(true);
-    dispatch(
-      createEmployee(
-        employee, 
-        showAnswer
-      )
-    );
-      setTimeout(() => {
+    dispatch(createEmployee(employee, showAnswer));
+    setTimeout(() => {
       setSubmited(false);
-      navigate("/")
-      }, 3000);
-     
+      navigate("/");
+    }, 3000);
+
     setErrorButton(true);
     setEmployee({
       name: "",

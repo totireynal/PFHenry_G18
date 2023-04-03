@@ -106,26 +106,26 @@ const RestoreEmployees = () => {
     setOptionFilters(!optionFilters);
   };
 
-  const [searchId, setSearchId] = useState(0)
-  const sendSearchId = (id) => setSearchId(id)
+  const [searchId, setSearchId] = useState(0);
+  const sendSearchId = (id) => setSearchId(id);
 
-    const handleClick = (event) => {
-      dispatch(updateDeletedEmployee(searchId));
-      dispatch(getDeletedEmployees(undefined, undefined, CompanyId));
-      fn(searchId);
+  const handleClick = (event) => {
+    dispatch(updateDeletedEmployee(searchId));
+    dispatch(getDeletedEmployees(undefined, undefined, CompanyId));
+    fn(searchId);
   };
-  
-    const refDivCheck = useRef();
 
-    let refModal = useRef();
+  const refDivCheck = useRef();
 
-    let refDivModal = useRef();
+  let refModal = useRef();
 
-    const modalActive = () => {
-      refModal.current.style.display = "flex";
-      refDivModal.current.style.transform = "scale-1";
-      refDivModal.current.style.opacity = "1";
-    };
+  let refDivModal = useRef();
+
+  const modalActive = () => {
+    refModal.current.style.display = "flex";
+    refDivModal.current.style.transform = "scale-1";
+    refDivModal.current.style.opacity = "1";
+  };
   return (
     <>
       <div

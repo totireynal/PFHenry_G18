@@ -8,7 +8,7 @@ import {
    } from "chart.js"
   
   import { Doughnut } from 'react-chartjs-2';
-  import {getEmployees} from "../../state/redux/actions/actions"
+  import {getDoughnu} from "../../state/redux/actions/actions"
   import { useEffect, useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   
@@ -21,17 +21,17 @@ import {
 
 export default function DoughnuChart(){
 
-    const allEmployees = useSelector(state => state.allEmployees)
+    const doughnut = useSelector(state => state.doughnut)
 
     const currentEmployee = useSelector((state) => state.currentEmployee);
     const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
 
     const dispatch = useDispatch();
     useEffect(() => {
-     dispatch(getEmployees(CompanyId))
-      }, [dispatch, allEmployees]
+     dispatch(getDoughnu(CompanyId))
+      }, [dispatch, doughnut]
   )
-  console.log(allEmployees)
+  console.log(doughnut)
 
        const options = {
 
@@ -48,7 +48,7 @@ export default function DoughnuChart(){
 
     const data = useMemo(function(){
 
-        const empleadosPorArea = allEmployees.reduce((acumulador, empleado) => {
+        const empleadosPorArea = doughnut.reduce((acumulador, empleado) => {
             const {area} = empleado;
             if (!acumulador[area]){
                 acumulador[area] = 0;
