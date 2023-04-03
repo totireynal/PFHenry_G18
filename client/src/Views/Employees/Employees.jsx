@@ -91,7 +91,7 @@ const Employees = () => {
     // return handleRefreshTwo();
   }, [CompanyId, dispatch]);
 
-  const del = useSelector((state) => state.deletedEmployees);
+  // const del = useSelector((state) => state.deletedEmployees);
 
   useEffect(() => {
     // setIsLoading(true);

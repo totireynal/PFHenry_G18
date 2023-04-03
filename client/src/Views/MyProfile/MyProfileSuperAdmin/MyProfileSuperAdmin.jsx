@@ -221,7 +221,7 @@ const MyProfileSuperAdmin = () => {
           <div className="flex felx-col gap-10 w-8/12 lg:justify-start ssm:justify-center ">
             <div className="flex flex-col justify-center lg:items-start ssm:items-center gap-5">
               <div className="flex lg:flex-wrap lg:text-start  ssm:flex-wrap ssm:text-center gap-5 text-6xl flex-wrap">
-                <p className="w-full">Coca-cola</p>
+                <p className="w-full">{companyInfo.name}</p>
               </div>
               <div className="lg:text-start ssm:text-center">
                 <p>
