@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 // import SideBar from "../../../Components/SideBar/SideBar";
 import {
   getAreasNum,
@@ -147,7 +147,7 @@ const EditEmployee = () => {
 
   return (
     <div className="w-full lg:h-screen lg:pt-0 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto ssm:pt-16">
-      {/* {currentEmployee.role !== "SuperAdmin" ? ( */}
+      {currentEmployee.role !== "SuperAdmin" ? (
       <>
         <div>
           <div className="w-full text-center mb-14 font-bold">
@@ -179,18 +179,20 @@ const EditEmployee = () => {
           </div>
         </div>
       </>
-      {/* ) : (
-        <>
+      
+      
+      ) : (
+        <div className="flex flex-col gap-4 justify-center items-center">
           <h1>You cant edit a SuperAdmin!!!</h1>
-          <br />
-          <Link to="/employees">
+          <Link to={`/employees/${CompanyId}`}>
             <button className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
               Got it
             </button>
           </Link>
-        </>
-      )} */}
+        </div>
+      )}
     </div>
+
   );
 };
 

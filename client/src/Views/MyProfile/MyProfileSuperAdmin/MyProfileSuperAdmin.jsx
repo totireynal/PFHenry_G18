@@ -210,7 +210,7 @@ const MyProfileSuperAdmin = () => {
       >
         <div className="flex gap-16 lg:flex-row ssm:items-center ssm:flex-col-reverse">
           <img
-            src="https://static.dw.com/image/60105922_403.jpg"
+            src={companyInfo.image}
             alt="profilepic"
             className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md h-[200px] "
           />
@@ -299,7 +299,7 @@ const MyProfileSuperAdmin = () => {
               {role}
             </p>
             <div className="flex flex-col  lg:w-fit ssm: mt-10 gap-3 ">
-              <Link to={`/editemployee/${id}`}>
+              <Link to={`/editemployeemyprofile/${id}`}>
                 <button className="bg-sky-400 text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
                   Edit Employee
                 </button>

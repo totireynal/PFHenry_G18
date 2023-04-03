@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 // import { resetCurrentEmployee } from "../../state/redux/actions/actions";
 // import { useCookies } from "react-cookie";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   // const dispatch = useDispatch();
@@ -192,12 +193,13 @@ const SideBar = () => {
               </div>
             </div>
           </div>
-
+          <Link to={url}>
           <img
             className="xl:inline-block h-[200px] ssm:hidden w-60 object-cover "
             src={current.image}
             alt=""
           />
+          </Link>
         </div>
       </div>
     </>

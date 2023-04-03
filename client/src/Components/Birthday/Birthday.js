@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import {getBirthday} from "../../state/redux/actions/actions"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {obtenerNombreMes} from "./BirthMonth"
 import { Link } from "react-router-dom";
@@ -50,28 +51,28 @@ const EmployeeList = () => {
 
 //Estilo lindo pero grande
 
-{/* <div className="max-w-md mx-auto">
-  <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-    {birthday.map((employee) => (
-      <li className="flex flex-col rounded-lg shadow-lg overflow-hidden" key={employee.id}>
-        <div className="flex-shrink-0">
-          <img className="h-48 w-full object-cover" src={employee.image} alt={employee.name} />
-        </div>
-        <div className="flex-1 bg-white p-4 flex flex-col justify-between">
-          <div className="flex-1">
-            <h3 className="text-lg font-medium">{employee.name} {employee.lastName}</h3>
-            <p className="text-sm">{obtenerNombreMes(employee.birthMonth)}{" "}{employee.birthDay}</p>
-          </div>
-          <div className="mt-4">
-            <a href={`employee/${employee.id}`} className="text-base font-medium text-indigo-600 hover:text-indigo-500">
-              View Profile
-            </a>
-          </div>
-        </div>
-      </li>
-    ))}
-  </ul>
-</div> */}
+// <div className="max-w-md mx-auto">
+// <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+//     {birthday.map((employee) => (
+//       <li className="flex flex-col rounded-lg shadow-lg overflow-hidden" key={employee.id}>
+//         <div className="flex-shrink-0">
+//           <img className="h-48 w-full object-cover" src={employee.image} alt={employee.name} />
+//         </div>
+//         <div className="flex-1 bg-white p-4 flex flex-col justify-between">
+//           <div className="flex-1">
+//             <h3 className="text-lg font-medium">{employee.name} {employee.lastName}</h3>
+//             <p className="text-sm">{obtenerNombreMes(employee.birthMonth)}{" "}{employee.birthDay}</p>
+//           </div>
+//           <div className="mt-4">
+//             <a href={`employee/${employee.id}`} className="text-base font-medium text-indigo-600 hover:text-indigo-500">
+//               View Profile
+//             </a>
+//           </div>
+//         </div>
+//       </li>
+//     ))}
+//   </ul>
+// </div> 
 
 
 
