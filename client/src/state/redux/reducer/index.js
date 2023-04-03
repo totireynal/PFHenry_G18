@@ -266,18 +266,9 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         companyInfo: action.payload,
-    case GET_BIRTHDAY:
-      return {
-        ...state,
-        birthday: action.payload,
-      };
-    case INDEX_AREA:
-      return {
-        ...state,
-        indexArea: action.payload,
-      };
+      }
     default:
-      return state;
+      return {...state};
   }
 }
   
