@@ -1,5 +1,5 @@
 import ButtonSideBar from "./ButtonSideBar/ButtonSideBar";
-import ButtonSideBarGrey from "./ButtonSideBar/ButtonSideBarGrey";
+import ButtonSideBarGrey from "./ButtonSideBar/ButtonSideBarGray";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { useAuth0 } from "@auth0/auth0-react";

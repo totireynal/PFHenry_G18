@@ -15,7 +15,7 @@ import MyProfileAdmin from "./Views/MyProfile/MyProfileAdmin";
 import MyProfileUser from "./Views/MyProfile/MyProfileUser";
 import Notifications from "./Views/Notifications/Notifications";
 // import Organization from "./Views/Organization";
-import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+// import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
