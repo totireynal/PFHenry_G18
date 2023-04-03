@@ -37,7 +37,8 @@ import {
   PUT_EVENTS,
   GET_COMPANY_INFO,
   GET_BIRTHDAY,
-  INDEX_AREA
+  INDEX_AREA,
+  GET_ALL_EMPLOYEES
 } from "../action-types/index";
 
 const initialState = {
@@ -63,10 +64,16 @@ const initialState = {
   companyInfo: {},
   birthday: [],
   indexArea: [],
+  getAlllEmployees: []
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case GET_ALL_EMPLOYEES:
+      return {
+        ...state,
+        getAlllEmployees: action.payload
+      }
     case GET_COMPANIES:
       return {
         ...state,
