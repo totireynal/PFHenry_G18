@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { createEmployee } from "../../../state/redux/actions/actions";
+import { createEmployee, getAllEmployees } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
 import validate from "../../../Utils/functions/validate";
-import { useBack } from "../../../Utils/hooks/mensajeBack";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
+
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
@@ -21,12 +21,11 @@ const AddFirstEmployee = () => {
   const [cookies] = useCookies(["cookieBack"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const decodedToken = cookies.cookieBack
-    ? jwt_decode(cookies.cookieBack)
-    : null;
-  const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
 
-  useEffect(() => {}, [dispatch]);
+ 
+
+  // const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
+  const getAlllEmployees = useSelector((state) => state.getAlllEmployees);
 
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
@@ -56,16 +55,21 @@ const AddFirstEmployee = () => {
 
   const { errors, setAllErrors } = useErrors();
 
-  const { back, setAllBack } = useBack();
-
-  const {
-    answer,
-    //  showAnswer
-  } = useAnswer();
+  const { answer, showAnswer } = useAnswer();
 
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
+  
+  useEffect(() => {
+    dispatch(getAllEmployees());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0) {
+      setErrorButton(false);
+    }
+  }, [errors]);
 
   useEffect(() => {}, []);
 
@@ -80,7 +84,8 @@ const AddFirstEmployee = () => {
       validate({
         ...employee,
         [event.target.name]: event.target.value,
-      })
+
+      }, getAlllEmployees)
     );
 
     setTouched({
@@ -185,15 +190,12 @@ const AddFirstEmployee = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmited(true);
-    dispatch(
-      createEmployee(
-        employee
-        // , showAnswer
-      )
-    );
+    dispatch(createEmployee(employee, showAnswer));
     setTimeout(() => {
       setSubmited(false);
+      navigate("/");
     }, 3000);
+
     setErrorButton(true);
     setEmployee({
       name: "",
@@ -230,7 +232,7 @@ const AddFirstEmployee = () => {
       cbu: "",
       dateOfAdmission: "",
     });
-    navigate("/");
+    // navigate("/");
   };
   return (
     <div
@@ -241,15 +243,6 @@ const AddFirstEmployee = () => {
         <div className="w-full text-center mb-14 font-bold">
           <span className="text-4xl text-sky-400">Add Employee</span>
         </div>
-
-        {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
-        {/* <Link to="/employees">
-            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  ">
-            BACK
-            </button>
-          </Link> */}
-        {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
-
         <div className="flex gap-16">
           <div>
             <FormFirstEmployee

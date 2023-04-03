@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-// import {getDataColors} from  "./funciones/helpers";
 
 import {
     Chart as ChartJS,
@@ -9,6 +8,9 @@ import {
    } from "chart.js"
   
   import { Doughnut } from 'react-chartjs-2';
+  import {getDoughnu} from "../../state/redux/actions/actions"
+  import { useEffect, useState } from "react";
+  import { useDispatch, useSelector } from "react-redux";
   
   ChartJS.register(
       ArcElement,
@@ -18,6 +20,18 @@ import {
 
 
 export default function DoughnuChart(){
+
+    const doughnut = useSelector(state => state.doughnut)
+
+    const currentEmployee = useSelector((state) => state.currentEmployee);
+    const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+     dispatch(getDoughnu(CompanyId))
+      }, [dispatch, doughnut]
+  )
+  console.log(doughnut)
 
        const options = {
 
@@ -33,11 +47,25 @@ export default function DoughnuChart(){
        
 
     const data = useMemo(function(){
+
+        const empleadosPorArea = doughnut.reduce((acumulador, empleado) => {
+            const {area} = empleado;
+            if (!acumulador[area]){
+                acumulador[area] = 0;
+            } 
+            acumulador[area]++;
+            return acumulador;
+        }, {});
+        const resultado = Object.keys(empleadosPorArea).map((area)=>{
+            return{area, cantidad: empleadosPorArea[area]};
+        })
+        console.log(resultado);
+
         return{
-            labels: ["Engineering", "Operations", "Legals", "HHRR"],
+            labels: resultado.map(empleado => empleado.area),
             datasets: [
                 {
-                    data: [5, 10, 3, 2],
+                    data: resultado.map(empleado => empleado.cantidad),
                     backgroundColor: getDataColors(20),
                     borderColor: getDataColors(),
               }

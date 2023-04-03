@@ -2,7 +2,8 @@
 import InputForm from "../InputForm";
 
 import UploadImage from "../Upload/UploadImage";
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FormFirstEmployee = ({
   handleInput,
@@ -23,6 +24,7 @@ const FormFirstEmployee = ({
   // dispatch(getPositionsNum())
   // dispatch(getAreasNum())
   //   }, [dispatch])
+  var navigate = useNavigate();
 
   return (
     <form
@@ -176,9 +178,9 @@ const FormFirstEmployee = ({
         </button>
       ) : (
         <p className="px-20 py-4 bg-green-400 text-white rounded">{answer}</p>
+        // <p className="px-20 py-4 bg-green-400 text-white rounded">{answer}</p>
       )}
-      {/* <p className="px-20 py-4 bg-green-400 rounded">hola que ase</p> */}
-      {/* {submited && <p className="text-green-800">{answer}</p>} */}
+      
     </form>
   );
 };

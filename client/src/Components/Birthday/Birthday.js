@@ -1,24 +1,81 @@
 import React from "react";
+import {getBirthday} from "../../state/redux/actions/actions"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {obtenerNombreMes} from "./BirthMonth"
+import { Link } from "react-router-dom";
 
-const EmployeeList = ({ employees }) => {
+
+const EmployeeList = () => {
+
+  const birthday = useSelector(state => state.birthday)
+  const currentEmployee = useSelector((state) => state.currentEmployee);
+  const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+     dispatch(getBirthday(CompanyId))
+      }, [dispatch]
+  )
+  console.log("Birthday", birthday)
     return (
-      <div className="flex flex-col justify-center items-center mt-4">
-        <h1 className="text-xl font-semibold mb-2">Proximos cumpleaños</h1>
-        <ul className="grid grid-cols-1 gap-2">
-          {employees.map((employee) => (
-            <li key={employee.id} className="bg-white shadow-lg rounded-lg p-2 flex flex-col">
-              <h2 className="text-base font-semibold mb-1">{employee.name} {employee.lastName}</h2>
-              <p className="text-gray-500 text-xs mb-1">{employee.birthDay}-{employee.birthMonth}</p>
-              <div className="flex justify-end">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full text-xs">
-                  Ver detalle
-                </button>
-              </div>
-            </li>
-          ))}
+      <div className="w-1/5 float-right overflow-x-hidden">
+        <h3 className="text-lg font-medium mb-4">Upcoming Birthdays</h3>
+        {birthday? (
+        <ul className="divide-y divide-gray-200">
+        {birthday.map(employee => (
+          <li key={employee.id} className="py-4 flex">
+            <img className="h-10 w-10 rounded-full" src={employee.image}   alt={employee.name} />
+            <div className="ml-3">
+            <Link to={`/employee/${employee.id}`}>
+              <p className="text-sm font-medium text-gray-900">{employee.name} {employee.lastName}</p>
+              </Link>
+            <p className="text-sm text-gray-500">{obtenerNombreMes(employee.birthMonth)}{" "}{employee.birthDay}</p>
+            </div>
+        </li>
+        ))}
         </ul>
-      </div>
+        ):<div>No upcoming birthdays found</div>}
+    </div>
     );
   };
   
   export default EmployeeList;
+
+
+
+
+
+
+
+//Estilo lindo pero grande
+
+{/* <div className="max-w-md mx-auto">
+  <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+    {birthday.map((employee) => (
+      <li className="flex flex-col rounded-lg shadow-lg overflow-hidden" key={employee.id}>
+        <div className="flex-shrink-0">
+          <img className="h-48 w-full object-cover" src={employee.image} alt={employee.name} />
+        </div>
+        <div className="flex-1 bg-white p-4 flex flex-col justify-between">
+          <div className="flex-1">
+            <h3 className="text-lg font-medium">{employee.name} {employee.lastName}</h3>
+            <p className="text-sm">{obtenerNombreMes(employee.birthMonth)}{" "}{employee.birthDay}</p>
+          </div>
+          <div className="mt-4">
+            <a href={`employee/${employee.id}`} className="text-base font-medium text-indigo-600 hover:text-indigo-500">
+              View Profile
+            </a>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div> */}
+
+
+
+
+
+
+  

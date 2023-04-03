@@ -7,7 +7,8 @@ const SelectForm = ({
   error,
   label,
   touched,
-  value
+  value,
+  users,
 }) => {
   return (
     <div className="lg:m-4 lg:w-60 md:w-[600px] sm:w-[450px] ssm:[200px] ssm:m-auto">
@@ -24,6 +25,7 @@ const SelectForm = ({
           {value}
         </option>
         {optionQuantity.map((el, i) => (
+
           <option disabled={el.disable} value={el.value} key={i}>
             {el.html}
           </option>

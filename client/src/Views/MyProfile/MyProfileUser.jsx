@@ -7,6 +7,8 @@ import { getEmployeeDetail } from "../../state/redux/actions/actions";
 const MyProfile = () => {
   // let { id } = useParams();
   let employeeDetail = useSelector((state) => state.currentEmployee);
+    const currentEmployee = useSelector((state) => state.currentEmployee);
+    const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
   let dispatch = useDispatch();
 
   
@@ -29,7 +31,7 @@ const MyProfile = () => {
   } = employeeDetail;
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id));
+    dispatch(getEmployeeDetail(CompanyId, id));
   }, [id, dispatch]);
 
 

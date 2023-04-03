@@ -225,7 +225,8 @@ const Form = ({
             handler={handleSelect}
             error={errors.PositionId}
             optionQuantity={positionsNum}
-          />
+            users={users.PositionId}
+            />
           <SelectFormSec
             label="Area"
             name="AreaId"
@@ -234,6 +235,7 @@ const Form = ({
             handler={handleSelect}
             error={errors.AreaId}
             optionQuantity={areasNum}
+            users={users.AreaId}
           />
         </div>
         <div className="w-full">

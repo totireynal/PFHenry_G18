@@ -36,6 +36,10 @@ import {
   GET_EVENTS,
   PUT_EVENTS,
   GET_COMPANY_INFO,
+  GET_BIRTHDAY,
+  INDEX_AREA,
+  GET_ALL_EMPLOYEES,
+  GET_DOUGHNU,
 } from "../action-types/index";
 
 const initialState = {
@@ -58,11 +62,20 @@ const initialState = {
   positionsCrud: [],
   deletedEmployees: [],
   events: [],
-  companyInfo: {}
+  birthday: [],
+  indexArea: [],
+  doughnut: [],
+  companyInfo: {},
+  getAlllEmployees: [],
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case GET_ALL_EMPLOYEES:
+      return {
+        ...state,
+        getAlllEmployees: action.payload,
+      };
     case GET_COMPANIES:
       return {
         ...state,
@@ -196,11 +209,10 @@ function rootReducer(state = initialState, action) {
         ...state,
       };
     case GET_EVENTS:
-      
       return {
         ...state,
-        events: action.payload
-      }
+        events: action.payload,
+      };
 
     case POST_CRUD_AREA:
       return {
@@ -232,14 +244,30 @@ function rootReducer(state = initialState, action) {
         ...state,
         positionsCrud: action.payload,
       };
+    case GET_BIRTHDAY:
+      return {
+        ...state,
+        birthday: action.payload,
+      };
+    case INDEX_AREA:
+      return {
+        ...state,
+        indexArea: action.payload,
+      };
+    case GET_DOUGHNU:
+      return {
+        ...state,
+        doughnut: action.payload,
+      };
+
     case GET_COMPANY_INFO:
       return {
         ...state,
         companyInfo: action.payload,
-      }
+      };
     default:
-      return state;
+      return { ...state };
   }
 }
-  
-  export default rootReducer;
+
+export default rootReducer;
