@@ -10,11 +10,13 @@ import {
 const SearchBarDeleted = ({ answer, showAnswer, handleRefresh }) => {
   let dispatch = useDispatch();
 
+  // eslint-disable-next-line no-unused-vars
   const users = useSelector((state) => state.deletedEmployees);
     const currentEmployee = useSelector((state) => state.currentEmployee);
     const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
 useEffect(() => {
   dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [dispatch, CompanyId]);
 
 

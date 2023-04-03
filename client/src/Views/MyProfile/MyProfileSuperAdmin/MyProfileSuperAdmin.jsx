@@ -210,7 +210,7 @@ const MyProfileSuperAdmin = () => {
       >
         <div className="flex gap-16 lg:flex-row ssm:items-center ssm:flex-col-reverse">
           <img
-            src="https://static.dw.com/image/60105922_403.jpg"
+            src={companyInfo.image}
             alt="profilepic"
             className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md h-[200px] "
           />
