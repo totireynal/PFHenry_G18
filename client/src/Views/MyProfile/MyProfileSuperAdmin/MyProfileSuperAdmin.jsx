@@ -60,11 +60,11 @@ const MyProfileSuperAdmin = () => {
   } = employeeDetail;
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id));
+    dispatch(getEmployeeDetail(CompanyId,id));
   }, [id, dispatch]);
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id));
+    dispatch(getEmployeeDetail(CompanyId,id));
   }, [id, dispatch]);
 
   const refQualify = useRef();
@@ -123,6 +123,7 @@ const MyProfileSuperAdmin = () => {
     refSuperAdminMode.current.style.display = "none";
     close();
   };
+
 
   
   return (
