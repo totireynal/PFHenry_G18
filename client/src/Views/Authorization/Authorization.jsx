@@ -19,8 +19,8 @@ const Authorization = () => {
     try {        
       const token = await getAccessTokenSilently();
       //SWITCH FOR LOCAL OR DEPLOYMENT
-      // const response = await axios.get("http://localhost:3001/protected", {
-      const response = await axios.get("/protected", {
+      const response = await axios.get("http://localhost:3001/protected", {
+      // const response = await axios.get("/protected", {
 
         headers: {
           authorization: `Bearer ${token}`

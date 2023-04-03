@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Employee from "./Employee";
+import EmployeeUser from "./Employee/EmployeeUser";
 import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -50,11 +50,11 @@ function EmployeesUser() {
 
   useEffect(() => {
     dispatch(getEmployees(undefined, showAnswer, CompanyId));
-  }, [CompanyId, showAnswer, dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getFilter(arrContentFilters, CompanyId));
-  }, [arrContentFilters, CompanyId, dispatch]);
+  }, [dispatch]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
@@ -107,8 +107,9 @@ function EmployeesUser() {
       <div className="flex flex-col gap-2 pb-8 pt-3 ">
         {users ? (
           users?.map((user, i) => {
+            if (user.role === "SuperAdmin") return "";
             return (
-              <Employee
+              <EmployeeUser
                 key={i}
                 id={user?.id}
                 name={user?.name}
