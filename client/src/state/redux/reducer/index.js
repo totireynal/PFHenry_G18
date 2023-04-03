@@ -63,7 +63,8 @@ const initialState = {
   events: [],
   birthday: [],
   indexArea: [],
-  doughnut :[]
+  doughnut :[],
+  companyInfo: {}
 };
 
 function rootReducer(state = initialState, action) {
@@ -253,6 +254,11 @@ function rootReducer(state = initialState, action) {
         doughnut: action.payload
       }
 
+      case GET_COMPANY_INFO:
+      return {
+        ...state,
+        companyInfo: action.payload,
+      }
     default:
       return state;
   }

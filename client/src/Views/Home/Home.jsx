@@ -52,7 +52,7 @@ const Home = () => {
       <button
         onClick={handleLogin}
         type="submit"
-        className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 fixed right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 z-50"
+        className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 fixed right-10 top-7 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 z-50"
       >
         {" "}
         Login

@@ -90,13 +90,14 @@ const Employees = () => {
     // return handleRefreshTwo();
   }, [CompanyId, dispatch]);
 
-  const del = useSelector((state) => state.deletedEmployees);
+  // const del = useSelector((state) => state.deletedEmployees);
 
   useEffect(() => {
     // setIsLoading(true);
     dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
     // .then(() => setIsLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arrContentFilters, CompanyId, dispatch]);
 
   const handleRefresh = (event) => {
