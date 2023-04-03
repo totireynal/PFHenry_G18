@@ -41,3 +41,4 @@ export const GET_EVENTS = "GET_EVENTS";
 export const PUT_EVENTS = "PUT_EVENTS";
 export const DELETE_EVENTS = "DELETE_EVENTS";
 export const GET_BIRTHDAY = "GET_BIRTHDAY"
+export const INDEX_AREA ="INDEX_AREA";

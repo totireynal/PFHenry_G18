@@ -41,6 +41,7 @@ import {
   GET_EVENTS,
   PUT_EVENTS,
   GET_BIRTHDAY,
+  INDEX_AREA
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -687,6 +688,24 @@ export const getBirthday = (CompanyId) => {
       const result = response.data;
       return dispatch({
         type: GET_BIRTHDAY,
+        payload: result,
+      });
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
+
+
+export const getIndexArea = (CompanyId) => {
+  return async (dispatch) => {
+    try{
+      const response = await axios(
+        `http://localhost:3001/areas/${CompanyId}/index`
+      );
+      const result = response.data;
+      return dispatch({
+        type: INDEX_AREA,
         payload: result,
       });
     }catch(error){
