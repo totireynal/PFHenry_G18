@@ -13,7 +13,7 @@ const Authorization = () => {
   const [cookies, setCookie] = useCookies(['token']);
   const { getAccessTokenSilently } = useAuth0();
 
-    console.log(cookies);
+  console.log(cookies);
 
   const callProtectedApi = useCallback(async () => {
     try {        

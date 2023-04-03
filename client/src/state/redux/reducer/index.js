@@ -35,6 +35,9 @@ import {
   UPDATE_DELETED_EMPLOYEE,
   GET_EVENTS,
   PUT_EVENTS,
+  GET_COMPANY_INFO,
+  GET_BIRTHDAY,
+  INDEX_AREA
 } from "../action-types/index";
 
 const initialState = {
@@ -56,9 +59,11 @@ const initialState = {
   areasCrud: [],
   positionsCrud: [],
   deletedEmployees: [],
-  events: []
+  events: [],
+  companyInfo: {},
+  birthday: [],
+  indexArea: []
 };
-console.log(initialState.ratings);
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -231,6 +236,21 @@ function rootReducer(state = initialState, action) {
         ...state,
         positionsCrud: action.payload,
       };
+      case GET_COMPANY_INFO:
+      return {
+        ...state,
+        companyInfo: action.payload,
+      }
+      case  GET_BIRTHDAY:
+      return {
+        ...state,
+        birthday: action.payload,
+      }
+    case INDEX_AREA:
+      return {
+        ...state,
+        indexArea: action.payload
+      }
     default:
       return state;
   }

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
@@ -31,8 +32,8 @@ const AddEmployee = () => {
   const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
 
   useEffect(() => {
-    dispatch(getPositionsNum());
-    dispatch(getAreasNum());
+    dispatch(getPositionsNum(undefined, currentCompanyId));
+    dispatch(getAreasNum(undefined, currentCompanyId));
   }, [dispatch]);
 
   const positionsNum = useSelector((state) => state.positionsNum);
@@ -123,19 +124,13 @@ const AddEmployee = () => {
   };
 
   const handleBlur = (event) => {
-    // const { value, name } = event.target;
-    // setAllBack({
-    //     ...employee,
-    //     [event.target.name]: event.target.value,
-    // });
 
     if (event.target.name === "email") {
       const valor = event.target.value;
       dispatch(getUsersEmail(currentCompanyId, valor)).then((resultado) => {
-        console.log("CORREO", valor);
-        console.log("company ID", currentCompanyId);
+
         if (resultado?.message) {
-          setAllBack({
+          setAllErrors({
             ...employee,
             [event.target.name]: resultado.message,
           });
@@ -144,8 +139,7 @@ const AddEmployee = () => {
             [event.target.name]: "",
           });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message);
+
       });
     }
     if (event.target.name === "cuil") {
@@ -276,7 +270,6 @@ const AddEmployee = () => {
       dateOfAdmission: "",
     });
   };
-  console.log(errors);
   return (
     <div
       className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0
@@ -286,14 +279,6 @@ ssm:py-16"
         <div className="w-full text-center mb-14 font-bold">
           <span className="text-4xl text-sky-400">Add Employe</span>
         </div>
-
-        {/* ++++++++++++++BOTON BACK AddEmployee+++++++++++++++++++ */}
-        {/* <Link to="/employees">
-            <button className="flex relative bg-sky-700 shadow-sky-600 hover:bg-sky-600 h-8 w-24 justify-center items-center rounded text-white border  ">
-            BACK
-            </button>
-          </Link> */}
-        {/* ++++++++++++++BOTON BACK+++++++++++++++++++ */}
 
         <div className="flex gap-16">
           <div className="">
@@ -315,9 +300,7 @@ ssm:py-16"
               handleBlur={handleBlur}
               back={back}
             />
-            {/* {mensajeEmail && <p>{mensajeEmail.email}</p>} */}
           </div>
-          {/* <p>{back.email}</p> */}
         </div>
       </div>
     </div>

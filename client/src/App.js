@@ -15,7 +15,7 @@ import MyProfileAdmin from "./Views/MyProfile/MyProfileAdmin";
 import MyProfileUser from "./Views/MyProfile/MyProfileUser";
 import Notifications from "./Views/Notifications/Notifications";
 // import Organization from "./Views/Organization";
-import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+// import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import SideBar from "./Components/SideBar/SideBar";
 import Payment from "./Views/Payment/Payment";
 import AddEmployee from "./Views/Employees/AddEmployee/AddEmployee";
@@ -119,15 +119,10 @@ function App() {
 
         {/* +++++ SUPERADMIN ROUTES +++++ */}
 
-        <Route
-          element={
-            <ProtectedRoute
-              isAllowed={user.role === "SuperAdmin"}
-              redirectTo="/home"
-            />
-          }
-        >
-          <Route path="/dashboard" element={<Dashboard />} />
+        {user.role === "SuperAdmin" && (
+        <>
+        
+        <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees/:id" element={<Employees />} />
           <Route path="/deletedemployees/:id" element={<RestoreEmployees />} />
           <Route path="/employee/:id" element={<EmployeeDetail />} />
@@ -142,18 +137,14 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
           {/* FALTA LA DE EDITAR DATOS DE LA EMPRESA */}
-        </Route>
+          
+          </>
+         )}
+         
+         {user.role === "Admin" && (<>
 
-        {/* +++++ ADMIN ROUTES +++++ */}
+          {/* +++++ ADMIN ROUTES +++++ */}
 
-        <Route
-          element={
-            <ProtectedRoute
-              isAllowed={user.role === "Admin"}
-              redirectTo="/home"
-            />
-          }
-        >
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees/:id" element={<Employees />} />
           <Route path="/employee/:id" element={<EmployeeDetail />} />
@@ -168,28 +159,23 @@ function App() {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/myprofile/:id" element={<MyProfileAdmin />} />
-        </Route>
+        </>)}
 
         {/* +++++ USER ROUTES +++++ */}
 
-        <Route
-          element={
-            <ProtectedRoute
-              isAllowed={user.role === "User"}
-              redirectTo="/home"
-            />
-          }
-        >
+          {user.role === "User" && (<>
+
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/employees/:id" element={<EmployeesUser />} />
+          <Route path="/employeesuser/:id" element={<EmployeesUser />} />
           <Route path="/myprofile/:id" element={<MyProfileUser />} />
           <Route path="/calendar" element={<CalendarUser />} />
-        </Route>
 
+          </>)}
         <Route
-          path="*"
-          element={<h1 className="h-screen w-screen">Ruta equivocada</h1>}
-        />
+        path="*"
+        element={<h1 className="h-screen w-screen">Ruta equivocada</h1>}
+
+      />
       </Routes>
     </div>
   );

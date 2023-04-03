@@ -58,7 +58,6 @@ export default function ContextWrapper(props) {
           //     CompanyId: 1679453976039,
           //   },
           // ];
-      console.log(events, "eventtt");
       return events;
     }
   const filteredEvents = useMemo(() => {

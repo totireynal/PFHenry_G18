@@ -25,6 +25,7 @@ import { RiMailAddLine } from "react-icons/ri";
 import { SiMinutemailer } from "react-icons/si";
 import { BsFillTrashFill } from "react-icons/bs";
 import { FaEllipsisH } from "react-icons/fa";
+import { MdOutlineRefresh } from "react-icons/md";
 
 const Employees = () => {
   const users = useSelector((state) => state.allEmployees);
@@ -84,19 +85,20 @@ const Employees = () => {
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
   useEffect(() => {
-    // setIsLoading(true);
     dispatch(getEmployees(undefined, undefined, CompanyId));
     // .then(() => setIsLoading(false));
     // return handleRefreshTwo();
   }, [CompanyId, dispatch]);
 
+  // const del = useSelector((state) => state.deletedEmployees);
+
   useEffect(() => {
     // setIsLoading(true);
     dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-    dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
     // .then(() => setIsLoading(false));
-  }, [arrContentFilters, CompanyId, showAnswer, dispatch]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [arrContentFilters, CompanyId, dispatch]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
@@ -105,25 +107,23 @@ const Employees = () => {
     // dispatch(getRoles());
     // dispatch(getPositions());
     handleReset();
-    setEmailSelection([])
+    setEmailSelection([]);
   };
-  const [options, setOptions] = useState(false)
+  const [options, setOptions] = useState(false);
   const [optionFilters, setOptionFilters] = useState(false);
 
   const handleOptions = () => {
     // refOptions.current.style.opacity = '1'
     // refOptions.current.style.pointerEvent = 'auto'
     // refOptions.current.style.transform = 'translateY(-0.75rem)'
-    setOptions(!options)
-    
-  }
+    setOptions(!options);
+  };
   const handleOptionsFilters = () => {
     // refOptions.current.style.opacity = '1'
     // refOptions.current.style.pointerEvent = 'auto'
     // refOptions.current.style.transform = 'translateY(-0.75rem)'
     setOptionFilters(!optionFilters);
-    
-  }
+  };
 
   return (
     <>
@@ -243,11 +243,10 @@ const Employees = () => {
               } relative flex flex-col justify-center items-start   p-2  bg-black bg-opacity-50 rounded gap-1 mt-2 `}
             >
               <button
-                className="flex relative bg-sky-400
-          shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2"
+                className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden"
                 onClick={handleRefresh}
               >
-                Refresh
+                <MdOutlineRefresh />
               </button>
               <Sort
                 selectedOption={selectedOption}
@@ -273,11 +272,10 @@ const Employees = () => {
           </div>
           <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8 sm:flex ssm:hidden">
             <button
-              className="flex relative bg-sky-400
-          shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2"
+              className="bg-sky-400 text-white text-2xl rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden"
               onClick={handleRefresh}
             >
-              Refresh
+              <MdOutlineRefresh />
             </button>
             <Sort
               selectedOption={selectedOption}
@@ -313,7 +311,6 @@ const Employees = () => {
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
           {users ? (
             users?.map((user, i) => {
-              console.log("USER-->",user);
               if (user.role==="SuperAdmin") return ""
               return (
                 <Employee
