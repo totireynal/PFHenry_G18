@@ -38,7 +38,8 @@ import {
   GET_COMPANY_INFO,
   GET_BIRTHDAY,
   INDEX_AREA,
-  GET_ALL_EMPLOYEES
+  GET_ALL_EMPLOYEES,
+  GET_DOUGHNU
 } from "../action-types/index";
 
 const initialState = {
@@ -61,6 +62,9 @@ const initialState = {
   positionsCrud: [],
   deletedEmployees: [],
   events: [],
+  birthday: [],
+  indexArea: [],
+  doughnut :[],
   companyInfo: {},
   birthday: [],
   indexArea: [],
@@ -242,11 +246,26 @@ function rootReducer(state = initialState, action) {
         ...state,
         positionsCrud: action.payload,
       };
+    case  GET_BIRTHDAY:
+      return {
+        ...state,
+        birthday: action.payload,
+      }
+    case INDEX_AREA:
+      return {
+        ...state,
+        indexArea: action.payload
+      }
+    case GET_DOUGHNU:
+      return{
+        ...state,
+        doughnut: action.payload
+      }
+
     case GET_COMPANY_INFO:
       return {
         ...state,
         companyInfo: action.payload,
-      };
     case GET_BIRTHDAY:
       return {
         ...state,

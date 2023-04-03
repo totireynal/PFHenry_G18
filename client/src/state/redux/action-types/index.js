@@ -44,3 +44,4 @@ export const DELETE_EVENTS = "DELETE_EVENTS";
 export const GET_COMPANY_INFO = 'GET_COMPANY_INFO'
 export const GET_BIRTHDAY = "GET_BIRTHDAY"
 export const INDEX_AREA ="INDEX_AREA";
+export const GET_DOUGHNU = "GET_DOUGHNU"
