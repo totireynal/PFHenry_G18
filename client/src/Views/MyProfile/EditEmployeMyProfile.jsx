@@ -156,6 +156,7 @@ const EditEmployeeMyProfile = () => {
 
         <div className="flex gap-16">
           <div>
+            {/* <h1>PRUEBA DE EDITH</h1> */}
             <FormEdit
               handleInput={handleInput}
               handleSubmit={handleSubmit}
