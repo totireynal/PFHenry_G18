@@ -1,5 +1,5 @@
 // import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DeletedEmployee from "../Employee/DeletedEmployee";
 import SearchBar from "./../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import {
   getFilter,
   getPositions,
   getRoles,
+  updateDeletedEmployee,
 } from "../../../state/redux/actions/actions";
 import Sort from "../../../Components/Sort/Sort";
 import Position from "../../../Components/Position/Position";
@@ -22,16 +23,15 @@ import { useAnswer } from "../../../Utils/hooks/answer";
 // import { SiMinutemailer } from "react-icons/si";
 // import { BsFillTrashFill } from "react-icons/bs";
 import { FaEllipsisH } from "react-icons/fa";
+import SearchBarDeleted from "../SearchBarDeleted/SearchBarDeleted";
 
 const RestoreEmployees = () => {
   const users = useSelector((state) => state.deletedEmployees);
-  console.log("segunda", users);
 
   const currentEmployee = useSelector((state) => state.currentEmployee);
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
 
   // const { CompanyId } = useParams()
-  console.log("monta employees-->", CompanyId);
 
   // const navigate = useNavigate();
   const { answer, showAnswer } = useAnswer();
@@ -39,7 +39,6 @@ const RestoreEmployees = () => {
   const dispatch = useDispatch();
 
   const [deletes, setDeletes] = useState(users);
-  console.log(users, "decimee");
 
   const fn = (id) =>
     setDeletes((del) => {
@@ -87,7 +86,7 @@ const RestoreEmployees = () => {
 
   useEffect(() => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-  }, [dispatch, CompanyId, deletes, showAnswer]);
+  }, [dispatch, CompanyId, deletes]);
 
   useEffect(() => {
     dispatch(getFilter(arrContentFilters, CompanyId));
@@ -106,15 +105,69 @@ const RestoreEmployees = () => {
   const handleOptionsFilters = () => {
     setOptionFilters(!optionFilters);
   };
+
+  const [searchId, setSearchId] = useState(0)
+  const sendSearchId = (id) => setSearchId(id)
+
+    const handleClick = (event) => {
+      dispatch(updateDeletedEmployee(searchId));
+      dispatch(getDeletedEmployees(undefined, undefined, CompanyId));
+      fn(searchId);
+  };
+  
+    const refDivCheck = useRef();
+
+    let refModal = useRef();
+
+    let refDivModal = useRef();
+
+    const modalActive = () => {
+      refModal.current.style.display = "flex";
+      refDivModal.current.style.transform = "scale-1";
+      refDivModal.current.style.opacity = "1";
+    };
   return (
     <>
+      <div
+        onClick={() => {
+          refModal.current.style.display = "none";
+        }}
+        ref={refModal}
+        className="fixed w-screen h-screen justify-center items-center bg-black bg-opacity-50 hidden z-10"
+      >
+        <div
+          ref={refDivModal}
+          className="flex flex-col justify-between w-[600px] h-[200px] bg-white rounded p-6 text-xl transition-all duration-100"
+        >
+          <h3>Are you sure you want to restore this employee?</h3>
+          <div className="text-end text-base flex justify-between">
+            <div className="flex justify-center items-center text-base  bg-green-400 rounded w-60 opacity-0">
+              <p className="pr-42 pl-2 py-1">Se deleteo</p>
+            </div>
+            <div>
+              <button
+                className="mr-6 px-6 py-2 bg-blue-400 rounded text-white"
+                onClick={handleClick}
+              >
+                Restore
+              </button>
+              <button
+                className=" px-6 py-2 bg-red-400 rounded text-white"
+                onClick={() => (refModal.current.style = "none")}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className=" relative w-full mr-10 h-screen overflow-auto  xl:pl-72 sm:pl-36 ssm:pl-12 z-0">
         {/* {
       isLoading ? <div>loadong</div> : */}
         {/* <div> */}
         <div className="flex sm:flex-col flex-wrap  h-auto pt-12    bg-slate-100 mb-3 items-center justify-center gap-2.5">
           <div className="flex gap-2 ">
-            <SearchBar
+            <SearchBarDeleted
               SearchBar
               showAnswer={showAnswer}
               answer={answer}
@@ -213,6 +266,8 @@ const RestoreEmployees = () => {
                   position={user?.position}
                   role={user?.role}
                   fn={fn}
+                  modalActive={modalActive}
+                  sendSearchId={sendSearchId}
                 />
               );
             })

@@ -74,7 +74,6 @@ const MyProfile = () => {
     refModal.current.style.opacity = "0";
   };
 
-  console.log(commentary);
 
   return (
     <>

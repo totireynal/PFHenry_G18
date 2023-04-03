@@ -19,9 +19,7 @@ const UploadImage = ({ handleChangeImage, user }) => {
       }
     );
     const file = await res.json();
-    console.log(res);
     setImage(file.secure_url);
-    console.log("URL de la imagen:", file.secure_url);
 
     handleChangeImage(file.secure_url);
   };
