@@ -21,8 +21,6 @@ import Rol from "../../Components/Rol/Rol";
 import { useAnswer } from "../../utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
-// import { RiMailAddLine } from "react-icons/ri";
-// import { SiMinutemailer } from "react-icons/si";
 import { BsFillTrashFill } from "react-icons/bs";
 import { FaEllipsisH } from "react-icons/fa";
 import { MdOutlineRefresh } from "react-icons/md";

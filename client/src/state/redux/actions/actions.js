@@ -43,8 +43,26 @@ import {
   GET_BIRTHDAY,
   INDEX_AREA,
   GET_COMPANY_INFO,
+  GET_ALL_EMPLOYEES,
   // PUT_EVENTS,
+  GET_DOUGHNU,
 } from "../action-types/index";
+
+export const getAllEmployees = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`http://localhost:3001/users`);
+      const result = response.data;
+      // console.log(result);
+      return dispatch({
+        type: GET_ALL_EMPLOYEES,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export function postCompany(payload) {
   return async function(dispatch) {
@@ -710,6 +728,21 @@ export const getIndexArea = (CompanyId) => {
       const result = response.data;
       return dispatch({
         type: INDEX_AREA,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getDoughnu = (CompanyId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`http://localhost:3001/users/${CompanyId}`);
+      const result = response.data;
+      return dispatch({
+        type: GET_DOUGHNU,
         payload: result,
       });
     } catch (error) {

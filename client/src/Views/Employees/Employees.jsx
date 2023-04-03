@@ -13,6 +13,7 @@ import {
   // getPositions,
   // getRoles,
   getDeletedEmployees,
+  getEvents,
 } from "../../state/redux/actions/actions";
 import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
@@ -97,8 +98,7 @@ const Employees = () => {
     dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
     // .then(() => setIsLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [arrContentFilters, CompanyId, dispatch]);
+  }, [arrContentFilters, CompanyId, dispatch, emailsSelection]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
@@ -202,10 +202,11 @@ const Employees = () => {
                 </button>
               </Link>
               <Link to={"/addareaposition/"}>
-                <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+                <button className="bg-sky-400 text-white rounded  overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden">
                   <AiOutlineEdit size={20} />
                 </button>
               </Link>
+
               <button
                 onClick={() => {
                   setEmailsUnselect(!emailsUnselect);

@@ -10,7 +10,7 @@ const InputeForm = ({
   id,
   error,
   touched,
-  onBlur,
+  // onBlur,
   back
 }) => {
   
@@ -40,7 +40,7 @@ const errorStyle = error && touched
           placeholder={placeholder}
           id={id}
           valid={error}
-          onBlur={onBlur}
+          // onBlur={onBlur}
           valide={back}
         />
       </div>

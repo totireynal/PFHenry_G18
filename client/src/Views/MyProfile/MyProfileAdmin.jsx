@@ -20,6 +20,8 @@ const MyProfileAdmin = () => {
 
   // let { id } = useParams();
   const dispatch = useDispatch();
+    const currentEmployee = useSelector((state) => state.currentEmployee);
+    const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
 
   
   let employeeDetail = useSelector((state) => state.currentEmployee);
@@ -62,11 +64,7 @@ const MyProfileAdmin = () => {
   } = employeeDetail;
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id));
-  }, [id, dispatch]);
-
-  useEffect(() => {
-    dispatch(getEmployeeDetail(id));
+    dispatch(getEmployeeDetail(CompanyId, id));
   }, [id, dispatch]);
 
   // const refQualify = useRef();
