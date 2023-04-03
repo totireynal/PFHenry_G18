@@ -2,13 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   contentFilters,
+  getDeletedEmployees,
   getEmployees,
 } from "../../../state/redux/actions/actions";
 // import { useAnswer } from "../../../Utils/hooks/answer";
 
-const SearchBar = ({ answer, showAnswer, handleRefresh }) => {
-  const [input, setInput] = useState("");
+const SearchBarDeleted = ({ answer, showAnswer, handleRefresh }) => {
   let dispatch = useDispatch();
+
+  const users = useSelector((state) => state.deletedEmployees);
+    const currentEmployee = useSelector((state) => state.currentEmployee);
+    const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+useEffect(() => {
+  dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+}, [dispatch, CompanyId]);
+
+
+
+
+  const [input, setInput] = useState("");
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
   // const allEmployees = useSelector((state) => state.allEmployees);
   // console.log(!!allEmployees, 'allll');
@@ -70,4 +82,5 @@ shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden sm:px-16 sm
   );
 };
 
-export default SearchBar;
+
+export default SearchBarDeleted;

@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import {useRef, useState} from 'react'
 
-const Employee = (props) => {
+const EmployeeUser = (props) => {
 
   const [check, setCheck] = useState(false)
   // console.log(check);
@@ -37,7 +37,7 @@ const Employee = (props) => {
           checked={check}
         />
       </label>
-      <Link to={`/employee/${props.id}`}>
+      {/* <Link to={`/employee/${props.id}`}> */}
         <span className="text-slate-300 absolute right-3 top-2 text-xs text-start font-medium ">
           {props.role}
         </span>
@@ -55,7 +55,7 @@ const Employee = (props) => {
                 </p>
               </div>
             </div>
-            <span className="text-black text-base font-medium sm:inline ssm:hidden truncate ">
+            <span className="text-black text-base font-medium sm:inline ssm:hidden">
               {props.email}
             </span>
             <span className="lg:inline md:inline ssm:hidden text-black text-base font-medium ">
@@ -66,9 +66,9 @@ const Employee = (props) => {
             </span>
           </div>
         </div>
-      </Link>
+      {/* </Link> */}
     </div>
   );
 };
 
-export default Employee;
+export default EmployeeUser;

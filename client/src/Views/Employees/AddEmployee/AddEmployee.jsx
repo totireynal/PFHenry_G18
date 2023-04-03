@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
@@ -31,8 +32,8 @@ const AddEmployee = () => {
   const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
 
   useEffect(() => {
-    dispatch(getPositionsNum());
-    dispatch(getAreasNum());
+    dispatch(getPositionsNum(undefined, currentCompanyId));
+    dispatch(getAreasNum(undefined, currentCompanyId));
   }, [dispatch]);
 
   const positionsNum = useSelector((state) => state.positionsNum);
@@ -127,10 +128,9 @@ const AddEmployee = () => {
     if (event.target.name === "email") {
       const valor = event.target.value;
       dispatch(getUsersEmail(currentCompanyId, valor)).then((resultado) => {
-        console.log("CORREO", valor);
-        console.log("company ID", currentCompanyId);
+
         if (resultado?.message) {
-          setAllBack({
+          setAllErrors({
             ...employee,
             [event.target.name]: resultado.message,
           });
@@ -139,8 +139,7 @@ const AddEmployee = () => {
             [event.target.name]: "",
           });
         }
-        console.log("Valor", valor);
-        console.log("Mensaje: ", resultado?.message);
+
       });
     }
     if (event.target.name === "cuil") {
@@ -271,7 +270,6 @@ const AddEmployee = () => {
       dateOfAdmission: "",
     });
   };
-  console.log(errors);
   return (
     <div
       className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0

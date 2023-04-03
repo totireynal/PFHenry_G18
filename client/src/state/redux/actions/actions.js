@@ -37,11 +37,13 @@ import {
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
   GET_RATING,
-  POST_EVENTS,
+  // POST_EVENTS,
   GET_EVENTS,
   PUT_EVENTS,
   GET_BIRTHDAY,
-  INDEX_AREA
+  INDEX_AREA,
+  GET_COMPANY_INFO,
+  // PUT_EVENTS,
 } from "../action-types/index";
 
 export function postCompany(payload) {
@@ -189,10 +191,10 @@ export const getPositions = (filters, CompanyId) => {
   };
 };
 
-export const getPositionsNum = (filters) => {
+export const getPositionsNum = (filters, CompanyId) => {
   return async function(dispatch) {
     try {
-      let url = "/positions/raw";
+      let url = `/positions/raw/${CompanyId}`;
 
       const response = await axios(url);
       const result = response.data;
@@ -247,10 +249,10 @@ export const getAreas = (filters, CompanyId) => {
   // }
 };
 
-export const getAreasNum = (filters) => {
+export const getAreasNum = (filters, CompanyId) => {
   return async function(dispatch) {
     try {
-      let url = "/areas/ars";
+      let url = `/areas/ars/${CompanyId}`;
 
       const response = await axios(url);
       const result = response.data;
@@ -442,10 +444,10 @@ export function postAreaCrud(area) {
   };
 }
 
-export function getAreasCrud() {
+export function getAreasCrud(CompanyId) {
   return (dispatch) => {
     axios
-      .get("/areas/ars")
+      .get(`/areas/ars/${CompanyId}`)
       .then((info) => {
         return dispatch({ type: GET_CRUD_AREAS, payload: info.data });
       })
@@ -508,10 +510,10 @@ export function postPositionCrud(position) {
   };
 }
 
-export function getPositionsCrud() {
+export function getPositionsCrud(CompanyId) {
   return (dispatch) => {
     axios
-      .get("/positions/raw")
+      .get(`/positions/raw/${CompanyId}`)
       .then((info) => {
         return dispatch({ type: GET_CRUD_POSITION, payload: info.data });
       })
@@ -622,16 +624,12 @@ export const getUsersDni = (companyId, dni) => {
   };
 };
 
-  
 export const addEvents = (savedEvents) => {
-  console.log(savedEvents, 'saved')
   return async (dispatch) => {
     try {
       await axios.post(`http://localhost:3001/events`, savedEvents);
-
-
     } catch (error) {
-      console.log(error.error)
+      console.log(error.error);
     }
   };
 };
@@ -643,7 +641,6 @@ export const getEvents = (CompanyId) => {
                `http://localhost:3001/events/${CompanyId}`
              );
              const result = response.data;
-             console.log(result, 'resultt')
              return dispatch({
                type: GET_EVENTS,
                payload: result,
@@ -654,14 +651,12 @@ export const getEvents = (CompanyId) => {
          };
        };
 export const putEvents = ( calendarEvent) => {
-  console.log(calendarEvent.id, 'lllllllllll');
          return async (dispatch) => {
            try {
              let response = await axios.put(
                `http://localhost:3001/events/${calendarEvent.id}`,
                calendarEvent
              );
-             console.log(response.data, "puttttt");
            } catch (error) {
              console.log(error);
            }
@@ -672,12 +667,27 @@ export const putEvents = ( calendarEvent) => {
             try {
               const response = await axios.delete(
                 `http://localhost:3001/events/${id}`);
-              console.log(response)
             } catch (error) {
               console.log(error);
             }
           };
-        };
+};
+        
+export const getCompanyInfo = (CompanyId) => {
+  return async (dispatch) => {
+    try {
+      const response = axios(`http://localhost:3001/companies/${CompanyId}`);
+      const result = (await response).data;
+
+      return dispatch({
+        type: GET_COMPANY_INFO,
+        payload: result,
+      })
+    } catch (error) {
+      
+    }
+  }
+} 
 
 export const getBirthday = (CompanyId) => {
   return async (dispatch) => {

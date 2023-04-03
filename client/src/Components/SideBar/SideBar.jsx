@@ -1,4 +1,5 @@
 import ButtonSideBar from "./ButtonSideBar/ButtonSideBar";
+import ButtonSideBarGrey from "./ButtonSideBar/ButtonSideBarGrey";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -36,10 +37,20 @@ const SideBar = () => {
 
 
   const current = useSelector((state) => state.currentEmployee);
-  // const currentEmployee = useSelector((state) => state.employeeDetail);
 
-  const url = `/myprofile/${current.id}`;
-  const urlCompany = `/employees/${current.CompanyId}`
+  let url, urlCompany;
+  
+  if (current.role === "SuperAdmin") {
+    url = `/myprofile/${current.id}`;
+    urlCompany = `/employees/${current.CompanyId}`;
+  } else if (current.role === "Admin") {
+    url = `/myprofile/${current.id}`;
+    urlCompany = `/employees/${current.CompanyId}`;
+  } else {
+    url = `/myprofile/${current.id}`;
+    urlCompany = `/employeesuser/${current.CompanyId}`;
+  }
+
 
   const { logout } = useAuth0();
 
@@ -115,6 +126,17 @@ const SideBar = () => {
                   >
                     Employees
                   </ButtonSideBar>
+                  {(current.role === "User") 
+                  ? 
+                  <ButtonSideBarGrey
+                  url="/notifications"
+                  icon="notifications"
+                  active={active.notifications}
+                  handleActive={handleActive}
+                  > 
+                  Notifications
+                </ButtonSideBarGrey>
+                  :
                   <ButtonSideBar
                     url="/notifications"
                     icon="notifications"
@@ -123,6 +145,7 @@ const SideBar = () => {
                   >
                     Notifications
                   </ButtonSideBar>
+                  }
                   <ButtonSideBar
                     url="/calendar"
                     icon="calendar_month"
