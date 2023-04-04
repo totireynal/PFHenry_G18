@@ -26,14 +26,15 @@ export default function DoughnuChart(){
 
     const currentEmployee = useSelector((state) => state.currentEmployee);
     const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+    
+    console.log("COMPANY IDDDDDD ", CompanyId)
 
     const dispatch = useDispatch();
+    
     useEffect(() => {
      dispatch(getDoughnu(CompanyId))
       }, [dispatch]
   )
-  console.log(doughnut)
-
        const options = {
 
         plugins: {
@@ -72,7 +73,7 @@ export default function DoughnuChart(){
               }
             ],
         }  
-    },[])
+    },[ doughnut])
 
   return (
     <div className=" -translate-x-16 bg-white rounded shadow-2xl border p-5">
