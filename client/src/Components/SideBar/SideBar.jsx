@@ -1,4 +1,5 @@
 import ButtonSideBar from "./ButtonSideBar/ButtonSideBar";
+// eslint-disable-next-line no-unused-vars
 import ButtonSideBarGrey from "./ButtonSideBar/ButtonSideBarGray";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
@@ -128,15 +129,15 @@ const SideBar = () => {
                     Employees
                   </ButtonSideBar>
                   {(current.role === "User") 
-                  ? 
-                  <ButtonSideBarGrey
-                  url="/notifications"
-                  icon="notifications"
-                  active={active.notifications}
-                  handleActive={handleActive}
-                  > 
-                  Notifications
-                </ButtonSideBarGrey>
+                  ? ""
+                //   <ButtonSideBarGrey
+                //   url="/notifications"
+                //   icon="notifications"
+                //   active={active.notifications}
+                //   handleActive={handleActive}
+                //   > 
+                //   Notifications
+                // </ButtonSideBarGrey>
                   :
                   <ButtonSideBar
                     url="/notifications"

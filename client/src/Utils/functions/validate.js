@@ -15,21 +15,21 @@ const validate = (values, getAlllEmployees) => {
   const allDni = getAlllEmployees.map((el) => el.dni);
 
   if (allEmails.includes(`${values.email}`))
-    errors.email = "Ya esta en la base de datos perrito salvaje";
+    errors.email = "Email already exist";
   if (allCbus.includes(`${values.cbu}`))
-    errors.cbu = "Ya esta en la base de datos perrito salvaje";
+    errors.cbu = "Cbu already exist";
   if (allCuils.includes(`${values.cuil}`))
-    errors.cuil = "Ya esta en la base de datos perrito salvaje";
+    errors.cuil = "Cuil already exist";
   if (allTel.includes(`${values.tel}`))
-    errors.tel = "Ya esta en la base de datos perrito salvaje";
+    errors.tel = "Phone number already exist";
   if (allDni.includes(`${values.dni}`))
-    errors.dni = "Ya esta en la base de datos perrito salvaje";
+    errors.dni = "Dni already exist";
 
   if (values.role === "default") errors.role = "You must choose a role";
   if (!values.name.length) errors.name = "Name can't be empty";
   if (!values.lastName.length) errors.lastName = "Last name can't be empty";
-  if (!values.cuil.length) errors.cuil = "Cuil can't be empty";
-  if (!values.cbu.length) errors.cbu = "Cbu can't be empty";
+  if (!values.cuil.length) errors.cuil = "CUIL can't be empty";
+  if (!values.cbu.length) errors.cbu = "CBU can't be empty";
   if (!values.address.length) errors.address = "Address can't be empty";
   if (values.PositionId === 0) errors.PositionId = "You must choose a position";
   if (values.AreaId === 0) errors.AreaId = "You must choose an area";
@@ -37,9 +37,9 @@ const validate = (values, getAlllEmployees) => {
   if (!values.birthDate.length) errors.birthDate = "You must choose a date";
   if (!values.dateOfAdmission.length)
     errors.dateOfAdmission = "You must choose a date";
-  if (!values.dni.length) errors.dni = "Dni can't be empty";
-  if (values.dni.length > 9)
-    errors.dni = "Dni can't be greater than 9 characters";
+  if (!values.dni.length) errors.dni = "DNI can't be empty";
+  if (values.dni.length > 8)
+    errors.dni = "DNI can't be greater than 8 characters";
   if (values.tel.length > 13)
     errors.tel = "Phone can't be greater than 13 characters";
   if (!values.email.length) errors.email = "Email can't be empy";
@@ -55,10 +55,10 @@ const validate = (values, getAlllEmployees) => {
   // console.log(age);
   // console.log(admission);
 
-  if (age < 18) errors.birthDate = "Invalid age";
+  if (age < 18) errors.birthDate = "You must be at least 18 years old";
   if (age < admission) errors.dateOfAdmission = "";
   if (admission >= age - 17)
-    errors.dateOfAdmission = "You must be at least be 18years old";
+    errors.dateOfAdmission = "You must be at least 18 years old";
 
   return errors;
 };

@@ -19,7 +19,7 @@ import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
 import Area from "../../Components/Area/Area";
 import Rol from "../../Components/Rol/Rol";
-import { useAnswer } from "../../utils/hooks/answer";
+import { useAnswer } from "../../Utils/hooks/answer";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -261,11 +261,11 @@ const EmployeesUser = () => {
                 handleSelectChange={handleSelectChange}
                 CompanyId={CompanyId}
               />
-              <Rol
+              {/* <Rol
                 selectedOption={selectedOption}
                 handleSelectChange={handleSelectChange}
                 CompanyId={CompanyId}
-              />
+              /> */}
             </div>
           </div>
           <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8 sm:flex ssm:hidden">
@@ -290,11 +290,11 @@ const EmployeesUser = () => {
               handleSelectChange={handleSelectChange}
               CompanyId={CompanyId}
             />
-            <Rol
+            {/* <Rol
               selectedOption={selectedOption}
               handleSelectChange={handleSelectChange}
               CompanyId={CompanyId}
-            />
+            /> */}
           </div>
           <div className="flex justify-center items-center">
             <p
@@ -320,7 +320,7 @@ const EmployeesUser = () => {
                   image={user?.image}
                   area={user?.area}
                   position={user?.position}
-                  role={user?.role}
+                  // role={user?.role}
                   // catchEmails={catchEmails}
                   // emailsSelection={emailsSelection}
                   // emailsUnselect={emailsUnselect}

@@ -4,15 +4,17 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 // import SideBar from "../../../Components/SideBar/SideBar";
 import {
   getAllEmployees,
+  // eslint-disable-next-line no-unused-vars
   getAreasNum,
   getEmployeeDetail,
+  // eslint-disable-next-line no-unused-vars
   getPositionsNum,
   updateEmployee,
 } from "../../../state/redux/actions/actions";
-import validateEdit from "../../../utils/functions/validateEdit";
+import validateEdit from "../../../Utils/functions/validateEdit";
 // import Form from "../../../Components/Form/Form";
-import { useErrors } from "../../../utils/hooks/errors";
-import { useAnswer } from "../../../utils/hooks/answer";
+import { useErrors } from "../../../Utils/hooks/errors";
+import { useAnswer } from "../../../Utils/hooks/answer";
 // import { Link } from "react-router-dom";
 // import SelectFormEdit from "../../../Components/SelectFormEdit/SelectFormEdit";
 import FormEdit from "../../../Components/FormEdit/FormEdit";
