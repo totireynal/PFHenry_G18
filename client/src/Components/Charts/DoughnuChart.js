@@ -74,7 +74,12 @@ export default function DoughnuChart(){
         }  
     },[])
 
-    return <Doughnut data = {data} options={options}/>
+  return (
+    <div className=" -translate-x-16">
+      <Doughnut data={data} options={options} />
+
+    </div>
+  )
 }
 
 

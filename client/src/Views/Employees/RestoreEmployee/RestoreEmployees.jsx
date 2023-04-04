@@ -17,7 +17,7 @@ import Sort from "../../../Components/Sort/Sort";
 import Position from "../../../Components/Position/Position";
 import Area from "../../../Components/Area/Area";
 import Rol from "../../../Components/Rol/Rol";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import { useAnswer } from "../../../utils/hooks/answer";
 // import { AiOutlinePlus } from "react-icons/ai";
 // import { RiMailAddLine } from "react-icons/ri";
 // import { SiMinutemailer } from "react-icons/si";
@@ -254,7 +254,7 @@ const RestoreEmployees = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
-          {users ? (
+          {users.length > 0 ? (
             users?.map((user, i) => {
               return (
                 <DeletedEmployee
@@ -274,7 +274,7 @@ const RestoreEmployees = () => {
               );
             })
           ) : (
-            <h3>{answer ? answer : ""}</h3>
+            <h3 className="text-sky-400 text-center">{answer ? answer : "No deleted employees found"}</h3>
           )}
         </div>
       </div>
