@@ -1,4 +1,4 @@
-import { log } from "mathjs";
+// import { log } from "mathjs";
 import { useSelector } from "react-redux";
 
 const WelcomeDashboard = () => {
