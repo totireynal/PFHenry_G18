@@ -30,7 +30,7 @@ export default function DoughnuChart(){
     const dispatch = useDispatch();
     useEffect(() => {
      dispatch(getDoughnu(CompanyId))
-      }, [dispatch, doughnut]
+      }, [dispatch]
   )
   console.log(doughnut)
 
