@@ -45,12 +45,15 @@ const Employee = (props) => {
           {props.role}
         </span>
         <div className="flex justify-between items-center h-20">
+          <div className="w-28 h-20">
+
           <img
-            className="object-cover mr-2 w-28 h-20"
+            className="object-cover mr-2 w-28   h-20"
             src={props.image}
             alt=""
-          />
-          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 ssm:grid-cols-1 items-center justify-start  w-full p-6 text-start auto-cols-min">
+            />
+            </div>
+          <div className="grid lg:grid-cols-4  md:grid-cols-3 sm:grid-cols-2 ssm:grid-cols-1 items-center justify-start  w-full p-6 text-start auto-cols-min">
             <div className=" text-start">
               <div className="flex flex-col">
                 <p className="text-xl font-bold break-al">

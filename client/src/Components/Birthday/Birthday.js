@@ -39,8 +39,8 @@ const EmployeeList = () => {
   console.log("Numero de dia: ", numeroDeDia)
   console.log("Birthday", birthday)
     return (
-      <div className=" w-full float-right overflow-x-hidden bg-white p-5 rounded-md">
-        <h3 className="text-lg font-medium mb-4 overflow-x-hidden">
+      <div className=" w-full float-right overflow-x-hidden bg-white p-5 rounded-md shadow-2xl">
+        <h3 className="font-medium mb-4 overflow-x-hidden h-5">
           Upcoming Birthdays
         </h3>
         {/* {birthday? ( */}

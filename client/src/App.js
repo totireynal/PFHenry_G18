@@ -32,6 +32,7 @@ import CalendarUser from "./Views/CalendarUser/CalendarUser";
 import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
 import AreaPositionFirstEmployee from "./Views/Register/AreaPositionFirstEmployee";
 import AreaPosition from "./Views/AreaPosition/AreaPosition";
+import DashboardUser from "./Views/DashboardUser/DashboardUser";
 
 
 
@@ -165,8 +166,8 @@ function App() {
 
           {user.role === "User" && (<>
 
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/employeesuser/:id" element={<EmployeesUser />} />
+          <Route path="/dashboard" element={<DashboardUser />} />
+          {/* <Route path="/employeesuser/:id" element={<EmployeesUser />} /> */}
           <Route path="/myprofile/:id" element={<MyProfileUser />} />
           <Route path="/calendar" element={<CalendarUser />} />
 
