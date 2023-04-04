@@ -27,6 +27,7 @@ const FormFirstEmployee = ({
   var navigate = useNavigate();
 
   return (
+    <div>
     <form
       onSubmit={handleSubmit}
       className="flex flex-col justify-center items-center"
@@ -177,11 +178,15 @@ const FormFirstEmployee = ({
           {button}
         </button>
       ) : (
-        <p className="px-20 py-4 bg-green-400 text-white rounded">{answer}</p>
+        <>
+        <p className="px-20 py-4 bg-green-400 text-white rounded"></p>
+        
+        </>
         // <p className="px-20 py-4 bg-green-400 text-white rounded">{answer}</p>
       )}
-      
     </form>
+    
+    </div>
   );
 };
 

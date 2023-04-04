@@ -5,6 +5,7 @@ import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
 import validate from "../../../Utils/functions/validate";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
+import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -20,6 +21,7 @@ import {
 const AddFirstEmployee = () => {
   const [cookies] = useCookies(["cookieBack"]);
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
  
@@ -60,6 +62,8 @@ const AddFirstEmployee = () => {
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
+
+  const [link, setLink] = useState(false)
   
   useEffect(() => {
     dispatch(getAllEmployees());
@@ -190,11 +194,13 @@ const AddFirstEmployee = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmited(true);
+    setLink(true);
     dispatch(createEmployee(employee, showAnswer));
-    setTimeout(() => {
-      setSubmited(false);
-      navigate("/");
-    }, 3000);
+    
+    // setSubmited(false);
+     setTimeout(() => {
+       setSubmited(false);
+     }, 1000);
 
     setErrorButton(true);
     setEmployee({
@@ -259,6 +265,20 @@ const AddFirstEmployee = () => {
               handleChangeImage={handleChangeImage}
             />
           </div>
+          {link && ( 
+          <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg">
+              <h2 className="text-xl font-bold mb-4">Sign in to your account to continue</h2>
+              <p className="mb-4">{answer}</p>
+              <div className="flex justify-end">
+
+                <Link to="/" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
+              </div>
+            </div>
+          </div>
+            
+         
+            )}
         </div>
       </div>
     </div>
@@ -266,3 +286,8 @@ const AddFirstEmployee = () => {
 };
 
 export default AddFirstEmployee;
+
+
+
+
+

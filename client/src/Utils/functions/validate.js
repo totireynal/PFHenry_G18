@@ -15,11 +15,11 @@ const validate = (values, getAlllEmployees) => {
   const allTel = getAlllEmployees.map(el => el.tel)
   const allDni = getAlllEmployees.map(el => el.dni)
 
-  if(allEmails.includes(`${values.email}`)) errors.email = 'Ya esta en la base de datos perrito salvaje'
-  if(allCbus.includes(`${values.cbu}`)) errors.cbu = 'Ya esta en la base de datos perrito salvaje'
-  if(allCuils.includes(`${values.cuil}`)) errors.cuil = 'Ya esta en la base de datos perrito salvaje'
-  if(allTel.includes(`${values.tel}`)) errors.tel = 'Ya esta en la base de datos perrito salvaje'
-  if(allDni.includes(`${values.dni}`)) errors.dni = 'Ya esta en la base de datos perrito salvaje'
+  if(allEmails.includes(`${values.email}`)) errors.email = 'Email already exists in database'
+  if(allCbus.includes(`${values.cbu}`)) errors.cbu = 'CBU already exists in database'
+  if(allCuils.includes(`${values.cuil}`)) errors.cuil = 'CUIL already exists in database'
+  if(allTel.includes(`${values.tel}`)) errors.tel = 'Phone number already exists in database'
+  if(allDni.includes(`${values.dni}`)) errors.dni = 'DNI  already exists in database'
 
   if (values.role === "default") errors.role = "You must choose a role";
   if (!values.name.length) errors.name = "Name can't be empty";

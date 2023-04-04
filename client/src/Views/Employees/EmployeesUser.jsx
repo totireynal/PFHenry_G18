@@ -309,7 +309,7 @@ const EmployeesUser = () => {
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
           {users ? (
             users?.map((user, i) => {
-              if (user.role === "SuperAdmin") return "";
+              // if (user.role === "SuperAdmin") return "";
               return (
                 <EmployeeUser
                   key={i}
