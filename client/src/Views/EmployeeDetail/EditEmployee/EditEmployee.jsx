@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 // import SideBar from "../../../Components/SideBar/SideBar";
 import {
+  getAllEmployees,
   getAreasNum,
   getEmployeeDetail,
   getPositionsNum,
   updateEmployee,
 } from "../../../state/redux/actions/actions";
-import validate from "../../../utils/functions/validate";
+import validateEdit from "../../../utils/functions/validateEdit";
 // import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../utils/hooks/errors";
 import { useAnswer } from "../../../utils/hooks/answer";
@@ -25,11 +26,12 @@ const EditEmployee = () => {
   const CompanyId = currentEmployeeCompany
     ? currentEmployeeCompany.CompanyId
     : null;
+    const getAlllEmployees = useSelector((state) => state.getAlllEmployees);
+
 
   useEffect(() => {
     dispatch(getEmployeeDetail(CompanyId, id));
-    dispatch(getPositionsNum());
-    dispatch(getAreasNum());
+    dispatch(getAllEmployees());
   }, [dispatch, id, CompanyId]);
 
   const { errors, setAllErrors } = useErrors();
@@ -72,15 +74,26 @@ const EditEmployee = () => {
     cbu: `${currentEmployee.cbu}`,
     image: `${currentEmployee.image}`,
   });
+    useEffect(() => {
+      if (Object.keys(errors).length === 0) {
+        setErrorButton(false);
+      } else {
+        setErrorButton(true);
+      }
+    }, [errors]);
+
+  // console.log(currentEmployee, 'aaaaaaaaaaa');
 
   const handleInput = (e) => {
     const { value, name } = e.target;
 
     setAllErrors(
-      validate({
-        ...updatedUser,
-        [name]: value,
-      })
+      validateEdit(
+        {
+          ...updatedUser,
+          [name]: value,
+        }, getAlllEmployees,currentEmployee
+      )
     );
     setUpdatedUser({
       ...updatedUser,
@@ -95,6 +108,9 @@ const EditEmployee = () => {
     const allErrors = Object.values(errors).length;
     if (!allErrors) {
       setErrorButton(false);
+    } else {
+      setErrorButton(true);
+      
     }
   };
 
@@ -144,6 +160,7 @@ const EditEmployee = () => {
       cbu: "",
     });
   };
+  console.log(errors);
 
   return (
     <div className="w-full lg:h-screen lg:pt-0 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto ssm:pt-16">

@@ -1,6 +1,7 @@
 import EmployeeList from "../../Components/Birthday/Birthday.js"
 import EmployeeRetention from "../../Components/Charts/BarChart.js"
 import DoughnuChart from "../../Components/Charts/DoughnuChart.js"
+import EventsDashboards from "../../Components/EventsDashboard/EventsDashboard.jsx";
 
 const Dashboarts = () => {
   return (
@@ -8,7 +9,8 @@ const Dashboarts = () => {
       
         {/* <EmployeeRetention/> */}
       <DoughnuChart/>
-      <EmployeeList/>
+      <EmployeeList />
+      <EventsDashboards/>
     </div>
   );
 };

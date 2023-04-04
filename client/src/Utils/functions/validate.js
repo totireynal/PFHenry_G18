@@ -1,7 +1,7 @@
 const regex = {
   date: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
   email:
-    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+    /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
   image: /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)\??([%&a-z0-9=_-]+)?$/i,
 };
 
@@ -14,7 +14,7 @@ const validate = (values, getAlllEmployees) => {
   const allCuils = getAlllEmployees.map(el => el.cuil)
   const allTel = getAlllEmployees.map(el => el.tel)
   const allDni = getAlllEmployees.map(el => el.dni)
-
+  
   if(allEmails.includes(`${values.email}`)) errors.email = 'Ya esta en la base de datos perrito salvaje'
   if(allCbus.includes(`${values.cbu}`)) errors.cbu = 'Ya esta en la base de datos perrito salvaje'
   if(allCuils.includes(`${values.cuil}`)) errors.cuil = 'Ya esta en la base de datos perrito salvaje'
@@ -27,7 +27,7 @@ const validate = (values, getAlllEmployees) => {
     errors.lastName = "Last name can't be empty";
   if (!values.cuil.length) errors.cuil = "Cuil can't be empty";
   if (!values.cbu.length) errors.cbu = "Cbu can't be empty";
-  if (!values.address.length)
+  if (!values.address.length)   
     errors.address = "Address can't be empty";
   if (values.PositionId === 0)
     errors.PositionId = "You must choose a position";

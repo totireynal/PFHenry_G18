@@ -87,6 +87,8 @@ const AddEmployee = () => {
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
       setErrorButton(false);
+    } else {
+      setErrorButton(true);
     }
   }, [errors]);
 

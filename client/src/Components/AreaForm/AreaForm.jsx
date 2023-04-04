@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   postAreaCrud,
@@ -24,9 +24,7 @@ const AreaForm = () => {
   // const [companyId] = useState({
   //   CompanyId: employee.CompanyId,
   // });
-
   const [editArea, setEditArea] = useState(null);
-
   const [showList, setShowList] = useState(false);
 
   const handleChange = (event) => {

@@ -252,7 +252,7 @@ const RestoreEmployees = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
-          {users ? (
+          {users.length > 0 ? (
             users?.map((user, i) => {
               return (
                 <DeletedEmployee
@@ -272,7 +272,7 @@ const RestoreEmployees = () => {
               );
             })
           ) : (
-            <h3>{answer ? answer : ""}</h3>
+            <h3 className="text-sky-400 text-center">{answer ? answer : "No deleted employees found"}</h3>
           )}
         </div>
       </div>

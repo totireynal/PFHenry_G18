@@ -66,8 +66,7 @@ const initialState = {
   indexArea: [],
   doughnut :[],
   companyInfo: {},
-  birthday: [],
-  indexArea: [],
+
   getAlllEmployees: []
 };
 
