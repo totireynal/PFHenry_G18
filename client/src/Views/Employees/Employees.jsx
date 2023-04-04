@@ -3,17 +3,12 @@ import React, { useEffect, useState } from "react";
 import Employee from "./Employee/Employee";
 import SearchBar from "./SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
-// import SideBar from "../../Components/SideBar/SideBar";
 import {
   cleanUrl,
-  // getAreas,
   getArrayEmails,
   getEmployees,
   getFilter,
-  // getPositions,
-  // getRoles,
   getDeletedEmployees,
-  // getEvents,
 } from "../../state/redux/actions/actions";
 import Sort from "../../Components/Sort/Sort";
 import Position from "../../Components/Position/Position";
@@ -33,9 +28,6 @@ const Employees = () => {
 
   const currentEmployee = useSelector((state) => state.currentEmployee);
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
-
-  // const { CompanyId } = useParams()
-  // console.log('monta employees-->', CompanyId);
 
   const navigate = useNavigate();
   const { answer, showAnswer } = useAnswer();
@@ -87,24 +79,16 @@ const Employees = () => {
 
   useEffect(() => {
     dispatch(getEmployees(undefined, undefined, CompanyId));
-    // .then(() => setIsLoading(false));
-    // return handleRefreshTwo();
   }, [CompanyId, dispatch]);
-
-  // const del = useSelector((state) => state.deletedEmployees);
 
   useEffect(() => {
     dispatch(getFilter(arrContentFilters, CompanyId, showAnswer));
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arrContentFilters, CompanyId, dispatch, emailsSelection]);
 
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
     dispatch(getEmployees());
-    // dispatch(getAreas());
-    // dispatch(getRoles());
-    // dispatch(getPositions());
     handleReset();
     setEmailSelection([]);
   };
@@ -112,24 +96,15 @@ const Employees = () => {
   const [optionFilters, setOptionFilters] = useState(false);
 
   const handleOptions = () => {
-    // refOptions.current.style.opacity = '1'
-    // refOptions.current.style.pointerEvent = 'auto'
-    // refOptions.current.style.transform = 'translateY(-0.75rem)'
     setOptions(!options);
   };
   const handleOptionsFilters = () => {
-    // refOptions.current.style.opacity = '1'
-    // refOptions.current.style.pointerEvent = 'auto'
-    // refOptions.current.style.transform = 'translateY(-0.75rem)'
     setOptionFilters(!optionFilters);
   };
 
   return (
     <>
       <div className=" relative w-full mr-10 h-screen overflow-auto  xl:pl-72 sm:pl-36 ssm:pl-12 z-0">
-        {/* {
-      isLoading ? <div>loadong</div> : */}
-        {/* <div> */}
         <div className="sticky top-0 z-30 bg-slate-100 pb-2">
           <div className="absolute right-10 top-[118px] sm:hidden ssm:inline-block rounded ">
             <div className="relative flex flex-col justify-center items-center gap-1 p-2 rounded">
@@ -311,7 +286,6 @@ const Employees = () => {
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
           {users ? (
             users?.map((user, i) => {
-              // if (user.role === "SuperAdmin") return "";
               return (
                 <Employee
                   key={i}

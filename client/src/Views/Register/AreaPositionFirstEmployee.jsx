@@ -7,8 +7,6 @@ import {
   postPositionCrud
 } from "../../state/redux/actions/actions";
 
-
-
 const AreaPositionFirstEmployee = () => {
   const dispatch = useDispatch();
 
