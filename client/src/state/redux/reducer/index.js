@@ -34,6 +34,7 @@ import {
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
   GET_EVENTS,
+  // eslint-disable-next-line no-unused-vars
   PUT_EVENTS,
   GET_COMPANY_INFO,
   GET_BIRTHDAY,

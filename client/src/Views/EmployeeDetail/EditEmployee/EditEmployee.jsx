@@ -4,8 +4,10 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 // import SideBar from "../../../Components/SideBar/SideBar";
 import {
   getAllEmployees,
+  // eslint-disable-next-line no-unused-vars
   getAreasNum,
   getEmployeeDetail,
+  // eslint-disable-next-line no-unused-vars
   getPositionsNum,
   updateEmployee,
 } from "../../../state/redux/actions/actions";

@@ -7,7 +7,8 @@ import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
 import validate from "../../../Utils/functions/validate";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -153,6 +154,27 @@ const AddFirstEmployee = () => {
     });
     // navigate("/");
   };
+
+  const {
+    loginWithRedirect,
+    // loginWithPopup,
+    // logout,
+    // isAuthenticated,
+    // getAccessTokenSilently,
+  } = useAuth0();
+
+  const handleLogin = async () => {
+    await loginWithRedirect({
+      appState: {
+        returnTo: "/authorization",
+      },
+      authorizationParams: {
+        prompt: "login",
+      },
+    });
+  };
+
+
   return (
     <div
       className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0
@@ -160,7 +182,7 @@ const AddFirstEmployee = () => {
     >
       <div>
         <div className="w-full text-center mb-14 font-bold">
-          <span className="text-4xl text-sky-400">Add Super Admin</span>
+          <span className="text-4xl text-sky-400">Add SuperAdmin</span>
         </div>
         <div className="flex gap-16">
           <div>
@@ -180,11 +202,15 @@ const AddFirstEmployee = () => {
           {link && ( 
           <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-8 rounded-lg">
-              <h2 className="text-xl font-bold mb-4">Sign in to your account to continue</h2>
+              <h2 className="text-xl font-bold mb-4">Last step! Now sign up into your account by creating a password</h2>
               <p className="mb-4">{answer}</p>
               <div className="flex justify-end">
 
-                <Link to="/" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
+                {/* <Link to="/" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link> */}
+                <button 
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                  onClick={handleLogin}
+                >Continue</button>
               </div>
             </div>
           </div>
