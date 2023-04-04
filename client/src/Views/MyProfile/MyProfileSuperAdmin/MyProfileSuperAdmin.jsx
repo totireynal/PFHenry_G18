@@ -39,6 +39,7 @@ const MyProfileSuperAdmin = () => {
   }, [dispatch, qualified]);
 
   const companyInfo = useSelector((state) => state.companyInfo);
+  
   console.log(companyInfo, "companyInfo");
 
   const {

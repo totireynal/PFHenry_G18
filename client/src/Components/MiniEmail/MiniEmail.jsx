@@ -74,7 +74,7 @@ const MiniEmail = () => {
 
   return (
     <div className=" border bg-white rounded-md w-full h-auto p-5 shadow-2xl flex flex-col">
-      <h2 className="mb-5">Send E-mail</h2>
+      <h2 className="mb-5 font-medium">Send E-mail</h2>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-end justify-center gap-2 w-full h-auto"
@@ -108,17 +108,17 @@ const MiniEmail = () => {
           />
         </div>
         <div className="flex flex-row items-start justify-start gap-6">
+          {sent && (
+            <p className="flex items-center justify-center font-semibold text-1xl text-green-700 pt-4">
+              <BsFillCheckCircleFill />
+            </p>
+          )}
           <button
             type="submit"
             className=" text-sky-400 border border-sky-400 rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 hover:text-white text-xs mt-2"
           >
             SEND
           </button>
-          {sent && (
-            <p className="flex items-center justify-center font-semibold text-1xl text-green-700 pt-2">
-              <BsFillCheckCircleFill />
-            </p>
-          )}
         </div>
       </form>
     </div>

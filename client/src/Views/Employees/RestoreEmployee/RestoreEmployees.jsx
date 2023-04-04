@@ -13,18 +13,9 @@ import {
   getRoles,
   updateDeletedEmployee,
 } from "../../../state/redux/actions/actions";
-import Sort from "../../../Components/Sort/Sort";
-import Position from "../../../Components/Position/Position";
-import Area from "../../../Components/Area/Area";
-import Rol from "../../../Components/Rol/Rol";
+
 import { useAnswer } from "../../../utils/hooks/answer";
-// import { AiOutlinePlus } from "react-icons/ai";
-// import { RiMailAddLine } from "react-icons/ri";
-// import { SiMinutemailer } from "react-icons/si";
-// import { BsFillTrashFill } from "react-icons/bs";
-import { FaEllipsisH } from "react-icons/fa";
-import { MdOutlineRefresh } from "react-icons/md";
-import SearchBarDeleted from "../SearchBarDeleted/SearchBarDeleted";
+
 
 const RestoreEmployees = () => {
   const users = useSelector((state) => state.deletedEmployees);
@@ -46,6 +37,8 @@ const RestoreEmployees = () => {
       const filter = del?.filter((e) => e.id !== id);
       return filter;
     });
+  
+  const fnn = (us) => setDeletes(us)
   //   const catchEmails = (email, checked) => {
   //     setEmailSelection((emails) => {
   //       if (checked) {
@@ -85,9 +78,11 @@ const RestoreEmployees = () => {
 
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
+  const [searchId, setSearchId] = useState(0);
   useEffect(() => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setDeletes(users)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, CompanyId, deletes]);
 
   useEffect(() => {
@@ -108,7 +103,6 @@ const RestoreEmployees = () => {
     setOptionFilters(!optionFilters);
   };
 
-  const [searchId, setSearchId] = useState(0);
   const sendSearchId = (id) => setSearchId(id);
 
   const handleClick = (event) => {
@@ -169,16 +163,11 @@ const RestoreEmployees = () => {
       isLoading ? <div>loadong</div> : */}
         {/* <div> */}
         <div className="flex sm:flex-col flex-wrap  h-auto pt-12    bg-slate-100 mb-3 items-center justify-center gap-2.5">
-          <div className="flex gap-2 ">
-            <SearchBarDeleted
-              SearchBar
-              showAnswer={showAnswer}
-              answer={answer}
-              handleRefresh={handleRefresh}
-            />
+          <div className="w-full text-center mb-14 font-bold">
+            <span className="text-4xl text-sky-400">Deleted Employees</span>
           </div>
         </div>
-        <div className="sticky top-0 z-30 bg-slate-100 pb-2">
+        {/* <div className="sticky top-0 z-30 bg-slate-100 pb-2 opacity-0 pointer-events-none">
           <div className="flex sm:flex-col flex-wrap  h-auto pt-12    bg-slate-100 mb-3 items-center justify-center gap-2.5"></div>
 
           <div className="sm:hidden ssm:inline-block absolute left-14">
@@ -251,8 +240,8 @@ const RestoreEmployees = () => {
               CompanyId={CompanyId}
             />
           </div>
-        </div>
-        <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
+        </div> */}
+        <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10">
           {users.length > 0 ? (
             users?.map((user, i) => {
               return (
