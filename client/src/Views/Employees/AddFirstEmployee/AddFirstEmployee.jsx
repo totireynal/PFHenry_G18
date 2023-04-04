@@ -159,7 +159,7 @@ const AddFirstEmployee = () => {
     >
       <div>
         <div className="w-full text-center mb-14 font-bold">
-          <span className="text-4xl text-sky-400">Add Employee</span>
+          <span className="text-4xl text-sky-400">Add Super Admin</span>
         </div>
         <div className="flex gap-16">
           <div>
