@@ -1,23 +1,42 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import { React, useState } from "react";
 import {getBirthday} from "../../state/redux/actions/actions"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {obtenerNombreMes} from "./BirthMonth"
 import { Link } from "react-router-dom";
+import { RiMailAddLine } from "react-icons/ri";
+import axios from "axios";
 
 
 const EmployeeList = () => {
-
+  
+  
   const birthday = useSelector(state => state.birthday)
   const currentEmployee = useSelector((state) => state.currentEmployee);
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
   const dispatch = useDispatch();
 
+  const [check, setCheck] = useState(false);
+
+
   useEffect(() => {
      dispatch(getBirthday(CompanyId))
       }, [dispatch]
   )
+
+
+  const sendEmail = async (email) => {
+    await axios.post("http://localhost:3001/notifications/birthday", {
+          to: email,
+        })
+        setCheck(true); //setear a true
+        console.log(email)
+  }
+
+
+  var numeroDeDia = new Date().getDate();
+  console.log("Numero de dia: ", numeroDeDia)
   console.log("Birthday", birthday)
     return (
       <div className=" w-full float-right overflow-x-hidden bg-white p-5 rounded-md">
@@ -28,7 +47,7 @@ const EmployeeList = () => {
         <ul className="divide-y divide-gray-200">
           {typeof birthday === "object" ? (
             birthday?.map((employee) => (
-              <Link to={`/employee/${employee.id}`}>
+              // <Link to={`/employee/${employee.id}`}>
                 <li
                   key={employee.id}
                   className="p-3 mb-3 rounded shadow-md flex hover:-translate-y-1 bg-slate-100 "
@@ -45,10 +64,19 @@ const EmployeeList = () => {
                     <p className="text-sm text-gray-500">
                       {obtenerNombreMes(employee.birthMonth)}{" "}
                       {employee.birthDay}
+                      {employee.birthDay==numeroDeDia &&
+                      (
+                        <button
+                        onClick={() => sendEmail(employee.email)}
+                        className="ml-2.5 bg-sky-400 text-white rounded  overflow-hidden px-2 ssm:py-1 h-8 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden "
+                      >
+                      <RiMailAddLine size={20} />
+                      </button>
+                      )}
                     </p>
                   </div>
                 </li>
-              </Link>
+              // </Link>
             ))
           ) : (
             <div
