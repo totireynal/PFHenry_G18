@@ -167,7 +167,7 @@ function App() {
           {user.role === "User" && (<>
 
           <Route path="/dashboard" element={<DashboardUser />} />
-          {/* <Route path="/employeesuser/:id" element={<EmployeesUser />} /> */}
+          <Route path="/employeesuser/:id" element={<EmployeesUser />} />
           <Route path="/myprofile/:id" element={<MyProfileUser />} />
           <Route path="/calendar" element={<CalendarUser />} />
 
