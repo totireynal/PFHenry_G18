@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddFirstEmployee = () => {
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
  
