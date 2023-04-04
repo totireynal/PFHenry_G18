@@ -10,6 +10,7 @@ import { getCompaniesEmail } from "../../state/redux/actions/actions";
 import { getCompaniesName } from "../../state/redux/actions/actions";
 import { getCompaniesTel } from "../../state/redux/actions/actions";
 import UploadImage from  "../../Components/Upload/UploadImage"
+import axios from "axios";
 
 
 
@@ -154,10 +155,10 @@ export default function CreateCompany(props) {
       return;
     }
 
-    const response = await getCompaniesCuit(input.cuit);
-    if(response.data !== "The company PruebaCUIT has been created correctly"){
+    // const response = await getCompaniesCuit(input.cuit);
+    // if(response.data !== "The company PruebaCUIT has been created correctly"){
 
-    };
+    // };
     
     if (
       !input.name ||
@@ -194,7 +195,13 @@ export default function CreateCompany(props) {
 
   setIsProcessing(false);
 
-    paymentIntent?dispatch(postCompany(input)):
+    paymentIntent ? (
+      dispatch(postCompany(input)).then(
+        await axios.post("http://localhost:3001/notifications/confirmation", {
+          to: input.email,
+        })
+      )
+      ):
     setInput({
       name: "",
       cuit: "",
