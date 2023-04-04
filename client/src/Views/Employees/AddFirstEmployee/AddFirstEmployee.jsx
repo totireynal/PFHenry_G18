@@ -163,7 +163,7 @@ const AddFirstEmployee = () => {
     >
       <div>
         <div className="w-full text-center mb-14 font-bold">
-          <span className="text-4xl text-sky-400">Add Employee</span>
+          <span className="text-4xl text-sky-400">Add SuperAdmin</span>
         </div>
         <div className="flex gap-16">
           <div>
@@ -184,7 +184,7 @@ const AddFirstEmployee = () => {
             <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
               <div className="bg-white p-8 rounded-lg">
                 <h2 className="text-xl font-bold mb-4">
-                  Sign in to your account to continue
+                  Log in with your account to access the application
                 </h2>
                 <p className="mb-4">{answer}</p>
                 <div className="flex justify-end">
