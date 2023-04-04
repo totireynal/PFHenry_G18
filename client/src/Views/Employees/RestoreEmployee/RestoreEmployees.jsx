@@ -84,10 +84,12 @@ const RestoreEmployees = () => {
 
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
 
+  const [searchId, setSearchId] = useState(0);
   useEffect(() => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+    setDeletes(users)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, CompanyId, deletes]);
+  }, [dispatch, CompanyId, deletes, users]);
 
   useEffect(() => {
     dispatch(getFilter(arrContentFilters, CompanyId));
@@ -107,7 +109,6 @@ const RestoreEmployees = () => {
     setOptionFilters(!optionFilters);
   };
 
-  const [searchId, setSearchId] = useState(0);
   const sendSearchId = (id) => setSearchId(id);
 
   const handleClick = (event) => {
@@ -253,7 +254,7 @@ const RestoreEmployees = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
+        <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10">
           {users.length > 0 ? (
             users?.map((user, i) => {
               return (
@@ -274,7 +275,9 @@ const RestoreEmployees = () => {
               );
             })
           ) : (
-            <h3 className="text-sky-400 text-center">{answer ? answer : "No deleted employees found"}</h3>
+            <h3 className="text-sky-400 text-center">
+              {answer ? answer : "No deleted employees found"}
+            </h3>
           )}
         </div>
       </div>

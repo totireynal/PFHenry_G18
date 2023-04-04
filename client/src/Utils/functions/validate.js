@@ -1,3 +1,5 @@
+import { log } from "mathjs";
+
 const regex = {
   date: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
   email: /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
@@ -14,16 +16,17 @@ const validate = (values, getAlllEmployees) => {
   const allTel = getAlllEmployees.map((el) => el.tel);
   const allDni = getAlllEmployees.map((el) => el.dni);
 
-  if (allEmails.includes(`${values.email}`))
-    errors.email = "Ya esta en la base de datos perrito salvaje";
-  if (allCbus.includes(`${values.cbu}`))
-    errors.cbu = "Ya esta en la base de datos perrito salvaje";
-  if (allCuils.includes(`${values.cuil}`))
-    errors.cuil = "Ya esta en la base de datos perrito salvaje";
-  if (allTel.includes(`${values.tel}`))
-    errors.tel = "Ya esta en la base de datos perrito salvaje";
-  if (allDni.includes(`${values.dni}`))
-    errors.dni = "Ya esta en la base de datos perrito salvaje";
+  if (allEmails.includes(`${values.email}`)) errors.email = "it already exists";
+  if (allCbus.includes(`${values.cbu}`)) errors.cbu = "it already exists";
+  if (allCuils.includes(`${values.cuil}`)) errors.cuil = "it already exists";
+  if (allTel.includes(`${values.tel}`)) errors.tel = "it already exists";
+  if (allDni.includes(`${values.dni}`)) errors.dni = "it already exists";
+
+
+  if (values.cuil.length > 11 || values.cuil.length<11) errors.cuil =
+                                                          "Wrong number of digits";
+  if (values.cbu.length > 22 || values.cbu.length<22) errors.cbu =
+                                                        "Wrong number of digits";
 
   if (values.role === "default") errors.role = "You must choose a role";
   if (!values.name.length) errors.name = "Name can't be empty";

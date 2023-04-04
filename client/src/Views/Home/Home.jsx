@@ -111,42 +111,41 @@ const Home = () => {
         <h2 className={`${styleText} py-10`}>Some of our clients</h2>
         <div className="max-w-[1200px] m-auto ">
           <div className="flex  justify-center items-start gap-10 h-auto flex-wrap">
-            {
-              clients?.map(({ name, image, score, comment }, i) => {
-                return (
-                  <div
-                    key={i} 
-                    className="flex flex-col justify-center items-center border-sky-400 p-5 bg-white w-[300px] border-2 rounded-md">
-                    <h3 className="text-2xl pb-1">{name}</h3>
+            {clients?.map(({ name, image, score, comment }, i) => {
+              return (
+                <div
+                  key={i}
+                  className="flex flex-col justify-center items-center border-sky-400 p-5 bg-white w-[300px] border-2 rounded-md"
+                >
+                  <h3 className="text-2xl pb-1">{name}</h3>
 
-                    <div className="relative flex flex-col justify-center items-center">
-                      <img
-                        className="object-cover rounded-md h-[180px]"
-                        src={image}
-                        alt=""
-                      />
-                      <div className="absolute -bottom-3">
-                        <div className="flex">
-                          {[...Array(score).fill(0)].map((start, i) => {
-                            return (
-                              <label 
-                                key={i}>
-                                <AiFillStar
-                                  size={30}
-                                  className={`text-yellow-200 transition-all duration-200`}
-                                />
-                              </label>
-                            );
-                          })}
-                        </div>
+                  <div className="relative flex flex-col justify-center items-center">
+                    <img
+                      className="object-cover rounded-md h-[180px]"
+                      src={image}
+                      alt=""
+                    />
+                    <div className="absolute -bottom-3">
+                      <div className="flex">
+                        {[...Array(score).fill(0)].map((start, i) => {
+                          return (
+                            <label key={i}>
+                              <AiFillStar
+                                size={30}
+                                className={`text-yellow-200 transition-all duration-200`}
+                              />
+                            </label>
+                          );
+                        })}
                       </div>
                     </div>
-                    <div className="text-center block mt-8 h-32 ">
-                      <p className="">{comment}</p>
-                    </div>
                   </div>
-                );
-              })}
+                  <div className="text-center block mt-8 h-32 ">
+                    <p className="">{comment}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -216,7 +215,7 @@ const Home = () => {
           </div>
 
           <div className="flex flex-col items-center justify-center w-1/3 text-lg">
-            <p>Link a un form para cargar.</p>
+            <a href="https://www.instagram.com/staffsphere_/?igshid=YmMyMTA2M2Y%3D" target="_BLANK"> Instagram</a>
 
             <span>
               <AiFillInstagram size={23}></AiFillInstagram>

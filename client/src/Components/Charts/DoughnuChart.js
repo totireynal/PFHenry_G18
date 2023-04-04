@@ -75,11 +75,11 @@ export default function DoughnuChart(){
     },[])
 
   return (
-    <div className=" -translate-x-16">
+    <div className=" -translate-x-16 bg-white rounded shadow-2xl border p-5">
+      <h2 className="mb-5 font-medium">Current Employees</h2>
       <Doughnut data={data} options={options} />
-
     </div>
-  )
+  );
 }
 
 
