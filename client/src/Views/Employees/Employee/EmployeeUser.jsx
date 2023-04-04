@@ -38,9 +38,9 @@ const EmployeeUser = (props) => {
         />
       </label>
       {/* <Link to={`/employee/${props.id}`}> */}
-        <span className="text-slate-300 absolute right-3 top-2 text-xs text-start font-medium ">
+        {/* <span className="text-slate-300 absolute right-3 top-2 text-xs text-start font-medium ">
           {props.role}
-        </span>
+        </span> */}
         <div className="flex justify-between items-center h-20">
           <img
             className="object-cover mr-2 w-28 h-20"

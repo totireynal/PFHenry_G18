@@ -16,6 +16,7 @@ import Area from "../../../Components/Area/Area";
 import Rol from "../../../Components/Rol/Rol";
 import { useAnswer } from "../../../Utils/hooks/answer";
 import { FaEllipsisH } from "react-icons/fa";
+import { MdOutlineRefresh } from "react-icons/md";
 import SearchBarDeleted from "../SearchBarDeleted/SearchBarDeleted";
 
 const RestoreEmployees = () => {
@@ -167,11 +168,10 @@ const RestoreEmployees = () => {
               } relative flex flex-col justify-center items-start   p-2  bg-black bg-opacity-50 rounded gap-1 mt-2 `}
             >
               <button
-                className="flex relative bg-sky-400
-          shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2"
+                className="bg-sky-400 text-white rounded text-2xl overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden"
                 onClick={handleRefresh}
               >
-                Refresh
+                <MdOutlineRefresh />
               </button>
               <Sort
                 selectedOption={selectedOption}
@@ -197,11 +197,10 @@ const RestoreEmployees = () => {
           </div>
           <div className="flex flex-wrap text-center h-auto justify-center items-center gap-8 mb-8 sm:flex ssm:hidden">
             <button
-              className="flex relative bg-sky-400
-          shadow-sky-200 hover:bg-sky-300 h-8 w-20 justify-center items-center rounded text-white border px-2"
+              className="bg-sky-400 text-white rounded text-2xl overflow-hidden h-8 px-4 ssm:py-1 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden"
               onClick={handleRefresh}
             >
-              Refresh
+              <MdOutlineRefresh />
             </button>
             <Sort
               selectedOption={selectedOption}
@@ -246,7 +245,9 @@ const RestoreEmployees = () => {
               );
             })
           ) : (
-            <h3 className="text-sky-400 text-center">{answer ? answer : "No deleted employees found"}</h3>
+            <h3 className="text-sky-400 text-center">
+              {answer ? answer : "No deleted employees found"}
+            </h3>
           )}
         </div>
       </div>

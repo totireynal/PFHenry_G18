@@ -39,6 +39,7 @@ import {
   GET_RATING,
   // POST_EVENTS,
   GET_EVENTS,
+  // eslint-disable-next-line no-unused-vars
   PUT_EVENTS,
   GET_BIRTHDAY,
   INDEX_AREA,
