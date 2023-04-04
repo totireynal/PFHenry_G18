@@ -21,9 +21,6 @@ const AreaForm = () => {
     CompanyId: employee.CompanyId,
   });
 
-  // const [companyId] = useState({
-  //   CompanyId: employee.CompanyId,
-  // });
   const [editArea, setEditArea] = useState(null);
   const [showList, setShowList] = useState(false);
 

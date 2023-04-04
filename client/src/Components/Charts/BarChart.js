@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useMemo} from "react";
 import {
     Chart as ChartJS,
@@ -14,7 +15,7 @@ import {
 import { Bar } from 'react-chartjs-2';
 
 import {getIndexArea} from "../../state/redux/actions/actions"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 

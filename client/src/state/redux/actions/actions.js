@@ -45,25 +45,24 @@ import {
   GET_COMPANY_INFO,
   GET_ALL_EMPLOYEES,
   // PUT_EVENTS,
-  GET_DOUGHNU
+  GET_DOUGHNU,
 } from "../action-types/index";
 
 export const getAllEmployees = () => {
   return async (dispatch) => {
-  try {
-    const response = await axios(`http://localhost:3001/users`)
-    const result = response.data
-// console.log(result);
-    return dispatch({
-      type: GET_ALL_EMPLOYEES,
-      payload: result
-    })
-  } catch (error) {
-    console.log(error);
-  }  
-  }
-  
-}
+    try {
+      const response = await axios(`http://localhost:3001/users`);
+      const result = response.data;
+      // console.log(result);
+      return dispatch({
+        type: GET_ALL_EMPLOYEES,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export function postCompany(payload) {
   return async function(dispatch) {
@@ -423,7 +422,7 @@ export const cleanArrayEmails = () => {
 export const getCompaniesName = (name) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies/validate?name=${name}`);
+      const response = await axios.get(`/companies?name=${name}`);
       const result = response.data;
       return result;
     } catch (error) {
@@ -435,7 +434,7 @@ export const getCompaniesName = (name) => {
 export const getCompaniesTel = (tel) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies/validate?tel=${tel}`);
+      const response = await axios.get(`/companies?tel=${tel}`);
       const result = response.data;
       return result;
     } catch (error) {
@@ -447,7 +446,7 @@ export const getCompaniesTel = (tel) => {
 export const getCompaniesEmail = (email) => {
   return async function(dispatch) {
     try {
-      const response = await axios.get(`/companies/validate?email=${email}`);
+      const response = await axios.get(`/companies?email=${email}`);
       const result = response.data;
       return result;
     } catch (error) {
@@ -654,44 +653,43 @@ export const addEvents = (savedEvents) => {
 };
 
 export const getEvents = (CompanyId) => {
-         return async (dispatch) => {
-           try {
-             const response = await axios(
-               `http://localhost:3001/events/${CompanyId}`
-             );
-             const result = response.data;
-             return dispatch({
-               type: GET_EVENTS,
-               payload: result,
-             });
-           } catch (error) {
-             console.log(error);
-           }
-         };
-       };
-export const putEvents = ( calendarEvent) => {
-         return async (dispatch) => {
-           try {
-             let response = await axios.put(
-               `http://localhost:3001/events/${calendarEvent.id}`,
-               calendarEvent
-             );
-           } catch (error) {
-             console.log(error);
-           }
-         };
-       };
-  export const deleteEvents = (id) => {
-          return async (dispatch) => {
-            try {
-              const response = await axios.delete(
-                `http://localhost:3001/events/${id}`);
-            } catch (error) {
-              console.log(error);
-            }
-          };
+  return async (dispatch) => {
+    try {
+      const response = await axios(`http://localhost:3001/events/${CompanyId}`);
+      const result = response.data;
+      return dispatch({
+        type: GET_EVENTS,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
-        
+export const putEvents = (calendarEvent) => {
+  return async (dispatch) => {
+    try {
+      // eslint-disable-next-line no-unused-vars
+      let response = await axios.put(
+        `http://localhost:3001/events/${calendarEvent.id}`,
+        calendarEvent
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const deleteEvents = (id) => {
+  return async (dispatch) => {
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const response = await axios.delete(`http://localhost:3001/events/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const getCompanyInfo = (CompanyId) => {
   return async (dispatch) => {
     try {
@@ -701,16 +699,14 @@ export const getCompanyInfo = (CompanyId) => {
       return dispatch({
         type: GET_COMPANY_INFO,
         payload: result,
-      })
-    } catch (error) {
-      
-    }
-  }
-} 
+      });
+    } catch (error) {}
+  };
+};
 
 export const getBirthday = (CompanyId) => {
   return async (dispatch) => {
-    try{
+    try {
       const response = await axios(
         `http://localhost:3001/users/${CompanyId}/birthday`
       );
@@ -719,16 +715,15 @@ export const getBirthday = (CompanyId) => {
         type: GET_BIRTHDAY,
         payload: result,
       });
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
-}
-
+  };
+};
 
 export const getIndexArea = (CompanyId) => {
   return async (dispatch) => {
-    try{
+    try {
       const response = await axios(
         `http://localhost:3001/areas/${CompanyId}/index`
       );
@@ -737,33 +732,23 @@ export const getIndexArea = (CompanyId) => {
         type: INDEX_AREA,
         payload: result,
       });
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
-}
-
-
+  };
+};
 
 export const getDoughnu = (CompanyId) => {
   return async (dispatch) => {
-    try{
-      const response = await axios(
-        `http://localhost:3001/users/${CompanyId}`
-      );
+    try {
+      const response = await axios(`http://localhost:3001/users/${CompanyId}`);
       const result = response.data;
       return dispatch({
         type: GET_DOUGHNU,
         payload: result,
       });
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
-}
-
-
-
-
-
-
+  };
+};

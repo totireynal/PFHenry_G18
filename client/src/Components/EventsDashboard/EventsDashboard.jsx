@@ -11,7 +11,7 @@ const EventsDashboards = () => {
     dispatch(getEvents(CompanyId))
   }, [dispatch])
   return (
-    <div className="border bg-white rounded-md w-1/3 h-auto p-5 shadow-2xl flex flex-col">
+    <div className="border bg-white rounded-md w-9/12 h-auto p-5 shadow-2xl flex flex-col">
       <h2 className="mb-5">Upcoming events</h2>
       <div className="flex flex-col gap-3">
 

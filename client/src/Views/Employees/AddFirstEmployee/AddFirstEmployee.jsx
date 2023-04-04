@@ -2,33 +2,30 @@
 // import SideBar from "../../../Components/SideBar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { createEmployee } from "../../../state/redux/actions/actions";
+import { createEmployee, getAllEmployees } from "../../../state/redux/actions/actions";
 import FormFirstEmployee from "../../../Components/Form/FormFirstEmployee";
 import validate from "../../../utils/functions/validate";
 import { useErrors } from "../../../utils/hooks/errors";
 import { useAnswer } from "../../../utils/hooks/answer";
-
+import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
 const AddFirstEmployee = () => {
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
-  useEffect(() => {
-    
-  }, [dispatch]);
-
  
-  
+
+  // const currentCompanyId = decodedToken ? decodedToken.CompanyId : null;
+  const getAlllEmployees = useSelector((state) => state.getAlllEmployees);
+
   const positionAdmin = useSelector((state) => state.positionsCrud);
   const areaAdmin = useSelector((state) => state.areasCrud);
 
+  const companyId = useSelector((state) => state.newCompanyId);
 
-    const companyId = useSelector((state) => state.newCompanyId);
-  
-
-    
   var [employee, setEmployee] = useState({
     name: "",
     lastName: "",
@@ -52,22 +49,24 @@ const AddFirstEmployee = () => {
 
   const { errors, setAllErrors } = useErrors();
 
-  const {
-    answer,
-    showAnswer
-  } = useAnswer();
+  const { answer, showAnswer } = useAnswer();
 
   const [touched, setTouched] = useState({});
 
   const [submited, setSubmited] = useState(false);
 
+  const [link, setLink] = useState(false)
+  
+  useEffect(() => {
+    dispatch(getAllEmployees());
+  }, [dispatch]);
 
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
       setErrorButton(false);
     }
   }, [errors]);
-  
+
   useEffect(() => {}, []);
 
   const handleInput = (event) => {
@@ -81,7 +80,8 @@ const AddFirstEmployee = () => {
       validate({
         ...employee,
         [event.target.name]: event.target.value,
-      })
+
+      }, getAlllEmployees)
     );
 
     setTouched({
@@ -107,17 +107,14 @@ const AddFirstEmployee = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmited(true);
-    dispatch(
-      createEmployee(
-        employee, 
-        showAnswer
-      )
-    );
-      setTimeout(() => {
-      setSubmited(false);
-      navigate("/")
-      }, 3000);
-     
+    setLink(true);
+    dispatch(createEmployee(employee, showAnswer));
+    
+    // setSubmited(false);
+     setTimeout(() => {
+       setSubmited(false);
+     }, 1000);
+
     setErrorButton(true);
     setEmployee({
       name: "",
@@ -180,6 +177,20 @@ const AddFirstEmployee = () => {
               handleChangeImage={handleChangeImage}
             />
           </div>
+          {link && ( 
+          <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg">
+              <h2 className="text-xl font-bold mb-4">Sign in to your account to continue</h2>
+              <p className="mb-4">{answer}</p>
+              <div className="flex justify-end">
+
+                <Link to="/" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
+              </div>
+            </div>
+          </div>
+            
+         
+            )}
         </div>
       </div>
     </div>
@@ -187,3 +198,8 @@ const AddFirstEmployee = () => {
 };
 
 export default AddFirstEmployee;
+
+
+
+
+

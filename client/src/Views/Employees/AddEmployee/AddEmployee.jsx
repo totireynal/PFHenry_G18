@@ -16,13 +16,13 @@ import { useAnswer } from "../../../utils/hooks/answer";
 // import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
-import {
-  getUsersTel,
-  getUsersEmail,
-  getUsersCuil,
-  getUsersCbu,
-  getUsersDni,
-} from "../../../state/redux/actions/actions";
+// import {
+//   getUsersTel,
+//   getUsersEmail,
+//   getUsersCuil,
+//   getUsersCbu,
+//   getUsersDni,
+// } from "../../../state/redux/actions/actions";
 
 const AddEmployee = () => {
   const [cookies] = useCookies(["cookieBack"]);
@@ -37,7 +37,6 @@ const AddEmployee = () => {
     dispatch(getAreasNum(undefined, currentCompanyId));
     dispatch(getAllEmployees());
   }, [dispatch]);
-  
 
   const positionsNum = useSelector((state) => state.positionsNum);
   const areasNum = useSelector((state) => state.areasNum);
@@ -71,6 +70,7 @@ const AddEmployee = () => {
 
   const [submited, setSubmited] = useState(false);
 
+  // eslint-disable-next-line no-unused-vars
   const { back, setAllBack } = useBack();
 
   // const [mensajeEmail, setMensajeEmail] = useState({
@@ -102,10 +102,13 @@ const AddEmployee = () => {
     });
 
     setAllErrors(
-      validate({
-        ...employee,
-        [event.target.name]: event.target.value,
-      }, getAlllEmployees)
+      validate(
+        {
+          ...employee,
+          [event.target.name]: event.target.value,
+        },
+        getAlllEmployees
+      )
     );
 
     setTouched({

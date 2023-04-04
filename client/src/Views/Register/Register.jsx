@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -57,6 +58,7 @@ export default function CreateCompany(props) {
   
 
 
+  // eslint-disable-next-line no-unused-vars
   const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);

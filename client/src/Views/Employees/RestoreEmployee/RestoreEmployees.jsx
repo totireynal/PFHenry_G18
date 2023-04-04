@@ -1,7 +1,7 @@
 // import { useNavigate } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import DeletedEmployee from "../Employee/DeletedEmployee";
-import SearchBar from "./../SearchBar/SearchBar";
+// import SearchBar from "./../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cleanUrl,
@@ -86,6 +86,7 @@ const RestoreEmployees = () => {
 
   useEffect(() => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, CompanyId, deletes]);
 
   useEffect(() => {
@@ -106,26 +107,27 @@ const RestoreEmployees = () => {
     setOptionFilters(!optionFilters);
   };
 
-  const [searchId, setSearchId] = useState(0)
-  const sendSearchId = (id) => setSearchId(id)
+  const [searchId, setSearchId] = useState(0);
+  const sendSearchId = (id) => setSearchId(id);
 
-    const handleClick = (event) => {
-      dispatch(updateDeletedEmployee(searchId));
-      dispatch(getDeletedEmployees(undefined, undefined, CompanyId));
-      fn(searchId);
+  const handleClick = (event) => {
+    dispatch(updateDeletedEmployee(searchId));
+    dispatch(getDeletedEmployees(undefined, undefined, CompanyId));
+    fn(searchId);
   };
-  
-    const refDivCheck = useRef();
 
-    let refModal = useRef();
+  // eslint-disable-next-line no-unused-vars
+  const refDivCheck = useRef();
 
-    let refDivModal = useRef();
+  let refModal = useRef();
 
-    const modalActive = () => {
-      refModal.current.style.display = "flex";
-      refDivModal.current.style.transform = "scale-1";
-      refDivModal.current.style.opacity = "1";
-    };
+  let refDivModal = useRef();
+
+  const modalActive = () => {
+    refModal.current.style.display = "flex";
+    refDivModal.current.style.transform = "scale-1";
+    refDivModal.current.style.opacity = "1";
+  };
   return (
     <>
       <div

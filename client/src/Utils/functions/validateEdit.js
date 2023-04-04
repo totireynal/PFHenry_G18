@@ -25,6 +25,7 @@ const validateEdit = (values, getAlllEmployees, currentEmployee) => {
   if (allDni.includes(`${values.dni}`) && !allDni.includes(`${currentEmployee.dni}`))
     errors.dni = "Ya esta en la base de datos perrito salvaje";
 
+  if (!values.image.length) errors.image = 'no hay'
   if (values.role === "default") errors.role = "You must choose a role";
   if (!values.name.length) errors.name = "Name can't be empty";
   if (!values.lastName.length) errors.lastName = "Last name can't be empty";

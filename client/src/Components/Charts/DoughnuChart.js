@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from "react";
 
 import {
@@ -9,7 +10,7 @@ import {
   
   import { Doughnut } from 'react-chartjs-2';
   import {getDoughnu} from "../../state/redux/actions/actions"
-  import { useEffect, useState } from "react";
+  import { useEffect } from "react";
   import { useDispatch, useSelector } from "react-redux";
   
   ChartJS.register(
@@ -73,7 +74,12 @@ export default function DoughnuChart(){
         }  
     },[])
 
-    return <Doughnut data = {data} options={options}/>
+  return (
+    <div className=" -translate-x-16">
+      <Doughnut data={data} options={options} />
+
+    </div>
+  )
 }
 
 
