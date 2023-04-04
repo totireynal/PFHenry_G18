@@ -1,23 +1,10 @@
-import { log } from "mathjs";
 import { useSelector } from "react-redux";
 
 const WelcomeDashboard = () => {
   let employeeDetail = useSelector((state) => state.currentEmployee);
   const {
-    id,
     name,
-    lastName,
-    birthDate,
-    email,
-    address,
-    dni,
-    tel,
     role,
-    position,
-    area,
-    cuil,
-    cbu,
-    dateOfAdmission,
     image,
   } = employeeDetail;
   const date = new Date();
