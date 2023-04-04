@@ -1,7 +1,7 @@
 // import { useNavigate } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import DeletedEmployee from "../Employee/DeletedEmployee";
-import SearchBar from "./../SearchBar/SearchBar";
+// import SearchBar from "./../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cleanUrl,
@@ -87,6 +87,7 @@ const RestoreEmployees = () => {
 
   useEffect(() => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, CompanyId, deletes]);
 
   useEffect(() => {
@@ -116,6 +117,7 @@ const RestoreEmployees = () => {
     fn(searchId);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const refDivCheck = useRef();
 
   let refModal = useRef();
@@ -251,7 +253,7 @@ const RestoreEmployees = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2 pb-8 sm:pt-3 ssm:pt-10 ">
-          {users ? (
+          {users.length > 0 ? (
             users?.map((user, i) => {
               return (
                 <DeletedEmployee
@@ -271,7 +273,7 @@ const RestoreEmployees = () => {
               );
             })
           ) : (
-            <h3>{answer ? answer : ""}</h3>
+            <h3 className="text-sky-400 text-center">{answer ? answer : "No deleted employees found"}</h3>
           )}
         </div>
       </div>

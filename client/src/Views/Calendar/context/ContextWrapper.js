@@ -7,6 +7,7 @@ import React, {
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
+// eslint-disable-next-line no-unused-vars
 import { addEvents, getEvents } from "../../../state/redux/actions/actions";
 
 function savedEventsReducer(state, { type, payload }) {
@@ -75,7 +76,7 @@ export default function ContextWrapper(props) {
         dispatch(getEvents(CompanyId));
 
 
-  }, [dispatch,CompanyId, events]);
+  }, [dispatch,CompanyId,]);
 
   useEffect(() => {
     setLabels((prevLabels) => {

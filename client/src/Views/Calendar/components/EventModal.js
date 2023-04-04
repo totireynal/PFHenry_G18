@@ -41,6 +41,7 @@ export default function EventModal() {
     dispatch(getEvents(CompanyId))
   },[dispatch, CompanyId])
 
+    // eslint-disable-next-line no-unused-vars
     const events = useSelector((state) => state.events);
   function handleSubmit(e) {
     e.preventDefault();

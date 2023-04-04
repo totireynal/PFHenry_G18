@@ -16,13 +16,13 @@ import { useAnswer } from "../../../utils/hooks/answer";
 // import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
-import {
-  getUsersTel,
-  getUsersEmail,
-  getUsersCuil,
-  getUsersCbu,
-  getUsersDni,
-} from "../../../state/redux/actions/actions";
+// import {
+//   getUsersTel,
+//   getUsersEmail,
+//   getUsersCuil,
+//   getUsersCbu,
+//   getUsersDni,
+// } from "../../../state/redux/actions/actions";
 
 const AddEmployee = () => {
   const [cookies] = useCookies(["cookieBack"]);
@@ -70,6 +70,7 @@ const AddEmployee = () => {
 
   const [submited, setSubmited] = useState(false);
 
+  // eslint-disable-next-line no-unused-vars
   const { back, setAllBack } = useBack();
 
   // const [mensajeEmail, setMensajeEmail] = useState({
@@ -86,6 +87,8 @@ const AddEmployee = () => {
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
       setErrorButton(false);
+    } else {
+      setErrorButton(true);
     }
   }, [errors]);
 
