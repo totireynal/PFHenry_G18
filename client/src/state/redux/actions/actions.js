@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -270,7 +270,7 @@ export const getAreas = (filters, CompanyId) => {
 export const getAreasNum = (filters, CompanyId) => {
   return async function(dispatch) {
     try {
-      let url = `/areas/ars/${CompanyId}`;
+      let url = `http://localhost:3001/areas/ars/${CompanyId}`;
 
       const response = await axios(url);
       const result = response.data;
