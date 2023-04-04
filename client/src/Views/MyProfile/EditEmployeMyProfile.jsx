@@ -7,10 +7,10 @@ import {
   updateEmployee,
   getEmployeeDetail,
 } from "../../state/redux/actions/actions";
-import validate from "../../Utils/functions/validate";
+import validate from "../../utils/functions/validate";
 // import Form from "../../Components/Form/Form";
-import { useErrors } from "../../Utils/hooks/errors";
-import { useAnswer } from "../../Utils/hooks/answer";
+import { useErrors } from "../../utils/hooks/errors";
+import { useAnswer } from "../../utils/hooks/answer";
 // import { Link } from "react-router-dom";
 // import SelectFormEdit from "../../Components/SelectFormEdit/SelectFormEdit";
 import FormEdit from "../../Components/FormEdit/FormEdit";
@@ -177,11 +177,8 @@ const EditEmployeeMyProfile = () => {
           </div>
         </div>
       </>
-
     </div>
-
   );
 };
-
 
 export default EditEmployeeMyProfile;

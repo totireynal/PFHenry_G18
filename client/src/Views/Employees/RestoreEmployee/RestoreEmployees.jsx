@@ -17,7 +17,7 @@ import Sort from "../../../Components/Sort/Sort";
 import Position from "../../../Components/Position/Position";
 import Area from "../../../Components/Area/Area";
 import Rol from "../../../Components/Rol/Rol";
-import { useAnswer } from "../../../Utils/hooks/answer";
+import { useAnswer } from "../../../utils/hooks/answer";
 // import { AiOutlinePlus } from "react-icons/ai";
 // import { RiMailAddLine } from "react-icons/ri";
 // import { SiMinutemailer } from "react-icons/si";
@@ -87,7 +87,7 @@ const RestoreEmployees = () => {
 
   useEffect(() => {
     dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, CompanyId, deletes]);
 
   useEffect(() => {
@@ -273,7 +273,9 @@ const RestoreEmployees = () => {
               );
             })
           ) : (
-            <h3 className="text-sky-400 text-center">{answer ? answer : "No deleted employees found"}</h3>
+            <h3 className="text-sky-400 text-center">
+              {answer ? answer : "No deleted employees found"}
+            </h3>
           )}
         </div>
       </div>
