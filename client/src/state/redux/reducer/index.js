@@ -66,7 +66,8 @@ const initialState = {
   indexArea: [],
   doughnut: [],
   companyInfo: {},
-  getAlllEmployees: [],
+
+  getAlllEmployees: []
 };
 
 function rootReducer(state = initialState, action) {

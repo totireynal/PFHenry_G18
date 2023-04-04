@@ -76,7 +76,7 @@ export default function ContextWrapper(props) {
         dispatch(getEvents(CompanyId));
 
 
-  }, [dispatch,CompanyId]);
+  }, [dispatch,CompanyId,]);
 
   useEffect(() => {
     setLabels((prevLabels) => {

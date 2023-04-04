@@ -20,26 +20,46 @@ const EmployeeList = () => {
   )
   console.log("Birthday", birthday)
     return (
-      <div className="w-1/5 float-right overflow-x-hidden">
-        <h3 className="text-lg font-medium mb-4 overflow-x-hidden">Upcoming Birthdays</h3>
+      <div className=" w-full float-right overflow-x-hidden bg-white p-5 rounded-md">
+        <h3 className="text-lg font-medium mb-4 overflow-x-hidden">
+          Upcoming Birthdays
+        </h3>
         {/* {birthday? ( */}
         <ul className="divide-y divide-gray-200">
-        {typeof birthday==="object"?
-        birthday?.map(employee => (
-          <li key={employee.id} className="py-4 flex">
-            <img className="h-10 w-10 rounded-full" src={employee.image}   alt={employee.name} />
-            <div className="ml-3">
-            <Link to={`/employee/${employee.id}`}>
-              <p className="text-sm font-medium text-gray-900">{employee.name} {employee.lastName}</p>
+          {typeof birthday === "object" ? (
+            birthday?.map((employee) => (
+              <Link to={`/employee/${employee.id}`}>
+                <li
+                  key={employee.id}
+                  className="p-3 mb-3 rounded shadow-md flex hover:-translate-y-1 bg-slate-100 "
+                >
+                  <img
+                    className="h-10 w-10 rounded-full"
+                    src={employee.image}
+                    alt={employee.name}
+                  />
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-gray-900">
+                      {employee.name} {employee.lastName}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {obtenerNombreMes(employee.birthMonth)}{" "}
+                      {employee.birthDay}
+                    </p>
+                  </div>
+                </li>
               </Link>
-            <p className="text-sm text-gray-500">{obtenerNombreMes(employee.birthMonth)}{" "}{employee.birthDay}</p>
-            </div>
-        </li>
-        )): <div className="overflow-x-hidden" style={{ overflowY: "hidden", scrollbarWidth: "none" }}>
+            ))
+          ) : (
+            <div
+              className="overflow-x-hidden"
+              style={{ overflowY: "hidden", scrollbarWidth: "none" }}
+            >
               No upcoming birthdays found
-            </div>}
-        </ul>         
-    </div>
+            </div>
+          )}
+        </ul>
+      </div>
     );
   };
   
