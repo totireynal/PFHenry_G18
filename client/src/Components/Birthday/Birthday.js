@@ -7,6 +7,7 @@ import {obtenerNombreMes} from "./BirthMonth"
 import { Link } from "react-router-dom";
 import { RiMailAddLine } from "react-icons/ri";
 import axios from "axios";
+import { SpaDependencies } from "mathjs";
 
 
 const EmployeeList = () => {
@@ -33,6 +34,17 @@ const EmployeeList = () => {
         setCheck(true); //setear a true
         console.log(email)
   }
+
+  const [send, setSend] = useState(false)
+
+  const handleButton = (employee) => {
+    sendEmail(employee.email);
+    setSend(true)
+    setTimeout(() => {
+      
+      setSend(false)
+    }, 2000);
+  };
 
 
   var numeroDeDia = new Date().getDate();
@@ -61,17 +73,21 @@ const EmployeeList = () => {
                     <p className="text-sm font-medium text-gray-900">
                       {employee.name} {employee.lastName}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 relative">
                       {obtenerNombreMes(employee.birthMonth)}{" "}
                       {employee.birthDay}
                       {employee.birthDay==numeroDeDia &&
                       (
+                      <>
+                        <span className={`${send ? 'inline-block':'hidden' } pl-2 text-sky-400`}>Enviado</span>
                         <button
-                        onClick={() => sendEmail(employee.email)}
-                        className="ml-2.5 bg-sky-400 text-white rounded  overflow-hidden px-2 ssm:py-1 h-8 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 sm:inline-block ssm:hidden "
-                      >
-                      <RiMailAddLine size={20} />
+                        onClick={()=> handleButton(employee)}
+                        className={`${send ? 'hidden' : 'inline-block'}  bg-sky-400 text-white rounded  overflow-hidden p-2 ssm:py-1 h-6 ml-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 `}
+                        >
+                      <RiMailAddLine size={15} />
                       </button>
+                        </>
+                      
                       )}
                     </p>
                   </div>
