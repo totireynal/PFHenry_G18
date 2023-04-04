@@ -17,29 +17,29 @@ function validate(input) {
   let errors = {};
   if(input.name === "name"){
     if (/[^A-Za-z0-9 ]+/g.test(input.name)) {
-      errors.name = "Nombre no puede tener caracteres especiales o tildes";
+      errors.name = "Only alphabetic characters";
     }
   }
   if (input.cuit) {
     if (
       !/^(20|23|27|30|33)([0-9]{9}|-[0-9]{8}-[0-9]{1})$/g.test(input.cuit)
     ) {
-      errors.cuit = "Ingrese un formato valido de CUIT";
+      errors.cuit = "CUIT is not valid";
     }
   }
   if (input.industry) {
     if (/[^A-Za-z0-9 ]+/g.test(input.industry)) {
-      errors.industry = "Nombre no puede tener caracteres especiales o tildes";
+      errors.industry = "Only alphabetic characters";
     }
   }
   if (input.numberEmployees) {
     if (!/^[0-9]+$/.test(input.numberEmployees)) {
-      errors.numberEmployees = "Ingrese formato numero";
+      errors.numberEmployees = "Numbers only";
     }
   }
   if (input.email) {
     if(!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(input.email)){
-      errors.email = "Ingrese un email valido";
+      errors.email = "Invalid email address";
     }
   }
   return errors;
@@ -230,7 +230,7 @@ export default function CreateCompany(props) {
     <div className="min-height-full flex h-screen">
       <div className="hidden lg:block relative h-full flex-1 text-6xl">
       <h1>StaffSphere Register Company</h1>
-      <div className="text-2xl">Simplify your team management for only U$S 2,000</div>
+      <div className="text-2xl">Simplify your team management for only USD 2,000</div>
       </div>
       <div className="flex-1 flex flex-col py-14 px-4 sm:pax-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
@@ -238,7 +238,7 @@ export default function CreateCompany(props) {
             <h2 className="mt-1 text-3x1 font-extrabold text-gray-900 my-2">
               Register your company
             </h2>
-            <h6 className="text-xs text-red-400">(*) Campos necesarios</h6>
+            <h6 className="text-xs text-red-400">(*) Mandatory fields</h6>
           </div>
           <div className="mt-6">
             <form

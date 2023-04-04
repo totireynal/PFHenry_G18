@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUrlQueries } from "../../../utils/functions/addUrlQueries";
+import { addUrlQueries } from "../../../Utils/functions/addUrlQueries";
 import {
   ADD_COMPANY,
   GET_COMPANIES,
@@ -39,6 +39,7 @@ import {
   GET_RATING,
   // POST_EVENTS,
   GET_EVENTS,
+  // eslint-disable-next-line no-unused-vars
   PUT_EVENTS,
   GET_BIRTHDAY,
   INDEX_AREA,
