@@ -24,10 +24,13 @@ const UploadImage = ({ handleChangeImage, user }) => {
   };
 
   return (
-    <div className="w-60  lg:ml-4  flex gap-4 items-end justify-start text-start">
-      <div className="">
-        <h3 className="pb-4">Image</h3>
-        <label className="bg-white p-2 rounded cursor-pointer" htmlFor="image">
+    <div className="w-auto flex gap-4 items-end justify-start text-start">
+      <div className="flex flex-col justify-center">
+        {/* <h3 className="pb-4">Image</h3> */}
+        <label
+          className="flex items-center justify-center bg-white h-10 w-32 rounded cursor-pointer"
+          htmlFor="image"
+        >
           Upload Image
         </label>
         <input
@@ -37,11 +40,6 @@ const UploadImage = ({ handleChangeImage, user }) => {
           id="image"
           onChange={upload}
         />
-        {/* <img
-          src={user}
-          alt="profilepic"
-          className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
-        /> */}
       </div>
     </div>
   );

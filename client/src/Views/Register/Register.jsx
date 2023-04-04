@@ -3,27 +3,24 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postCompany } from "../../state/redux/actions/actions";
-import {CardElement} from "@stripe/react-stripe-js";
-import {useStripe, useElements} from "@stripe/react-stripe-js"
+import { CardElement } from "@stripe/react-stripe-js";
+import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { getCompaniesCuit } from "../../state/redux/actions/actions";
 import { getCompaniesEmail } from "../../state/redux/actions/actions";
 import { getCompaniesName } from "../../state/redux/actions/actions";
 import { getCompaniesTel } from "../../state/redux/actions/actions";
-import UploadImage from  "../../Components/Upload/UploadImage"
-
-
+import UploadImage from "../../Components/Upload/UploadImage";
+import { MdArrowBack } from "react-icons/md";
 
 function validate(input) {
   let errors = {};
-  if(input.name === "name"){
+  if (input.name === "name") {
     if (/[^A-Za-z0-9 ]+/g.test(input.name)) {
       errors.name = "Only alphabetic characters";
     }
   }
   if (input.cuit) {
-    if (
-      !/^(20|23|27|30|33)([0-9]{9}|-[0-9]{8}-[0-9]{1})$/g.test(input.cuit)
-    ) {
+    if (!/^(20|23|27|30|33)([0-9]{9}|-[0-9]{8}-[0-9]{1})$/g.test(input.cuit)) {
       errors.cuit = "CUIT is not valid";
     }
   }
@@ -38,7 +35,11 @@ function validate(input) {
     }
   }
   if (input.email) {
-    if(!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(input.email)){
+    if (
+      !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+        input.email
+      )
+    ) {
       errors.email = "Invalid email address";
     }
   }
@@ -50,26 +51,21 @@ export default function CreateCompany(props) {
   const stripe = useStripe();
   const elements = useElements();
   const [isCardComplete, setIsCardComplete] = useState(false);
- 
+
   const [mensajeCuit, setMensajeCuit] = useState(null);
   const [mensajeName, setMensajeName] = useState(null);
   const [mensajeEmail, setMensajeEmail] = useState(null);
   const [mensajeTel, setMensajeTel] = useState(null);
-  
-
 
   // eslint-disable-next-line no-unused-vars
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
- 
 
   const dispatch = useDispatch();
-  
-
 
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
@@ -80,62 +76,53 @@ export default function CreateCompany(props) {
     numberEmployees: "",
     tel: "",
     email: "",
-    image: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg"
+    image:
+      "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
   });
 
-
   const handleBlurCUIT = (event) => {
-
     const cuit = event.target.value;
-      dispatch(getCompaniesCuit(cuit)).then(resultado => {
+    dispatch(getCompaniesCuit(cuit)).then((resultado) => {
       if (resultado?.message) {
         setMensajeCuit(resultado?.message);
       } else {
         setMensajeCuit(null);
       }
-
     });
-  }
+  };
 
   const handleBlurName = (event) => {
-
     const name = event.target.value;
-      dispatch(getCompaniesName(name)).then(resultado => {
+    dispatch(getCompaniesName(name)).then((resultado) => {
       if (resultado?.message) {
         setMensajeName(resultado?.message);
       } else {
         setMensajeName(null);
       }
-
     });
-  }
-
+  };
 
   const handleBlurEmail = (event) => {
-
     const email = event.target.value;
-      dispatch(getCompaniesEmail(email)).then(resultado => {
+    dispatch(getCompaniesEmail(email)).then((resultado) => {
       if (resultado?.message) {
         setMensajeEmail(resultado?.message);
       } else {
         setMensajeEmail(null);
       }
-
     });
-  }
+  };
 
   const handleBlurTel = (event) => {
-
     const valor = event.target.value;
-      dispatch(getCompaniesTel(valor)).then(resultado => {
+    dispatch(getCompaniesTel(valor)).then((resultado) => {
       if (resultado?.message) {
         setMensajeTel(resultado?.message);
       } else {
         setMensajeTel(null);
       }
-
     });
-  }
+  };
 
   const handleChangeImage = (url) => {
     setInput({
@@ -144,8 +131,7 @@ export default function CreateCompany(props) {
     });
   };
 
-  
-  const handleSubmit = async (e)=> {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
@@ -155,10 +141,9 @@ export default function CreateCompany(props) {
     }
 
     const response = await getCompaniesCuit(input.cuit);
-    if(response.data !== "The company PruebaCUIT has been created correctly"){
+    if (response.data !== "The company PruebaCUIT has been created correctly") {
+    }
 
-    };
-    
     if (
       !input.name ||
       !input.cuit ||
@@ -173,145 +158,153 @@ export default function CreateCompany(props) {
     }
 
     setIsProcessing(true);
-    const {error, paymentIntent} = await stripe.confirmCardPayment(
-      clientSecret,{
-      payment_method:{
-      card: elements.getElement(CardElement)
+    const { error, paymentIntent } = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
       }
-    },
-  )
-  if(error){
-    setErrorMessage("Your card was declined.");
-    setSuccessMessage(null);
-    } else if(paymentIntent)
-    {
-      console.log(paymentIntent)
-      setSuccessMessage("Payment status: succeeded!")
+    );
+    if (error) {
+      setErrorMessage("Your card was declined.");
+      setSuccessMessage(null);
+    } else if (paymentIntent) {
+      console.log(paymentIntent);
+      setSuccessMessage("Payment status: succeeded!");
       setErrorMessage(null);
     } else {
-    setMessage("Unexpected state");
+      setMessage("Unexpected state");
     }
 
-  setIsProcessing(false);
+    setIsProcessing(false);
 
-    paymentIntent?dispatch(postCompany(input)):
-    setInput({
-      name: "",
-      cuit: "",
-      industry: "",
-      numberEmployees: "",
-      email: "",
-      location:"",
-      tel:"",
-      image:"https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
-    });
+    paymentIntent
+      ? dispatch(postCompany(input))
+      : setInput({
+          name: "",
+          cuit: "",
+          industry: "",
+          numberEmployees: "",
+          email: "",
+          location: "",
+          tel: "",
+          image:
+            "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
+        });
     setFormSubmitted(true);
-  }
+  };
 
   const handleCardChange = (event) => {
     setIsCardComplete(event.complete);
   };
   function handleChange(e) {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setInput({
       ...input,
       [name]: value,
-      InformationId:1
+      InformationId: 1,
     });
     setErrors(
       validate({
         ...input,
         [name]: value,
       })
-     );
+    );
   }
 
   return (
-    <div className="min-height-full flex h-screen">
-      <div className="hidden lg:block relative h-full flex-1 text-6xl">
-      <h1>StaffSphere Register Company</h1>
-      <div className="text-2xl">Simplify your team management for only USD 2,000</div>
+    <div className="flex h-screen w-full">
+      <Link to={"/home"}>
+        <button className="fixed top-0 left-6 text-2xl mt-6 text-sky-400 hover:text-white border border-sky-400 rounded overflow-hidden px-4 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
+          <MdArrowBack />
+        </button>
+      </Link>
+      <div className="h-full w-1/2 flex flex-col justify-center items-center pb-16">
+        <h1 className="text-6xl text-center font-bold">
+          StaffSphere Company Register
+        </h1>
+        <span className="text-2xl">
+          Simplify your team management for only USD 2,000
+        </span>
       </div>
-      <div className="flex-1 flex flex-col py-14 px-4 sm:pax-6 lg:flex-none lg:px-20 xl:px-24">
-        <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
-          <div className="text-center lg:text-left">
-            <h2 className="mt-1 text-3x1 font-extrabold text-gray-900 my-2">
-              Register your company
-            </h2>
-            <h6 className="text-xs text-red-400">(*) Mandatory fields</h6>
-          </div>
-          <div className="mt-6">
-            <form
-              action=""
-              className="space-y-1"
-              onSubmit={(e) => handleSubmit(e)}
-            >
-              {/* grid grid-cols-1 lg:grid-col-2 lg:gap-3 */}
-              <div className="grid lg:grid-cols-2 gap-3">
-                <div>
-                  <label
-                    htmlFor="Name"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
+      <div className="h-full w-1/2 flex flex-col justify-center items-center gap-6">
+        <div className="flex flex-col w-2/3">
+          <span className="text-xl font-bold pb-1">Register your company</span>
+          <span className="text-xs text-red-400">(*) Mandatory fields</span>
+        </div>
+        <div className="w-2/3">
+          <form
+            action=""
+            // className="space-y-1"
+            onSubmit={(e) => handleSubmit(e)}
+          >
+            <div className="flex flex-wrap gap-4">
+              <div className="flex flex-row w-full gap-10">
+                <div className="w-1/2">
+                  <label htmlFor="Name" className="text-base">
                     Name <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="text"
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="w-full rounded-md block h-10 px-2 outline-none focus:border-blue-400"
                     placeholder="Name"
                     value={input.name}
                     name="name"
                     onChange={(e) => handleChange(e)}
-                    onBlur={(event)=> handleBlurName(event)}
+                    onBlur={(event) => handleBlurName(event)}
                   />
                   {errors.name && (
                     <section className="m-0 text-red-600">
                       {errors.name}
                     </section>
                   )}
-                  {mensajeName && <section className="m-0  text-red-600">{mensajeName}</section>}
-                   {console.log("Mensaje en section:", mensajeName)}
+                  {mensajeName && (
+                    <section className="m-0  text-red-600">
+                      {mensajeName}
+                    </section>
+                  )}
+                  {console.log("Mensaje en section:", mensajeName)}
                 </div>
-                <div>
-                  <label
-                    htmlFor="ID"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
+                <div className="w-1/2">
+                  <label htmlFor="ID" className="text-base">
                     CUIT <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="w-full rounded-md block h-10 px-2 outline-none focus:border-blue-400"
                     type="number"
                     value={input.cuit}
                     name="cuit"
                     onChange={(e) => handleChange(e)}
                     placeholder="e.g 30203445606"
-                    onBlur={(event)=> handleBlurCUIT(event)}
+                    onBlur={(event) => handleBlurCUIT(event)}
                   />
-                  
-                   {errors.cuit && (
+
+                  {errors.cuit && (
                     <section className="m-0  text-red-600">
                       {errors.cuit}
                     </section>
-                  )} 
-                   {mensajeCuit && <section className="m-0  text-red-600">{mensajeCuit}</section>}
-                   {console.log("Mensaje en section:", mensajeCuit)}
-                   
+                  )}
+                  {mensajeCuit && (
+                    <section className="m-0  text-red-600">
+                      {mensajeCuit}
+                    </section>
+                  )}
+                  {console.log("Mensaje en section:", mensajeCuit)}
                 </div>
-                <div>
-                  <label
-                    htmlFor="Industry"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
+              </div>
+              <div className="flex flex-row w-full gap-10">
+                <div className="w-1/2">
+                  <label htmlFor="Industry" className="text-base">
                     Industry <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
-                  className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
-                   type ="text"
-                   name="industry"
-                   value={input.industry}
-                   onChange={(e) => handleChange(e)}
-                   placeholder="Industry"
+                    className="w-full rounded-md block h-10 px-2 outline-none focus:border-blue-400"
+                    type="text"
+                    name="industry"
+                    value={input.industry}
+                    onChange={(e) => handleChange(e)}
+                    placeholder="Industry"
                   />
                   {errors.industry && (
                     <section className="m-0  text-red-600">
@@ -319,16 +312,13 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                 </div>
-                <div>
-                  <label
-                    htmlFor="Location"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
+                <div className="w-1/2">
+                  <label htmlFor="Location" className="text-base">
                     Location <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="text"
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="w-full rounded-md block h-10 px-2 outline-none focus:border-blue-400"
                     placeholder="Location"
                     value={input.location}
                     name="location"
@@ -340,16 +330,16 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                 </div>
-                <div>
-                  <label
-                    htmlFor="numberEmployees"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
-                    Number of employees <span className="text-xs text-red-400">(*)</span>
+              </div>
+              <div className="flex flex-row w-full gap-10">
+                <div className="w-1/2">
+                  <label htmlFor="numberEmployees" className="text-base">
+                    Number of employees{" "}
+                    <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="number"
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="w-full rounded-md block h-10 px-2 outline-none focus:border-blue-400"
                     placeholder="Number of employees"
                     value={input.numberEmployees}
                     name="numberEmployees"
@@ -361,123 +351,152 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                 </div>
-              <div>
-                  <label
-                    htmlFor="Tel"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
+                <div className="w-1/2">
+                  <label htmlFor="Tel" className="text-base">
                     Phone <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="number"
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="w-full rounded-md block h-10 px-2 outline-none focus:border-blue-400"
                     placeholder="Phone"
                     value={input.tel}
                     name="tel"
                     onChange={(e) => handleChange(e)}
-                    onBlur={(event)=> handleBlurTel(event)}
+                    onBlur={(event) => handleBlurTel(event)}
                   />
                   {errors.tel && (
                     <section className="m-0  text-red-600">
                       {errors.tel}
                     </section>
                   )}
-                  {mensajeTel && <section className="m-0  text-red-600">{mensajeTel}</section>}
+                  {mensajeTel && (
+                    <section className="m-0  text-red-600">
+                      {mensajeTel}
+                    </section>
+                  )}
                   {console.log("Mensaje en section:", mensajeTel)}
                 </div>
-                <div>
-                  <label
-                    htmlFor="Email"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
+              </div>
+              <div className="flex flex-row w-full gap-10">
+                <div className="w-1/2">
+                  <label htmlFor="Email" className="text-base">
                     Email <span className="text-xs text-red-400">(*)</span>
                   </label>
                   <input
                     type="email"
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="w-full rounded-md block h-10 px-2 outline-none focus:border-blue-400"
                     placeholder="Email"
                     value={input.email}
                     name="email"
                     onChange={(e) => handleChange(e)}
-                    onBlur={(event)=> handleBlurEmail(event)}
+                    onBlur={(event) => handleBlurEmail(event)}
                   />
                   {errors.email && (
                     <section className="m-0  text-red-600">
                       {errors.email}
                     </section>
                   )}
-                  {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
+                  {mensajeEmail && (
+                    <section className="m-0  text-red-600">
+                      {mensajeEmail}
+                    </section>
+                  )}
                   {console.log("Mensaje en section:", mensajeEmail)}
                 </div>
-                <div>
-                  <div className="flex flex-row w-60">
-                    <UploadImage handleChangeImage={handleChangeImage} />
-                    <img
+                <div className="flex flex-row w-1/2 items-end">
+                  <UploadImage handleChangeImage={handleChangeImage} />
+                  <img
                     src={input.image}
                     alt="profilepic"
-                    className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
-                    />
+                    className="border-none shadow-none h-10 rounded-md ml-auto"
+                  />
                 </div>
-                </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="Payment"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
-                    Payment <span className="text-xs text-red-400">(*)</span>
-                  </label>
-                  <CardElement id="payment-element"  onChange={handleCardChange}/>
-                </div>
-              <div>
-                <button
-                  type="submit"
-                  className="m2-2 w-full py-3 bg-sky-700 text-white"
-                  disabled={!isCardComplete || isProcessing || !stripe || !elements || !input.name ||!input.cuit || !input.email || !input.tel || !input.location || !input.industry || !input.numberEmployees || mensajeCuit || mensajeName || mensajeEmail|| mensajeTel}
-                >
-                  {" "}
-                  
-                    <span>
-                    {isProcessing ? "Processing ... " : "Register and pay now"}
-                    </span>
-                </button>
               </div>
-            </form>
-            <div>
-              { successMessage  && formSubmitted &&
-               <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-               <div className="bg-white p-8 rounded-lg">
-                 <h2 className="text-xl font-bold mb-4">{successMessage} Thank you for trusting us  🎉</h2>
-                 <p className="mb-4">We need some additional data to complete the process</p>
-                 <div className="flex justify-end">
-                   
-                   <Link to="/addAreaPositionSA" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
-                 </div>
-               </div>
-             </div>
-          }
-          {
-            errorMessage &&
-            <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-               <div className="bg-white p-8 rounded-lg">
-                 <h2 className="text-xl font-bold mb-4">{errorMessage}</h2>
-                 <p className="mb-4">Please try again</p>
-                 <div className="flex justify-end">
-                   
-                   <Link to="/" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
-                 </div>
-               </div>
-             </div>
-          }
-            
-            
-          
+            </div>
+            <div className="mt-6 pb-4">
+              <label htmlFor="Payment" className="text-base">
+                Payment <span className="text-xs text-red-400">(*)</span>
+              </label>
+              <CardElement
+                id="payment-element"
+                onChange={handleCardChange}
+                className="pt-3"
+              />
+            </div>
+            <div className="flex items-center justify-center">
+              <button
+                type="submit"
+                className="mt-6 bg-sky-400 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+                // className={
+                //   errors
+                //     ? "cursor-not-allowed mt-6 bg-sky-200 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+                //     : "mt-6 bg-sky-400 text-white rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+                // }
+                disabled={
+                  !isCardComplete ||
+                  isProcessing ||
+                  !stripe ||
+                  !elements ||
+                  !input.name ||
+                  !input.cuit ||
+                  !input.email ||
+                  !input.tel ||
+                  !input.location ||
+                  !input.industry ||
+                  !input.numberEmployees ||
+                  mensajeCuit ||
+                  mensajeName ||
+                  mensajeEmail ||
+                  mensajeTel
+                }
+              >
+                {" "}
+                <span>
+                  {isProcessing ? "Processing ... " : "Register and pay now"}
+                </span>
+              </button>
+            </div>
+          </form>
+          <div>
+            {successMessage && formSubmitted && (
+              <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+                <div className="bg-white p-8 rounded-lg">
+                  <h2 className="text-xl font-bold mb-4">
+                    {successMessage} Thank you for trusting us 🎉
+                  </h2>
+                  <p className="mb-4">
+                    We need some additional data to complete the process
+                  </p>
+                  <div className="flex justify-end">
+                    <Link
+                      to="/addAreaPositionSA"
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                    >
+                      Continue
+                    </Link>
+                  </div>
                 </div>
+              </div>
+            )}
+            {errorMessage && (
+              <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+                <div className="bg-white p-8 rounded-lg">
+                  <h2 className="text-xl font-bold mb-4">{errorMessage}</h2>
+                  <p className="mb-4">Please try again</p>
+                  <div className="flex justify-end">
+                    <Link
+                      to="/"
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                    >
+                      Continue
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      
     </div>
   );
 }
-
