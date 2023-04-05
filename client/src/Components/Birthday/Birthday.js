@@ -51,12 +51,12 @@ const EmployeeList = () => {
   console.log("Numero de dia: ", numeroDeDia)
   console.log("Birthday", birthday)
     return (
-      <div className=" w-full float-right overflow-x-hidden bg-white p-5 rounded-md shadow-2xl">
-        <h3 className="font-medium mb-4 overflow-x-hidden h-5">
+      <div className=" w-full lg:my-0 ssm:my-10 float-right overflow-auto bg-white p-5 rounded-md shadow-2xl">
+        <h3 className="font-medium mb-4  h-5 lg:text-start ssm:text-center">
           Upcoming Birthdays
         </h3>
         {/* {birthday? ( */}
-        <ul className="divide-y divide-gray-200">
+        <ul className="divide-y divide-gray-200 overflow-auto h-[250px]">
           {typeof birthday === "object" ? (
             birthday?.map((employee) => (
               // <Link to={`/employee/${employee.id}`}>
@@ -64,7 +64,7 @@ const EmployeeList = () => {
                 key={employee.id}
                 className="p-3 mb-3 rounded shadow-md flex flex-wrap hover:-translate-y-1 bg-slate-100 "
               >
-                <div className="xl:inline-block xl:w-fit lg:w-full lg:flex  lg:justify-center lg:items-center">
+                <div className="xl:inline-block xl:w-fit ssm:w-full ssm:flex  ssm:justify-center ssm:items-center">
                   <img
                     className="h-10 w-10 rounded-full"
                     src={employee.image}
