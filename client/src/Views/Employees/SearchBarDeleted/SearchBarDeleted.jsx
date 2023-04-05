@@ -1,14 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  contentFilters,
+  // contentFilters,
+  getDeletedEmployees,
   getEmployees,
 } from "../../../state/redux/actions/actions";
+// import { log } from "mathjs";
 // import { useAnswer } from "../../../Utils/hooks/answer";
 
-const SearchBar = ({ answer, showAnswer, handleRefresh }) => {
-  const [input, setInput] = useState("");
+const SearchBarDeleted = ({ answer, showAnswer, handleRefresh, fnn, deletes }) => {
   let dispatch = useDispatch();
+
+  // eslint-disable-next-line no-unused-vars
+  const users = useSelector((state) => state.deletedEmployees);
+    const currentEmployee = useSelector((state) => state.currentEmployee);
+    const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+useEffect(() => {
+  dispatch(getDeletedEmployees(undefined, showAnswer, CompanyId));
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [dispatch, CompanyId]);
+
+
+
+
+  const [input, setInput] = useState("");
   const arrContentFilters = useSelector((state) => state.arrContentFilters);
   // const allEmployees = useSelector((state) => state.allEmployees);
   // console.log(!!allEmployees, 'allll');
@@ -28,7 +43,9 @@ const SearchBar = ({ answer, showAnswer, handleRefresh }) => {
     if (input.trim().length > 0) {
       // handleRefresh()
       // dispatch(getEmployees(input));
-      dispatch(contentFilters({ name: input }));
+      // dispatch(contentFilters({ name: input }));
+      console.log(deletes.map(el => el.name))
+      
       setInput("");
     } else {
       setTimeout(() => {
@@ -70,4 +87,5 @@ shadow-sky-200 hover:bg-sky-300 text-white rounded-r overflow-hidden sm:px-16 sm
   );
 };
 
-export default SearchBar;
+
+export default SearchBarDeleted;

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -9,6 +10,7 @@ import { getCompaniesEmail } from "../../state/redux/actions/actions";
 import { getCompaniesName } from "../../state/redux/actions/actions";
 import { getCompaniesTel } from "../../state/redux/actions/actions";
 import UploadImage from  "../../Components/Upload/UploadImage"
+import axios from "axios";
 
 
 
@@ -16,29 +18,29 @@ function validate(input) {
   let errors = {};
   if(input.name === "name"){
     if (/[^A-Za-z0-9 ]+/g.test(input.name)) {
-      errors.name = "Nombre no puede tener caracteres especiales o tildes";
+      errors.name = "Only alphabetic characters";
     }
   }
   if (input.cuit) {
     if (
       !/^(20|23|27|30|33)([0-9]{9}|-[0-9]{8}-[0-9]{1})$/g.test(input.cuit)
     ) {
-      errors.cuit = "Ingrese un formato valido de CUIT";
+      errors.cuit = "CUIT is not valid";
     }
   }
   if (input.industry) {
     if (/[^A-Za-z0-9 ]+/g.test(input.industry)) {
-      errors.industry = "Nombre no puede tener caracteres especiales o tildes";
+      errors.industry = "Only alphabetic characters";
     }
   }
   if (input.numberEmployees) {
     if (!/^[0-9]+$/.test(input.numberEmployees)) {
-      errors.numberEmployees = "Ingrese formato numero";
+      errors.numberEmployees = "Numbers only";
     }
   }
   if (input.email) {
     if(!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(input.email)){
-      errors.email = "Ingrese un email valido";
+      errors.email = "Invalid email address";
     }
   }
   return errors;
@@ -54,9 +56,14 @@ export default function CreateCompany(props) {
   const [mensajeName, setMensajeName] = useState(null);
   const [mensajeEmail, setMensajeEmail] = useState(null);
   const [mensajeTel, setMensajeTel] = useState(null);
+  
 
 
+  // eslint-disable-next-line no-unused-vars
   const [message, setMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
   const [isProcessing, setIsProcessing] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
  
@@ -87,10 +94,8 @@ export default function CreateCompany(props) {
       } else {
         setMensajeCuit(null);
       }
-      console.log("Valor", cuit);
-      console.log("Mensaje: ", resultado?.message)
+
     });
-    console.log("asdasdasd")
   }
 
   const handleBlurName = (event) => {
@@ -102,8 +107,7 @@ export default function CreateCompany(props) {
       } else {
         setMensajeName(null);
       }
-      console.log("Valor", name);
-      console.log("Mensaje: ", resultado?.message)
+
     });
   }
 
@@ -117,8 +121,7 @@ export default function CreateCompany(props) {
       } else {
         setMensajeEmail(null);
       }
-      console.log("Valor", email);
-      console.log("Mensaje: ", resultado?.message)
+
     });
   }
 
@@ -131,8 +134,7 @@ export default function CreateCompany(props) {
       } else {
         setMensajeTel(null);
       }
-      console.log("Valor", valor);
-      console.log("Mensaje: ", resultado?.message)
+
     });
   }
 
@@ -141,7 +143,6 @@ export default function CreateCompany(props) {
       ...input,
       image: url,
     });
-    console.log(input.image)
   };
 
   
@@ -154,10 +155,10 @@ export default function CreateCompany(props) {
       return;
     }
 
-    const response = await getCompaniesCuit(input.cuit);
-    if(response.data !== "The company PruebaCUIT has been created correctly"){
+    // const response = await getCompaniesCuit(input.cuit);
+    // if(response.data !== "The company PruebaCUIT has been created correctly"){
 
-    };
+    // };
     
     if (
       !input.name ||
@@ -181,23 +182,26 @@ export default function CreateCompany(props) {
     },
   )
   if(error){
-    setMessage(error.message);
+    setErrorMessage("Your card was declined.");
+    setSuccessMessage(null);
     } else if(paymentIntent)
     {
       console.log(paymentIntent)
-    setMessage("Payment status: succeeded!")
-    
+      setSuccessMessage("Payment status: succeeded!")
+      setErrorMessage(null);
     } else {
     setMessage("Unexpected state");
     }
 
   setIsProcessing(false);
 
- 
-
-    console.log("Input pasado a post: ",input)
-    dispatch(postCompany(input));
-    console.log(input);
+    paymentIntent ? (
+      dispatch(postCompany(input)).then(
+        await axios.post("http://localhost:3001/notifications/confirmation", {
+          to: input.email,
+        })
+      )
+      ):
     setInput({
       name: "",
       cuit: "",
@@ -233,7 +237,7 @@ export default function CreateCompany(props) {
     <div className="min-height-full flex h-screen">
       <div className="hidden lg:block relative h-full flex-1 text-6xl">
       <h1>StaffSphere Register Company</h1>
-      <div className="text-2xl">Simplify your team management for only U$S 2,000</div>
+      <div className="text-2xl">Simplify your team management for only USD 2,000</div>
       </div>
       <div className="flex-1 flex flex-col py-14 px-4 sm:pax-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
@@ -241,7 +245,7 @@ export default function CreateCompany(props) {
             <h2 className="mt-1 text-3x1 font-extrabold text-gray-900 my-2">
               Register your company
             </h2>
-            <h6 className="text-xs text-red-400">(*) Campos necesarios</h6>
+            <h6 className="text-xs text-red-400">(*) Mandatory fields</h6>
           </div>
           <div className="mt-6">
             <form
@@ -386,7 +390,7 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                   {mensajeTel && <section className="m-0  text-red-600">{mensajeTel}</section>}
-                   {console.log("Mensaje en section:", mensajeTel)}
+                  {console.log("Mensaje en section:", mensajeTel)}
                 </div>
                 <div>
                   <label
@@ -410,7 +414,7 @@ export default function CreateCompany(props) {
                     </section>
                   )}
                   {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
-                   {console.log("Mensaje en section:", mensajeEmail)}
+                  {console.log("Mensaje en section:", mensajeEmail)}
                 </div>
                 <div>
                   <div className="flex flex-row w-60">
@@ -421,29 +425,6 @@ export default function CreateCompany(props) {
                     className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
                     />
                 </div>
-                  {/* <label
-                    htmlFor="Email"
-                    className="block  text-sm mt-2 lg:mt-0 font-medium text-gray-700"
-                  >
-                    Image <span className="text-xs text-red-400">(*)</span>
-                  </label>
-                  <input
-                    type="image"
-                    alt="image"
-                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Image"
-                    value={input.image}
-                    name="image"
-                    onChange={(e) => handleChange(e)}
-                    onBlur={(event)=> handleBlurEmail(event)}
-                  />
-                  {errors.image && (
-                    <section className="m-0  text-red-600">
-                      {errors.image}
-                    </section>
-                  )}
-                  {/* {mensajeEmail && <section className="m-0  text-red-600">{mensajeEmail}</section>}
-                   {console.log("Mensaje en section:", mensajeEmail)} */} 
                 </div>
                 </div>
                 <div>
@@ -467,19 +448,30 @@ export default function CreateCompany(props) {
                     {isProcessing ? "Processing ... " : "Register and pay now"}
                     </span>
                 </button>
-                 {/* Show any error or success messages */}
-                 {/* {message && <div className="mb-4">{message}</div>} */}
               </div>
             </form>
             <div>
-              { message && formSubmitted &&
+              { successMessage  && formSubmitted &&
                <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
                <div className="bg-white p-8 rounded-lg">
-                 <h2 className="text-xl font-bold mb-4">{message} Thank you for trusting us  🎉</h2>
+                 <h2 className="text-xl font-bold mb-4">{successMessage} Thank you for trusting us  🎉</h2>
                  <p className="mb-4">We need some additional data to complete the process</p>
                  <div className="flex justify-end">
                    
                    <Link to="/addAreaPositionSA" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
+                 </div>
+               </div>
+             </div>
+          }
+          {
+            errorMessage &&
+            <div className="fixed z-50 inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+               <div className="bg-white p-8 rounded-lg">
+                 <h2 className="text-xl font-bold mb-4">{errorMessage}</h2>
+                 <p className="mb-4">Please try again</p>
+                 <div className="flex justify-end">
+                   
+                   <Link to="/" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Continue</Link>
                  </div>
                </div>
              </div>

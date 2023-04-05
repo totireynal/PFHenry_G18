@@ -129,7 +129,7 @@ const FormEmail = () => {
           </div>
           <button
             type="submit"
-            className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+            className="bg-sky-400 outline-none text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
           >
             SEND
           </button>

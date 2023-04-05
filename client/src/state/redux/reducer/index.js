@@ -34,7 +34,14 @@ import {
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
   GET_EVENTS,
-  // PUT_EVENTS,
+  // eslint-disable-next-line no-unused-vars
+  PUT_EVENTS,
+  GET_COMPANY_INFO,
+  GET_BIRTHDAY,
+  INDEX_AREA,
+  GET_ALL_EMPLOYEES,
+  GET_DOUGHNU,
+  GET_EVENTS_INCOMING,
 } from "../action-types/index";
 
 const initialState = {
@@ -56,12 +63,23 @@ const initialState = {
   areasCrud: [],
   positionsCrud: [],
   deletedEmployees: [],
-  events: []
+  events: [],
+  eventsIncoming: [],
+  birthday: [],
+  indexArea: [],
+  doughnut: [],
+  companyInfo: {},
+
+  getAlllEmployees: []
 };
-console.log(initialState.ratings);
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case GET_ALL_EMPLOYEES:
+      return {
+        ...state,
+        getAlllEmployees: action.payload,
+      };
     case GET_COMPANIES:
       return {
         ...state,
@@ -195,11 +213,15 @@ function rootReducer(state = initialState, action) {
         ...state,
       };
     case GET_EVENTS:
-      
       return {
         ...state,
-        events: action.payload
-      }
+        events: action.payload,
+      };
+    case GET_EVENTS_INCOMING:
+      return {
+        ...state,
+        eventsIncoming: action.payload,
+      };
 
     case POST_CRUD_AREA:
       return {
@@ -231,9 +253,30 @@ function rootReducer(state = initialState, action) {
         ...state,
         positionsCrud: action.payload,
       };
+    case GET_BIRTHDAY:
+      return {
+        ...state,
+        birthday: action.payload,
+      };
+    case INDEX_AREA:
+      return {
+        ...state,
+        indexArea: action.payload,
+      };
+    case GET_DOUGHNU:
+      return {
+        ...state,
+        doughnut: action.payload,
+      };
+
+    case GET_COMPANY_INFO:
+      return {
+        ...state,
+        companyInfo: action.payload,
+      };
     default:
-      return state;
+      return { ...state };
   }
 }
-  
-  export default rootReducer;
+
+export default rootReducer;

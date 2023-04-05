@@ -7,7 +7,9 @@ import { AiFillStar } from "react-icons/ai";
 import { useRef, useState } from "react";
 import {
   addRating,
+  getCompanyInfo,
   getEmployeeDetail,
+  getEmployees,
   getRating,
 } from "../../../state/redux/actions/actions";
 
@@ -17,23 +19,28 @@ const MyProfileSuperAdmin = () => {
   // let { id } = useParams();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getRating());
-    const reviewDone = clients.some((client) => !!client);
-    if (reviewDone) {
-      setQualified(true);
-      console.log("entro");
-    } else {
-      console.log("no entro");
-    }
-  }, []);
-
+  
   let employeeDetail = useSelector((state) => state.currentEmployee);
+
+  const allEmployees = useSelector(state => state.allEmployees).length
+
   const currentEmployee = useSelector((state) => state.currentEmployee);
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+
   const ratings = useSelector((state) => state.ratings);
   const clients = ratings.map((client) => client.CompanyId === CompanyId);
+
   const [qualified, setQualified] = useState(false);
+  useEffect(() => {
+    dispatch(getCompanyInfo(CompanyId));
+    dispatch(getRating());
+    dispatch(getEmployees(undefined, undefined, CompanyId))
+
+  }, [dispatch, qualified]);
+
+  const companyInfo = useSelector((state) => state.companyInfo);
+  
+  console.log(companyInfo, "companyInfo");
 
   const {
     id,
@@ -54,11 +61,7 @@ const MyProfileSuperAdmin = () => {
   } = employeeDetail;
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id));
-  }, [id, dispatch]);
-
-  useEffect(() => {
-    dispatch(getEmployeeDetail(id));
+    dispatch(getEmployeeDetail(CompanyId,id));
   }, [id, dispatch]);
 
   const refQualify = useRef();
@@ -104,13 +107,22 @@ const MyProfileSuperAdmin = () => {
     refModal.current.style.opacity = "1";
     refQualify.current.style.pointerEvents = "auto";
     refQualify.current.style.opacity = "1";
+    const reviewDone = clients.some((client) => !!client);
+    if (reviewDone) {
+      setQualified(true);
+      console.log("entro");
+    } else {
+      console.log("no entro");
+    }
   };
   const userMode = () => {
     refUserMode.current.style.display = "flex";
     refSuperAdminMode.current.style.display = "none";
     close();
   };
-  console.log(ratings);
+
+
+  
   return (
     <>
       <div
@@ -199,22 +211,23 @@ const MyProfileSuperAdmin = () => {
       >
         <div className="flex gap-16 lg:flex-row ssm:items-center ssm:flex-col-reverse">
           <img
-            src="https://static.dw.com/image/60105922_403.jpg"
+            src={companyInfo.image}
             alt="profilepic"
             className="object-cover lg:w-4/12 sm:w-8/12 ssm:w-12/12 ssm: rounded-md h-[200px] "
           />
           <div className="flex felx-col gap-10 w-8/12 lg:justify-start ssm:justify-center ">
             <div className="flex flex-col justify-center lg:items-start ssm:items-center gap-5">
               <div className="flex lg:flex-wrap lg:text-start  ssm:flex-wrap ssm:text-center gap-5 text-6xl flex-wrap">
-                <p className="w-full">Coca-cola</p>
+                <p className="w-full">{companyInfo.name}</p>
               </div>
               <div className="lg:text-start ssm:text-center">
                 <p>
-                  <span className="font-bold">Industry: </span> Tecnologica
+                  <span className="font-bold">Industry: </span>{" "}
+                  {companyInfo.industry}
                 </p>
                 <p>
-                  <span className="font-bold">Location:</span> Tigre, Buenos
-                  Aires, Argentina
+                  <span className="font-bold">Location:</span>{" "}
+                  {companyInfo.location}
                 </p>
               </div>
             </div>
@@ -226,26 +239,28 @@ const MyProfileSuperAdmin = () => {
               onClick={userMode}
               className=" text-xs text-sky-400 border border-sky-400 rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 hover:text-white"
             >
-              User mode
+              My user
             </button>
           </div>
           <div className="flex md:flex-row ssm:flex-col lg:text-start ssm:justify-center ssm:text-center w-1/2 text-xl pt-16">
             <div className="flex flex-col lg:justify-between w-full ">
               <p className="mb-5">
-                <span className="font-bold block">Cuit:</span> 12589532120
+                <span className="font-bold block">Cuit:</span>{" "}
+                {companyInfo.cuit}
               </p>
               <p className="mb-5">
-                <span className="font-bold block">Numero de empleados:</span> 10
+                <span className="font-bold block">Numero de empleados:</span>{" "}
+                {allEmployees}
               </p>
             </div>
             <div className="flex flex-col justify-start w-full">
               <p className="mb-5">
                 <span className="font-bold block">Email:</span>{" "}
-                nosetodavaia@gmail.com
+                {companyInfo.email}
               </p>
               <p className="mb-5">
-                <span className="font-bold block">Payment day:</span> 11 de
-                Marzo de 1620
+                <span className="font-bold block">Payment day:</span>{" "}
+                {companyInfo.paymentDay}
               </p>
             </div>
           </div>
@@ -285,7 +300,7 @@ const MyProfileSuperAdmin = () => {
               {role}
             </p>
             <div className="flex flex-col  lg:w-fit ssm: mt-10 gap-3 ">
-              <Link to={`/editemployee/${id}`}>
+              <Link to={`/editemployeemyprofile/${id}`}>
                 <button className="bg-sky-400 text-xs text-white rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
                   Edit Employee
                 </button>
@@ -294,7 +309,7 @@ const MyProfileSuperAdmin = () => {
                 onClick={companyMode}
                 className=" text-xs text-sky-400 border border-sky-400 rounded overflow-hidden px-8 py-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 hover:text-white"
               >
-                Company mode
+                My company
               </button>
             </div>
           </div>

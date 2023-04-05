@@ -5,8 +5,10 @@ import GlobalContext from "../context/GlobalContext";
 export default function Day({ day, rowIdx }) {
   const [dayEvents, setDayEvents] = useState([]);
   const {
-    // setDaySelected,
-    // setShowEventModal,
+    // eslint-disable-next-line no-unused-vars
+    setDaySelected,
+    // eslint-disable-next-line no-unused-vars
+    setShowEventModal,
     filteredEvents,
     setSelectedEvent,
   } = useContext(GlobalContext);

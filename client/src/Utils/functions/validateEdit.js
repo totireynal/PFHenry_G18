@@ -4,8 +4,8 @@ const regex = {
   image: /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)\??([%&a-z0-9=_-]+)?$/i,
 };
 
-const validate = (values, getAlllEmployees) => {
-  // console.log(getAlllEmployees, "alllll");
+const validateEdit = (values, getAlllEmployees, currentEmployee) => {
+  console.log(getAlllEmployees, "alllll");
   const errors = {};
 
   const allEmails = getAlllEmployees.map((el) => el.email);
@@ -14,19 +14,23 @@ const validate = (values, getAlllEmployees) => {
   const allTel = getAlllEmployees.map((el) => el.tel);
   const allDni = getAlllEmployees.map((el) => el.dni);
 
-  if (allEmails.includes(`${values.email}`))
-    errors.email = "Email already exist";
-  if (allCbus.includes(`${values.cbu}`)) errors.cbu = "Cbu already exist";
-  if (allCuils.includes(`${values.cuil}`)) errors.cuil = "Cuil already exist";
-  if (allTel.includes(`${values.tel}`))
-    errors.tel = "Phone number already exist";
-  if (allDni.includes(`${values.dni}`)) errors.dni = "Dni already exist";
+  if (allEmails.includes(`${values.email}`) && currentEmployee.email !== values.email)
+    errors.email = "it already exists";
+  if (allCbus.includes(`${values.cbu}`) && !allCbus.includes(`${currentEmployee.cbu}`))
+    errors.cbu = "it already exists";
+  if (allCuils.includes(`${values.cuil}`) && !allCuils.includes(`${currentEmployee.cuil}`))
+    errors.cuil = "it already exists";
+  if (allTel.includes(`${values.tel}`) && !allTel.includes(`${currentEmployee.tel}`))
+    errors.tel = "it already exists";
+  if (allDni.includes(`${values.dni}`) && !allDni.includes(`${currentEmployee.dni}`))
+    errors.dni = "it already exists";
 
+  if (!values.image.length) errors.image = 'no hay'
   if (values.role === "default") errors.role = "You must choose a role";
   if (!values.name.length) errors.name = "Name can't be empty";
   if (!values.lastName.length) errors.lastName = "Last name can't be empty";
-  if (!values.cuil.length) errors.cuil = "CUIL can't be empty";
-  if (!values.cbu.length) errors.cbu = "CBU can't be empty";
+  if (!values.cuil.length) errors.cuil = "Cuil can't be empty";
+  if (!values.cbu.length) errors.cbu = "Cbu can't be empty";
   if (!values.address.length) errors.address = "Address can't be empty";
   if (values.PositionId === 0) errors.PositionId = "You must choose a position";
   if (values.AreaId === 0) errors.AreaId = "You must choose an area";
@@ -34,9 +38,9 @@ const validate = (values, getAlllEmployees) => {
   if (!values.birthDate.length) errors.birthDate = "You must choose a date";
   if (!values.dateOfAdmission.length)
     errors.dateOfAdmission = "You must choose a date";
-  if (!values.dni.length) errors.dni = "DNI can't be empty";
-  if (values.dni.length > 8)
-    errors.dni = "DNI can't be greater than 8 characters";
+  if (!values.dni.length) errors.dni = "Dni can't be empty";
+  if (values.dni.length > 9)
+    errors.dni = "Dni can't be greater than 9 characters";
   if (values.tel.length > 13)
     errors.tel = "Phone can't be greater than 13 characters";
   if (!values.email.length) errors.email = "Email can't be empy";
@@ -52,12 +56,12 @@ const validate = (values, getAlllEmployees) => {
   // console.log(age);
   // console.log(admission);
 
-  if (age < 18) errors.birthDate = "You must be at least 18 years old";
+  if (age < 18) errors.birthDate = "Invalid age";
   if (age < admission) errors.dateOfAdmission = "";
   if (admission >= age - 17)
-    errors.dateOfAdmission = "You must be at least 18 years old";
+    errors.dateOfAdmission = "You must be at least be 18years old";
 
   return errors;
 };
 
-export default validate;
+export default validateEdit;

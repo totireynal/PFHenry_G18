@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   postAreaCrud,
@@ -14,13 +14,14 @@ const AreaForm = () => {
   const dispatch = useDispatch();
 
   const allAreas = useSelector((state) => state.areasCrud);
+  const employee = useSelector((state) => state.currentEmployee);
 
   const [area, setArea] = useState({
     area: "",
+    CompanyId: employee.CompanyId,
   });
 
   const [editArea, setEditArea] = useState(null);
-
   const [showList, setShowList] = useState(false);
 
   const handleChange = (event) => {
@@ -36,13 +37,13 @@ const AreaForm = () => {
       handleUpdate(event);
     } else {
       dispatch(postAreaCrud(area));
-      setArea({ area: "" });
+      setArea({ area: "", CompanyId: employee.CompanyId });
     }
   };
 
   const handleSubmitGet = (event) => {
     event.preventDefault();
-    dispatch(getAreasCrud());
+    dispatch(getAreasCrud(employee.CompanyId));
     setShowList(!showList);
   };
 
@@ -50,7 +51,7 @@ const AreaForm = () => {
     event.preventDefault();
     dispatch(updateAreaCrud(editArea.id, area));
     setEditArea(null);
-    setArea({ area: "" });
+    setArea({ area: "", CompanyId: employee.CompanyId });
   };
 
   return (
@@ -71,7 +72,7 @@ const AreaForm = () => {
           {editArea ? "UPDATE AREA" : "CREATE AREA"}
         </button>
       </form>
-      <form onClick={handleSubmitGet} className="flex flex-col gap-2 w-80">
+      <div onClick={handleSubmitGet} className="flex flex-col gap-2 w-80">
         <button
           type="submit"
           className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
@@ -86,6 +87,7 @@ const AreaForm = () => {
                   <div className="relative mb-1">
                     <p
                       key={area?.id}
+                      onClick={(event) => event.stopPropagation()}
                       className="flex justify-center items-center border rounded h-8 font-semibold border-gray-400 bg-white"
                     >
                       {area?.area}
@@ -115,7 +117,7 @@ const AreaForm = () => {
             </ul>
           </div>
         )}
-      </form>
+      </div>
     </div>
   );
 };

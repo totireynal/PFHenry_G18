@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 // import SideBar from "../../../Components/SideBar/SideBar";
 import {
+  getAllEmployees,
+  // eslint-disable-next-line no-unused-vars
   getAreasNum,
   getEmployeeDetail,
+  // eslint-disable-next-line no-unused-vars
   getPositionsNum,
   updateEmployee,
 } from "../../../state/redux/actions/actions";
-import validate from "../../../Utils/functions/validate";
+import validateEdit from "../../../Utils/functions/validateEdit";
 // import Form from "../../../Components/Form/Form";
 import { useErrors } from "../../../Utils/hooks/errors";
 import { useAnswer } from "../../../Utils/hooks/answer";
@@ -25,12 +28,12 @@ const EditEmployee = () => {
   const CompanyId = currentEmployeeCompany
     ? currentEmployeeCompany.CompanyId
     : null;
+  const getAlllEmployees = useSelector((state) => state.getAlllEmployees);
 
-    useEffect(() => {
-      dispatch(getEmployeeDetail(CompanyId, id));
-      dispatch(getPositionsNum());
-      dispatch(getAreasNum());
-    }, [dispatch, id, CompanyId]);
+  useEffect(() => {
+    dispatch(getEmployeeDetail(CompanyId, id));
+    dispatch(getAllEmployees());
+  }, [dispatch, id, CompanyId]);
 
   const { errors, setAllErrors } = useErrors();
 
@@ -52,6 +55,7 @@ const EditEmployee = () => {
     role: false,
     cuil: false,
     cbu: false,
+    image: false,
   });
 
   const [submited, setSubmited] = useState(false);
@@ -72,15 +76,28 @@ const EditEmployee = () => {
     cbu: `${currentEmployee.cbu}`,
     image: `${currentEmployee.image}`,
   });
+  useEffect(() => {
+    if (Object.keys(errors).length === 0) {
+      setErrorButton(false);
+    } else {
+      setErrorButton(true);
+    }
+  }, [errors]);
+
+  // console.log(currentEmployee, 'aaaaaaaaaaa');
 
   const handleInput = (e) => {
     const { value, name } = e.target;
 
     setAllErrors(
-      validate({
-        ...updatedUser,
-        [name]: value,
-      })
+      validateEdit(
+        {
+          ...updatedUser,
+          [name]: value,
+        },
+        getAlllEmployees,
+        currentEmployee
+      )
     );
     setUpdatedUser({
       ...updatedUser,
@@ -95,6 +112,8 @@ const EditEmployee = () => {
     const allErrors = Object.values(errors).length;
     if (!allErrors) {
       setErrorButton(false);
+    } else {
+      setErrorButton(true);
     }
   };
 
@@ -144,10 +163,11 @@ const EditEmployee = () => {
       cbu: "",
     });
   };
+  console.log(errors);
 
   return (
     <div className="w-full lg:h-screen lg:pt-0 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto ssm:pt-16">
-      {/* {currentEmployee.role !== "SuperAdmin" ? ( */}
+      {currentEmployee.role !== "SuperAdmin" ? (
         <>
           <div>
             <div className="w-full text-center mb-14 font-bold">
@@ -179,17 +199,16 @@ const EditEmployee = () => {
             </div>
           </div>
         </>
-      {/* ) : (
-        <>
+      ) : (
+        <div className="flex flex-col gap-4 justify-center items-center">
           <h1>You cant edit a SuperAdmin!!!</h1>
-          <br />
-          <Link to="/employees">
+          <Link to={`/employees/${CompanyId}`}>
             <button className="bg-sky-400 text-white rounded overflow-hidden px-16 py-3 right-10 top-10 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300">
               Got it
             </button>
           </Link>
-        </>
-      )} */}
+        </div>
+      )}
     </div>
   );
 };

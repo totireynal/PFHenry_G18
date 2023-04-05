@@ -13,9 +13,11 @@ const PositionForm = () => {
   const dispatch = useDispatch();
 
   const allPositions = useSelector((state) => state.positionsCrud);
+  const employee = useSelector((state) => state.currentEmployee);
 
   const [position, setPosition] = useState({
     position: "",
+    CompanyId: employee.CompanyId,
   });
 
   const [editPosition, setEditPosition] = useState(null);
@@ -35,13 +37,13 @@ const PositionForm = () => {
       handleUpdate(event);
     } else {
       dispatch(postPositionCrud(position));
-      setPosition({ position: "" });
+      setPosition({ position: "", CompanyId: employee.CompanyId });
     }
   };
 
   const handleSubmitGet = (event) => {
     event.preventDefault();
-    dispatch(getPositionsCrud());
+    dispatch(getPositionsCrud(employee.CompanyId));
     setShowList(!showList);
   };
 
@@ -49,7 +51,7 @@ const PositionForm = () => {
     event.preventDefault();
     dispatch(updatePositionCrud(editPosition.id, position));
     setEditPosition(null);
-    setPosition({ position: "" });
+    setPosition({ position: "", CompanyId: employee.CompanyId });
   };
 
   return (

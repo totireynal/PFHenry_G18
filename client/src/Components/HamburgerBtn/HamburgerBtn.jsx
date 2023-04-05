@@ -1,5 +1,5 @@
-import { Squash as Hamburger } from "hamburger-react";
-import { useState } from "react";
+// import { Squash as Hamburger } from "hamburger-react";
+// import { useState } from "react";
 
 const HamburgerBtn = () => {
 

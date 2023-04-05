@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addEvents } from "../../../state/redux/actions/actions";
+import React, { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addEvents, putEvents,deleteEvents, getEvents } from "../../../state/redux/actions/actions";
 import GlobalContext from "../context/GlobalContext";
 
 const labelsClasses = [
@@ -32,21 +32,33 @@ export default function EventModal() {
       : labelsClasses[0]
   );
 
-  const dispatch = useDispatch()
 
+  const dispatch = useDispatch()
+    const currentEmployee = useSelector((state) => state.currentEmployee);
+  const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+
+  useEffect(() => {
+    dispatch(getEvents(CompanyId))
+  },[dispatch, CompanyId])
+
+    // eslint-disable-next-line no-unused-vars
+    const events = useSelector((state) => state.events);
   function handleSubmit(e) {
     e.preventDefault();
+    //  selectedEvent ? selectedEvent.eventId : Number((Date.now()+'').split('').slice(-6).join(''))
     const calendarEvent = {
+      id:selectedEvent ? selectedEvent.id : Number((Date.now()+'').split('').slice(-6).join('')),
       title,
       description,
       label: selectedLabel,
       day: daySelected.valueOf(),
-      eventId: selectedEvent ? selectedEvent.eventId : Date.now(),
+      CompanyId,
     };
     if (selectedEvent) {
-      dispatch(addEvents(calendarEvent));
+      dispatch(putEvents(calendarEvent));
       dispatchCalEvent({ type: "update", payload: calendarEvent });
     } else {
+      dispatch(addEvents(calendarEvent))
       dispatchCalEvent({ type: "push", payload: calendarEvent });
     }
 
@@ -68,6 +80,7 @@ export default function EventModal() {
                     payload: selectedEvent,
                   });
                   setShowEventModal(false);
+                  dispatch(deleteEvents(selectedEvent.id))
                 }}
                 className="material-icons-outlined text-gray-400 cursor-pointer"
               >

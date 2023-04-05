@@ -7,6 +7,7 @@ import React, {
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
+// eslint-disable-next-line no-unused-vars
 import { addEvents, getEvents } from "../../../state/redux/actions/actions";
 
 function savedEventsReducer(state, { type, payload }) {
@@ -58,7 +59,6 @@ export default function ContextWrapper(props) {
           //     CompanyId: 1679453976039,
           //   },
           // ];
-      console.log(events, "eventtt");
       return events;
     }
   const filteredEvents = useMemo(() => {
@@ -76,7 +76,7 @@ export default function ContextWrapper(props) {
         dispatch(getEvents(CompanyId));
 
 
-  }, [dispatch,CompanyId, events]);
+  }, [dispatch,CompanyId, savedEvents]);
 
   useEffect(() => {
     setLabels((prevLabels) => {
