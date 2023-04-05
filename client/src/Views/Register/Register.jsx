@@ -221,16 +221,16 @@ export default function CreateCompany(props) {
         </button>
       </Link>
       <div className="h-full w-1/2 flex flex-col justify-center items-center pb-16">
-        <h1 className="text-6xl text-center font-bold">
+        <h1 className="text-6xl text-center font-bold pl-20">
           StaffSphere Company Register
         </h1>
-        <span className="text-2xl">
+        <span className="text-2xl pl-20">
           Simplify your team management for only USD 2,000
         </span>
       </div>
       <div className="h-full w-1/2 flex flex-col justify-center items-center gap-6">
         <div className="flex flex-col w-2/3">
-          <span className="text-xl font-bold pb-1">Register your company</span>
+          <span className="text-2xl font-bold pb-1">Register your company</span>
           <span className="text-xs text-red-400">(*) Mandatory fields</span>
         </div>
         <div className="w-2/3">
