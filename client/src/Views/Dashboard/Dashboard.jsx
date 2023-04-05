@@ -8,7 +8,7 @@ import WelcomeDashboard from "../../Components/WelcomeDashboard/WelcomeDashboard
 
 const Dashboarts = () => {
   return (
-    <div className="w-full h-screen ml-72 pt-16 flex pr-16">
+    <div className="w-full h-screen xl:ml-72 lg:ml-32 pt-16 flex pr-16">
       {/* <EmployeeRetention/> */}
       <div className="flex flex-col w-full gap-16">
         <WelcomeDashboard />

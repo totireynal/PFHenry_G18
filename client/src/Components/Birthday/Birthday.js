@@ -60,38 +60,45 @@ const EmployeeList = () => {
           {typeof birthday === "object" ? (
             birthday?.map((employee) => (
               // <Link to={`/employee/${employee.id}`}>
-                <li
-                  key={employee.id}
-                  className="p-3 mb-3 rounded shadow-md flex hover:-translate-y-1 bg-slate-100 "
-                >
+              <li
+                key={employee.id}
+                className="p-3 mb-3 rounded shadow-md flex flex-wrap hover:-translate-y-1 bg-slate-100 "
+              >
+                <div className="xl:inline-block xl:w-fit lg:w-full lg:flex  lg:justify-center lg:items-center">
                   <img
                     className="h-10 w-10 rounded-full"
                     src={employee.image}
                     alt={employee.name}
                   />
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-900">
-                      {employee.name} {employee.lastName}
-                    </p>
-                    <p className="text-sm text-gray-500 relative">
-                      {obtenerNombreMes(employee.birthMonth)}{" "}
-                      {employee.birthDay}
-                      {employee.birthDay==numeroDeDia &&
-                      (
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm font-medium text-gray-900">
+                    {employee.name} {employee.lastName}
+                  </p>
+                  <p className="text-sm text-gray-500 relative">
+                    {obtenerNombreMes(employee.birthMonth)} {employee.birthDay}
+                    {employee.birthDay == numeroDeDia && (
                       <>
-                        <span className={`${send ? 'inline-block':'hidden' } pl-2 text-sky-400`}>Enviado</span>
-                        <button
-                        onClick={()=> handleButton(employee)}
-                        className={`${send ? 'hidden' : 'inline-block'}  bg-sky-400 text-white rounded  overflow-hidden p-2 ssm:py-1 h-6 ml-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 `}
+                        <span
+                          className={`${
+                            send ? "inline-block" : "hidden"
+                          } pl-2 text-sky-400`}
                         >
-                      <RiMailAddLine size={15} />
-                      </button>
-                        </>
-                      
-                      )}
-                    </p>
-                  </div>
-                </li>
+                          Enviado
+                        </span>
+                        <button
+                          onClick={() => handleButton(employee)}
+                          className={`${
+                            send ? "hidden" : "inline-block"
+                          }  bg-sky-400 text-white rounded  overflow-hidden p-2 ssm:py-1 h-6 ml-2 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300 `}
+                        >
+                          <RiMailAddLine size={15} />
+                        </button>
+                      </>
+                    )}
+                  </p>
+                </div>
+              </li>
               // </Link>
             ))
           ) : (
