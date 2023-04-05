@@ -226,7 +226,7 @@ const Form = ({
             error={errors.PositionId}
             optionQuantity={positionsNum}
             users={users.PositionId}
-            />
+          />
           <SelectFormSec
             label="Area"
             name="AreaId"
@@ -298,12 +298,12 @@ const Form = ({
             handler={handleInput}
             id="CompanyId"
           />
-          <div className="flex flex-row w-60">
+          <div className="flex flex-row w-1/2 items-end gap-6 ml-4">
             <UploadImage handleChangeImage={handleChangeImage} />
             <img
               src={users.image}
               alt="profilepic"
-              className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
+              className="border-none shadow-none h-10 rounded-md ml-auto"
             />
           </div>
         </div>
@@ -313,7 +313,7 @@ const Form = ({
           className={
             errorButton
               ? "cursor-not-allowed border px-16 py-3 h-auto rounded shadow-md shadow-slate-300 bg-gray-400 text-slate-300"
-              : "bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
+              : "mb-6 bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
           }
           onClick={handleSubmit}
           disabled={errorButton}
