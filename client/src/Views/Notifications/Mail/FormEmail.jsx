@@ -52,8 +52,8 @@ const FormEmail = () => {
       try {
         for (const email of checkEmails) {
           //SWITCH FOR LOCAL OR DEPLOYMENT
-          await axios.post("http://localhost:3001/notifications", {
-          // await axios.post("/notifications", {
+          // await axios.post("http://localhost:3001/notifications", {
+          await axios.post("/notifications", {
             to: email,
             subject,
             text,

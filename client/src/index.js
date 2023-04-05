@@ -28,10 +28,10 @@ root.render(
           clientId={clientId}
           authorizationParams={{
             //----FOR LOCAL--->
-            redirect_uri: "http://localhost:3000/authorization",
+            // redirect_uri: "http://localhost:3000/authorization",
 
             //----FOR DEPLOYMENT--->
-            // redirect_uri: "https://pf-front-end.vercel.app/authorization",            
+            redirect_uri: "https://pf-front-end.vercel.app/authorization",            
 
             //set this route in callback at Auth0
             audience: "staffsphere identifier",
