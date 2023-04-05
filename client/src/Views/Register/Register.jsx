@@ -11,7 +11,7 @@ import { getCompaniesName } from "../../state/redux/actions/actions";
 import { getCompaniesTel } from "../../state/redux/actions/actions";
 import UploadImage from "../../Components/Upload/UploadImage";
 import { MdArrowBack } from "react-icons/md";
-
+import axios from "axios";
 function validate(input) {
   let errors = {};
   if (input.name === "name") {
@@ -179,19 +179,23 @@ export default function CreateCompany(props) {
 
     setIsProcessing(false);
 
-    paymentIntent
-      ? dispatch(postCompany(input))
-      : setInput({
-          name: "",
-          cuit: "",
-          industry: "",
-          numberEmployees: "",
-          email: "",
-          location: "",
-          tel: "",
-          image:
-            "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
-        });
+    paymentIntent ? (
+      dispatch(postCompany(input)).then(
+        await axios.post("/notifications/confirmation", {
+          to: input.email,
+        })
+      )
+      ):
+    setInput({
+      name: "",
+      cuit: "",
+      industry: "",
+      numberEmployees: "",
+      email: "",
+      location:"",
+      tel:"",
+      image:"https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg",
+    });
     setFormSubmitted(true);
   };
 

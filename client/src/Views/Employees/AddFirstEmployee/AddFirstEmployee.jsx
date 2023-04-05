@@ -179,7 +179,7 @@ const AddFirstEmployee = () => {
 
   return (
     <div
-      className="w-full lg:h-screen lg:my-0 sm:my-16 xl:ml-72 lg:ml-36 sm:ml-16 flex justify-center items-center ssm:m-auto lg:py-0
+      className="w-full lg:h-screen lg:my-0 sm:my-16 flex justify-center items-center ssm:m-auto lg:py-0
     ssm:py-16"
     >
       <div>
