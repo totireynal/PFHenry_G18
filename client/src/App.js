@@ -148,6 +148,7 @@ function App() {
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees/:id" element={<Employees />} />
+          <Route path="/deletedemployees/:id" element={<RestoreEmployees />} />
           <Route path="/employee/:id" element={<EmployeeDetail />} />
           <Route path="/addemployee" element={<AddEmployee />} />
           <Route path="/addareaposition" element={<AreaPosition />} />
