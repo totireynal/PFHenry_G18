@@ -23,7 +23,7 @@ function ChatButton() {
   };
 
   return (
-    <div className="fixed bottom-0 right-0 mb-8 mr-8">
+    <div className="fixed bottom-0 right-0 mb-8 mr-8 z-30">
       {isOpen ? (
         <div className="bg-white shadow-lg rounded-lg p-4">
           <div className="fixed bottom-0 right-0 mb-4 mr-4">

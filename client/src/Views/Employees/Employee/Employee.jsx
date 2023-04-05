@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
-import {useRef, useState} from 'react'
+import { useRef, useState } from "react";
 
 const Employee = (props) => {
-
-  const [check, setCheck] = useState(false)
+  const [check, setCheck] = useState(false);
   // console.log(check);
 
   const handleCheck = (e) => {
     // const { checked } = e.target;
-    setCheck(ck => !ck)
+    setCheck((ck) => !ck);
 
     props.catchEmails(props.email, check);
   };
@@ -46,13 +45,12 @@ const Employee = (props) => {
         </span>
         <div className="flex justify-between items-center h-20">
           <div className="w-28 h-20">
-
-          <img
-            className="object-cover mr-2 w-28   h-20"
-            src={props.image}
-            alt=""
+            <img
+              className="object-cover mr-2 w-28   h-20"
+              src={props.image}
+              alt=""
             />
-            </div>
+          </div>
           <div className="grid lg:grid-cols-4  md:grid-cols-3 sm:grid-cols-2 ssm:grid-cols-1 items-center justify-start  w-full p-6 text-start auto-cols-min">
             <div className=" text-start">
               <div className="flex flex-col">

@@ -25,8 +25,8 @@ const WelcomeDashboard = () => {
   const year = date.toLocaleString("en", { year: "numeric" });
   const month = date.toLocaleString("en", { month: "long" });
   return (
-    <div className=" bg-sky-400 shadow-2xl text-white flex flex-col w-9/12 rounded-md overflow-auto p-5 gap-10">
-      <div className="flex justify-between  gap-2">
+    <div className=" bg-sky-400 shadow-2xl text-white flex flex-col lg:w-9/12 ssm:w-12/12 rounded-md overflow-auto p-5 gap-10">
+      <div className="flex md:justify-between flex-wrap ssm:justify-center ssm:text-center md:text-start gap-2">
         <div className="flex flex-col justify-between">
           <h3 className="tex text-sm">{role}</h3>
           <h3 className="text-gray-800">

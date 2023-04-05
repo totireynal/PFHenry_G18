@@ -8,7 +8,7 @@ import WelcomeDashboard from "../../Components/WelcomeDashboard/WelcomeDashboard
 
 const Dashboarts = () => {
   return (
-    <div className="w-full h-screen ml-72 pt-16 flex pr-16">
+    <div className="w-full lg:h-screen ssm:h-auto xl:pl-72 sm:pl-36 ssm:pl-12 pt-16 flex lg:flex-row ssm:flex-col pr-16 bg-slate-100">
       {/* <EmployeeRetention/> */}
       <div className="flex flex-col w-full gap-16">
         <WelcomeDashboard />
@@ -16,9 +16,9 @@ const Dashboarts = () => {
       </div>
       <div className="flex flex-col w-full gap-5">
         <MiniEmail />
-        <div className="flex items-center justify-center">
-        <DoughnuChart />
-        <EmployeeList />
+        <div className="flex lg:flex-row ssm:flex-col items-center">
+          <DoughnuChart />
+          <EmployeeList />
         </div>
       </div>
     </div>
