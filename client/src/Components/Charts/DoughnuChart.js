@@ -27,7 +27,7 @@ export default function DoughnuChart(){
     const currentEmployee = useSelector((state) => state.currentEmployee);
     const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
     
-    console.log("COMPANY IDDDDDD ", CompanyId)
+    // console.log("COMPANY IDDDDDD ", CompanyId)
 
     const dispatch = useDispatch();
     
@@ -61,7 +61,7 @@ export default function DoughnuChart(){
         const resultado = Object.keys(empleadosPorArea).map((area)=>{
             return{area, cantidad: empleadosPorArea[area]};
         })
-        console.log(resultado);
+        // console.log(resultado);
 
         return{
             labels: resultado.map(empleado => empleado.area),

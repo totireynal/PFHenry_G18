@@ -170,7 +170,7 @@ export default function CreateCompany(props) {
       !input.location ||
       !input.image
     ) {
-      return alert("Complete correctamente el formulario antes de enviarlo");
+      return alert("Please make sure all mandatory fields are correctly filled");
     }
 
     setIsProcessing(true);

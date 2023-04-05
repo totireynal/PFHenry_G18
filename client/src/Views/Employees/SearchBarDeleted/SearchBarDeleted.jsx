@@ -44,7 +44,7 @@ useEffect(() => {
       // handleRefresh()
       // dispatch(getEmployees(input));
       // dispatch(contentFilters({ name: input }));
-      console.log(deletes.map(el => el.name))
+      // console.log(deletes.map(el => el.name))
       
       setInput("");
     } else {
