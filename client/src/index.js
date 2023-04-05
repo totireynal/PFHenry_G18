@@ -13,10 +13,10 @@ const domain = "dev-a5lp6h1utxb70h27.us.auth0.com";
 const clientId = "KzGcYaMK0yVq39wFL8WaAH8BjmQ7yqlj";
 
 //--------FOR LOCAL USE UNCOMMENT THIS LINK----------------
-axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "http://localhost:3001";
 
 //-------FOR DEPLOYMENT VERSION UNCOMMENT THIS LINK--------
-// axios.defaults.baseURL = "https://pfbackend-production-f5f5.up.railway.app";
+axios.defaults.baseURL = "https://pfbackend-production-f5f5.up.railway.app";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
