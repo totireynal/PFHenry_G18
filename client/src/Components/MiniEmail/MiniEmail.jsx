@@ -11,6 +11,7 @@ const MiniEmail = () => {
   const [subject, setSubject] = useState("");
   const [text, setText] = useState("");
 
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState({});
   const [sent, setSent] = useState(false);
 
@@ -70,6 +71,7 @@ const MiniEmail = () => {
     return () => {
       dispatch(cleanArrayEmails());
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

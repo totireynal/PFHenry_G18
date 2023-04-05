@@ -14,7 +14,7 @@ import {
   updateDeletedEmployee,
 } from "../../../state/redux/actions/actions";
 
-import { useAnswer } from "../../../utils/hooks/answer";
+import { useAnswer } from "../../../Utils/hooks/answer";
 
 
 const RestoreEmployees = () => {
@@ -38,6 +38,7 @@ const RestoreEmployees = () => {
       return filter;
     });
   
+  // eslint-disable-next-line no-unused-vars
   const fnn = (us) => setDeletes(us)
   //   const catchEmails = (email, checked) => {
   //     setEmailSelection((emails) => {
@@ -56,6 +57,7 @@ const RestoreEmployees = () => {
   //     navigate("/notifications");
   //   };
 
+  // eslint-disable-next-line no-unused-vars
   const [selectedOption, setSelectedOption] = useState({
     area: "default",
     sort: "default",
@@ -72,6 +74,7 @@ const RestoreEmployees = () => {
     });
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleSelectChange = (value) => {
     setSelectedOption(value);
   };
@@ -89,6 +92,7 @@ const RestoreEmployees = () => {
     dispatch(getFilter(arrContentFilters, CompanyId));
   }, [dispatch, arrContentFilters, CompanyId]);
 
+  // eslint-disable-next-line no-unused-vars
   const handleRefresh = (event) => {
     dispatch(cleanUrl());
     dispatch(getDeletedEmployees());
@@ -99,6 +103,7 @@ const RestoreEmployees = () => {
   };
 
   const [optionFilters, setOptionFilters] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const handleOptionsFilters = () => {
     setOptionFilters(!optionFilters);
   };

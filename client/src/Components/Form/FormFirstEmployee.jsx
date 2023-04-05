@@ -2,8 +2,8 @@
 import InputForm from "../InputForm";
 
 import UploadImage from "../Upload/UploadImage";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const FormFirstEmployee = ({
   handleInput,
@@ -24,7 +24,7 @@ const FormFirstEmployee = ({
   // dispatch(getPositionsNum())
   // dispatch(getAreasNum())
   //   }, [dispatch])
-  var navigate = useNavigate();
+  // var navigate = useNavigate();
 
   return (
     <div>

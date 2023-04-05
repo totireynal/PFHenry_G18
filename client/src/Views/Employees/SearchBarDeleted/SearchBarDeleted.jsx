@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  contentFilters,
+  // contentFilters,
   getDeletedEmployees,
   getEmployees,
 } from "../../../state/redux/actions/actions";
-import { log } from "mathjs";
+// import { log } from "mathjs";
 // import { useAnswer } from "../../../Utils/hooks/answer";
 
 const SearchBarDeleted = ({ answer, showAnswer, handleRefresh, fnn, deletes }) => {

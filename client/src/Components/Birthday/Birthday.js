@@ -4,10 +4,10 @@ import {getBirthday} from "../../state/redux/actions/actions"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {obtenerNombreMes} from "./BirthMonth"
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { RiMailAddLine } from "react-icons/ri";
 import axios from "axios";
-import { SpaDependencies } from "mathjs";
+// import { SpaDependencies } from "mathjs";
 
 
 const EmployeeList = () => {
@@ -18,6 +18,7 @@ const EmployeeList = () => {
   const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
   const dispatch = useDispatch();
 
+  // eslint-disable-next-line no-unused-vars
   const [check, setCheck] = useState(false);
 
 
