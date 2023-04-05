@@ -11,6 +11,7 @@ import {
   // addRating,
   // getCompanyInfo,
   getEmployeeDetail,
+  getCurrentEmployee
   // getEmployees,
   // getRating,
 } from "../../state/redux/actions/actions";
@@ -65,6 +66,7 @@ const MyProfileAdmin = () => {
 
   useEffect(() => {
     dispatch(getEmployeeDetail(CompanyId, id));
+    dispatch(getCurrentEmployee(CompanyId, id))
   }, [id, dispatch]);
 
   // const refQualify = useRef();

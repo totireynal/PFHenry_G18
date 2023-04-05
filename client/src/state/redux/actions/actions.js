@@ -53,7 +53,7 @@ import {
 export const getAllEmployees = () => {
   return async (dispatch) => {
     try {
-      const response = await axios("/users");
+      const response = await axios(`/users`);
       const result = response.data;
       // console.log(result);
       return dispatch({
