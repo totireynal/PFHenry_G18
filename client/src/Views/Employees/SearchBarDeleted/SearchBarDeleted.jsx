@@ -5,9 +5,10 @@ import {
   getDeletedEmployees,
   getEmployees,
 } from "../../../state/redux/actions/actions";
+import { log } from "mathjs";
 // import { useAnswer } from "../../../Utils/hooks/answer";
 
-const SearchBarDeleted = ({ answer, showAnswer, handleRefresh }) => {
+const SearchBarDeleted = ({ answer, showAnswer, handleRefresh, fnn, deletes }) => {
   let dispatch = useDispatch();
 
   // eslint-disable-next-line no-unused-vars
@@ -42,7 +43,9 @@ useEffect(() => {
     if (input.trim().length > 0) {
       // handleRefresh()
       // dispatch(getEmployees(input));
-      dispatch(contentFilters({ name: input }));
+      // dispatch(contentFilters({ name: input }));
+      console.log(deletes.map(el => el.name))
+      
       setInput("");
     } else {
       setTimeout(() => {

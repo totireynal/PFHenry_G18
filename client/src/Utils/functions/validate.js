@@ -16,14 +16,11 @@ const validate = (values, getAlllEmployees) => {
 
   if (allEmails.includes(`${values.email}`))
     errors.email = "Email already exist";
-  if (allCbus.includes(`${values.cbu}`))
-    errors.cbu = "Cbu already exist";
-  if (allCuils.includes(`${values.cuil}`))
-    errors.cuil = "Cuil already exist";
+  if (allCbus.includes(`${values.cbu}`)) errors.cbu = "Cbu already exist";
+  if (allCuils.includes(`${values.cuil}`)) errors.cuil = "Cuil already exist";
   if (allTel.includes(`${values.tel}`))
     errors.tel = "Phone number already exist";
-  if (allDni.includes(`${values.dni}`))
-    errors.dni = "Dni already exist";
+  if (allDni.includes(`${values.dni}`)) errors.dni = "Dni already exist";
 
   if (values.role === "default") errors.role = "You must choose a role";
   if (!values.name.length) errors.name = "Name can't be empty";

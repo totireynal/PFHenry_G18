@@ -32,6 +32,7 @@ import CalendarUser from "./Views/CalendarUser/CalendarUser";
 import MyProfileSuperAdmin from "./Views/MyProfile/MyProfileSuperAdmin/MyProfileSuperAdmin";
 import AreaPositionFirstEmployee from "./Views/Register/AreaPositionFirstEmployee";
 import AreaPosition from "./Views/AreaPosition/AreaPosition";
+import DashboardUser from "./Views/DashboardUser/DashboardUser";
 
 
 
@@ -96,7 +97,7 @@ function App() {
           pathname === "/authorization" ? (
             ""
           ) : (
-            <div className='bg-white'>
+            <div className="bg-white">
               <SideBar isOpen={isOpen} />
             </div>
           )}
@@ -120,62 +121,68 @@ function App() {
         {/* +++++ SUPERADMIN ROUTES +++++ */}
 
         {user.role === "SuperAdmin" && (
-        <>
-        
-        <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/employees/:id" element={<Employees />} />
-          <Route path="/deletedemployees/:id" element={<RestoreEmployees />} />
-          <Route path="/employee/:id" element={<EmployeeDetail />} />
-          <Route path="/addemployee" element={<AddEmployee />} />
-          <Route path="/addareaposition" element={<AreaPosition />} />
-          <Route path="/editemployee/:id" element={<EditEmployee />} />
-          <Route
-            path="/editemployeemyprofile/:id"
-            element={<EditEmployeeMyProfile />}
-          />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
-          {/* FALTA LA DE EDITAR DATOS DE LA EMPRESA */}
-          
+          <>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/employees/:id" element={<Employees />} />
+            <Route
+              path="/deletedemployees/:id"
+              element={<RestoreEmployees />}
+            />
+            <Route path="/employee/:id" element={<EmployeeDetail />} />
+            <Route path="/addemployee" element={<AddEmployee />} />
+            <Route path="/addareaposition" element={<AreaPosition />} />
+            <Route path="/editemployee/:id" element={<EditEmployee />} />
+            <Route
+              path="/editemployeemyprofile/:id"
+              element={<EditEmployeeMyProfile />}
+            />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/myprofile/:id" element={<MyProfileSuperAdmin />} />
+            {/* FALTA LA DE EDITAR DATOS DE LA EMPRESA */}
           </>
-         )}
-         
-         {user.role === "Admin" && (<>
+        )}
 
-          {/* +++++ ADMIN ROUTES +++++ */}
+        {user.role === "Admin" && (
+          <>
+            {/* +++++ ADMIN ROUTES +++++ */}
 
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/employees/:id" element={<Employees />} />
-          <Route path="/employee/:id" element={<EmployeeDetail />} />
-          <Route path="/addemployee" element={<AddEmployee />} />
-          <Route path="/addareaposition" element={<AreaPosition />} />
-          <Route path="/editemployee/:id" element={<EditEmployee />} />
-          <Route
-            path="/editemployeemyprofile/:id"
-            element={<EditEmployeeMyProfile />}
-          />
-          {/* <Route path="/organization" element={<Organization />} /> */}
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/myprofile/:id" element={<MyProfileAdmin />} />
-        </>)}
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/employees/:id" element={<Employees />} />
+            <Route path="/employee/:id" element={<EmployeeDetail />} />
+            <Route path="/addemployee" element={<AddEmployee />} />
+            <Route path="/addareaposition" element={<AreaPosition />} />
+            <Route path="/editemployee/:id" element={<EditEmployee />} />
+            <Route
+              path="/deletedemployees/:id"
+              element={<RestoreEmployees />}
+            />
+
+            <Route
+              path="/editemployeemyprofile/:id"
+              element={<EditEmployeeMyProfile />}
+            />
+            {/* <Route path="/organization" element={<Organization />} /> */}
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/myprofile/:id" element={<MyProfileAdmin />} />
+          </>
+        )}
 
         {/* +++++ USER ROUTES +++++ */}
 
-          {user.role === "User" && (<>
-
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/employeesuser/:id" element={<EmployeesUser />} />
-          <Route path="/myprofile/:id" element={<MyProfileUser />} />
-          <Route path="/calendar" element={<CalendarUser />} />
-
-          </>)}
+        {user.role === "User" && (
+          <>
+            <Route path="/dashboard" element={<DashboardUser />} />
+            <Route path="/employeesuser/:id" element={<EmployeesUser />} />
+            <Route path="/myprofile/:id" element={<MyProfileUser />} />
+            <Route path="/calendar" element={<CalendarUser />} />
+          </>
+        )}
         <Route
-        path="*"
-        element={<h1 className="h-screen w-screen">Ruta equivocada</h1>}
-
-      />
+          path="*"
+          element={<h1 className="h-screen w-screen">Ruta equivocada</h1>}
+        />
       </Routes>
     </div>
   );
