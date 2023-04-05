@@ -29,7 +29,8 @@ const EmployeeList = () => {
 
 
   const sendEmail = async (email) => {
-    await axios.post("http://localhost:3001/notifications/birthday", {
+    // await axios.post("http://localhost:3001/notifications/birthday", {
+    await axios.post("/notifications/birthday", {
           to: email,
         })
         setCheck(true); //setear a true
@@ -49,8 +50,8 @@ const EmployeeList = () => {
 
 
   var numeroDeDia = new Date().getDate();
-  console.log("Numero de dia: ", numeroDeDia)
-  console.log("Birthday", birthday)
+  // console.log("Numero de dia: ", numeroDeDia)
+  // console.log("Birthday", birthday)
     return (
       <div className=" w-full float-right overflow-x-hidden bg-white p-5 rounded-md shadow-2xl">
         <h3 className="font-medium mb-4 overflow-x-hidden h-5">

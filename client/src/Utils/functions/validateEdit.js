@@ -5,7 +5,7 @@ const regex = {
 };
 
 const validateEdit = (values, getAlllEmployees, currentEmployee) => {
-  console.log(getAlllEmployees, "alllll");
+  // console.log(getAlllEmployees, "alllll");
   const errors = {};
 
   const allEmails = getAlllEmployees.map((el) => el.email);
