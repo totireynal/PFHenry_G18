@@ -12,8 +12,10 @@ const EventsDashboards = () => {
     dispatch(getEventsIncoming(CompanyId))
   }, [dispatch])
   return (
-    <div className="border bg-white rounded-md w-9/12 h-[400px] p-5 shadow-2xl flex flex-col ">
-      <h2 className="mb-5 font-medium ">Upcoming events</h2>
+    <div className="border bg-white rounded-md lg:w-9/12 ssm:w-12/12 h-[400px] p-5 shadow-2xl flex flex-col ">
+      <h2 className="mb-5 font-medium lg:text-start ssm:text-center ">
+        Upcoming events
+      </h2>
       <div className="flex flex-col gap-3 overflow-auto">
         {Array.isArray(events)
           ? events?.map((event) => {

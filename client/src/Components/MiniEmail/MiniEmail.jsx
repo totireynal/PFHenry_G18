@@ -46,8 +46,8 @@ const MiniEmail = () => {
     if (validateForm()) {
       try {
         //SWITCH FOR LOCAL OR DEPLOYMENT
-        await axios.post("http://localhost:3001/notifications", {
-          // await axios.post("/notifications", {
+        // await axios.post("http://localhost:3001/notifications", {
+          await axios.post("/notifications", {
           to,
           subject,
           text,
@@ -75,8 +75,10 @@ const MiniEmail = () => {
   }, []);
 
   return (
-    <div className=" border bg-white rounded-md w-full h-auto p-5 shadow-2xl flex flex-col">
-      <h2 className="mb-5 font-medium">Send E-mail</h2>
+    <div className=" border bg-white rounded-md w-full h-auto p-5 shadow-2xl flex flex-col lg:mt-0 ssm:mt-10">
+      <h2 className="mb-5 font-medium lg:text-start ssm:text-center">
+        Send E-mail
+      </h2>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-end justify-center gap-2 w-full h-auto"
