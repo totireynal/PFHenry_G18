@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 import {
   addRating,
   getCompanyInfo,
+  getCurrentEmployee,
   getEmployeeDetail,
   getEmployees,
   getRating,
@@ -35,7 +36,7 @@ const MyProfileSuperAdmin = () => {
     dispatch(getCompanyInfo(CompanyId));
     dispatch(getRating());
     dispatch(getEmployees(undefined, undefined, CompanyId))
-
+    dispatch(getCurrentEmployee(CompanyId, id))
   }, [dispatch, qualified]);
 
   const companyInfo = useSelector((state) => state.companyInfo);

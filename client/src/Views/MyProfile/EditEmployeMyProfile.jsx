@@ -27,8 +27,8 @@ const EditEmployeeMyProfile = () => {
 
   useEffect(() => {
     dispatch(getEmployeeDetail(CompanyId, id));
-    dispatch(getPositionsNum());
-    dispatch(getAreasNum());
+    dispatch(getPositionsNum(undefined, CompanyId));
+    dispatch(getAreasNum(undefined, CompanyId));
   }, [dispatch, id, CompanyId]);
 
   const { errors, setAllErrors } = useErrors();

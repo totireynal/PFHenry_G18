@@ -77,7 +77,7 @@ const EmployeeList = () => {
                           send ? "inline-block" : "hidden"
                         } pl-2 text-sky-400`}
                       >
-                        Enviado
+                        Sent
                       </span>
                       <button
                         onClick={() => handleButton(employee)}
