@@ -60,7 +60,7 @@ return (
         <h1 className="text-6xl mt-20">StaffSphere Register Company</h1>
         <h6 class="text-xl  mb-4">Start unleashing the full potential of our personnel management software!</h6>
         <p class="text-gray-600 leading-loose font-sans-serif">
-        Please enter your job title and work area
+        Please enter your area and position
         </p>
         <div>
           <div className="flex flex-col items-center justify-center gap-2"
@@ -89,7 +89,7 @@ return (
                 disabled={!area.area || !position.position}
                 className="bg-sky-400 text-white  rounded overflow-hidden px-16 py-3 active:translate-y-1 active:shadow-2xl shadow-sky-200 hover:bg-sky-300"
                 >
-                CREATE
+                CONTINUE
                 </button>
               </form>
               <div>

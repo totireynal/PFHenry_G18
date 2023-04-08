@@ -15,15 +15,15 @@ const validateEdit = (values, getAlllEmployees, currentEmployee) => {
   const allDni = getAlllEmployees.map((el) => el.dni);
 
   if (allEmails.includes(`${values.email}`) && currentEmployee.email !== values.email)
-    errors.email = "Ya esta en la base de datos perrito salvaje";
+    errors.email = "it already exists";
   if (allCbus.includes(`${values.cbu}`) && !allCbus.includes(`${currentEmployee.cbu}`))
-    errors.cbu = "Ya esta en la base de datos perrito salvaje";
+    errors.cbu = "it already exists";
   if (allCuils.includes(`${values.cuil}`) && !allCuils.includes(`${currentEmployee.cuil}`))
-    errors.cuil = "Ya esta en la base de datos perrito salvaje";
+    errors.cuil = "it already exists";
   if (allTel.includes(`${values.tel}`) && !allTel.includes(`${currentEmployee.tel}`))
-    errors.tel = "Ya esta en la base de datos perrito salvaje";
+    errors.tel = "it already exists";
   if (allDni.includes(`${values.dni}`) && !allDni.includes(`${currentEmployee.dni}`))
-    errors.dni = "Ya esta en la base de datos perrito salvaje";
+    errors.dni = "it already exists";
 
   if (!values.image.length) errors.image = 'no hay'
   if (values.role === "default") errors.role = "You must choose a role";

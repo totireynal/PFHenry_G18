@@ -39,6 +39,7 @@ import {
   GET_RATING,
   // POST_EVENTS,
   GET_EVENTS,
+  // eslint-disable-next-line no-unused-vars
   PUT_EVENTS,
   GET_BIRTHDAY,
   INDEX_AREA,
@@ -46,6 +47,7 @@ import {
   GET_ALL_EMPLOYEES,
   // PUT_EVENTS,
   GET_DOUGHNU,
+  GET_EVENTS_INCOMING,
 } from "../action-types/index";
 
 export const getAllEmployees = () => {
@@ -659,6 +661,22 @@ export const getEvents = (CompanyId) => {
       const result = response.data;
       return dispatch({
         type: GET_EVENTS,
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const getEventsIncoming = (CompanyId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(
+        `http://localhost:3001/events/next/${CompanyId}`
+      );
+      const result = response.data;
+      return dispatch({
+        type: GET_EVENTS_INCOMING,
         payload: result,
       });
     } catch (error) {

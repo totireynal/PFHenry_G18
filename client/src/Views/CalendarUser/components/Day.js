@@ -5,8 +5,8 @@ import GlobalContext from "../context/GlobalContext";
 export default function Day({ day, rowIdx }) {
   const [dayEvents, setDayEvents] = useState([]);
   const {
-    // setDaySelected,
-    // setShowEventModal,
+    setDaySelected,
+    setShowEventModal,
     filteredEvents,
     setSelectedEvent,
   } = useContext(GlobalContext);

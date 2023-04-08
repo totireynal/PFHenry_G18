@@ -198,12 +198,12 @@ const FormEdit = ({
             error={errors.dateOfAdmission}
           />
 
-          <div className="flex flex-row w-60">
+          <div className="flex flex-row w-1/2 items-end gap-6 ml-4">
             <UploadImage handleChangeImage={handleChangeImage} />
             <img
               src={users.image}
               alt="profilepic"
-              className="rounded-md border-none shadow-none text-transparent w-auto h-10 object-cover"
+              className="border-none shadow-none h-10 rounded-md ml-auto"
             />
           </div>
         </div>

@@ -177,11 +177,8 @@ const EditEmployeeMyProfile = () => {
           </div>
         </div>
       </>
-
     </div>
-
   );
 };
-
 
 export default EditEmployeeMyProfile;

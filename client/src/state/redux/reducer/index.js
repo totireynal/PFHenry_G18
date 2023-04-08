@@ -34,12 +34,14 @@ import {
   GET_DELETED_EMPLOYEES,
   UPDATE_DELETED_EMPLOYEE,
   GET_EVENTS,
+  // eslint-disable-next-line no-unused-vars
   PUT_EVENTS,
   GET_COMPANY_INFO,
   GET_BIRTHDAY,
   INDEX_AREA,
   GET_ALL_EMPLOYEES,
   GET_DOUGHNU,
+  GET_EVENTS_INCOMING,
 } from "../action-types/index";
 
 const initialState = {
@@ -62,6 +64,7 @@ const initialState = {
   positionsCrud: [],
   deletedEmployees: [],
   events: [],
+  eventsIncoming: [],
   birthday: [],
   indexArea: [],
   doughnut: [],
@@ -213,6 +216,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         events: action.payload,
+      };
+    case GET_EVENTS_INCOMING:
+      return {
+        ...state,
+        eventsIncoming: action.payload,
       };
 
     case POST_CRUD_AREA:

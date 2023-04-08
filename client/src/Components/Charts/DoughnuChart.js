@@ -26,14 +26,15 @@ export default function DoughnuChart(){
 
     const currentEmployee = useSelector((state) => state.currentEmployee);
     const CompanyId = currentEmployee ? currentEmployee.CompanyId : null;
+    
+    console.log("COMPANY IDDDDDD ", CompanyId)
 
     const dispatch = useDispatch();
+    
     useEffect(() => {
      dispatch(getDoughnu(CompanyId))
       }, [dispatch]
   )
-  console.log(doughnut)
-
        const options = {
 
         plugins: {
@@ -72,14 +73,14 @@ export default function DoughnuChart(){
               }
             ],
         }  
-    },[])
+    },[ doughnut])
 
   return (
-    <div className=" -translate-x-16">
+    <div className=" lg:-translate-x-16 bg-white rounded-md shadow-2xl border p-5 w-full lg:text-start ssm:text-center lg:inline-block ssm:flex justify-center items-center flex-col">
+      <h2 className="mb-9 font-medium">Current Employees</h2>
       <Doughnut data={data} options={options} />
-
     </div>
-  )
+  );
 }
 
 
