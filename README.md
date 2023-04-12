@@ -37,10 +37,11 @@ List the ready features here:
 
 ## Screenshots
 
-![dds](https://user-images.githubusercontent.com/87680255/229974065-8138da94-06d0-4251-a55c-ef0be7a95ebf.png)
+![dds](https://i.postimg.cc/J4zG0j2x/Dashboard.png)
 
-![Screenshot 2023-04-05 002725](https://user-images.githubusercontent.com/87680255/229974152-662ad8c6-2a6c-4ee0-b02b-4ad59a129812.png)
-![Screenshot 2023-04-05 002801](https://user-images.githubusercontent.com/87680255/229974158-53b7ebbb-d928-4467-8e84-f74791477f23.png)
+
+![Screenshot 2023-04-05 002801](https://i.postimg.cc/kXGgqq2h/Employees.png)
+![Screenshot 2023-04-05 002725](https://i.postimg.cc/vmsygsmy/Calendar.png)
 ![Screenshot 2023-04-05 002908](https://user-images.githubusercontent.com/87680255/229974189-c195ba3b-147b-496d-ba49-a654b4dbc473.png)
 
 
